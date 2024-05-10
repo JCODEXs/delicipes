@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useUploadThing } from "~/utils/uploadthings";
 
 // import { toast } from "sonner";
@@ -78,6 +79,9 @@ export function SimpleUploadButton() {
   //   const posthog = usePostHog();
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
+    onUploadBegin() {
+      toast("Uploading...");
+    },
     onClientUploadComplete(res) {
       router.refresh();
     },
