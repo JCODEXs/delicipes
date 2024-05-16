@@ -9,6 +9,7 @@ export default async function FullPageImageView(props: { id: number }) {
         <img
           src={image.url}
           height={400}
+          width="auto"
           alt="img"
           className="w-96 object-contain"
         />

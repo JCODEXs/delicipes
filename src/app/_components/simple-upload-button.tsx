@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useUploadThing } from "~/utils/uploadthings";
 
 // import { toast } from "sonner";
-// import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "posthog-js/react";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -76,40 +76,33 @@ function LoadingSpinnerSVG() {
 export function SimpleUploadButton() {
   const router = useRouter();
 
-  //   const posthog = usePostHog();
+  const posthog = usePostHog();
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
-      toast("Uploading...");
+      posthog.capture("upload_begin");
+      toast(
+        <div className="flex items-center gap-2 text-white">
+          <LoadingSpinnerSVG /> <span className="text-lg">Uploading...</span>
+        </div>,
+        {
+          duration: 100000,
+          id: "upload-begin",
+        },
+      );
     },
-    onClientUploadComplete(res) {
+    onUploadError(error) {
+      posthog.capture("upload_error", { error });
+      toast.dismiss("upload-begin");
+      toast.error("Upload failed");
+    },
+    onClientUploadComplete() {
+      toast.dismiss("upload-begin");
+      toast("Upload complete!");
+
       router.refresh();
     },
   });
-  //     onUploadBegin() {
-  //       posthog.capture("upload_begin");
-  //       toast(
-  //         <div className="flex items-center gap-2 text-white">
-  //           <LoadingSpinnerSVG /> <span className="text-lg">Uploading...</span>
-  //         </div>,
-  //         {
-  //           duration: 100000,
-  //           id: "upload-begin",
-  //         },
-  //       );
-  //     },
-  //     onUploadError(error) {
-  //       posthog.capture("upload_error", { error });
-  //       toast.dismiss("upload-begin");
-  //       toast.error("Upload failed");
-  //     },
-  //     onClientUploadComplete() {
-  //       toast.dismiss("upload-begin");
-  //       toast("Upload complete!");
-
-  //       router.refresh();
-  //     },
-  //   });
 
   return (
     <div>

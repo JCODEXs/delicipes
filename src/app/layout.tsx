@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import TopNav from "./_components/topnav";
 import { Toaster } from "sonner";
+import { CSPostHogProvider } from "./_analytics/provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,23 +26,24 @@ export default function RootLayout({
   modal: React.ReactNode;
   other: React.ReactNode;
 }) {
-  // console.log(modal);
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`font-sans ${inter.variable} dark flex flex-col gap-4`}
-        >
-          <div className=" grid h-screen grid-rows-[auto,1fr]">
-            <TopNav />
-            <main className="overflow-y-scroll">{children}</main>
-          </div>
-          <div>{modal}</div>
+      <CSPostHogProvider>
+        <html lang="en">
+          <body
+            className={`font-sans ${inter.variable} dark flex flex-col gap-4`}
+          >
+            <div className=" grid h-screen grid-rows-[auto,1fr]">
+              <TopNav />
+              <main className="overflow-y-scroll">{children}</main>
+            </div>
+            <div>{modal}</div>
 
-          <div id="modal-root"></div>
-          <Toaster />
-        </body>
-      </html>
+            <div id="modal-root"></div>
+            <Toaster />
+          </body>
+        </html>
+      </CSPostHogProvider>
     </ClerkProvider>
   );
 }
