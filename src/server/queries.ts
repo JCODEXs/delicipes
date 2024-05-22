@@ -1,6 +1,6 @@
 import "server-only"
 import { db } from "./db";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
@@ -34,7 +34,9 @@ if(!user.userId) throw new Error("Unauthorized")
 export async function deleteImage(id: number) {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-
+//  const fullUserData = await clerkClient.users.getUser(user.userId);
+//         if (fullUserData?.privateMetadata?.["can-delete"] !== true)
+//           throw new Error("User Does Not Have Upload Permissions");
   await db
     .delete(images)
     .where(and(eq(images.id, id), eq(images.userId, user.userId)));
@@ -46,6 +48,7 @@ export async function deleteImage(id: number) {
       imageId: id,
     },
   });
- 
-  redirect("/");
+  revalidatePath("/img")
+   redirect("/");
+  
 }

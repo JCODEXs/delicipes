@@ -20,11 +20,9 @@ export const metadata = {
 export default function RootLayout({
   children,
   modal,
-  other,
 }: {
   children: React.ReactNode;
   modal: React.ReactNode;
-  other: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
@@ -36,9 +34,8 @@ export default function RootLayout({
             <div className=" grid h-screen grid-rows-[auto,1fr]">
               <TopNav />
               <main className="overflow-y-scroll">{children}</main>
+              {modal}
             </div>
-            <div>{modal}</div>
-
             <div id="modal-root"></div>
             <Toaster />
           </body>

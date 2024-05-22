@@ -8,6 +8,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
+  console.log(dialogRef);
   useEffect(() => {
     if (!dialogRef.current?.open) {
       dialogRef.current?.showModal();
@@ -25,7 +26,9 @@ export function Modal({ children }: { children: React.ReactNode }) {
       onClose={onDismiss}
     >
       {children}
-      {/* <button onClick={onDismiss} className="close-button" /> */}
+      <button onClick={onDismiss} className="close-button">
+        Close
+      </button>
     </dialog>,
     document.getElementById("modal-root")!,
   );
