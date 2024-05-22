@@ -1,3 +1,3 @@
 export default function Default() {
-  return <div> canceled</div>;
+  return null;
 }

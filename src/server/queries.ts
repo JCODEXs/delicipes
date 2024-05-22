@@ -3,8 +3,7 @@ import { db } from "./db";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { permanentRedirect, redirect } from "next/navigation";
 import analyticsServerClient from "./analytics";
 
 export async function getMyImages() {
@@ -30,6 +29,16 @@ if(!user.userId) throw new Error("Unauthorized")
 
   return image;
 }
+export async function getAllImages() {
+    const user = auth()
+if(!user.userId) throw new Error("Unauthorized")
+
+  const images = await db.query.images.findMany({
+    orderBy: (model,{desc})=>desc(model.id),
+  });
+ return images }
+
+ 
 
 export async function deleteImage(id: number) {
   const user = auth();
@@ -49,6 +58,6 @@ export async function deleteImage(id: number) {
   //   },
   // });
   // revalidatePath("/img")
-   redirect("/");
+   permanentRedirect("/",);
   
 }

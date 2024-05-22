@@ -8,14 +8,8 @@ export default async function FullPageImageView(props: { id: number }) {
 
   return (
     <div className="flex h-full w-full">
-      <div className="flex flex-shrink items-center justify-center">
-        <img
-          src={image.url}
-          height={400}
-          width="auto"
-          alt="img"
-          className="w-96 object-contain"
-        />
+      <div className="flex w-96 flex-shrink items-center justify-center object-contain">
+        <img src={image.url} height={400} width={"auto"} alt="img" />
       </div>
       <div className="flex h-full w-56 flex-shrink-0 flex-col border-l text-white">
         <div className="border-b p-2 text-center text-xl">{image.name}</div>
@@ -32,6 +26,7 @@ export default async function FullPageImageView(props: { id: number }) {
           <form
             action={async () => {
               "use server";
+
               await deleteImage(idAsNumber);
             }}
           >

@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import FullPageRecetionView from "~/components/reception-page";
 import { getMyImages } from "~/server/queries";
 export const dynamic = "force-dynamic";
 async function Images() {
@@ -36,7 +37,8 @@ export default async function HomePage() {
     <main className="flex min-h-screen flex-col items-center justify-center  text-white">
       <SignedOut>
         <div className="h-full w-full text-center text-2xl">
-          Please sign in above
+          <FullPageRecetionView />
+          Para comenzar inicia sesion
         </div>
       </SignedOut>
       <SignedIn>
