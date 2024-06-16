@@ -7,12 +7,15 @@ export default async function FullPageImageView(props: { id: number }) {
   const idAsNumber = Number(props.id);
 
   return (
-    <div className="flex h-full w-full">
-      <div className="flex w-96 flex-shrink items-center justify-center object-contain">
-        <img src={image.url} height={400} width={"auto"} alt="img" />
+    <div className=" flex h-full w-full">
+      <div className="flex flex-grow-0 items-start justify-center">
+        <img src={image.url} className="max-w-85% h-auto " alt="img" />
       </div>
-      <div className="flex h-full w-56 flex-shrink-0 flex-col border-l text-white">
-        <div className="border-b p-2 text-center text-xl">{image.name}</div>
+      <div className=" flex h-full w-56 flex-shrink-0 flex-col border-l text-white">
+        <div className="h-12"> </div>
+        <div className="mt-24 border-b p-2 text-center text-xl">
+          {image.name}
+        </div>
 
         <div className="p-2">
           <div>Uploaded By:</div>
