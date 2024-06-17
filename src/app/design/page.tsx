@@ -1,12 +1,13 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import FullPageRecetionView from "~/components/reception-page";
+
 import { getMyImages } from "~/server/queries";
-import { CarouselComponent } from "./_components/carouselCompo";
+import DesignRecipe from "../_components/recipe design/recepiDesign";
+
 export const dynamic = "force-dynamic";
-async function Images() {
-  return <CarouselComponent />;
+export default async function Recipes() {
+  return <DesignRecipe />;
 }
 //   const images = await getMyImages();
 
@@ -34,19 +35,3 @@ async function Images() {
 //     </div>
 //   );
 // }
-
-export default async function HomePage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center  text-white">
-      <SignedOut>
-        <div className="h-full w-full text-center text-2xl">
-          <FullPageRecetionView />
-          Sign in above to begin
-        </div>
-      </SignedOut>
-      <SignedIn>
-        <Images />
-      </SignedIn>
-    </main>
-  );
-}

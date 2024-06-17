@@ -1,6 +1,9 @@
 "use client";
 import { SignedIn, SignInButton, SignedOut, UserButton } from "@clerk/nextjs";
 import { SimpleUploadButton } from "./simple-upload-button";
+import Link from "next/link";
+import { SimpleAddButton } from "./simple-add-button";
+import { DropdownMenuAdd } from "./dropDownMenu";
 function LoadingSpinnerSVG() {
   return (
     <svg
@@ -23,14 +26,16 @@ function LoadingSpinnerSVG() {
 }
 export default function TopNav() {
   return (
-    <nav className="flex w-full items-center justify-between border-b p-4 text-xl font-semibold">
-      <div>Il Nostro Matrimonio</div>
+    <nav className="flex w-full items-center justify-between border-b p-2 text-xl font-semibold">
+      <Link href={"/"}>
+        <div>Delicipes</div>
+      </Link>
       <div className="flex flex-row items-center gap-4">
         <SignedOut>
           <SignInButton mode="modal" />
         </SignedOut>
         <SignedIn>
-          <SimpleUploadButton />
+          <DropdownMenuAdd />
           <UserButton />
         </SignedIn>
       </div>

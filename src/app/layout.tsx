@@ -8,6 +8,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Toaster } from "sonner";
 import { CSPostHogProvider } from "./_analytics/provider";
 import { ourFileRouter } from "./api/uploadthing/core";
+import Footer from "./_components/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
               <TopNav />
               <main className="overflow-y-scroll">{children}</main>
               {modal}
+              <Footer />
             </div>
             <div id="modal-root"></div>
             <Toaster />

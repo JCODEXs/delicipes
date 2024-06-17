@@ -48,7 +48,8 @@ export async function deleteImage(id: number) {
 //           throw new Error("User Does Not Have Upload Permissions");
   await db
     .delete(images)
-    .where(and(eq(images.id, id), eq(images.userId, user.userId)));
+    // .where(and(eq(images.id, id), eq(images.userId, user.userId)));
+    .where(eq(images.id, id));
 
   // analyticsServerClient.capture({
   //   distinctId: user.userId,
