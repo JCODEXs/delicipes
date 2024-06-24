@@ -17,7 +17,9 @@ export function DropdownMenuAdd() {
       <DropdownMenuContent>
         <DropdownMenuLabel>Add</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Ingredient</DropdownMenuItem>
+        <Link href={"/ingredients"}>
+          <DropdownMenuItem>Ingredient</DropdownMenuItem>
+        </Link>
         <Link href={"/design"}>
           {" "}
           <DropdownMenuItem>Recipe</DropdownMenuItem>

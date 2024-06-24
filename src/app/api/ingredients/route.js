@@ -1,4 +1,4 @@
-import { connectToDatabase, insertDocument } from "../../../lib/mongoDb.js";
+import { connectToDatabase } from "../../../lib/mongoDb";
 import { NextResponse } from "next/server";
 export async function POST(req, res) {
   const body = await req.json();

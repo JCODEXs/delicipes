@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { personSvg, eyeSvg, trashSvg } from "~/app/icons/icons";
 
 const RecipeCardComponent = ({
   recipe,
@@ -8,6 +9,7 @@ const RecipeCardComponent = ({
 }) => {
   const [total, setTotal] = useState(0);
   const [updatedIngredients, setUpdatedIngredients] = useState([]);
+
   // console.log(recipe, updatedIngredients);
   useEffect(() => {
     if (recipe?.ingredients) {
@@ -56,7 +58,8 @@ const RecipeCardComponent = ({
             marginBottom: "0.6rem",
           }}
         >
-          {recipe?.portions}👤
+          {recipe?.portions}
+          {personSvg}
         </div>
         <div
           style={{
@@ -74,13 +77,14 @@ const RecipeCardComponent = ({
               fontSize: "1.5rem",
               width: "fit-content",
               cursor: "pointer",
+              marginBottom: "1rem",
             }}
             onClick={(e) => {
               e.stopPropagation(); // Prevent triggering the editRecipe.recipe function
               deleteHandler(_id);
             }}
           >
-            🗑
+            {trashSvg}
           </div>
           <div
             style={{
@@ -95,7 +99,7 @@ const RecipeCardComponent = ({
               // editRecipe(recipe);
             }}
           >
-            ✏️
+            {eyeSvg}
           </div>
         </div>
         <div className="in-2container">
@@ -105,9 +109,9 @@ const RecipeCardComponent = ({
               <div className="in-container" key={ingredient._id}>
                 <div className="item3">
                   <div>{ingredient?.ingredient?.image}</div>
-                </div>
-                <div>
-                  <div>{ingredient?.ingredient?.name}</div>
+                  <div>
+                    <div>{ingredient?.ingredient?.name}</div>
+                  </div>
                 </div>
                 <div
                   className="in-container"

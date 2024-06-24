@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { connectToDatabase, insertDocument } from "../../../lib/mongoDb.js";
+import { connectToDatabase } from "../../../lib/mongoDb";
 import { NextResponse } from "next/server";
 export async function POST(req, res) {
   const body = await req.json();
@@ -41,7 +41,7 @@ export async function PUT(req) {
     if (!_id || !ObjectId.isValid(_id)) {
       return NextResponse.json(
         { message: "Invalid or missing ID format." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -58,14 +58,14 @@ export async function PUT(req) {
     } else {
       return NextResponse.json(
         { message: "No document found with the given ID." },
-        { status: 404 }
+        { status: 404 },
       );
     }
   } catch (error) {
     console.error("Error updating the document:", error);
     return NextResponse.json(
       { message: "An error occurred while updating the document." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

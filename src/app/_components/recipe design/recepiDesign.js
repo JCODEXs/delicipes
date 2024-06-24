@@ -15,6 +15,7 @@ import {
 import { Modal } from "../modal/modal";
 import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
+import { personSvg } from "~/app/icons/icons";
 export default function DesignRecipe() {
   const [ingredients, setIngredients] = useState(); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -367,7 +368,12 @@ export default function DesignRecipe() {
         return "#2B4438"; // Default background color
     }
   };
+  const myDivRef = useRef(null);
 
+  // Function to scroll to the referenced div
+  const scrollToDiv = () => {
+    myDivRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   //console.log(actionMode)
   return (
     <div className="out-container">
@@ -534,26 +540,11 @@ export default function DesignRecipe() {
           </div>
         </div>
 
-        <div id="recipe" className="recipe">
+        <div ref={myDivRef} id="recipe" className="recipe">
           <div>
             {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
 
             <div className="out-container">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <button
-                  className={isDisabled ? "buttonDisabled" : "addButton"}
-                  disabled={isDisabled}
-                  onClick={() => addToListofRecipe(recipe)}
-                >
-                  Add recipe to Library
-                </button>
-              </div>
               <input
                 type="text"
                 style={{
@@ -568,8 +559,14 @@ export default function DesignRecipe() {
                 onChange={(e) => setTittle(e.target.value)}
                 required
               />{" "}
-              <div>
-                👤
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                for:{" "}
                 <input
                   type="number"
                   style={{
@@ -579,10 +576,11 @@ export default function DesignRecipe() {
                     padding: "0.2rem",
                   }}
                   value={portions}
-                  placeholder="    # 👤"
+                  placeholder="# 👤"
                   onChange={(e) => setPortions(e.target.value)}
                   required
                 />
+                {personSvg}
               </div>
             </div>
             {recipeList?.length > 0 ? (
@@ -602,7 +600,7 @@ export default function DesignRecipe() {
                       flexDirection: "row",
                       alignItems: "center",
                       flexBasis: "calc(30% - 8px)",
-                      border: "1px solid white", //rgb(20,70,110,0.7)",
+                      border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
                       padding: "0.25rem",
                       borderRadius: "8px",
                       boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
@@ -669,6 +667,21 @@ export default function DesignRecipe() {
               }}
             />
           </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <button
+              className={isDisabled ? "buttonDisabled" : "addButton"}
+              disabled={isDisabled}
+              onClick={() => addToListofRecipe(recipe)}
+            >
+              Add recipe to Library
+            </button>
+          </div>
         </div>
 
         {/* </div> */}
@@ -691,7 +704,13 @@ export default function DesignRecipe() {
               // console.log(recipe);
               if (recipe?._id) {
                 return (
-                  <div key={recipe?._id} onClick={() => editRecipe(recipe)}>
+                  <div
+                    key={recipe?._id}
+                    onClick={() => {
+                      editRecipe(recipe);
+                      scrollToDiv();
+                    }}
+                  >
                     <RecipeCardComponent
                       key={recipe?._id}
                       _id={recipe?._id}

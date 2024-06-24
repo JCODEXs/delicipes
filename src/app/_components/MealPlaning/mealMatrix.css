@@ -1,0 +1,28 @@
+.buttonP{
+  border: 1px solid  #949287;
+  margin-bottom:0.15rem;
+  margin-right:0.75rem;
+  padding: 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  border-radius: 5px;
+  background: rgba(180, 92, 24, 0.894);
+  z-index: 7;
+  /* box-shadow: 2px 2px 4px rgba(57, 46, 30, 0.507); */
+  cursor: pointer;
+  /* background-image: 
+      repeating-linear-gradient(28deg, #e1be81,rgb(101, 47, 6)10px,rgb(65, 55, 48)10px, rgb(101, 47, 6) 20px),
+      repeating-linear-gradient(-25deg, #c4b9a6,rgb(101, 47, 6)10px,rgb(101, 47, 6)10px, rgb(101, 47, 6) 20px); */
+}
+.mealMatrix{
+  overflow: scroll;
+  background-image: linear-gradient(85deg, rgba(0, 10, 10, 0.8), rgba(220, 180, 0, 0.529) 30%, rgba(183, 85, 15, 0.8) 60%, rgba(20, 42, 42, 0.8));
+  z-index: 7;
+  min-height: 100vh;
+ }
+  dialog {
+    max-width: 100vw;
+    max-height: 100vh;
+   
+  
+  }

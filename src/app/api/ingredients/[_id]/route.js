@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
-import { connectToDatabase } from "../../../../lib/mongoDb";
+import { connectToDatabase } from "../../../lib/mongoDb";
 
 export async function DELETE(req, context) {
   // Extract the ID from the URL params
@@ -10,7 +10,7 @@ export async function DELETE(req, context) {
   if (!params._id || !ObjectId.isValid(params._id)) {
     return NextResponse.json(
       { message: "Invalid or missing ID format." },
-      { status: 400 }
+      { status: 400 },
     );
   }
   console.log(params);
@@ -31,14 +31,14 @@ export async function DELETE(req, context) {
     } else {
       return NextResponse.json(
         { message: "No document found with the given ID." },
-        { status: 404 }
+        { status: 404 },
       );
     }
   } catch (error) {
     console.error("Error deleting the document:", error);
     return NextResponse.json(
       { message: "An error occurred while deleting the document." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

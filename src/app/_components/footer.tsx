@@ -7,10 +7,10 @@ import { Button } from "~/components/ui/button";
 export default function Footer() {
   return (
     <nav>
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-4 bg-slate-900">
         <SignedIn>
           <div className="flex w-full items-center justify-between border-b p-2 text-xl font-semibold">
-            <div className="ml-2 flex w-full flex-row justify-between">
+            <div className="ml-2 flex w-full flex-row justify-around">
               <Link href={"/inventory"}>
                 <div>Pantry</div>
               </Link>

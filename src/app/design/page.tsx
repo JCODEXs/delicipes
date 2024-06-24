@@ -1,13 +1,14 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
 
-import { getMyImages } from "~/server/queries";
 import DesignRecipe from "../_components/recipe design/recepiDesign";
 
 export const dynamic = "force-dynamic";
 export default async function Recipes() {
-  return <DesignRecipe />;
+  return (
+    <SignedIn>
+      <DesignRecipe />
+    </SignedIn>
+  );
 }
 //   const images = await getMyImages();
 
