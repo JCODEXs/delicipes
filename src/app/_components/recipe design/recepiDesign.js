@@ -17,7 +17,7 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 export default function DesignRecipe() {
-  const [ingredients, setIngredients] = useState(); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
+  // const [ingredients, setIngredients] = useState(); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [quantity, setQuantity] = useState([0]);
@@ -32,7 +32,7 @@ export default function DesignRecipe() {
   const [editableIngredient, setEditableIngredient] = useState();
   const [isDisabled, setIsDisabled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
+  // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
   const min = {
     gr: 25,
     und: 1,
@@ -47,6 +47,9 @@ export default function DesignRecipe() {
     usePantry();
 
   const store = usePantry();
+  const ingredients = store.ingredients;
+  const recipes = store.recipes;
+  console.log(recipes, ingredients);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -81,19 +84,9 @@ export default function DesignRecipe() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const recipes = await getRecipes();
-        const ingredients = await getIngredients();
-        setIngredients([...ingredients]);
+        // setIngredients([...ingredients]);
         setIngredientsList(ingredients);
 
-        ingredients.map((ingredient) => {
-          addSingleIngredient(ingredient);
-          // // console.log(ingredient);
-        });
-        recipes.map((recipe) => {
-          addStoreRecipe(recipe);
-          // console.log(recipe);
-        });
         // // console.log(ingredients, recipes);
       } catch (error) {
         console.error(error);
