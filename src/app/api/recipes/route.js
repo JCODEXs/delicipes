@@ -26,7 +26,7 @@ export async function GET(req, res) {
   const db = cached.conn.db;
 
   const result = await db.collection("therecipes").find().toArray();
-  //console.log(result);
+  console.log(result);
   return NextResponse.json({ result });
 }
 
