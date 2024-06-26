@@ -100,7 +100,7 @@ const MealMatrix = () => {
       }
     });
   };
-  // // console.log(selectedRecipes);
+  console.log(selectedRecipes);
 
   const handleSelectRecipe = (day, _recipe) => {
     // // console.log(day, _recipe);
@@ -353,7 +353,7 @@ const MealMatrix = () => {
         ([ingredient, details]) => (
           <li key={ingredient}>
             {details?.cantidad && details?.cantidad.toFixed(0)}{" "}
-            {details?.cantidad > 9 ? "gr" : "unid"} {ingredient}
+            {details?.cantidad > 12 ? "gr" : "unid"} {ingredient}
             {/*  ${" "}{details.precio?.toFixed(0)} */}
           </li>
         ),
@@ -653,7 +653,7 @@ const MealMatrix = () => {
                   {selectedRecipes?.[day] &&
                     selectedRecipes[day].map((_selectedRecipe) => (
                       <div
-                        key={_selectedRecipe._id + day}
+                        key={_selectedRecipe.key + day}
                         draggable="true"
                         onDragStart={(event) =>
                           handleDragStartFromDay(event, _selectedRecipe, day)

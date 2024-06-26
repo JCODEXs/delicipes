@@ -33,7 +33,7 @@ export default function RecipeCard({
         {showPortions && (
           <button
             style={{
-              borderRadius: "45%",
+              borderRadius: "50%",
               background: "rgb(190,37,7,0.9)",
               fontSize: "0.9rem",
               padding: "0.15rem",
@@ -64,12 +64,13 @@ export default function RecipeCard({
             }}
             value={portions}
             placeholder="#"
-            onChange={(e) => {
-              const inputValue = parseInt(e.target.value);
-              const minRange = 0; // minimum allowed value
-              const maxRange = 20; // maximum allowed value
+            onChange={
+              (e) => {
+                const inputValue = parseInt(e.target.value);
+                const minRange = 0; // minimum allowed value
+                const maxRange = 20; // maximum allowed value
 
-              if (!isNaN(inputValue)) {
+                // if (!isNaN(inputValue)) {
                 // console.log("ch");
                 // Check if the entered value is a valid number
                 if (inputValue < minRange) {
@@ -79,10 +80,12 @@ export default function RecipeCard({
                 } else {
                   setPortions(inputValue); // Set the entered value if it's within the range
                 }
-              } else {
-                // setPortions(1); // Set an empty string if the entered value is not a number
               }
-            }}
+              //    else {
+              //     // setPortions(1); // Set an empty string if the entered value is not a number
+              //   }
+              // }
+            }
             required
           />
         </div>
@@ -123,7 +126,7 @@ export default function RecipeCard({
         <div className="itemcard" style={{ fontSize: "1.5rem" }}>
           $
           {((total / recipe.portions) * (showPortions ? portions : 1)).toFixed(
-            0
+            0,
           )}
         </div>
         {/* <div

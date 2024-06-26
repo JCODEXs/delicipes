@@ -577,7 +577,7 @@ export default function DesignRecipe() {
                   onChange={(e) => setPortions(e.target.value)}
                   required
                 />
-                {personSvg}
+                {/* {personSvg} */}
               </div>
             </div>
             {recipeList?.length > 0 ? (
