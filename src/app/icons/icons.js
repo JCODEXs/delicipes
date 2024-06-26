@@ -9,7 +9,7 @@ export const eyeSvg = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="size-6"
+    className="size-2"
   >
     <path
       strokeLinecap="round"
@@ -30,8 +30,8 @@ export const trashSvg = (
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
-    stroke="currentColor"
-    className="size-6"
+    stroke="rgb(200,15,70,0.8)"
+    className="size-2"
   >
     <path
       strokeLinecap="round"
@@ -48,7 +48,7 @@ export const personSvg = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="size-6"
+    className="size-2"
   >
     <path
       strokeLinecap="round"

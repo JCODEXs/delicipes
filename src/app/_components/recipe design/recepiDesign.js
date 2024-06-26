@@ -17,7 +17,8 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 export default function DesignRecipe() {
-  // const [ingredients, setIngredients] = useState(); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
+  const store = usePantry();
+  let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [quantity, setQuantity] = useState([0]);
@@ -43,12 +44,11 @@ export default function DesignRecipe() {
     ML: 100,
     Gr: 50,
   };
-  const { addDBRecipe } = usePantry();
+  const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
-  const store = usePantry();
-  let ingredients = store.ingredients;
+  // let ingredients =
   let recipes = store.recipes;
-  console.log(recipes, ingredients);
+  // console.log(recipes, ingredients);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -81,7 +81,7 @@ export default function DesignRecipe() {
     validateForm();
   }, [tittle, portions, recipeList]);
   useEffect(() => {
-    console.log(ingredients);
+    // console.log(ingredients);
     const fetchData = async () => {
       if (ingredients.length < 1 || recipes.length < 1) {
         ingredients = await getIngredients();
@@ -89,9 +89,17 @@ export default function DesignRecipe() {
       }
       try {
         // setIngredients([...ingredients]);
+        ingredients.map((ingredient) => {
+          addSingleIngredient(ingredient);
+          // console.log(ingredient);
+        });
+        recipes.forEach((recipe) => {
+          addStoreRecipe(recipe);
+          // console.log(recipe);
+        });
         setIngredientsList(ingredients);
 
-        // // console.log(ingredients, recipes);
+        // console.log(ingredients, recipes);
       } catch (error) {
         console.error(error);
       }
@@ -588,9 +596,10 @@ export default function DesignRecipe() {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
-                      flexBasis: "calc(30% - 8px)",
+                      justifyContent: "space-between",
+                      flexBasis: "calc(30% - 10px)",
                       border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
-                      padding: "0.25rem",
+                      padding: "0.15rem",
                       borderRadius: "8px",
                       boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
                     }}
@@ -599,39 +608,41 @@ export default function DesignRecipe() {
                     <div className="itemQ2" style={{ margin: "0.3rem" }}>
                       {item?.ingredient?.name}
                     </div>
-                    <button
-                      className="buttonSum"
-                      onClick={() => increase(index, item?.ingredient?.units)}
-                    >
-                      +
-                    </button>
-                    {}
-                    <button
-                      className="buttonSum"
-                      onClick={() => decrease(index, item?.ingredient?.units)}
-                    >
-                      -
-                    </button>{" "}
+                    <div className="in-container">
+                      <button
+                        className="buttonSum"
+                        onClick={() => increase(index, item?.ingredient?.units)}
+                      >
+                        +
+                      </button>
+                      {}
+                      <button
+                        className="buttonSum"
+                        onClick={() => decrease(index, item?.ingredient?.units)}
+                      >
+                        -
+                      </button>{" "}
+                    </div>
                     <div className="in-container">
                       {" "}
                       <div className="item2">{quantity?.[index]}</div>{" "}
                       <div className="baseMarc">{item?.ingredient?.units}</div>
-                    </div>
-                    <div
-                      style={{
-                        margin: "0.25rem",
-                        fontSize: "1.5rem",
-                        // marginInlineStart: "0.5rem",
-                        padding: "0.5rem",
-                        color: "rgb(200,30,14)",
-                        alignItems: "flex-start",
-                        justifyContent: "flex-end",
-                        borderLeft: "1px solid rbg(10,15,65,0.8)",
-                      }}
-                      onClick={() => removeItem(item, index)}
-                    >
-                      {" "}
-                      X
+                      <div
+                        style={{
+                          margin: "0.25rem",
+                          fontSize: "1.5rem",
+                          // marginInlineStart: "0.5rem",
+                          padding: "0.5rem",
+                          color: "rgb(200,30,14)",
+                          // alignItems: "flex-start",
+                          justifyContent: "flex-end",
+                          borderLeft: "1px solid rbg(10,15,65,0.8)",
+                        }}
+                        onClick={() => removeItem(item, index)}
+                      >
+                        {" "}
+                        X
+                      </div>
                     </div>
                   </div>
                 );

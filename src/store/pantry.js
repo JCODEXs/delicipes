@@ -33,11 +33,12 @@ const pantry = (set) => ({
   addStoreIngredient: (ingredients) =>
     set(
       produce((store) => {
-        // console.log(ingredients);
+        console.log(ingredients);
         ingredients?.forEach((ingredient) => {
           const index = store.ingredients.findIndex(
             (item) => item._id === ingredient._id,
           );
+          console.log(ingredient);
           if (index === -1) {
             // console.log("new item", ingredient);
             // store.ingredients.push(ingredient);
@@ -365,7 +366,7 @@ export const addIngredient = async (ingredient) => {
     _id: result.data.result.insertedId,
   };
   await usePantry.getState().addSingleIngredient(ingredientNew);
-  // console.log("addIngredient", result.data);
+  console.log("addIngredient", result.data);
   const { response, data } = result.data;
 };
 

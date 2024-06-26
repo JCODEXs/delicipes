@@ -107,3 +107,9 @@ dialog{
   height: 80%;
   width: 80%;
 }
+svg {
+  color: rgb(182, 183, 182);
+  height: 100%;
+  width: 100%;
+  max-width: 2rem;
+}

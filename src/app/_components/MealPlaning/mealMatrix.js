@@ -2,25 +2,43 @@
 "use client";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import styles from "./mealMatrix.css";
-import { usePantry } from "../../../store/pantry";
+import { getRecipes, usePantry } from "../../../store/pantry";
 import { shallow } from "zustand/shallow";
 import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
 const MealMatrix = () => {
-  const { addStorePrograming } = usePantry();
   const [selectedRecipes, setSelectedRecipes] = useState({});
   const storeRecipes = usePantry((store) => store.recipes, shallow);
-  const [recipes, setRecipes] = useState();
+  let [recipes, setRecipes] = useState();
   const [portions, setPortions] = useState({});
   const [dayTotals, setDayTotals] = useState();
   const [showList, setShowList] = useState(false);
   const [ingredientsTotList, setIngredientsTotList] = useState("");
   const programing = usePantry((store) => store.programing, shallow);
   const [openedModal, setOpenedModal] = useState(false);
-  const { deletePrograming } = usePantry();
+  const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   // // console.log(ingredientsTotList);
   // //  console.log(portions);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (storeRecipes.length < 1) {
+        recipes = await getRecipes();
+      }
+      try {
+        recipes?.forEach((recipe) => {
+          addStoreRecipe(recipe);
+          // console.log(recipe);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [recipes]);
+
   const OnClickExpand = () => {
     setShowList(!showList);
   };
