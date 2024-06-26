@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePantry } from "~/store/pantry";
 
-export default async function DataStorage({ recipes, ingredients }) {
+export default function DataStorage({ recipes, ingredients }) {
   const { addStoreRecipe, addSingleIngredient } = usePantry();
   if (!recipes || !ingredients) {
     console.error("Recipes or ingredients are missing:", {
@@ -23,5 +23,5 @@ export default async function DataStorage({ recipes, ingredients }) {
     });
   }, [addStoreRecipe, addSingleIngredient, recipes, ingredients]);
 
-  return <p>ok</p>;
+  return null;
 }

@@ -1,11 +1,9 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
+import api from "./api/recipes/api";
 import FullPageRecetionView from "~/components/reception-page";
-import { getMyImages } from "~/server/queries";
 import { CarouselComponent } from "./_components/carouselCompo";
 import { getIngredients, getRecipes, usePantry } from "~/store/pantry";
-import { useEffect } from "react";
+
 import DataStorage from "./dataStorage";
 export const dynamic = "force-dynamic";
 
@@ -61,7 +59,13 @@ export default async function HomePage() {
   try {
     // const recipes = await getRecipes();
     // const ingredients = await getIngredients();
-    const { recipes, ingredients } = fetchData();
+    // const { recipes, ingredients } = fetchData();
+    const [recipesResponse, ingredientsResponse] = await Promise.all([
+      api.get("/recipes"),
+      api.get("/ingredients"),
+    ]);
+    const recipes = recipesResponse.data.result;
+    const ingredients = ingredientsResponse.data.result;
 
     return (
       <main className="flex min-h-screen flex-col items-center justify-center  text-white">

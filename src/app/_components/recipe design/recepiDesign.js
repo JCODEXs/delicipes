@@ -46,8 +46,8 @@ export default function DesignRecipe() {
   const { addDBRecipe } = usePantry();
 
   const store = usePantry();
-  const ingredients = store.ingredients;
-  const recipes = store.recipes;
+  let ingredients = store.ingredients;
+  let recipes = store.recipes;
   console.log(recipes, ingredients);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
@@ -81,7 +81,12 @@ export default function DesignRecipe() {
     validateForm();
   }, [tittle, portions, recipeList]);
   useEffect(() => {
+    console.log(ingredients);
     const fetchData = async () => {
+      if (ingredients.length < 1 || recipes.length < 1) {
+        ingredients = await getIngredients();
+        recipes = await getRecipes();
+      }
       try {
         // setIngredients([...ingredients]);
         setIngredientsList(ingredients);
@@ -93,15 +98,7 @@ export default function DesignRecipe() {
     };
 
     fetchData();
-  }, []);
-
-  // useEffect(() => {
-  //   addStoreIngredient([...ingredientsList]);
-
-  //   setRecipes(storeRecipes[storeRecipes.length - 1]);
-
-  //   //console.log(recipes, storeRecipes);
-  // }, []);
+  }, [ingredients]);
 
   const updateRecipes = (recipe) => {
     const newRecipe = [];
