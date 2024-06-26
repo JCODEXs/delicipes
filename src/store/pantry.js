@@ -305,7 +305,7 @@ export const usePantry = create(
 // console.log(pantry.recipes);
 
 export const getRecipes = async () => {
-  // console.log("hi");
+  console.log("hi");
   const result = await axios.get("/api/recipes");
   console.log("getRecipes", result.data.result);
   const { response, data } = result.data;

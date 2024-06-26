@@ -43,8 +43,7 @@ export default function DesignRecipe() {
     ML: 100,
     Gr: 50,
   };
-  const { addStoreRecipe, addDBRecipe, addSingleIngredient, onRehydrate } =
-    usePantry();
+  const { addDBRecipe } = usePantry();
 
   const store = usePantry();
   const ingredients = store.ingredients;

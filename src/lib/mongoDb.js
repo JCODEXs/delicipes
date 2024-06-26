@@ -15,19 +15,19 @@ if (!MONGODB_DB) {
 }
 
 export const connectToDatabase = async () => {
-  //console.log("here");
+  console.log("here");
   let cached = {};
   const conn = {};
   const opts = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };
-  // console.log("conecting");
+  console.log("conecting");
   const promise = MongoClient.connect(uri, opts)
     .then((client) => {
       conn.client = client;
       const db = client.db(MONGODB_DB);
-      // console.log(db, "conected");
+      console.log(db, "conected");
       return db;
     })
     .then((db) => {

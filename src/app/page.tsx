@@ -39,10 +39,29 @@ async function Images() {
 //   );
 // }
 
+const fetchData = async (retries = 5) => {
+  let recipes;
+  let ingredients;
+  try {
+    recipes = await getRecipes();
+    ingredients = await getIngredients();
+
+    return { recipes, ingredients };
+  } catch (err) {
+    if (retries > 0) {
+      setTimeout(() => fetchData(retries - 1), 2000); // Retry after 2 seconds
+    } else {
+      console.error("Error fetching data:", err);
+    }
+  }
+  return { recipes, ingredients };
+};
+
 export default async function HomePage() {
   try {
-    const recipes = await getRecipes();
-    const ingredients = await getIngredients();
+    // const recipes = await getRecipes();
+    // const ingredients = await getIngredients();
+    const { recipes, ingredients } = fetchData();
 
     return (
       <main className="flex min-h-screen flex-col items-center justify-center  text-white">

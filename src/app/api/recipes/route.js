@@ -22,11 +22,12 @@ export async function POST(req, res) {
   return NextResponse.json({ result });
 }
 export async function GET(req, res) {
+  console.log("hi");
   const cached = await connectToDatabase();
   const db = cached.conn.db;
 
   const result = await db.collection("therecipes").find().toArray();
-  //console.log(result);
+  console.log(result);
   return NextResponse.json({ result });
 }
 
