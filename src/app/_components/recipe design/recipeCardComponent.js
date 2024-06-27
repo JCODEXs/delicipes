@@ -112,7 +112,7 @@ const RecipeCardComponent = ({
                 <div className="item3">
                   <div className="w-30 flex-nowrap overflow-x-auto">
                     {ingredient?.ingredient?.name.length > 12
-                      ? ingredient?.ingredient?.name.slice(0, -4)
+                      ? ingredient?.ingredient?.name.slice(0, -6)
                       : ingredient?.ingredient?.name}
                   </div>
                 </div>

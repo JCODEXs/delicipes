@@ -44,10 +44,13 @@ export default function RootLayout({
           <body
             className={`font-sans ${inter.variable} dark flex flex-col gap-4`}
           >
-            <div className=" grid max-h-fit grid-rows-[auto,1fr]">
-              <TopNav />
-              <Footer />
-              <main className=" max-h-fit overflow-y-scroll">{children}</main>
+            <div className="">
+              <div className=" fixed z-50  w-full flex-col  bg-slate-800">
+                <TopNav />
+                <Footer />
+              </div>
+              <div className="h-24"></div>
+              <main className="">{children}</main>
               {modal}
             </div>
             <div id="modal-root"></div>

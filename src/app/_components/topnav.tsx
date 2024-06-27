@@ -26,7 +26,7 @@ function LoadingSpinnerSVG() {
 }
 export default function TopNav() {
   return (
-    <nav className="flex max-h-fit w-full items-center justify-between border-b p-2 text-xl font-semibold">
+    <nav className="flex  w-full items-center justify-between border-b p-2 text-xl font-semibold  backdrop-blur-sm">
       <Link href={"/"}>
         <div>Delicipes</div>
       </Link>

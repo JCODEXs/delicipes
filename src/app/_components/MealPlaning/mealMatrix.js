@@ -18,8 +18,8 @@ const MealMatrix = () => {
   const programing = usePantry((store) => store.programing, shallow);
   const [openedModal, setOpenedModal] = useState(false);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
-  // // console.log(ingredientsTotList);
-  // //  console.log(portions);
+  // // // console.log(ingredientsTotList);
+  // // //  console.log(portions);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ const MealMatrix = () => {
       try {
         recipes?.forEach((recipe) => {
           addStoreRecipe(recipe);
-          // console.log(recipe);
+          // // console.log(recipe);
         });
       } catch (error) {
         console.error(error);
@@ -45,13 +45,13 @@ const MealMatrix = () => {
 
   const deleteFromSelected = (day, recipeID) => {
     setSelectedRecipes((prevSelectedRecipes) => {
-      // console.log(prevSelectedRecipes[day]);
+      // // console.log(prevSelectedRecipes[day]);
 
       return {
         ...prevSelectedRecipes,
         [day]: [
           ...prevSelectedRecipes?.[day]?.filter(
-            (prevRecipes) => prevRecipes?.key !== recipeID,
+            (prevRecipes) => prevRecipes?._id !== recipeID,
           ),
         ],
       };
@@ -66,23 +66,23 @@ const MealMatrix = () => {
   };
   const setProgramPortions = (day, portions, recipeID) => {
     setSelectedRecipes((prevSelectedRecipes) => {
-      // console.log(prevSelectedRecipes[day]);
-      // console.log(recipeID, currentRecipes);
+      // // console.log(prevSelectedRecipes[day]);
+      // // console.log(recipeID, currentRecipes);
       const currentRecipes = prevSelectedRecipes[day] ?? [];
       let modifiedRecipe = currentRecipes.find(
-        (recipe) => recipe.key === recipeID,
+        (recipe) => recipe._id === recipeID,
       );
       let restRecipes = currentRecipes.filter(
-        (recipe) => recipe.key !== recipeID,
+        (recipe) => recipe._id !== recipeID,
       );
       if (modifiedRecipe) {
         const updatedRecipe = {
           ...modifiedRecipe,
           realPortions: portions[recipeID],
         };
-        // console.log(modifiedRecipe);
+        // // console.log(modifiedRecipe);
         const modifiedIndex = currentRecipes.findIndex(
-          (recipe) => recipe.key === recipeID,
+          (recipe) => recipe._id === recipeID,
         );
         const newRecipes = [
           ...currentRecipes.slice(0, modifiedIndex),
@@ -93,22 +93,22 @@ const MealMatrix = () => {
           ...prevSelectedRecipes,
           [day]: newRecipes,
         };
-        // console.log(updatedSelectedRecipes);
+        // // console.log(updatedSelectedRecipes);
         return updatedSelectedRecipes;
       } else {
         return prevSelectedRecipes;
       }
     });
   };
-  console.log(selectedRecipes);
+  // console.log(selectedRecipes);
 
   const handleSelectRecipe = (day, _recipe) => {
-    // // console.log(day, _recipe);
+    // console.log(day, _recipe);
 
     const isRecipeSelected = selectedRecipes?.[day]?.some((recipe) => {
-      return _recipe.key === recipe.key;
+      return _recipe._id === recipe._id;
     });
-
+    // console.log(isRecipeSelected);
     if (!isRecipeSelected) {
       setSelectedRecipes((prevSelectedRecipes) => ({
         ...prevSelectedRecipes,
@@ -119,7 +119,7 @@ const MealMatrix = () => {
 
   useEffect(() => {
     setRecipes(storeRecipes);
-    // console.log(programing);
+    // // console.log(programing);
     setSelectedRecipes(programing[programing.length - 1]);
   }, [storeRecipes]);
   useEffect(() => {
@@ -141,49 +141,50 @@ const MealMatrix = () => {
 
           selectedRecipes[key].map((recipe) => {
             const RecipeIngredients = recipe.ingredients;
-            // console.log(RecipeIngredients);
+            // // console.log(RecipeIngredients);
           });
-          // console.log(recipes);
+          // // console.log(recipes);
           // Recorre los ingredientes de cada receta y suma las cantidades y precios
-          if (selectedRecipes[key].length > 1) {
+          if (selectedRecipes[key].length > 0) {
             totalPrice[key] = 0;
-            selectedRecipes[key].forEach((recipe) => {
+            selectedRecipes[key].forEach((recipe_) => {
+              const recipe = recipe_.recipe;
               const portionsUnit =
-                portions?.[recipe.key] ?? Number(recipe.portions);
+                portions?.[recipe_._id] ?? Number(recipe.portions);
               const realPortions = recipe.realPortions ?? 1;
-              // console.log(realPortions, portionsUnit, portions?.[recipe.key]);
+              // // console.log(realPortions, portionsUnit, portions?.[recipe.key]);
               recipe.ingredients.map((ingredient) => {
                 const ingredientProps = ingredient.ingredient;
                 const cantidad = ingredient.quantity / recipe.portions;
                 const { name: nombre, grPrice: precio } = ingredientProps;
-                // console.log(ingredientsTotalsDay[key]); //(realPortions, cantidad, portions, ingredientProps);
+                // // console.log(ingredientsTotalsDay[key]); //(realPortions, cantidad, portions, ingredientProps);
                 if (ingredientsTotals[nombre]) {
                   ingredientsTotals[nombre].cantidad +=
-                    cantidad * portions?.[recipe.key + key] ?? 1;
-                  // console.log(ingredientsTotalsDay[key]);
+                    cantidad * portions?.[recipe_._id + key] ?? 1;
+                  // // console.log(ingredientsTotalsDay[key]);
                   if (!ingredientsTotalsDay[key][nombre]) {
-                    // console.log(ingredientsTotalsDay);
+                    // // console.log(ingredientsTotalsDay);
                     ingredientsTotalsDay[key][nombre] = {};
                     ingredientsTotalsDay[key][nombre].cantidad = 0;
                   }
                   ingredientsTotalsDay[key][nombre].cantidad +=
-                    cantidad * portions?.[recipe.key + key] ?? 1;
+                    cantidad * portions?.[recipe_._id + key] ?? 1;
                   ingredientsTotals[nombre].precio += precio * cantidad;
                   ingredientsTotalsDay[key][nombre].precio += precio * cantidad;
                 } else {
                   ingredientsTotals[nombre] = {
-                    cantidad: cantidad * portions?.[recipe.key + key] ?? 1,
+                    cantidad: cantidad * portions?.[recipe_._id + key] ?? 1,
                     precio:
-                      precio * cantidad * portions?.[recipe.key + key] ?? 1,
+                      precio * cantidad * portions?.[recipe_._id + key] ?? 1,
                   };
                   ingredientsTotalsDay[key][nombre] = {
-                    cantidad: cantidad * portions?.[recipe.key + key] ?? 1,
+                    cantidad: cantidad * portions?.[recipe_._id + key] ?? 1,
                     precio:
-                      precio * cantidad * portions?.[recipe.key + key] ?? 1,
+                      precio * cantidad * portions?.[recipe_._id + key] ?? 1,
                   };
                 }
                 totalPrice[key] +=
-                  precio * cantidad * portions?.[recipe.key + key] ?? 1;
+                  precio * cantidad * portions?.[recipe_._id + key] ?? 1;
               });
             });
             // console.log(totalPrice[key], key, ingredientsTotalsDay);
@@ -196,11 +197,11 @@ const MealMatrix = () => {
             selectedRecipes[key]?.[0]?.ingredients?.map((ingredient) => {
               const realPortions = selectedRecipes[key]?.[0].realPortions ?? 1;
               const porciones = Number(selectedRecipes[key]?.[0]?.portions);
-              const Portions = portions[`${selectedRecipes[key][0].key}${key}`];
+              const Portions = portions[`${selectedRecipes[key][0]._id}${key}`];
               const ingredientProps = ingredient.ingredient;
               const cantidad = ingredient.quantity / porciones;
               const { name: nombre, grPrice: precio } = ingredientProps;
-              // console.log(
+              // // console.log(
               //   realPortions,
               //   cantidad,
               //   selectedRecipes[key][0],
@@ -211,7 +212,7 @@ const MealMatrix = () => {
               //   precio
               // );
               if (ingredientsTotals[nombre]) {
-                // console.log(cantidad, Portions);
+                // // console.log(cantidad, Portions);
                 ingredientsTotalsDay[key][nombre] = { cantidad: 0, precio: 0 };
                 ingredientsTotals[nombre].cantidad += cantidad * Portions;
                 ingredientsTotalsDay[key][nombre].cantidad +=
@@ -233,7 +234,7 @@ const MealMatrix = () => {
               }
               totalPrice[key] += precio * cantidad * Portions;
             });
-            // console.log(ingredientsTotalsDay, key);
+            // // console.log(ingredientsTotalsDay, key);
             setDayTotals((prevDaysTotal) => ({
               ...prevDaysTotal,
               [key]: totalPrice[key],
@@ -242,7 +243,7 @@ const MealMatrix = () => {
           // console.log(dayTotals);
         });
     }
-    // console.log(ingredientsTotals, ingredientsTotalsDay);
+    // // console.log(ingredientsTotals, ingredientsTotalsDay);
     setIngredientsTotList([ingredientsTotals, ingredientsTotalsDay]);
 
     const weekPrice = Object.values(ingredientsTotals).reduce(
@@ -255,38 +256,38 @@ const MealMatrix = () => {
       ...prevDaysTotal,
       ["total"]: weekPrice,
     }));
-    // // // console.log(weekPrice);
-    // // // console.log(ingredientsTotals, dayTotals);
+    // // // // console.log(weekPrice);
+    // // // // console.log(ingredientsTotals, dayTotals);
     // const weekPrice = in?.reduce((acc, ingredient) => {
     //   return ingredient.price + acc;
     // }, 0);
-    // // // console.log(weekPrice);
+    // // // // console.log(weekPrice);
     return { ingredientsTotals, totalPrice, weekPrice, ingredientsTotalsDay };
   };
 
   const handleDragStart = (event, recipe) => {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", JSON.stringify({ recipe }));
-    // // // console.log(recipe);
+    // // // // console.log(recipe);
   };
   const handleDragStartFromDay = (event, recipe, dayFrom) => {
     // if(!dayFrom){
     //     event.dataTransfer.effectAllowed = 'move';
     //     event.dataTransfer.setData('text/plain', JSON.stringify({recipe}));
     // }
-
+    const thisRecipe = recipe.recipe;
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData(
       "text/plain",
       JSON.stringify({ recipe, dayFrom }),
     );
-    // // // console.log(recipe);
+    // // // // console.log(recipe);
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
     const target = event;
-    // // console.log(target);
+    // // // console.log(target);
   };
 
   const handleDrop = (event, day) => {
@@ -305,9 +306,9 @@ const MealMatrix = () => {
     const dayFrom = parsedData.dayFrom;
     if (dayFrom && selectedRecipes[dayFrom]) {
       const updatedRecipes = selectedRecipes[dayFrom].filter(
-        (r) => r.key !== recipe.key,
+        (r) => r._id !== recipe._id,
       );
-      // console.log(updatedRecipes, recipe, dayFrom);
+      // console.log(updatedRecipes, recipe._id, selectedRecipes);
       setSelectedRecipes((prevSelectedRecipes) => ({
         ...prevSelectedRecipes,
         [dayFrom]: updatedRecipes,
@@ -346,9 +347,9 @@ const MealMatrix = () => {
     ),
   );
   const ingListByDay = (day) => {
-    // console.log(day, ingredientsTotList[1]?.[day]);
+    // // console.log(day, ingredientsTotList[1]?.[day]);
     if (ingredientsTotList[1]?.[day]) {
-      // console.log(day, ingredientsTotList[1]);
+      // // console.log(day, ingredientsTotList[1]);
       return Object.entries(ingredientsTotList?.[1]?.[day])?.map(
         ([ingredient, details]) => (
           <li key={ingredient}>
@@ -460,8 +461,8 @@ const MealMatrix = () => {
           {recipes?.map((recipe) => (
             <div
               draggable="true"
-              key={recipe.recipe.key}
-              onDragStart={(event) => handleDragStart(event, recipe.recipe)}
+              key={recipe._id}
+              onDragStart={(event) => handleDragStart(event, recipe)}
             >
               <div
                 style={{
@@ -653,7 +654,7 @@ const MealMatrix = () => {
                   {selectedRecipes?.[day] &&
                     selectedRecipes[day].map((_selectedRecipe) => (
                       <div
-                        key={_selectedRecipe.key + day}
+                        key={_selectedRecipe._id + day}
                         draggable="true"
                         onDragStart={(event) =>
                           handleDragStartFromDay(event, _selectedRecipe, day)
@@ -675,14 +676,15 @@ const MealMatrix = () => {
                         }}
                       >
                         <RecipeCard
-                          key={_selectedRecipe.key}
-                          recipe_={_selectedRecipe}
+                          key={_selectedRecipe._id}
+                          recipe_={_selectedRecipe.recipe}
                           day={day}
                           showPortions={true}
                           getPortions={setProgramPortions}
                           passPortions={passPortions}
+                          _id={_selectedRecipe._id}
                           deleteCard={() => {
-                            deleteFromSelected(day, _selectedRecipe.key);
+                            deleteFromSelected(day, _selectedRecipe._id);
                           }}
                         />
                       </div>

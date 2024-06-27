@@ -8,14 +8,15 @@ export default function RecipeCard({
   day,
   deleteCard,
   passPortions,
+  _id,
 }) {
   let total = 0;
   const recipe = recipe_;
-  // console.log(recipe);
+  console.log(recipe);
   const [portions, setPortions] = useState(1);
   if (showPortions) {
     useEffect(() => {
-      passPortions(portions, recipe.key + day);
+      passPortions(portions, _id + day);
       // getPortions(day, portions, recipe._id);
     }, [portions]);
   }

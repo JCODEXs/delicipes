@@ -375,7 +375,7 @@ export default function DesignRecipe() {
   return (
     <div className="out-container">
       <div className="background"></div>
-      <div className="container">
+      <div className="container h-60">
         <div id="+ingredientes" className="ingredients">
           <div className="addButton" onClick={() => openModal()}>
             {!addIngredientModal ? (
@@ -685,14 +685,13 @@ export default function DesignRecipe() {
         </div>
 
         {/* </div> */}
-      </div>
-      <div style={{}}>
+
         <div
           style={{
             position: "sticky",
             top: 5,
             fontSize: "1.8rem",
-            margin: "1rem",
+            margin: "2rem",
           }}
         >
           Library
@@ -705,6 +704,7 @@ export default function DesignRecipe() {
               if (recipe?._id) {
                 return (
                   <div
+                    className="w-auto"
                     key={recipe?._id}
                     onClick={() => {
                       editRecipe(recipe);

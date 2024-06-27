@@ -3,5 +3,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="max-h-fit w-full">{children}</div>;
+  return <div className=" w-full">{children}</div>;
 }
