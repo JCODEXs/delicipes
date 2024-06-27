@@ -88,8 +88,7 @@ export default async function HomePage() {
       //   <p>Error fetching data. Please try again later.</p>
       // </main>
       <main className="flex min-h-screen flex-col items-center justify-center  text-white">
-        hey
-        {/* <SignedOut>
+        <SignedOut>
           <div className="h-full w-full text-center text-2xl">
             <FullPageRecetionView />
             Sign in above to begin
@@ -97,7 +96,7 @@ export default async function HomePage() {
         </SignedOut>
         <SignedIn>
           <Images />
-        </SignedIn> */}
+        </SignedIn>
       </main>
     );
   }
