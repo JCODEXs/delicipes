@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
-import { connectToDatabase } from "../../../lib/mongoDb";
+import { connectToDatabase } from "~/lib/mongoDb";
 
 export async function DELETE(req, context) {
   // Extract the ID from the URL params
