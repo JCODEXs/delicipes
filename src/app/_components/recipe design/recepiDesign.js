@@ -17,7 +17,8 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 export default function DesignRecipe() {
-  const [ingredients, setIngredients] = useState(); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
+  const store = usePantry();
+  let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [quantity, setQuantity] = useState([0]);
@@ -32,7 +33,7 @@ export default function DesignRecipe() {
   const [editableIngredient, setEditableIngredient] = useState();
   const [isDisabled, setIsDisabled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
+  // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
   const min = {
     gr: 25,
     und: 1,
@@ -43,10 +44,11 @@ export default function DesignRecipe() {
     ML: 100,
     Gr: 50,
   };
-  const { addStoreRecipe, addDBRecipe, addSingleIngredient, onRehydrate } =
-    usePantry();
+  const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
-  const store = usePantry();
+  // let ingredients =
+  let recipes = store.recipes;
+  // console.log(recipes, ingredients);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -79,37 +81,32 @@ export default function DesignRecipe() {
     validateForm();
   }, [tittle, portions, recipeList]);
   useEffect(() => {
+    // console.log(ingredients);
     const fetchData = async () => {
+      if (ingredients.length < 1 || recipes.length < 1) {
+        ingredients = await getIngredients();
+        recipes = await getRecipes();
+      }
       try {
-        const recipes = await getRecipes();
-        const ingredients = await getIngredients();
-        setIngredients([...ingredients]);
-        setIngredientsList(ingredients);
-
+        // setIngredients([...ingredients]);
         ingredients.map((ingredient) => {
           addSingleIngredient(ingredient);
-          // // console.log(ingredient);
+          // console.log(ingredient);
         });
-        recipes.map((recipe) => {
+        recipes.forEach((recipe) => {
           addStoreRecipe(recipe);
           // console.log(recipe);
         });
-        // // console.log(ingredients, recipes);
+        setIngredientsList(ingredients);
+
+        // console.log(ingredients, recipes);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, []);
-
-  // useEffect(() => {
-  //   addStoreIngredient([...ingredientsList]);
-
-  //   setRecipes(storeRecipes[storeRecipes.length - 1]);
-
-  //   //console.log(recipes, storeRecipes);
-  // }, []);
+  }, [ingredients]);
 
   const updateRecipes = (recipe) => {
     const newRecipe = [];
@@ -378,7 +375,7 @@ export default function DesignRecipe() {
   return (
     <div className="out-container">
       <div className="background"></div>
-      <div className="container">
+      <div className="container ">
         <div id="+ingredientes" className="ingredients">
           <div className="addButton" onClick={() => openModal()}>
             {!addIngredientModal ? (
@@ -580,7 +577,7 @@ export default function DesignRecipe() {
                   onChange={(e) => setPortions(e.target.value)}
                   required
                 />
-                {personSvg}
+                {/* {personSvg} */}
               </div>
             </div>
             {recipeList?.length > 0 ? (
@@ -599,9 +596,10 @@ export default function DesignRecipe() {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
-                      flexBasis: "calc(30% - 8px)",
+                      justifyContent: "space-between",
+                      flexBasis: "calc(30% - 10px)",
                       border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
-                      padding: "0.25rem",
+                      padding: "0.15rem",
                       borderRadius: "8px",
                       boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
                     }}
@@ -610,39 +608,41 @@ export default function DesignRecipe() {
                     <div className="itemQ2" style={{ margin: "0.3rem" }}>
                       {item?.ingredient?.name}
                     </div>
-                    <button
-                      className="buttonSum"
-                      onClick={() => increase(index, item?.ingredient?.units)}
-                    >
-                      +
-                    </button>
-                    {}
-                    <button
-                      className="buttonSum"
-                      onClick={() => decrease(index, item?.ingredient?.units)}
-                    >
-                      -
-                    </button>{" "}
+                    <div className="in-container">
+                      <button
+                        className="buttonSum"
+                        onClick={() => increase(index, item?.ingredient?.units)}
+                      >
+                        +
+                      </button>
+                      {}
+                      <button
+                        className="buttonSum"
+                        onClick={() => decrease(index, item?.ingredient?.units)}
+                      >
+                        -
+                      </button>{" "}
+                    </div>
                     <div className="in-container">
                       {" "}
                       <div className="item2">{quantity?.[index]}</div>{" "}
                       <div className="baseMarc">{item?.ingredient?.units}</div>
-                    </div>
-                    <div
-                      style={{
-                        margin: "0.25rem",
-                        fontSize: "1.5rem",
-                        // marginInlineStart: "0.5rem",
-                        padding: "0.5rem",
-                        color: "rgb(200,30,14)",
-                        alignItems: "flex-start",
-                        justifyContent: "flex-end",
-                        borderLeft: "1px solid rbg(10,15,65,0.8)",
-                      }}
-                      onClick={() => removeItem(item, index)}
-                    >
-                      {" "}
-                      X
+                      <div
+                        style={{
+                          margin: "0.25rem",
+                          fontSize: "1.5rem",
+                          // marginInlineStart: "0.5rem",
+                          padding: "0.5rem",
+                          color: "rgb(200,30,14)",
+                          // alignItems: "flex-start",
+                          justifyContent: "flex-end",
+                          borderLeft: "1px solid rbg(10,15,65,0.8)",
+                        }}
+                        onClick={() => removeItem(item, index)}
+                      >
+                        {" "}
+                        X
+                      </div>
                     </div>
                   </div>
                 );
@@ -685,14 +685,13 @@ export default function DesignRecipe() {
         </div>
 
         {/* </div> */}
-      </div>
-      <div style={{}}>
+
         <div
           style={{
             position: "sticky",
             top: 5,
             fontSize: "1.8rem",
-            margin: "1rem",
+            margin: "2rem",
           }}
         >
           Library
@@ -705,6 +704,7 @@ export default function DesignRecipe() {
               if (recipe?._id) {
                 return (
                   <div
+                    className="w-auto"
                     key={recipe?._id}
                     onClick={() => {
                       editRecipe(recipe);

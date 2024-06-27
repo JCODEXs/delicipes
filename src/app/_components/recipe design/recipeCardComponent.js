@@ -55,7 +55,7 @@ const RecipeCardComponent = ({
             justifyContent: "flex-end",
             borderRadius: 8,
             marginRight: "1rem",
-            marginBottom: "0.6rem",
+            marginBottom: "0.25rem",
           }}
         >
           {recipe?.portions}
@@ -78,6 +78,7 @@ const RecipeCardComponent = ({
               width: "fit-content",
               cursor: "pointer",
               marginBottom: "1rem",
+              color: "red",
             }}
             onClick={(e) => {
               e.stopPropagation(); // Prevent triggering the editRecipe.recipe function
@@ -106,11 +107,13 @@ const RecipeCardComponent = ({
           {updatedIngredients.map((ingredient) => {
             // console.log(ingredient);
             return (
-              <div className="in-container" key={ingredient._id}>
+              <div className="in-container2" key={ingredient._id}>
+                <div>{ingredient?.ingredient?.image}</div>
                 <div className="item3">
-                  <div>{ingredient?.ingredient?.image}</div>
-                  <div>
-                    <div>{ingredient?.ingredient?.name}</div>
+                  <div className="w-30 flex-nowrap ">
+                    {ingredient?.ingredient?.name.length > 12
+                      ? ingredient?.ingredient?.name.slice(0, -6)
+                      : ingredient?.ingredient?.name}
                   </div>
                 </div>
                 <div
@@ -120,7 +123,8 @@ const RecipeCardComponent = ({
                   // }}
                 >
                   <div className="baseMarc">
-                    {ingredient?.quantity} {ingredient?.ingredient?.units}
+                    <div>{ingredient?.quantity}</div>{" "}
+                    <div>{ingredient?.ingredient?.units}</div>
                   </div>
                 </div>
                 =

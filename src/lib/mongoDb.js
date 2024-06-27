@@ -15,13 +15,10 @@ if (!MONGODB_DB) {
 }
 
 export const connectToDatabase = async () => {
-  //console.log("here");
+  // console.log("here");
   let cached = {};
   const conn = {};
-  const opts = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
+  const opts = {};
   // console.log("conecting");
   const promise = MongoClient.connect(uri, opts)
     .then((client) => {

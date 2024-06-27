@@ -17,7 +17,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     min-width: 1rem;
-    max-width: 25px;
+    max-width: 35px;
     margin-inline-start: 0.75rem;
     padding: 0.25rem;
     align-items: center;
@@ -227,6 +227,7 @@
     align-items: stretch;
     color: #9f2121;
     justify-content: space-between;
+    width: 100%;
     /* box-shadow: 2px 2px 4px rgba(85, 8, 8, 0.659); */
 }
 
@@ -252,6 +253,7 @@
     font-weight: 300;
     font-size: 1.2rem;
     margin-bottom: 0.25rem;
+    width: 100%;
     color: #ffffff;
 }
 
@@ -280,5 +282,5 @@ input {
 font-size: 0.9rem;
     font-weight: 300;
     margin: 0.25rem;
-    gap:0.1rem
+    
 }

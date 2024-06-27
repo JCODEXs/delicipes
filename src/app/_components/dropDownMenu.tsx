@@ -24,7 +24,9 @@ export function DropdownMenuAdd() {
           {" "}
           <DropdownMenuItem>Recipe</DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>Meal Program</DropdownMenuItem>
+        <Link href={"/plan"}>
+          <DropdownMenuItem>Meal Program</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

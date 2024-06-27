@@ -65,12 +65,12 @@ export default function Form({ setIngredients, editableIngredient, onClose }) {
     } else {
       deleteSingleIngredient(editableIngredient._id);
     }
-    setIngredients((prev) => {
-      if (!Array.isArray(prev)) {
-        return formFields;
-      }
-      return [...prev, ...formFields];
-    });
+    // setIngredients((prev) => {
+    //   if (!Array.isArray(prev)) {
+    //     return formFields;
+    //   }
+    //   return [...prev, ...formFields];
+    // });
 
     formFields.forEach((ingredient, index) => {
       const id = Math.random(10) * 100000000000;
