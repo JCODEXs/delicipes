@@ -375,7 +375,7 @@ export default function DesignRecipe() {
   return (
     <div className="out-container">
       <div className="background"></div>
-      <div className="container h-60">
+      <div className="container ">
         <div id="+ingredientes" className="ingredients">
           <div className="addButton" onClick={() => openModal()}>
             {!addIngredientModal ? (
