@@ -13,11 +13,11 @@ export default function DataStorage({ recipes, ingredients }) {
     return;
   }
   useEffect(() => {
-    console.log("Adding ingredients to store", ingredients);
+    // console.log("Adding ingredients to store", ingredients);
     ingredients.forEach((ingredient) => {
       addSingleIngredient(ingredient);
     });
-    console.log("Adding recipes to store", recipes);
+    // console.log("Adding recipes to store", recipes);
     recipes.forEach((recipe) => {
       addStoreRecipe(recipe);
     });

@@ -33,12 +33,12 @@ const pantry = (set) => ({
   addStoreIngredient: (ingredients) =>
     set(
       produce((store) => {
-        console.log(ingredients);
+        // console.log(ingredients);
         ingredients?.forEach((ingredient) => {
           const index = store.ingredients.findIndex(
             (item) => item._id === ingredient._id,
           );
-          console.log(ingredient);
+          // console.log(ingredient);
           if (index === -1) {
             // console.log("new item", ingredient);
             // store.ingredients.push(ingredient);
@@ -93,7 +93,7 @@ const pantry = (set) => ({
     set(
       // Use produce to modify the current state immutably
       produce((store) => {
-        console.log(recipe);
+        // console.log(recipe);
         store.recipes.push(recipe);
         // console.log(store.recipes); // Add the new recipe to the recipes array
       }),
@@ -106,11 +106,11 @@ const pantry = (set) => ({
 
       produce((store) => {
         const newRecipe = { ...recipe };
-        console.log(recipe);
+        // console.log(recipe);
         const index = store.recipes.findIndex(
           (item) => item._id === recipe._id,
         );
-        console.log(index);
+        // console.log(index);
         if (index !== -1) {
           store.recipes[index] = {
             ...store.recipes[index],
@@ -120,7 +120,7 @@ const pantry = (set) => ({
         } else {
           console.warn(`Recipe with id ${recipe._id} not found.`);
         }
-        console.log(store.recipes); // Add the new recipe to the recipes array
+        // console.log(store.recipes); // Add the new recipe to the recipes array
       }),
       false,
       "SingleUpdateRecipe",
@@ -129,7 +129,7 @@ const pantry = (set) => ({
     set(
       // Use produce to modify the current state immutably
       produce((store) => {
-        console.log(ingredient);
+        // console.log(ingredient);
         const index = store.ingredients.findIndex(
           (item) => item._id === ingredient._id,
         );
@@ -176,7 +176,7 @@ const pantry = (set) => ({
           if (store.recipes.length === 0) {
             // If the recipes array is empty, add the new recipe
             store.recipes.push(_recipe);
-            console.log("first item", _recipe);
+            // console.log("first item", _recipe);
           } else {
             // Check if the recipe already exists
             const index = store.recipes.findIndex(
@@ -185,11 +185,11 @@ const pantry = (set) => ({
 
             if (index === -1) {
               // If the recipe doesn't exist, add it
-              console.log("new item", _recipe);
+              // console.log("new item", _recipe);
               store.recipes.push(_recipe);
             } else {
               // If the recipe exists, update it
-              console.log("updating item", _recipe);
+              // console.log("updating item", _recipe);
 
               store.recipes[index] = _recipe;
               //  {
@@ -200,7 +200,7 @@ const pantry = (set) => ({
             }
           }
         }
-        console.log(store.recipes);
+        // console.log(store.recipes);
       }),
       false,
       "addRecipe",
@@ -220,9 +220,9 @@ const pantry = (set) => ({
       }),
     );
 
-    console.log(_recipe, recipeExists);
+    // console.log(_recipe, recipeExists);
     if (!recipeExists) {
-      console.log("new item", _recipe);
+      // console.log("new item", _recipe);
       const newRecipe = await addRecipe(_recipe);
     } else {
       // If the recipe exists, update the store
@@ -231,7 +231,7 @@ const pantry = (set) => ({
           const index = store.recipes.findIndex(
             (item) => item._id === _recipe._id,
           );
-          console.log("updating item", index, _recipe);
+          // console.log("updating item", index, _recipe);
           // store.recipes[index] = _recipe;
           modifyRecipe(_recipe);
         }),
@@ -306,9 +306,9 @@ export const usePantry = create(
 // console.log(pantry.recipes);
 
 export const getRecipes = async () => {
-  console.log("hi");
+  // console.log("hi");
   const result = await axios.get("/api/recipes");
-  console.log("getRecipes", result.data.result);
+  // console.log("getRecipes", result.data.result);
   const { response, data } = result.data;
   return result.data.result;
 };
@@ -325,14 +325,14 @@ export const addRecipe = async (recipe) => {
   const result = await axios.post("/api/recipes", {
     recipe,
   });
-  console.log(result.data);
+  // console.log(result.data);
   const RecipeNew = await { ...recipe, _id: result.data.result.insertedId };
   usePantry.getState().addStoreRecipe(RecipeNew);
-  console.log(RecipeNew);
+  // console.log(RecipeNew);
   return result.data;
 };
 export const modifyRecipe = async (recipe) => {
-  console.log(recipe);
+  // console.log(recipe);
   const result = await axios.put("/api/recipes", {
     recipe,
   });
@@ -342,7 +342,7 @@ export const modifyRecipe = async (recipe) => {
   return result.data;
 };
 export const DeleteRecipe = async (_id) => {
-  console.log(_id);
+  // console.log(_id);
   const result = await axios.delete(`/api/recipes/${_id}`);
   await usePantry.getState().deleteSingleRecipe(_id);
   // console.log("Delete recipe", result.data);
@@ -366,7 +366,7 @@ export const addIngredient = async (ingredient) => {
     _id: result.data.result.insertedId,
   };
   await usePantry.getState().addSingleIngredient(ingredientNew);
-  console.log("addIngredient", result.data);
+  // console.log("addIngredient", result.data);
   const { response, data } = result.data;
 };
 
