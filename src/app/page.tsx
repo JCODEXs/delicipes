@@ -84,8 +84,20 @@ export default async function HomePage() {
   } catch (error) {
     console.error("Error fetching data:", error);
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center text-white">
-        <p>Error fetching data. Please try again later.</p>
+      // <main className="flex min-h-screen flex-col items-center justify-center text-white">
+      //   <p>Error fetching data. Please try again later.</p>
+      // </main>
+      <main className="flex min-h-screen flex-col items-center justify-center  text-white">
+        hey
+        {/* <SignedOut>
+          <div className="h-full w-full text-center text-2xl">
+            <FullPageRecetionView />
+            Sign in above to begin
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <Images />
+        </SignedIn> */}
       </main>
     );
   }
