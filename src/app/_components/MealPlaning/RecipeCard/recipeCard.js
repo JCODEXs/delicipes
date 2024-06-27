@@ -12,7 +12,7 @@ export default function RecipeCard({
 }) {
   let total = 0;
   const recipe = recipe_;
-  console.log(recipe);
+  // console.log(recipe);
   const [portions, setPortions] = useState(1);
   if (showPortions) {
     useEffect(() => {
@@ -36,8 +36,8 @@ export default function RecipeCard({
             style={{
               borderRadius: "50%",
               background: "rgb(190,37,7,0.9)",
-              fontSize: "0.9rem",
-              padding: "0.15rem",
+              fontSize: "1rem",
+              padding: "0.2rem",
               margin: "0.15",
             }}
             onClick={() => {

@@ -5,7 +5,7 @@ import { usePantry, addIngredient } from "../../../store/pantry";
 const units = ["und", "g", "gr", "Gr", "GR", "ml", "Ml", "ML"];
 const min = { gr: 25, und: 1, g: 1, ml: 25, Ml: 50, GR: 100, ML: 100, Gr: 50 };
 
-export default function Form({ setIngredients, editableIngredient, onClose }) {
+export default function Form({ editableIngredient, onClose }) {
   const { addStoreIngredient, deleteSingleIngredient } = usePantry();
   // console.log(editableIngredient);
   const [formFields, setFormFields] = useState([

@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 // import styles from "./recepiDesign.css";
 import Form from "./ingredientsDatabase";
-
-import { shallow } from "zustand/shallow";
 import {
   getRecipes,
   getIngredients,
@@ -17,17 +15,24 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 export default function DesignRecipe() {
+  // ingredients,
+  // ingredientsList,
+  // recipeList,
+  // quantity,
+  // searchRef,
+  // Recipe,
+  // serchRef
   const store = usePantry();
   let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [quantity, setQuantity] = useState([0]);
-  const [tittle, setTittle] = useState("");
-  const [portions, setPortions] = useState();
+  const [Recipe, setRecipe] = useState({
+    recipe: { tittle: "", portions: 0 },
+    _id: null,
+  });
   const searchRef = useRef();
-  const [recipe, setRecipe] = useState();
   const [addIngredientModal, setAddIngredientModal] = useState(false);
-  const [Id, setId] = useState();
   //const [descriptionValue, setDescriptionValue] = useState("");
   const [actionMode, setActionMode] = useState("select");
   const [editableIngredient, setEditableIngredient] = useState();
@@ -46,8 +51,13 @@ export default function DesignRecipe() {
   };
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
-  // let ingredients =
   let recipes = store.recipes;
+  const descriptionRef = useRef("");
+  const descriptionValue = descriptionRef.current;
+  const storeIngredients = usePantry((store) => store.ingredients);
+  const storeRecipes = usePantry((store) => store.recipes);
+  // // console.log(storeIngredients);
+  // console.log(storeRecipes);
   // console.log(recipes, ingredients);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
@@ -62,13 +72,7 @@ export default function DesignRecipe() {
   //   }
   // }, []);
   // }, [dependency]);
-  let total = 0;
-  const descriptionRef = useRef("");
-  const descriptionValue = descriptionRef.current;
-  const storeIngredients = usePantry((store) => store.ingredients);
-  const storeRecipes = usePantry((store) => store.recipes, shallow);
-  // // console.log(storeIngredients);
-  // console.log(storeRecipes);
+
   function openModal() {
     setAddIngredientModal(true);
   }
@@ -79,7 +83,7 @@ export default function DesignRecipe() {
 
   useLayoutEffect(() => {
     validateForm();
-  }, [tittle, portions, recipeList]);
+  }, [Recipe?.recipe?.tittle, Recipe?.recipe?.portions, recipeList]);
   useEffect(() => {
     // console.log(ingredients);
     const fetchData = async () => {
@@ -108,11 +112,11 @@ export default function DesignRecipe() {
     fetchData();
   }, [ingredients]);
 
-  const updateRecipes = (recipe) => {
+  const updateRecipes = (_recipe) => {
     const newRecipe = [];
-    const updatedRecipe = recipe.ingredients.forEach((ing, index) => {
+    const updatedRecipe = _recipe.ingredients.forEach((ing, index) => {
       const actualIngredient = ingredientsList.find((_ing) => {
-        return _ing.ingredient.name === ing.ingredient.name;
+        return _ing._id === ing._id;
       });
 
       if (actualIngredient) {
@@ -169,44 +173,44 @@ export default function DesignRecipe() {
     let filteredIngredients = ingredientsList;
 
     if (searchValue !== "") {
-      filteredIngredients = ingredientsList.filter((ingredient) =>
-        ingredient.ingredient.name.includes(searchValue),
+      filteredIngredients = ingredientsList.filter((_ingredient) =>
+        _ingredient.ingredient.name.includes(searchValue),
       );
     } else {
-      const usedItems = recipeList.map((item) => item.ingredient.name);
+      const usedItems = recipeList.map((_item) => _item.ingredient.name);
 
       filteredIngredients = storeIngredients.filter(
-        (item) => !usedItems.includes(item.ingredient.name),
+        (_item) => !usedItems.includes(_item.ingredient.name),
       );
     }
     if (searchValue == "") {
-      const usedItems = recipeList.map((item) => item.ingredient.name);
+      const usedItems = recipeList.map((_item) => _item.ingredient.name);
 
       filteredIngredients = storeIngredients.filter(
-        (item) => !usedItems.includes(item.ingredient.name),
+        (_item) => !usedItems.includes(_item.ingredient.name),
       );
     }
     setIngredientsList(filteredIngredients);
     // console.log(filteredIngredients, searchValue, storeIngredients);
   };
-  const editRecipe = (recipe) => {
-    // console.log(recipe);
-    setRecipe(recipe.recipe);
-    setTittle(recipe.recipe.tittle);
-    setId(recipe._id);
-    descriptionRef.current = recipe.recipe.description;
-    // //setDescriptionValue(recipe.description);
-    const ingredients = updateRecipes(recipe.recipe);
-    const quantity = recipe.recipe.ingredients.map((ingredient) => {
-      return ingredient.quantity;
+  const editRecipe = (_recipe) => {
+    // console.log(_recipe);
+    setRecipe(_recipe.recipe);
+    // setTittle(_recipe.recipe.tittle);
+    descriptionRef.current = _recipe?.recipe?.description;
+    // //setDescriptionValue(_recipe.description);
+    const updatedIngredients = updateRecipes(_recipe.recipe);
+    const quantity = _recipe?.recipe?.ingredients.map((_ingredient) => {
+      return _ingredient.quantity;
     });
-    // console.log(ingredients, recipe);
-    setRecipeList(ingredients);
+    console.log(updatedIngredients, recipe);
+    setRecipeList(updatedIngredients);
     setQuantity(quantity);
-    setPortions(recipe.recipe.portions);
+    // setPortions(_recipe.recipe.portions);
   };
 
   const addToListofRecipe = () => {
+    //no
     // console.log(recipeList);
     const ingredients = [];
     recipeList.map((item, index) => {
@@ -218,22 +222,24 @@ export default function DesignRecipe() {
     addDBRecipe({
       recipe: {
         key: Math.random(8) * 10000000,
-        ingredients: ingredients,
+        ingredients,
         description: descriptionValue,
-        tittle: tittle,
-        portions: portions,
+        tittle: Recipe?.recipe?.tittle,
+        portions: Recipe?.recipe?.portions,
       },
-      _id: Id,
+      _id: Recipe?._id,
     });
     setRecipeList([]);
-    setTittle("");
+    setRecipe({
+      recipe: { tittle: "", portions: 0 },
+      _id: null,
+    });
+
     descriptionRef.current = "";
     //setDescriptionValue("");
     setQuantity([]);
     setIngredientsList(storeIngredients);
     // // console.log(recipeList, ingredients);
-    setPortions(1);
-    setId(undefined);
   };
   const makeBkup = () => {
     storeIngredients.forEach((ingredient) => {
@@ -242,6 +248,7 @@ export default function DesignRecipe() {
     });
   };
   const addToRecipe = (item) => {
+    //
     // // console.log(item);
     if (actionMode == "delete") {
       DeleteIngredient(item._id);
@@ -311,7 +318,11 @@ export default function DesignRecipe() {
     }
   };
   const validateForm = () => {
-    if (tittle?.trim() === "" || +portions < 1 || recipeList.length < 1) {
+    if (
+      Recipe?.recipe?.tittle?.trim() === "" ||
+      +Recipe?.recipe?.portions < 1 ||
+      recipeList.length < 1
+    ) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
@@ -389,7 +400,6 @@ export default function DesignRecipe() {
               {addIngredientModal && (
                 <Modal isOpen={addIngredientModal} onClose={closeModal}>
                   <Form
-                    setIngredients={setIngredients}
                     editableIngredient={editableIngredient}
                     key={editableIngredient?.name}
                     onClose={closeModal}
@@ -543,6 +553,7 @@ export default function DesignRecipe() {
 
             <div className="out-container">
               <input
+                name="tittle"
                 type="text"
                 style={{
                   width: "70%",
@@ -551,9 +562,14 @@ export default function DesignRecipe() {
                   padding: "0.2rem",
                   margin: "0.25rem",
                 }}
-                value={tittle}
+                value={Recipe?.recipe?.tittle}
                 placeholder="Recipe name"
-                onChange={(e) => setTittle(e.target.value)}
+                onChange={(e) =>
+                  setRecipe((prev) => ({
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                  }))
+                }
                 required
               />{" "}
               <div
@@ -565,6 +581,7 @@ export default function DesignRecipe() {
               >
                 for:{" "}
                 <input
+                  name="portions"
                   type="number"
                   style={{
                     width: "22%",
@@ -572,9 +589,14 @@ export default function DesignRecipe() {
                     borderRadius: 8,
                     padding: "0.2rem",
                   }}
-                  value={portions}
+                  value={Recipe?.recipe?.portions}
                   placeholder="# 👤"
-                  onChange={(e) => setPortions(e.target.value)}
+                  onChange={(e) =>
+                    setRecipe((prev) => ({
+                      ...prev,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
                   required
                 />
                 {/* {personSvg} */}
@@ -677,7 +699,7 @@ export default function DesignRecipe() {
             <button
               className={isDisabled ? "buttonDisabled" : "addButton"}
               disabled={isDisabled}
-              onClick={() => addToListofRecipe(recipe)}
+              onClick={() => addToListofRecipe()}
             >
               Add recipe to Library
             </button>
@@ -699,22 +721,22 @@ export default function DesignRecipe() {
         <div className="ReceipLibrary">
           {
             // !shouldCheckLocalStorage &&
-            storeRecipes.map((recipe) => {
-              // console.log(recipe);
-              if (recipe?._id) {
+            storeRecipes.map((_recipe) => {
+              // console.log(_recipe);
+              if (_recipe?._id) {
                 return (
                   <div
                     className="w-auto"
-                    key={recipe?._id}
+                    key={_recipe?._id}
                     onClick={() => {
-                      editRecipe(recipe);
+                      editRecipe(_recipe);
                       scrollToDiv();
                     }}
                   >
                     <RecipeCardComponent
-                      key={recipe?._id}
-                      _id={recipe?._id}
-                      recipe={recipe.recipe}
+                      key={_recipe?._id}
+                      _id={_recipe?._id}
+                      recipe={_recipe.recipe}
                       storeIngredients={storeIngredients}
                       deleteHandler={deleteHandler}
                     />
