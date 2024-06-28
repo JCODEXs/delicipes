@@ -7,7 +7,7 @@ import { getIngredients, getRecipes, usePantry } from "~/store/pantry";
 import DataStorage from "./dataStorage";
 export const dynamic = "force-dynamic";
 
-async function Images() {
+async function ImagesCarrousel() {
   return <CarouselComponent />;
 }
 //   const images = await getMyImages();
@@ -80,7 +80,7 @@ export default async function HomePage() {
           </div>
         </SignedOut>
         <SignedIn>
-          <Images />
+          <ImagesCarrousel />
           <DataStorage recipes={recipes} ingredients={ingredients} />
         </SignedIn>
       </main>
@@ -89,7 +89,11 @@ export default async function HomePage() {
     console.error("Error fetching data:", error);
     return (
       <main className="flex min-h-screen flex-col items-center justify-center text-white">
-        <p>Error fetching data. Please try again later.</p>
+        {/* <p>Error fetching data. Please try again later.</p> */}
+        <div className="h-full w-full text-center text-2xl">
+          <FullPageRecetionView />
+          Sign in above to begin
+        </div>
       </main>
       // <main className="flex min-h-screen flex-col items-center justify-center  text-white">
       //   <SignedOut>
