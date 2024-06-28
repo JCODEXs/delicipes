@@ -90,10 +90,16 @@ export default async function HomePage() {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center text-white">
         {/* <p>Error fetching data. Please try again later.</p> */}
-        <div className="h-full w-full text-center text-2xl">
-          <FullPageRecetionView />
-          Sign in above to begin
-        </div>
+        <SignedOut>
+          <div className="h-full w-full text-center text-2xl">
+            <FullPageRecetionView />
+            Sign in above to begin
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <ImagesCarrousel />
+          {/* <DataStorage recipes={recipes} ingredients={ingredients} /> */}
+        </SignedIn>
       </main>
       // <main className="flex min-h-screen flex-col items-center justify-center  text-white">
       //   <SignedOut>

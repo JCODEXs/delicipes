@@ -1,7 +1,7 @@
 "use client";
 import Autoplay from "embla-carousel-autoplay";
 import * as React from "react";
-import LazyLoad from "react-lazyload";
+
 // import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -29,23 +29,21 @@ export function CarouselComponent() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="max-h-42 max-w-3xl"
+      className="max-h-42 max-w-2xl"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
         {imagesPre.map((_, index) => (
-          <LazyLoad key={index}>
-            <CarouselItem key={index}>
-              <div className="flex h-full items-center p-1 ">
-                {/* <Card>
+          <CarouselItem key={index}>
+            <div className="flex h-full items-center p-1 ">
+              {/* <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6"> */}
-                <img src={_} className="h-full text-4xl font-semibold "></img>
-                {/* </CardContent>
+              <img src={_} className="h-full text-4xl font-semibold "></img>
+              {/* </CardContent>
               </Card> */}
-              </div>
-            </CarouselItem>
-          </LazyLoad>
+            </div>
+          </CarouselItem>
         ))}
       </CarouselContent>
       <CarouselPrevious />
