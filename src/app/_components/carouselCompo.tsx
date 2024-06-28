@@ -23,15 +23,15 @@ export function CarouselComponent() {
     "https://utfs.io/f/36b336af-b06c-41cb-ab5a-61ccc82a9289-l91r2y.jpg",
     "https://utfs.io/f/ae307455-c5ac-4c10-9b89-a834527344c2-okw41l.jpg",
   ];
-
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true }),
+  );
   return (
     <Carousel
-      className="w-full max-w-sm"
-      plugins={[
-        Autoplay({
-          delay: 4000,
-        }),
-      ]}
+      plugins={[plugin.current]}
+      className="max-h-42 max-w-3xl"
+      onMouseEnter={plugin.current.stop}
+      onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
         {imagesPre.map((_, index) => (
@@ -39,7 +39,7 @@ export function CarouselComponent() {
             <div className="flex h-full items-center p-1 ">
               {/* <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6"> */}
-              <img src={_} className="text-4xl font-semibold"></img>
+              <img src={_} className="h-full text-4xl font-semibold "></img>
               {/* </CardContent>
               </Card> */}
             </div>

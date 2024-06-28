@@ -139,8 +139,6 @@ export default function Form({ editableIngredient, onClose }) {
               onChange={(event) => handleChange(index, event)}
               required
             />
-        
-
 
             <datalist id="units">
               {units.map((unit) => {

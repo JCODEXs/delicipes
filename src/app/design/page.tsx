@@ -1,12 +1,11 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-
-import DesignRecipe from "../_components/recipe design/recepiDesign";
+import DesignRecipeMetods from "../_components/recipe design/recipeDesignMetods";
 
 export const dynamic = "force-dynamic";
 export default async function Recipes() {
   return (
     <SignedIn>
-      <DesignRecipe />
+      <DesignRecipeMetods />
     </SignedIn>
   );
 }

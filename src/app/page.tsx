@@ -37,16 +37,20 @@ async function Images() {
 //   );
 // }
 
-const fetchData = async (retries = 5) => {
+const fetchData = async (retries = 2) => {
   let recipes;
   let ingredients;
   try {
+    setTimeout(() => {
+      console.log("hello");
+    }, 2000);
     recipes = await getRecipes();
     ingredients = await getIngredients();
 
     return { recipes, ingredients };
   } catch (err) {
     if (retries > 0) {
+      console.log("1");
       setTimeout(() => fetchData(retries - 1), 2000); // Retry after 2 seconds
     } else {
       console.error("Error fetching data:", err);
@@ -84,20 +88,20 @@ export default async function HomePage() {
   } catch (error) {
     console.error("Error fetching data:", error);
     return (
-      // <main className="flex min-h-screen flex-col items-center justify-center text-white">
-      //   <p>Error fetching data. Please try again later.</p>
-      // </main>
-      <main className="flex min-h-screen flex-col items-center justify-center  text-white">
-        <SignedOut>
-          <div className="h-full w-full text-center text-2xl">
-            <FullPageRecetionView />
-            Sign in above to begin
-          </div>
-        </SignedOut>
-        <SignedIn>
-          <Images />
-        </SignedIn>
+      <main className="flex min-h-screen flex-col items-center justify-center text-white">
+        <p>Error fetching data. Please try again later.</p>
       </main>
+      // <main className="flex min-h-screen flex-col items-center justify-center  text-white">
+      //   <SignedOut>
+      //     <div className="h-full w-full text-center text-2xl">
+      //       <FullPageRecetionView />
+      //       Sign in above to begin
+      //     </div>
+      //   </SignedOut>
+      //   <SignedIn>
+      //     <Images />
+      //   </SignedIn>
+      // </main>
     );
   }
 }

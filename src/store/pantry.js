@@ -207,6 +207,7 @@ const pantry = (set) => ({
     ),
   addDBRecipe: async (_recipe) => {
     let recipeExists = false;
+    console.log(_recipe);
     set(
       produce((store) => {
         if (_recipe._id) {

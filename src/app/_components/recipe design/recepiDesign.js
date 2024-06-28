@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 // import styles from "./recepiDesign.css";
 import Form from "./ingredientsDatabase";
@@ -14,51 +12,45 @@ import { Modal } from "../modal/modal";
 import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
-export default function DesignRecipe() {
-  // ingredients,
-  // ingredientsList,
-  // recipeList,
-  // quantity,
-  // searchRef,
-  // Recipe,
-  // serchRef
+import ActionBox from "./actionbox";
+export default function DesignRecipe({
+  ingredients,
+  ingredientsList,
+  recipeList,
+  quantity,
+  searchRef,
+  Recipe,
+  updateRecipes,
+  descriptionRef,
+  setSearch,
+  editRecipe,
+  addToRecipe,
+  removeItem,
+  increase,
+  decrease,
+  deleteHandler,
+  setIngredientsList,
+  setRecipeList,
+  setRecipe,
+  setQuantity,
+  actionMode,
+  setActionMode,
+  setEditableIngredient,
+  editableIngredient,
+  setAddIngredientModal,
+  addIngredientModal,
+}) {
   const store = usePantry();
-  let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
-  const [ingredientsList, setIngredientsList] = useState([]);
-  const [recipeList, setRecipeList] = useState([]);
-  const [quantity, setQuantity] = useState([0]);
-  const [Recipe, setRecipe] = useState({
-    recipe: { tittle: "", portions: 0 },
-    _id: null,
-  });
-  const searchRef = useRef();
-  const [addIngredientModal, setAddIngredientModal] = useState(false);
-  //const [descriptionValue, setDescriptionValue] = useState("");
-  const [actionMode, setActionMode] = useState("select");
-  const [editableIngredient, setEditableIngredient] = useState();
   const [isDisabled, setIsDisabled] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
   // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
-  const min = {
-    gr: 25,
-    und: 1,
-    g: 1,
-    ml: 25,
-    Ml: 50,
-    GR: 100,
-    ML: 100,
-    Gr: 50,
-  };
+
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
   let recipes = store.recipes;
-  const descriptionRef = useRef("");
-  const descriptionValue = descriptionRef.current;
+  const descriptionValue = descriptionRef?.current;
   const storeIngredients = usePantry((store) => store.ingredients);
   const storeRecipes = usePantry((store) => store.recipes);
-  // // console.log(storeIngredients);
-  // console.log(storeRecipes);
-  // console.log(recipes, ingredients);
+
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -112,24 +104,6 @@ export default function DesignRecipe() {
     fetchData();
   }, [ingredients]);
 
-  const updateRecipes = (_recipe) => {
-    const newRecipe = [];
-    const updatedRecipe = _recipe.ingredients.forEach((ing, index) => {
-      const actualIngredient = ingredientsList.find((_ing) => {
-        return _ing._id === ing._id;
-      });
-
-      if (actualIngredient) {
-        newRecipe[index] = actualIngredient; // Update ing properties with actualIngredient
-
-        // addStoreRecipe(recipe); // Update the recipe in storeRecipes
-      } else {
-        newRecipe[index] = ing;
-      }
-    });
-    // // console.log(recipe, updatedRecipe);
-    return newRecipe;
-  };
   // useEffect(() => {
   //   let total;
   //   const updatedRecipes = storeRecipes.map((recipe) => {
@@ -163,55 +137,10 @@ export default function DesignRecipe() {
   //     });
   //   });
   // }, []);
-  useEffect(() => {
-    setIngredientsList(storeIngredients);
-    //console.log(storeIngredients);
-  }, [storeIngredients]);
-
-  const setSearch = () => {
-    const searchValue = searchRef.current.value.trim();
-    let filteredIngredients = ingredientsList;
-
-    if (searchValue !== "") {
-      filteredIngredients = ingredientsList.filter((_ingredient) =>
-        _ingredient.ingredient.name.includes(searchValue),
-      );
-    } else {
-      const usedItems = recipeList.map((_item) => _item.ingredient.name);
-
-      filteredIngredients = storeIngredients.filter(
-        (_item) => !usedItems.includes(_item.ingredient.name),
-      );
-    }
-    if (searchValue == "") {
-      const usedItems = recipeList.map((_item) => _item.ingredient.name);
-
-      filteredIngredients = storeIngredients.filter(
-        (_item) => !usedItems.includes(_item.ingredient.name),
-      );
-    }
-    setIngredientsList(filteredIngredients);
-    // console.log(filteredIngredients, searchValue, storeIngredients);
-  };
-  const editRecipe = (_recipe) => {
-    // console.log(_recipe);
-    setRecipe(_recipe.recipe);
-    // setTittle(_recipe.recipe.tittle);
-    descriptionRef.current = _recipe?.recipe?.description;
-    // //setDescriptionValue(_recipe.description);
-    const updatedIngredients = updateRecipes(_recipe.recipe);
-    const quantity = _recipe?.recipe?.ingredients.map((_ingredient) => {
-      return _ingredient.quantity;
-    });
-    console.log(updatedIngredients, recipe);
-    setRecipeList(updatedIngredients);
-    setQuantity(quantity);
-    // setPortions(_recipe.recipe.portions);
-  };
+  ///try
 
   const addToListofRecipe = () => {
-    //no
-    // console.log(recipeList);
+    // console.log(Recipe);
     const ingredients = [];
     recipeList.map((item, index) => {
       const newIngredient = { ...item };
@@ -247,76 +176,7 @@ export default function DesignRecipe() {
       addIngredient(ingredient.ingredient);
     });
   };
-  const addToRecipe = (item) => {
-    //
-    // // console.log(item);
-    if (actionMode == "delete") {
-      DeleteIngredient(item._id);
-      const filter = ingredientsList.filter(
-        (ingredient) => ingredient._id !== item._id,
-      );
-      setIngredientsList(filter);
-    }
-    if (actionMode == "select") {
-      if (
-        recipeList.some(
-          (_item) => _item.ingredient.name === item.ingredient.name,
-        )
-      ) {
-      } else {
-        setRecipeList((prev) => [...prev, item]);
-        const filter = ingredientsList.filter(
-          (ingredient) =>
-            ingredient?.ingredient?.name !== item?.ingredient?.name ||
-            item.name,
-        );
-        setIngredientsList(filter);
-      }
-    }
-    if (actionMode == "edit") {
-      setEditableIngredient(item);
-      setAddIngredientModal(true);
-      //console.log(item)
-    }
-  };
-  const removeItem = (item, index) => {
-    if (
-      ingredientsList.some(
-        (ingredient) => ingredient?.ingredient?.name === item?.ingredient?.name, // || item.name
-      )
-    ) {
-      const filter = recipeList.filter(
-        (ingredient) => ingredient?.ingredient?.name !== item?.ingredient?.name,
-      );
-      // console.log(recipeList, "filter", filter, item);
-      setQuantity((prev) => {
-        let quantity = prev ? [...prev] : [];
-        // console.log(quantity);
-        const newquantity = [
-          ...quantity.slice(0, index),
-          ...quantity.slice(index + 1),
-        ];
-        return newquantity;
-      });
-      setRecipeList(filter);
-    } else {
-      setIngredientsList((prev) => [...prev, item]);
-      const filter = recipeList.filter(
-        (ingredient) => ingredient?.ingredient?.name !== item?.ingredient?.name,
-      );
-      // console.log(recipeList, "filter", filter, item);
-      setQuantity((prev) => {
-        let quantity = prev ? [...prev] : [];
-        // console.log(quantity);
-        const newquantity = [
-          ...quantity.slice(0, index),
-          ...quantity.slice(index + 1),
-        ];
-        return newquantity;
-      });
-      setRecipeList(filter);
-    }
-  };
+
   const validateForm = () => {
     if (
       Recipe?.recipe?.tittle?.trim() === "" ||
@@ -329,58 +189,12 @@ export default function DesignRecipe() {
     }
     // ///  console.log(isDisabled,recipeList.length>1,+portions,tittle,tittle.trim() === "")
   };
-  const increase = (index, units) => {
-    setQuantity((prev) => {
-      const newQuantity = [...prev];
-      if (newQuantity[index]) {
-        newQuantity[index] = +newQuantity[index] + min[units];
-      } else {
-        newQuantity[index] = 0 + min[units];
-      }
-      // // console.log(newQuantity);
-      return newQuantity;
-    });
-  };
 
-  const decrease = (index, units) => {
-    setQuantity((prev) => {
-      const newQuantity = [...prev];
-      if (newQuantity[index] && newQuantity[index] >= min[units]) {
-        newQuantity[index] = +newQuantity[index] - min[units];
-      } else {
-        newQuantity[index] = 0;
-      }
-
-      return newQuantity;
-    });
-  };
-  function deleteHandler(_id) {
-    const result = window.confirm(
-      "¿Estás seguro de que deseas borrar este elemento?",
-    );
-    if (result) {
-      // deleteStoreRecipe(recipe.tittle);
-      // // console.log(recipe);
-      DeleteRecipe(_id);
-    }
-  }
-  const getBackgroundColor = (actionMode) => {
-    switch (actionMode) {
-      case "delete":
-        return "#742109";
-      case "edit":
-        return "#C4B55E"; // Example color for edit mode
-      case "select":
-        return "#2B4438"; // Example color for select mode
-      default:
-        return "#2B4438"; // Default background color
-    }
-  };
   const myDivRef = useRef(null);
 
   // Function to scroll to the referenced div
   const scrollToDiv = () => {
-    myDivRef.current.scrollIntoView({ behavior: "smooth" });
+    myDivRef?.current.scrollIntoView({ behavior: "smooth" });
   };
   //console.log(actionMode)
   return (
@@ -408,127 +222,13 @@ export default function DesignRecipe() {
               )}
             </div>
 
-            <div
-              className="backGuide"
-              onClick={() =>
-                actionMode != "select"
-                  ? actionMode == "delete"
-                    ? setActionMode("select")
-                    : setActionMode("delete")
-                  : setActionMode("edit")
-              }
-            >
-              {" "}
-              {actionMode != "select" ? (
-                actionMode == "delete" ? (
-                  <div
-                    style={{
-                      fontSize: "1.2rem",
-                      display: "flex",
-                      gap: "3rem",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "flex-end",
-                    }}
-                  >
-                    <button
-                      style={{ background: "#bd2709" }}
-                      className="modeButton"
-                    >
-                      Change mode{" "}
-                    </button>
-                    <div
-                      style={{
-                        fontSize: "1.4rem",
-                        color: "red",
-                      }}
-                    >
-                      Delete Box{" "}
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      fontSize: "1.2rem",
-                      display: "flex",
-                      gap: "3rem",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "flex-end",
-                    }}
-                  >
-                    <button
-                      style={{ background: "#bd2709" }}
-                      className="modeButton"
-                    >
-                      Change mode{" "}
-                    </button>
-                    <div
-                      style={{
-                        fontSize: "1.4rem",
-                        color: "rgb(15,200,150,0.99)",
-                      }}
-                    >
-                      Edit box{" "}
-                    </div>
-                  </div>
-                )
-              ) : (
-                <div
-                  style={{
-                    fontSize: "1.2rem",
-                    gap: "3rem",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "flex-end",
-                  }}
-                >
-                  <button
-                    style={{ background: "#bd2709" }}
-                    className="modeButton"
-                  >
-                    Change mode{" "}
-                  </button>
-                  <div
-                    style={{
-                      fontSize: "1.4rem",
-                      color: "white",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {" "}
-                    Add box
-                  </div>
-                </div>
-              )}{" "}
-            </div>
-            <div
-              className="items"
-              style={{
-                background: getBackgroundColor(actionMode),
-              }}
-            >
-              {
-                // !shouldCheckLocalStorage &&
-                ingredientsList?.map((item, index) => {
-                  return (
-                    <div
-                      className="item"
-                      key={item?._id}
-                      onClick={() => addToRecipe(item)}
-                      onMouseEnter={() =>
-                        setHoveredItem(item.ingredient?.name || item.name)
-                      }
-                      onMouseLeave={() => setHoveredItem(null)}
-                      data-tooltip={hoveredItem}
-                    >
-                      {item.ingredient?.image || item.image}
-                    </div>
-                  );
-                })
-              }
-            </div>
+            <ActionBox
+              ingredientsList={ingredientsList}
+              addToRecipe={addToRecipe}
+              actionMode={actionMode}
+              setActionMode={setActionMode}
+            />
+
             <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
@@ -683,7 +383,7 @@ export default function DesignRecipe() {
                 borderRadius: 8,
                 padding: "0.25rem",
               }}
-              value={descriptionValue?.current}
+              value={descriptionValue}
               onChange={(e) => {
                 descriptionRef.current = e.target.value;
               }}
