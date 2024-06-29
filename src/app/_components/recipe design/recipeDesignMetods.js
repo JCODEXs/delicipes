@@ -1,8 +1,9 @@
 "use client";
 import { DeleteIngredient, DeleteRecipe, usePantry } from "~/store/pantry";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import DesignRecipe from "./recepiDesign";
-export default function DesignRecipeMetods() {
+import { redirect } from "next/navigation";
+export default function DesignRecipeMetods({ createRecipe }) {
   const store = usePantry();
   let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -27,6 +28,7 @@ export default function DesignRecipeMetods() {
     ML: 100,
     Gr: 50,
   };
+
   const updateRecipes = (_recipe) => {
     const newRecipe = [];
     const updatedRecipe = _recipe.ingredients.forEach((ing, index) => {
@@ -192,10 +194,10 @@ export default function DesignRecipeMetods() {
       DeleteRecipe(_id);
     }
   }
-  useEffect(() => {
-    setIngredientsList(ingredients);
-    //console.log(storeIngredients);
-  }, [ingredients]);
+  // useEffect(() => {
+  //   setIngredientsList(ingredients);
+  //   //console.log(storeIngredients);
+  // }, [ingredients]);
   return (
     <DesignRecipe
       ingredients={ingredients}

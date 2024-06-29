@@ -5,29 +5,7 @@ import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 
 const pantry = (set) => ({
   ingredients: [],
-  recipes: [
-    // {
-    //   tittle: "first",
-    //   ingredients: [
-    //     {
-    //       name: "tomate",🫙
-    //       units: "gr",
-    //       image: "🍅",
-    //       grPrice: "5",
-    //       quantity: "450",
-    //     },
-    //     {
-    //       name: "huevo",
-    //       units: "und",
-    //       image: "🥚",
-    //       grPrice: "500",
-    //       quantity: 4,
-    //     },
-    //   ],
-    //   description: "ejemplo",
-    //   portions: 3,
-    // },
-  ],
+  recipes: [],
   programing: [],
 
   addStoreIngredient: (ingredients) =>
@@ -93,9 +71,9 @@ const pantry = (set) => ({
     set(
       // Use produce to modify the current state immutably
       produce((store) => {
-        // console.log(recipe);
+        console.log(recipe);
         store.recipes.push(recipe);
-        // console.log(store.recipes); // Add the new recipe to the recipes array
+        console.log(store.recipes); // Add the new recipe to the recipes array
       }),
       false,
       "SingleAddRecipe",
@@ -304,17 +282,14 @@ export const usePantry = create(
 
   // subscribeWithSelector(log(persist(devtools(pantry), { name: "Devtools" })))
 );
-// console.log(pantry.recipes);
 
 export const getRecipes = async () => {
-  // console.log("hi");
   const result = await axios.get("/api/recipes");
   // console.log("getRecipes", result.data.result);
   const { response, data } = result.data;
   return result.data.result;
 };
 export const getIngredients = async () => {
-  // console.log("hi");
   const result = await axios.get("/api/ingredients");
   // console.log("getIngredients", result.data.result);
   // const { response, data } = result.data;
@@ -370,7 +345,10 @@ export const addIngredient = async (ingredient) => {
   // console.log("addIngredient", result.data);
   const { response, data } = result.data;
 };
-
+export const serverActionForm = async (recipe_) => {
+  console.log(recipe_);
+  await usePantry.getState().addSingleRecipe(recipe_);
+};
 // useStore.subscribe(
 //   (store) => store.ingredients,
 //   (newIngredients, prevIngredients) => {

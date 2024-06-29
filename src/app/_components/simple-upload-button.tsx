@@ -19,7 +19,7 @@ const useUploadThingInputProps = (...args: Input) => {
     const selectedFiles = Array.from(e.target.files);
     const result = await $ut.startUpload(selectedFiles);
 
-    console.log("uploaded files", result);
+    console.log("uploaded files", result[0].name);
     // TODO: persist result in state maybe?
   };
 
@@ -111,6 +111,7 @@ export function SimpleUploadButton() {
         <UploadSVG />
       </label>
       <input
+        name="image"
         id="upload-button"
         type="file"
         className="sr-only"

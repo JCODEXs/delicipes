@@ -13,6 +13,7 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 import ActionBox from "./actionbox";
+import RecipeConstructionForm from "./recipeConstruction";
 export default function DesignRecipe({
   ingredients,
   ingredientsList,
@@ -222,13 +223,14 @@ export default function DesignRecipe({
               )}
             </div>
 
-            <ActionBox
-              ingredientsList={ingredientsList}
-              addToRecipe={addToRecipe}
-              actionMode={actionMode}
-              setActionMode={setActionMode}
-            />
-
+            <div ref={myDivRef}>
+              <ActionBox
+                ingredientsList={ingredientsList}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+              />
+            </div>
             <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
@@ -241,173 +243,21 @@ export default function DesignRecipe({
               />
               🔎
             </div>
-            {/* <button className="button" type="button" onClick={() => makeBkup()}>
-              bkup
-            </button> */}
           </div>
         </div>
+        {/* ///begins recipe */}
+        <RecipeConstructionForm
+          recipeList={recipeList}
+          increase={increase}
+          decrease={decrease}
+          quantity={quantity}
+          removeItem={removeItem}
+          Recipe={Recipe}
+        />
 
-        <div ref={myDivRef} id="recipe" className="recipe">
-          <div>
-            {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
-
-            <div className="out-container">
-              <input
-                name="tittle"
-                type="text"
-                style={{
-                  width: "70%",
-                  height: 30,
-                  borderRadius: 8,
-                  padding: "0.2rem",
-                  margin: "0.25rem",
-                }}
-                value={Recipe?.recipe?.tittle}
-                placeholder="Recipe name"
-                onChange={(e) =>
-                  setRecipe((prev) => ({
-                    ...prev,
-                    [e.target.name]: e.target.value,
-                  }))
-                }
-                required
-              />{" "}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                for:{" "}
-                <input
-                  name="portions"
-                  type="number"
-                  style={{
-                    width: "22%",
-                    height: 30,
-                    borderRadius: 8,
-                    padding: "0.2rem",
-                  }}
-                  value={Recipe?.recipe?.portions}
-                  placeholder="# 👤"
-                  onChange={(e) =>
-                    setRecipe((prev) => ({
-                      ...prev,
-                      [e.target.name]: e.target.value,
-                    }))
-                  }
-                  required
-                />
-                {/* {personSvg} */}
-              </div>
-            </div>
-            {recipeList?.length > 0 ? (
-              <h4>Adjust quantitys</h4>
-            ) : (
-              <h3 style={{ margin: "2rem", marginBottom: "0rem" }}>
-                Add ingredients from the box abobe ☝🏽
-              </h3>
-            )}
-            <div className="incrementalnputs">
-              {recipeList?.map((item, index) => {
-                // //  console.log(item);
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      flexBasis: "calc(30% - 10px)",
-                      border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
-                      padding: "0.15rem",
-                      borderRadius: "8px",
-                      boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
-                    }}
-                    key={item?._id}
-                  >
-                    <div className="itemQ2" style={{ margin: "0.3rem" }}>
-                      {item?.ingredient?.name}
-                    </div>
-                    <div className="in-container">
-                      <button
-                        className="buttonSum"
-                        onClick={() => increase(index, item?.ingredient?.units)}
-                      >
-                        +
-                      </button>
-                      {}
-                      <button
-                        className="buttonSum"
-                        onClick={() => decrease(index, item?.ingredient?.units)}
-                      >
-                        -
-                      </button>{" "}
-                    </div>
-                    <div className="in-container">
-                      {" "}
-                      <div className="item2">{quantity?.[index]}</div>{" "}
-                      <div className="baseMarc">{item?.ingredient?.units}</div>
-                      <div
-                        style={{
-                          margin: "0.25rem",
-                          fontSize: "1.5rem",
-                          // marginInlineStart: "0.5rem",
-                          padding: "0.5rem",
-                          color: "rgb(200,30,14)",
-                          // alignItems: "flex-start",
-                          justifyContent: "flex-end",
-                          borderLeft: "1px solid rbg(10,15,65,0.8)",
-                        }}
-                        onClick={() => removeItem(item, index)}
-                      >
-                        {" "}
-                        X
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <div id="description" className="description">
-          <div>
-            <textarea
-              type="text"
-              placeholder="Preparation steps"
-              style={{
-                width: "98%",
-                height: "fit-content",
-                borderRadius: 8,
-                padding: "0.25rem",
-              }}
-              value={descriptionValue}
-              onChange={(e) => {
-                descriptionRef.current = e.target.value;
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <button
-              className={isDisabled ? "buttonDisabled" : "addButton"}
-              disabled={isDisabled}
-              onClick={() => addToListofRecipe()}
-            >
-              Add recipe to Library
-            </button>
-          </div>
-        </div>
-
-        {/* </div> */}
-
+        {/* //////
+        ends recipe
+        ///////// */}
         <div
           style={{
             position: "sticky",
@@ -450,3 +300,160 @@ export default function DesignRecipe({
     </div>
   );
 }
+//recipe
+//  <div>
+//    <div ref={myDivRef} id="recipe" className="recipe">
+//      <div>
+//        {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
+
+//        <div className="out-container">
+//          <input
+//            name="tittle"
+//            type="text"
+//            style={{
+//              width: "70%",
+//              height: 30,
+//              borderRadius: 8,
+//              padding: "0.2rem",
+//              margin: "0.25rem",
+//            }}
+//            value={Recipe?.recipe?.tittle}
+//            placeholder="Recipe name"
+//            onChange={(e) =>
+//              setRecipe((prev) => ({
+//                ...prev,
+//                [e.target.name]: e.target.value,
+//              }))
+//            }
+//            required
+//          />{" "}
+//          <div
+//            style={{
+//              display: "flex",
+//              flexDirection: "row",
+//              alignItems: "center",
+//            }}
+//          >
+//            for:{" "}
+//            <input
+//              name="portions"
+//              type="number"
+//              style={{
+//                width: "22%",
+//                height: 30,
+//                borderRadius: 8,
+//                padding: "0.2rem",
+//              }}
+//              value={Recipe?.recipe?.portions}
+//              placeholder="# 👤"
+//              onChange={(e) =>
+//                setRecipe((prev) => ({
+//                  ...prev,
+//                  [e.target.name]: e.target.value,
+//                }))
+//              }
+//              required
+//            />
+//            {/* {personSvg} */}
+//          </div>
+//        </div>
+//        {recipeList?.length > 0 ? (
+//          <h4>Adjust quantitys</h4>
+//        ) : (
+//          <h3 style={{ margin: "2rem", marginBottom: "0rem" }}>
+//            Add ingredients from the box abobe ☝🏽
+//          </h3>
+//        )}
+//        <div className="incrementalnputs">
+//          {recipeList?.map((item, index) => {
+//            // //  console.log(item);
+//            return (
+//              <div
+//                style={{
+//                  display: "flex",
+//                  flexDirection: "row",
+//                  alignItems: "center",
+//                  justifyContent: "space-between",
+//                  flexBasis: "calc(30% - 10px)",
+//                  border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
+//                  padding: "0.15rem",
+//                  borderRadius: "8px",
+//                  boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
+//                }}
+//                key={item?._id}
+//              >
+//                <div className="itemQ2" style={{ margin: "0.3rem" }}>
+//                  {item?.ingredient?.name}
+//                </div>
+//                <div className="in-container">
+//                  <button
+//                    className="buttonSum"
+//                    onClick={() => increase(index, item?.ingredient?.units)}
+//                  >
+//                    +
+//                  </button>
+//                  {}
+//                  <button
+//                    className="buttonSum"
+//                    onClick={() => decrease(index, item?.ingredient?.units)}
+//                  >
+//                    -
+//                  </button>{" "}
+//                </div>
+//                <div className="in-container">
+//                  {" "}
+//                  <div className="item2">{quantity?.[index]}</div>{" "}
+//                  <div className="baseMarc">{item?.ingredient?.units}</div>
+//                  <div
+//                    style={{
+//                      margin: "0.25rem",
+//                      fontSize: "1.5rem",
+//                      // marginInlineStart: "0.5rem",
+//                      padding: "0.5rem",
+//                      color: "rgb(200,30,14)",
+//                      // alignItems: "flex-start",
+//                      justifyContent: "flex-end",
+//                      borderLeft: "1px solid rbg(10,15,65,0.8)",
+//                    }}
+//                    onClick={() => removeItem(item, index)}
+//                  >
+//                    {" "}
+//                    X
+//                  </div>
+//                </div>
+//              </div>
+//            );
+//          })}
+//        </div>
+//      </div>
+//    </div>
+//    <div id="description" className="description">
+//      <div>
+//        <textarea
+//          type="text"
+//          placeholder="Preparation steps"
+//          style={{
+//            width: "98%",
+//            height: "fit-content",
+//            borderRadius: 8,
+//            padding: "0.25rem",
+//          }}
+//        />
+//      </div>
+//      <div
+//        style={{
+//          display: "flex",
+//          flexDirection: "row",
+//          justifyContent: "center",
+//        }}
+//      >
+//        <button
+//          className={isDisabled ? "buttonDisabled" : "addButton"}
+//          disabled={isDisabled}
+//          onClick={() => addToListofRecipe()}
+//        >
+//          Add recipe to Library
+//        </button>
+//      </div>
+//    </div>
+//  </div>;

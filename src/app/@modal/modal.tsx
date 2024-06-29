@@ -19,7 +19,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
       dialogRef.current?.showModal();
     }
   }, []);
-  console.log(dialogRef);
+  // console.log(dialogRef);
 
   function onDismiss() {
     router.back();

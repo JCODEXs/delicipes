@@ -64,12 +64,12 @@ export default async function HomePage() {
     // const recipes = await getRecipes();
     // const ingredients = await getIngredients();
     // const { recipes, ingredients } = fetchData();
-    const [recipesResponse, ingredientsResponse] = await Promise.all([
-      api.get("/recipes"),
-      api.get("/ingredients"),
-    ]);
-    const recipes = recipesResponse.data.result;
-    const ingredients = ingredientsResponse.data.result;
+    // const [recipesResponse, ingredientsResponse] = await Promise.all([
+    //   api.get("/recipes"),
+    //   api.get("/ingredients"),
+    // ]);
+    // const recipes = recipesResponse.data.result;
+    // const ingredients = ingredientsResponse.data.result;
 
     return (
       <main className="flex min-h-screen flex-col items-center justify-center  text-white">
@@ -81,7 +81,7 @@ export default async function HomePage() {
         </SignedOut>
         <SignedIn>
           <ImagesCarrousel />
-          <DataStorage recipes={recipes} ingredients={ingredients} />
+          {/* <DataStorage recipes={recipes} ingredients={ingredients} /> */}
         </SignedIn>
       </main>
     );

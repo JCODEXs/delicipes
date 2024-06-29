@@ -26,7 +26,7 @@ const Dashboard: React.FC<DashboardProps> = ({ images }) => {
       totalCount={images.length}
       itemContent={(index) => {
         const image = images[index];
-        console.log("image", image);
+        // console.log("image", image);
         return (
           <div key={index} className="flex h-auto w-72 flex-row">
             <Link

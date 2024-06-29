@@ -37,6 +37,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts"
-  ],
+, "captain-definition"  ],
   "exclude": ["node_modules"]
 }
