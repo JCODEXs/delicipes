@@ -35,17 +35,15 @@ export function CarouselComponent() {
     >
       <CarouselContent>
         {imagesPre.map((_, index) => (
-          <LazyLoad key={index}>
-            <CarouselItem key={index}>
-              <div className="flex h-full items-center p-1 ">
-                {/* <Card>
+          <CarouselItem key={index}>
+            <div className="flex h-full items-center p-1 ">
+              {/* <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6"> */}
-                <img src={_} className="h-full text-4xl font-semibold "></img>
-                {/* </CardContent>
+              <img src={_} className="h-full text-4xl font-semibold "></img>
+              {/* </CardContent>
               </Card> */}
-              </div>
-            </CarouselItem>
-          </LazyLoad>
+            </div>
+          </CarouselItem>
         ))}
       </CarouselContent>
       <CarouselPrevious />
