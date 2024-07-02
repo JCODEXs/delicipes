@@ -51,26 +51,20 @@ export default function DesignRecipeMetods() {
     let filteredIngredients = ingredientsList;
 
     if (searchValue !== "") {
-      filteredIngredients = ingredientsList.filter((_ingredient) =>
-        _ingredient.ingredient.name.includes(searchValue),
+      filteredIngredients = ingredientsList.filter((ingredient) =>
+        ingredient.ingredient.name.includes(searchValue),
       );
     } else {
-      const usedItems = recipeList.map((_item) => _item.ingredient.name);
+      const usedItems = recipeList.map((item) => item.ingredient.name);
 
-      filteredIngredients = storeIngredients.filter(
-        (_item) => !usedItems.includes(_item.ingredient.name),
-      );
-    }
-    if (searchValue == "") {
-      const usedItems = recipeList.map((_item) => _item.ingredient.name);
-
-      filteredIngredients = storeIngredients.filter(
-        (_item) => !usedItems.includes(_item.ingredient.name),
+      filteredIngredients = store.ingredients.filter(
+        (item) => !usedItems.includes(item.ingredient.name),
       );
     }
     setIngredientsList(filteredIngredients);
-    // console.log(filteredIngredients, searchValue, storeIngredients);
+    console.log(filteredIngredients, searchValue, ingredients);
   };
+
   const editRecipe = (_recipe) => {
     // console.log(_recipe);
     setRecipe(_recipe);
@@ -183,9 +177,7 @@ export default function DesignRecipeMetods() {
     });
   };
   function deleteHandler(_id) {
-    const result = window.confirm(
-      "¿Estás seguro de que deseas borrar este elemento?",
-    );
+    const result = window.confirm("Are you certain?");
     if (result) {
       // deleteStoreRecipe(recipe.tittle);
       // // console.log(recipe);

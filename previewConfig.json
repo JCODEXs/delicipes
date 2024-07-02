@@ -1,0 +1,19 @@
+{
+  "recipeConstruction": [
+    {
+      "propName": "der",
+      "propType": "number",
+      "defaultValue": "4"
+    },
+    {
+      "propName": "re",
+      "propType": "number",
+      "defaultValue": "5"
+    },
+    {
+      "propName": "fe",
+      "propType": "string",
+      "defaultValue": "ewqw"
+    }
+  ]
+}

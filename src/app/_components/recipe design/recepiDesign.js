@@ -153,14 +153,14 @@ export default function DesignRecipe({
         key: Math.random(8) * 10000000,
         ingredients,
         description: descriptionValue,
-        tittle: Recipe?.recipe?.tittle,
+        title: Recipe?.recipe?.tittle ?? Recipe.recipe.title,
         portions: Recipe?.recipe?.portions,
       },
       _id: Recipe?._id,
     });
     setRecipeList([]);
     setRecipe({
-      recipe: { tittle: "", portions: 0 },
+      recipe: { title: "", portions: 0 },
       _id: null,
     });
 
@@ -178,16 +178,23 @@ export default function DesignRecipe({
   };
 
   const validateForm = () => {
+    console.log(Recipe);
     if (
-      Recipe?.recipe?.tittle?.trim() === "" ||
-      +Recipe?.recipe?.portions < 1 ||
+      Recipe?.title?.trim() === "" ||
+      +Recipe?.portions < 1 ||
       recipeList.length < 1
     ) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
     }
-    // ///  console.log(isDisabled,recipeList.length>1,+portions,tittle,tittle.trim() === "")
+    // console.log(
+    //   isDisabled,
+    //   recipeList.length > 1,
+    //   +portions,
+    //   title,
+    //   title.trim() === "",
+    // );
   };
 
   const myDivRef = useRef(null);
@@ -253,7 +260,7 @@ export default function DesignRecipe({
 
             <div className="out-container">
               <input
-                name="tittle"
+                name="title"
                 type="text"
                 style={{
                   width: "70%",
@@ -262,12 +269,15 @@ export default function DesignRecipe({
                   padding: "0.2rem",
                   margin: "0.25rem",
                 }}
-                value={Recipe?.recipe?.tittle}
+                defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe.title}
                 placeholder="Recipe name"
                 onChange={(e) =>
                   setRecipe((prev) => ({
                     ...prev,
-                    [e.target.name]: e.target.value,
+                    recipe: {
+                      ...prev.recipe,
+                      [e.target.name]: e.target.value,
+                    },
                   }))
                 }
                 required
@@ -289,12 +299,15 @@ export default function DesignRecipe({
                     borderRadius: 8,
                     padding: "0.2rem",
                   }}
-                  value={Recipe?.recipe?.portions}
+                  defaultValue={Recipe?.recipe?.portions}
                   placeholder="# 👤"
                   onChange={(e) =>
                     setRecipe((prev) => ({
                       ...prev,
-                      [e.target.name]: e.target.value,
+                      recipe: {
+                        ...prev.recipe,
+                        [e.target.name]: e.target.value,
+                      },
                     }))
                   }
                   required
@@ -382,8 +395,9 @@ export default function DesignRecipe({
                 height: "fit-content",
                 borderRadius: 8,
                 padding: "0.25rem",
+                color: "black",
               }}
-              value={descriptionValue}
+              defaultValue={descriptionValue}
               onChange={(e) => {
                 descriptionRef.current = e.target.value;
               }}

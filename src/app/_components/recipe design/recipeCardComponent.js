@@ -47,7 +47,7 @@ const RecipeCardComponent = ({
           justifyContent: "flex-end",
         }}
       >
-        <div className="tittle">{recipe?.tittle}</div>
+        <div className="tittle">{recipe?.tittle ?? recipe.title}</div>
         <div
           style={{
             fontSize: "1.25rem",
