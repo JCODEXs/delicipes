@@ -30,34 +30,34 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <CSPostHogProvider>
-        <html lang="en">
-          <NextSSRPlugin
-            /**
-             * The `extractRouterConfig` will extract **only** the route configs
-             * from the router to prevent additional information from being
-             * leaked to the client. The data passed to the client is the same
-             * as if you were to fetch `/api/uploadthing` directly.
-             */
-            routerConfig={extractRouterConfig(ourFileRouter)}
-          />
-          <body
-            className={`font-sans ${inter.variable} dark flex flex-col gap-4`}
-          >
-            <div className="">
-              <div className=" fixed z-50  w-full flex-col  bg-slate-800">
-                <TopNav />
-                <Footer />
-              </div>
-              <div className="h-24"></div>
-              <main className="">{children}</main>
-              {modal}
+      {/* <CSPostHogProvider> */}
+      <html lang="en">
+        <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
+        <body
+          className={`font-sans ${inter.variable} dark flex flex-col gap-4`}
+        >
+          <div className="">
+            <div className=" fixed z-50  w-full flex-col  bg-slate-800">
+              <TopNav />
+              <Footer />
             </div>
-            <div id="modal-root"></div>
-            <Toaster />
-          </body>
-        </html>
-      </CSPostHogProvider>
+            <div className="h-24"></div>
+            <main className="">{children}</main>
+            {modal}
+          </div>
+          <div id="modal-root"></div>
+          <Toaster />
+        </body>
+      </html>
+      {/* </CSPostHogProvider> */}
     </ClerkProvider>
   );
 }

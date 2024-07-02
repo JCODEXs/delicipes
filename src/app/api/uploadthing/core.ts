@@ -3,7 +3,7 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
-import { ratelimit } from "~/server/ratelimiter";
+// import { ratelimit } from "~/server/ratelimiter";
  
 const f = createUploadthing();
  
@@ -24,8 +24,8 @@ export const ourFileRouter = {
       
       // if (fullUserData?.privateMetadata?.["can-upload"] !== true)
       //   throw new UploadThingError("User Does Not Have Upload Permissions");
-    const { success } = await ratelimit.limit(user.userId);
-    if(!success) throw new UploadThingError("Ratelimited")
+    // const { success } = await ratelimit.limit(user.userId);
+    // if(!success) throw new UploadThingError("Ratelimited")
     
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.userId};
