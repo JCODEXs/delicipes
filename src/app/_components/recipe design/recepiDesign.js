@@ -13,6 +13,8 @@ import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
 import ActionBox from "./actionbox";
+import { SimpleUploadButton } from "../simple-upload-button";
+import Image from "next/image";
 export default function DesignRecipe({
   ingredients,
   ingredientsList,
@@ -155,6 +157,7 @@ export default function DesignRecipe({
         description: descriptionValue,
         title: Recipe?.recipe?.tittle ?? Recipe.recipe.title,
         portions: Recipe?.recipe?.portions,
+        imageUrl: Recipe?.recipe?.imageUrl,
       },
       _id: Recipe?._id,
     });
@@ -177,8 +180,8 @@ export default function DesignRecipe({
     });
   };
 
+  console.log(Recipe);
   const validateForm = () => {
-    console.log(Recipe);
     if (
       Recipe?.title?.trim() === "" ||
       +Recipe?.portions < 1 ||
@@ -228,20 +231,22 @@ export default function DesignRecipe({
                 </Modal>
               )}
             </div>
-
-            <ActionBox
-              ingredientsList={ingredientsList}
-              addToRecipe={addToRecipe}
-              actionMode={actionMode}
-              setActionMode={setActionMode}
-            />
-
+            <div className=" flex flex-row flex-wrap">
+              {" "}
+              <ActionBox
+                ingredientsList={ingredientsList}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+              />
+            </div>
             <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
                 style={{
                   minWidth: 120,
                   margin: "0.3rem",
+                  color: "black",
                 }}
                 ref={searchRef}
                 onChange={setSearch}
@@ -259,29 +264,6 @@ export default function DesignRecipe({
             {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
 
             <div className="out-container">
-              <input
-                name="title"
-                type="text"
-                style={{
-                  width: "70%",
-                  height: 30,
-                  borderRadius: 8,
-                  padding: "0.2rem",
-                  margin: "0.25rem",
-                }}
-                defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe.title}
-                placeholder="Recipe name"
-                onChange={(e) =>
-                  setRecipe((prev) => ({
-                    ...prev,
-                    recipe: {
-                      ...prev.recipe,
-                      [e.target.name]: e.target.value,
-                    },
-                  }))
-                }
-                required
-              />{" "}
               <div
                 style={{
                   display: "flex",
@@ -289,7 +271,41 @@ export default function DesignRecipe({
                   alignItems: "center",
                 }}
               >
-                for:{" "}
+                {" "}
+                Title :
+                <input
+                  name="title"
+                  type="text"
+                  style={{
+                    width: "60%",
+                    height: 30,
+                    borderRadius: 8,
+                    padding: "0.2rem",
+                    margin: "0.25rem",
+                  }}
+                  defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe.title}
+                  placeholder="Recipe name"
+                  onChange={(e) =>
+                    setRecipe((prev) => ({
+                      ...prev,
+                      recipe: {
+                        ...prev.recipe,
+                        [e.target.name]: e.target.value,
+                      },
+                    }))
+                  }
+                  required
+                />{" "}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: "1rem",
+                }}
+              >
+                <div>For : </div>
                 <input
                   name="portions"
                   type="number"
@@ -316,7 +332,7 @@ export default function DesignRecipe({
               </div>
             </div>
             {recipeList?.length > 0 ? (
-              <h4>Adjust quantitys</h4>
+              <div className="z-10 bg-black">Adjust quantitys</div>
             ) : (
               <h3 style={{ margin: "2rem", marginBottom: "0rem" }}>
                 Add ingredients from the box abobe ☝🏽
@@ -329,19 +345,23 @@ export default function DesignRecipe({
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      flexBasis: "calc(30% - 10px)",
-                      border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
+                      flexBasis: "calc(20% - 10px)",
+                      background: "rgb(250,250,200,0.5)",
+                      content: "☝🏽",
+                      //border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
                       padding: "0.15rem",
                       borderRadius: "8px",
                       boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
                     }}
                     key={item?._id}
                   >
+                    {" "}
                     <div className="itemQ2" style={{ margin: "0.3rem" }}>
                       {item?.ingredient?.name}
+                      {item?.ingredient?.image}
                     </div>
                     <div className="in-container">
                       <button
@@ -358,10 +378,16 @@ export default function DesignRecipe({
                         -
                       </button>{" "}
                     </div>
-                    <div className="in-container">
+                    <div
+                      className="in-container "
+                      style={{ marginLeft: "1rem", gap: "1.5rem" }}
+                    >
                       {" "}
-                      <div className="item2">{quantity?.[index]}</div>{" "}
-                      <div className="baseMarc">{item?.ingredient?.units}</div>
+                      <div className="item2">
+                        {quantity?.[index]}
+                        {item?.ingredient?.units}
+                      </div>{" "}
+                      <div className="baseMarc"></div>
                       <div
                         style={{
                           margin: "0.25rem",
@@ -383,6 +409,15 @@ export default function DesignRecipe({
                 );
               })}
             </div>
+            {Recipe.recipe.imageUrl ? (
+              <div className="relative right-0 top-0 h-16 w-16 rounded-t-lg object-cover">
+                {" "}
+                <img src={Recipe.recipe.imageUrl} height={100} width={60} />
+                <SimpleUploadButton setRecipe={setRecipe} />
+              </div>
+            ) : (
+              <SimpleUploadButton setRecipe={setRecipe} />
+            )}
           </div>
         </div>
         <div id="description" className="description">
@@ -422,17 +457,18 @@ export default function DesignRecipe({
 
         {/* </div> */}
 
-        <div
-          style={{
-            position: "sticky",
-            top: 5,
-            fontSize: "1.8rem",
-            margin: "2rem",
-          }}
-        >
-          Library
-        </div>
         <div className="ReceipLibrary">
+          <div
+            style={{
+              position: "sticky",
+              top: 5,
+              fontSize: "1.8rem",
+              margin: "2rem",
+              maxWidth: 100,
+            }}
+          >
+            All Recipes Library
+          </div>
           {
             // !shouldCheckLocalStorage &&
             storeRecipes.map((_recipe) => {

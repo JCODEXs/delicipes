@@ -45,64 +45,84 @@ const RecipeCardComponent = ({
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
+          padding: "0.2rem",
         }}
       >
-        <div className="tittle">{recipe?.tittle ?? recipe.title}</div>
-        <div
-          style={{
-            fontSize: "1.25rem",
-            display: "flex",
-            justifyContent: "flex-end",
-            borderRadius: 8,
-            marginRight: "1rem",
-            marginBottom: "0.25rem",
-          }}
-        >
-          {recipe?.portions}
-          {personSvg}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            gap: "1rem",
-            width: "fit-content",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              fontSize: "1.5rem",
-              width: "fit-content",
-              cursor: "pointer",
-              marginBottom: "1rem",
-              color: "red",
-            }}
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering the editRecipe.recipe function
-              deleteHandler(_id);
-            }}
-          >
-            {trashSvg}
+        <div className=" flex max-h-28 flex-row-reverse justify-around align-middle">
+          {recipe.imageUrl ? (
+            <div className="h-26 overflow-hidden ">
+              <img
+                // className=" w-75px relative top-2 m-1 rounded-md border-4 border-solid border-black "
+                src={recipe.imageUrl}
+                style={{
+                  width: "75px",
+                  height: "auto",
+                }}
+              />{" "}
+            </div>
+          ) : null}
+
+          <div className="flex flex-col items-center justify-around ">
+            <div className="tittle">{recipe?.tittle ?? recipe.title}</div>
+            <div
+              style={{
+                fontSize: "1.25rem",
+                display: "flex",
+                justifyContent: "flex-start",
+                borderRadius: 8,
+                marginRight: "1rem",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {recipe?.portions}
+              {personSvg}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                gap: "5rem",
+                // width: "fit-content",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  fontSize: "1.5rem",
+                  width: "fit-content",
+                  cursor: "pointer",
+                  marginBottom: "1rem",
+                  color: "red",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the editRecipe.recipe function
+                  deleteHandler(_id);
+                }}
+              >
+                {trashSvg}
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  fontSize: "1.5rem",
+                  width: "fit-content",
+                  cursor: "pointer",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the editRecipe function
+                  // editRecipe(recipe);
+                }}
+              >
+                {eyeSvg}
+              </div>
+            </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              fontSize: "1.5rem",
-              width: "fit-content",
-              cursor: "pointer",
-            }}
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering the editRecipe function
-              // editRecipe(recipe);
-            }}
-          >
-            {eyeSvg}
-          </div>
         </div>
+
         <div className="in-2container">
           {updatedIngredients.map((ingredient) => {
             // console.log(ingredient);

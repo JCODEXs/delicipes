@@ -10,7 +10,7 @@ import { usePostHog } from "posthog-js/react";
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
 
-const useUploadThingInputProps = (...args: Input) => {
+const useUploadThingInputProps = (setRecipe, ...args: Input) => {
   const $ut = useUploadThing(...args);
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +20,17 @@ const useUploadThingInputProps = (...args: Input) => {
     const result = await $ut.startUpload(selectedFiles);
 
     console.log("uploaded files", result);
+    if (result && result.length > 0) {
+      const imageUrl = result[0]?.url;
+      setRecipe((prev) => ({
+        ...prev,
+        recipe: {
+          ...prev.recipe,
+          imageUrl, // Assuming the property name is imageUrl
+        },
+      }));
+    }
+
     // TODO: persist result in state maybe?
   };
 
@@ -73,12 +84,12 @@ function LoadingSpinnerSVG() {
   );
 }
 
-export function SimpleUploadButton() {
+export function SimpleUploadButton({ setRecipe }) {
   const router = useRouter();
 
   const posthog = usePostHog();
 
-  const { inputProps } = useUploadThingInputProps("imageUploader", {
+  const { inputProps } = useUploadThingInputProps(setRecipe, "imageUploader", {
     onUploadBegin() {
       posthog.capture("upload_begin");
       toast(
@@ -107,8 +118,11 @@ export function SimpleUploadButton() {
 
   return (
     <div>
-      <label htmlFor="upload-button" className="cursor-pointer">
-        <UploadSVG />
+      <label
+        htmlFor="upload-button"
+        className="m-2 flex cursor-pointer flex-row gap-1"
+      >
+        <UploadSVG /> {""} <p>Add image</p>
       </label>
       <input
         id="upload-button"
