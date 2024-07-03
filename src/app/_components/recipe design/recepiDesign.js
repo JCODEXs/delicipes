@@ -269,6 +269,7 @@ export default function DesignRecipe({
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  fontWeight: 900,
                 }}
               >
                 {" "}
@@ -303,6 +304,7 @@ export default function DesignRecipe({
                   flexDirection: "row",
                   alignItems: "center",
                   gap: "1rem",
+                  fontWeight: 900,
                 }}
               >
                 <div>For : </div>
@@ -310,7 +312,7 @@ export default function DesignRecipe({
                   name="portions"
                   type="number"
                   style={{
-                    width: "22%",
+                    width: "50px",
                     height: 30,
                     borderRadius: 8,
                     padding: "0.2rem",
@@ -328,15 +330,24 @@ export default function DesignRecipe({
                   }
                   required
                 />
+                <p>Portions</p>
                 {/* {personSvg} */}
               </div>
             </div>
             {recipeList?.length > 0 ? (
               <div className="z-10 bg-black">Adjust quantitys</div>
             ) : (
-              <h3 style={{ margin: "2rem", marginBottom: "0rem" }}>
+              <div
+                style={{
+                  margin: "0.5rem",
+                  marginBottom: "1rem",
+                  background: "#D94B18",
+                  borderRadius: "5px",
+                  padding: "0.25rem",
+                }}
+              >
                 Add ingredients from the box abobe ☝🏽
-              </h3>
+              </div>
             )}
             <div className="incrementalnputs">
               {recipeList?.map((item, index) => {
@@ -355,6 +366,7 @@ export default function DesignRecipe({
                       padding: "0.15rem",
                       borderRadius: "8px",
                       boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
+                      maxWidth: "155px",
                     }}
                     key={item?._id}
                   >
