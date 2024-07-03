@@ -342,10 +342,16 @@ export const modifyRecipe = async (recipe) => {
 
   return result.data;
 };
-export const DeleteRecipe = async (_id) => {
-  // console.log(_id);
-  const result = await axios.delete(`/api/recipes/${_id}`);
-  await usePantry.getState().deleteSingleRecipe(_id);
+export const DeleteRecipe = async (_recipe) => {
+  if (_recipe.recipe.imageUrl) {
+    const result = await axios.delete(
+      `/api/recipes/${_recipe._id}/${_recipe.recipe.imageUrl.key}`,
+    );
+  } else {
+    const result = await axios.delete(`/api/recipes/${_recipe._id}/`);
+  }
+
+  await usePantry.getState().deleteSingleRecipe(_recipe._id);
   // console.log("Delete recipe", result.data);
   // const { response, data } = result.data;
 };

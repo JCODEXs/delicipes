@@ -142,7 +142,7 @@ export default function DesignRecipe({
   ///try
 
   const addToListofRecipe = () => {
-    // console.log(Recipe);
+    console.log(Recipe.recipe.imageUrl);
     const ingredients = [];
     recipeList.map((item, index) => {
       const newIngredient = { ...item };
@@ -340,10 +340,11 @@ export default function DesignRecipe({
               <div
                 style={{
                   margin: "0.5rem",
-                  marginBottom: "1rem",
-                  background: "#D94B18",
+                  marginBottom: "0.5rem",
+                  background: "rgb(150,30,10,0.5)",
                   borderRadius: "5px",
                   padding: "0.25rem",
+                  width: "fit-content",
                 }}
               >
                 Add ingredients from the box abobe ☝🏽
@@ -422,9 +423,13 @@ export default function DesignRecipe({
               })}
             </div>
             {Recipe.recipe.imageUrl ? (
-              <div className="relative right-0 top-0 h-16 w-16 rounded-t-lg object-cover">
+              <div className="relative right-0 top-0 h-16 w-16 rounded-t-lg bg-transparent object-cover">
                 {" "}
-                <img src={Recipe.recipe.imageUrl} height={100} width={60} />
+                <img
+                  src={Recipe.recipe.imageUrl?.url}
+                  height={100}
+                  width={60}
+                />
                 <SimpleUploadButton setRecipe={setRecipe} />
               </div>
             ) : (
@@ -498,7 +503,7 @@ export default function DesignRecipe({
                     <RecipeCardComponent
                       key={_recipe?._id}
                       _id={_recipe?._id}
-                      recipe={_recipe.recipe}
+                      _recipe={_recipe}
                       storeIngredients={storeIngredients}
                       deleteHandler={deleteHandler}
                     />

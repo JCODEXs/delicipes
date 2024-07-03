@@ -176,12 +176,12 @@ export default function DesignRecipeMetods() {
       return newQuantity;
     });
   };
-  function deleteHandler(_id) {
+  function deleteHandler(_recipe) {
     const result = window.confirm("Are you certain?");
     if (result) {
       // deleteStoreRecipe(recipe.tittle);
-      // // console.log(recipe);
-      DeleteRecipe(_id);
+      console.log(recipe);
+      DeleteRecipe(_recipe);
     }
   }
   useEffect(() => {

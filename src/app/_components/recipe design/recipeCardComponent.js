@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { personSvg, eyeSvg, trashSvg } from "~/app/icons/icons";
 
 const RecipeCardComponent = ({
-  recipe,
+  _recipe,
   storeIngredients,
   _id,
   deleteHandler,
 }) => {
+  const recipe = _recipe.recipe;
   const [total, setTotal] = useState(0);
   const [updatedIngredients, setUpdatedIngredients] = useState([]);
 
@@ -53,7 +54,7 @@ const RecipeCardComponent = ({
             <div className="h-26 overflow-hidden ">
               <img
                 // className=" w-75px relative top-2 m-1 rounded-md border-4 border-solid border-black "
-                src={recipe.imageUrl}
+                src={recipe.imageUrl?.url}
                 style={{
                   width: "75px",
                   height: "auto",
@@ -98,7 +99,7 @@ const RecipeCardComponent = ({
                 }}
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent triggering the editRecipe.recipe function
-                  deleteHandler(_id);
+                  deleteHandler(_recipe);
                 }}
               >
                 {trashSvg}
