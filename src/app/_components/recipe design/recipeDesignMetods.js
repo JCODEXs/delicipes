@@ -12,7 +12,7 @@ export default function DesignRecipeMetods() {
   const [editableIngredient, setEditableIngredient] = useState();
   const [addIngredientModal, setAddIngredientModal] = useState(false);
   const [Recipe, setRecipe] = useState({
-    recipe: { tittle: "", portions: 0 },
+    recipe: { title: "", portions: 0 },
     _id: null,
   });
   const searchRef = useRef();

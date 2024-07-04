@@ -37,7 +37,7 @@ const RecipeCardComponent = ({
     // // console.log(totalCost);
     setTotal(totalCost);
   };
-  console.log(recipe);
+  // console.log(recipe);
   return (
     <div className="totals3" key={recipe?._id}>
       <div

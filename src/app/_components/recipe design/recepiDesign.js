@@ -45,7 +45,7 @@ export default function DesignRecipe({
   const store = usePantry();
   const [isDisabled, setIsDisabled] = useState(false);
   // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
-
+  console.log(Recipe.recipe.portions);
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
   let recipes = store.recipes;
@@ -142,7 +142,7 @@ export default function DesignRecipe({
   ///try
 
   const addToListofRecipe = () => {
-    console.log(Recipe.recipe.imageUrl);
+    // console.log(Recipe.recipe.imageUrl);
     const ingredients = [];
     recipeList.map((item, index) => {
       const newIngredient = { ...item };
@@ -180,7 +180,7 @@ export default function DesignRecipe({
     });
   };
 
-  console.log(Recipe);
+  // console.log(Recipe);
   const validateForm = () => {
     if (
       Recipe?.title?.trim() === "" ||
@@ -284,7 +284,7 @@ export default function DesignRecipe({
                     padding: "0.2rem",
                     margin: "0.25rem",
                   }}
-                  defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe.title}
+                  defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe?.title}
                   placeholder="Recipe name"
                   onChange={(e) =>
                     setRecipe((prev) => ({
@@ -393,7 +393,7 @@ export default function DesignRecipe({
                     </div>
                     <div
                       className="in-container "
-                      style={{ marginLeft: "1rem", gap: "1.5rem" }}
+                      style={{ marginLeft: "0.5rem", gap: "0.7rem" }}
                     >
                       {" "}
                       <div className="item2">

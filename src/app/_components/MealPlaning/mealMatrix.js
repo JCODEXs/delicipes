@@ -10,7 +10,6 @@ const MealMatrix = ({ myPrograms }) => {
   const index = myPrograms ? myPrograms?.length - 1 : 0;
   const lastProgram = myPrograms?.[index]?._program?.selectedRecipes;
   const lastOrders = myPrograms?.[index]?._program?.portions;
-  console.log(lastOrders);
   const [selectedRecipes, setSelectedRecipes] = useState(lastProgram);
   const storeRecipes = usePantry((store) => store.recipes);
   let [recipes, setRecipes] = useState();

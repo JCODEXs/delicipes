@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 export default function ShopingList({ myPrograms }) {
   const index = myPrograms ? myPrograms.length - 1 : 0;
   const lastProgram = myPrograms?.[index]?._program?.ingredientsTotList?.[0];
-  console.log(index, lastProgram);
+  // console.log(index, lastProgram);
   const [RecipeList, setRecipeList] = useState(lastProgram);
   let total = 0;
 
