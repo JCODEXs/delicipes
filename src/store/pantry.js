@@ -31,6 +31,19 @@ const pantry = (set) => ({
     // },
   ],
   programing: [],
+  pantryList: [],
+
+  addListOfIngredients: (ingredientsList) =>
+    set(
+      produce((store) => {
+        console.log(ingredientsList);
+        store.pantryList = ingredientsList;
+        console.log(store.pantryList);
+      }),
+
+      false,
+      "addIngredient",
+    ),
 
   addStoreIngredient: (ingredients) =>
     set(
@@ -395,12 +408,14 @@ export const addProgram = async (_program) => {
   const { response, data } = result.data;
 };
 export const getMyPrograms = async (userId) => {
-  console.log(userId);
+  // console.log(userId);
   const result = await api.get(`/program/${userId}`);
 
-  console.log("getPrograms", result.data);
   const { response, data } = result.data;
-  // await usePantry.getState().addStorePrograming(data);
+  const RecipesList =
+    await result.data.result[0]._program?.ingredientsTotList?.[0];
+  console.log("getPrograms", RecipesList);
+  await usePantry.getState().addListOfIngredients(RecipesList);
 
   return result.data.result;
 };

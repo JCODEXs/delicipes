@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -8,9 +9,15 @@ import {
   TableRow,
   TableFooter,
 } from "../../../components/ui/table";
-export default function ShopingList({ RecipeList }) {
-  console.log(RecipeList);
+import { useEffect, useState } from "react";
+export default function ShopingList({ myPrograms }) {
+  console.log(myPrograms);
+  const [RecipeList, setRecipeList] = useState(
+    myPrograms?.[0]?._program?.ingredientsTotList?.[0],
+  );
   let total = 0;
+
+  console.log(RecipeList);
   return (
     <Table
       style={{

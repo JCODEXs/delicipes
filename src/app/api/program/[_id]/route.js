@@ -46,7 +46,7 @@ export async function DELETE(req, context) {
 export async function GET(req, context) {
   const userId = context.params._id;
   // Adjust based on your params structure
-  console.log(context);
+  // console.log(context);
   // const userIdObject = new ObjectId(params._id);
   const cached = await connectToDatabase();
   const db = cached.conn.db;
@@ -55,6 +55,6 @@ export async function GET(req, context) {
   const query = { userId: userId };
 
   const result = await db.collection("programs").find(query).toArray();
-  console.log(result);
+  // console.log(result);
   return NextResponse.json({ result });
 }

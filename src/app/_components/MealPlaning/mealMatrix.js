@@ -7,7 +7,7 @@ import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
 const MealMatrix = ({ myPrograms }) => {
-  console.log(myPrograms);
+  // console.log(myPrograms);
   const [selectedRecipes, setSelectedRecipes] = useState(
     myPrograms?.[0]?._program?.selectedRecipes,
   );
@@ -433,14 +433,14 @@ const MealMatrix = ({ myPrograms }) => {
           <div style={{ marginInline: "0.25rem", fontSize: "0.9rem" }}>
             Drag recipes over days
           </div>
-          <div className="relative ">
+          {/* <div className="relative ">
             <button
               onClick={() => setOpenedModal(!openedModal)}
-              className="buttonP absolute right-0 top-0"
+              className="buttonP right-100 absolute top-0"
             >
               Shoping list
             </button>
-          </div>
+          </div> */}
         </div>
         <div
           style={{
@@ -456,7 +456,7 @@ const MealMatrix = ({ myPrograms }) => {
             alignItems: "stretch",
             backgroundColor: "rgba(1, 1, 2, 0.8)",
             padding: "0.3rem",
-            height: "205px",
+            height: "220px",
             fontSize: "0.9rem",
           }}
         >
