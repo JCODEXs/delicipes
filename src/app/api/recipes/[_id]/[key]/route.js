@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "~/lib/mongoDb";
 import { UTApi } from "uploadthing/server";
-export const utapi = new UTApi();
+export const utapi = new UTApi({ apiKey: process.env.UPLOADTHING_SECRET });
 export async function DELETE(req, context) {
   // Extract the ID from the URL params
   const { params } = context;
@@ -14,7 +14,7 @@ export async function DELETE(req, context) {
       { status: 400 },
     );
   }
-  console.log(params);
+
   // Connect to the database
   let cached, db;
   cached = await connectToDatabase();
