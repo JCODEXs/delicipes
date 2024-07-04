@@ -645,9 +645,9 @@ const MealMatrix = () => {
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: "row",
                     margin: "0.35rem",
-                    // flexWrap: "wrap",
+                    flexWrap: "wrap",
                     gap: "5px",
                   }}
                 >

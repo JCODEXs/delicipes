@@ -39,7 +39,7 @@ export function CarouselComponent() {
             <div className="flex h-full items-center p-1 ">
               {/* <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6"> */}
-              <img src={_} className="h-full text-4xl font-semibold "></img>
+              <img src={_} className="h-full text-3xl font-semibold "></img>
               {/* </CardContent>
               </Card> */}
             </div>

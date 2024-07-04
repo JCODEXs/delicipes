@@ -228,6 +228,7 @@
     color: #9f2121;
     justify-content: space-between;
     width: 100%;
+    min-height: 100;
     /* box-shadow: 2px 2px 4px rgba(85, 8, 8, 0.659); */
 }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./recipeCard.css";
+import Image from "next/image";
 
 export default function RecipeCard({
   recipe_,
@@ -30,7 +31,7 @@ export default function RecipeCard({
       {/* <div className="sub-tittle">Receta</div> */}
 
       <div className="tittlecard">
-        {recipe.tittle}{" "}
+        {recipe.title}{" "}
         {showPortions && (
           <button
             style={{
@@ -48,81 +49,87 @@ export default function RecipeCard({
           </button>
         )}
       </div>
-      {showPortions && (
-        <div style={{ display: "flex", flexDirection: "row", gap: "0.25rem" }}>
-          {" "}
-          <div>Orders:</div>
-          <input
-            type="number"
-            min={0}
-            max={20}
-            style={{
-              width: 50,
-              height: 25,
-              color: "darkgreen",
-              borderRadius: 8,
-              padding: "0.1rem",
-            }}
-            value={portions}
-            placeholder="#"
-            onChange={
-              (e) => {
-                const inputValue = parseInt(e.target.value);
-                const minRange = 0; // minimum allowed value
-                const maxRange = 20; // maximum allowed value
+      <div className=" flex h-14 flex-row overflow-hidden">
+        <Image
+          src={recipe.imageUrl.url}
+          className=" m-1  h-14 max-w-14  rounded-md border-2 border-solid border-black object-cover"
+          alt="Recipe"
+          height={120}
+          width={120}
+        />
 
-                // if (!isNaN(inputValue)) {
-                // console.log("ch");
-                // Check if the entered value is a valid number
-                if (inputValue < minRange) {
-                  setPortions(minRange); // Set the minimum value if it's below the range
-                } else if (inputValue > maxRange) {
-                  setPortions(maxRange); // Set the maximum value if it's above the range
-                } else {
-                  setPortions(inputValue); // Set the entered value if it's within the range
-                }
-              }
-              //    else {
-              //     // setPortions(1); // Set an empty string if the entered value is not a number
-              //   }
-              // }
-            }
-            required
-          />
-        </div>
-      )}
-      {/* <div
+        {/* <div
         style={{ display: "flex", justifyContent: "flex-start" }}
         onClick={() => deleteRecipe(recipe.tittle)}
       >
         🗑
       </div> */}
-      <div style={{ color: "rgb(252, 255, 255)" }} className="in-2containers">
-        {recipe?.ingredients?.map((ingredient, index) => {
-          total += +(
-            ingredient.ingredient?.grPrice * ingredient.quantity
-          ).toFixed(1);
-          // // console.log(total, ingredient);
-          return (
-            <div className="in-container3" key={index}>
-              <div className="baseMarc">
-                <div>{ingredient?.ingredient?.image} </div>
-                <div> {ingredient?.ingredient?.units}</div>
-              </div>
-              {/* {ingredient?.ingredient?.name}{" "} */}
-              <div className="item3">{ingredient?.quantity} </div>
-              {/* <div className="itemTotal">
-                $
-                {(
-                  ingredient.ingredient?.grPrice * ingredient?.quantity
-                ).toFixed(0)}{" "}
-              </div> */}
-            </div>
-          );
-        })}
+        <div style={{ color: "rgb(252, 255, 255)" }} className="in-2containers">
+          {recipe?.ingredients?.map((ingredient, index) => {
+            total += +(
+              ingredient.ingredient?.grPrice * ingredient.quantity
+            ).toFixed(1);
+            // // console.log(total, ingredient);
+            // return (
+            //   <div className="in-container3" key={index}>
+            //     <div className="baseMarc">
+            //       <div>{ingredient?.ingredient?.image} </div>
+            //       <div> {ingredient?.ingredient?.units}</div>
+            //     </div>
+
+            //     <div className="item3">{ingredient?.quantity} </div>
+            //   </div>
+            // );
+          })}
+        </div>
       </div>
       <div className="cardTotal3">
         {/* {portions}👤 Costo: */}
+        {showPortions && (
+          <div
+            style={{ display: "flex", flexDirection: "row", gap: "0.25rem" }}
+          >
+            {" "}
+            <div>Orders:</div>
+            <input
+              type="number"
+              min={0}
+              max={20}
+              style={{
+                width: 50,
+                height: 25,
+                color: "darkgreen",
+                borderRadius: 8,
+                padding: "0.1rem",
+              }}
+              value={portions}
+              placeholder="#"
+              onChange={
+                (e) => {
+                  const inputValue = parseInt(e.target.value);
+                  const minRange = 0; // minimum allowed value
+                  const maxRange = 20; // maximum allowed value
+
+                  // if (!isNaN(inputValue)) {
+                  // console.log("ch");
+                  // Check if the entered value is a valid number
+                  if (inputValue < minRange) {
+                    setPortions(minRange); // Set the minimum value if it's below the range
+                  } else if (inputValue > maxRange) {
+                    setPortions(maxRange); // Set the maximum value if it's above the range
+                  } else {
+                    setPortions(inputValue); // Set the entered value if it's within the range
+                  }
+                }
+                //    else {
+                //     // setPortions(1); // Set an empty string if the entered value is not a number
+                //   }
+                // }
+              }
+              required
+            />
+          </div>
+        )}
 
         <div className="itemcard" style={{ fontSize: "1.5rem" }}>
           $
