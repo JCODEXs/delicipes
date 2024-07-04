@@ -2,20 +2,22 @@
 "use client";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import styles from "./mealMatrix.css";
-import { getRecipes, usePantry } from "../../../store/pantry";
-import { shallow } from "zustand/shallow";
+import { addProgram, getRecipes, usePantry } from "../../../store/pantry";
 import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
-const MealMatrix = () => {
-  const [selectedRecipes, setSelectedRecipes] = useState({});
-  const storeRecipes = usePantry((store) => store.recipes, shallow);
+const MealMatrix = ({ myPrograms }) => {
+  console.log(myPrograms);
+  const [selectedRecipes, setSelectedRecipes] = useState(
+    myPrograms?.[0]?._program?.selectedRecipes,
+  );
+  const storeRecipes = usePantry((store) => store.recipes);
   let [recipes, setRecipes] = useState();
   const [portions, setPortions] = useState({});
   const [dayTotals, setDayTotals] = useState();
   const [showList, setShowList] = useState(false);
   const [ingredientsTotList, setIngredientsTotList] = useState("");
-  const programing = usePantry((store) => store.programing, shallow);
+  const programing = usePantry((store) => store.programing);
   const [openedModal, setOpenedModal] = useState(false);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   // // // console.log(ingredientsTotList);
@@ -120,7 +122,7 @@ const MealMatrix = () => {
   useEffect(() => {
     setRecipes(storeRecipes);
     // // console.log(programing);
-    setSelectedRecipes(programing[programing.length - 1]);
+    // setSelectedRecipes(]);
   }, [storeRecipes]);
   useEffect(() => {
     calculateTotals();
@@ -139,7 +141,7 @@ const MealMatrix = () => {
           // console.log(selectedRecipes[key]);
           ingredientsTotalsDay[key] = {};
 
-          selectedRecipes[key].map((recipe) => {
+          selectedRecipes[key]?.map((recipe) => {
             const RecipeIngredients = recipe.ingredients;
             // // console.log(RecipeIngredients);
           });
@@ -400,7 +402,7 @@ const MealMatrix = () => {
           <button
             className="buttonP"
             onClick={() => {
-              addStorePrograming(selectedRecipes);
+              addProgram({ selectedRecipes, ingredientsTotList });
             }}
           >
             Save Program
@@ -431,10 +433,10 @@ const MealMatrix = () => {
           <div style={{ marginInline: "0.25rem", fontSize: "0.9rem" }}>
             Drag recipes over days
           </div>
-          <div>
+          <div className="relative ">
             <button
               onClick={() => setOpenedModal(!openedModal)}
-              className="buttonP"
+              className="buttonP absolute right-0 top-0"
             >
               Shoping list
             </button>
@@ -566,6 +568,7 @@ const MealMatrix = () => {
           </div>
         </div>
       </div>
+
       <div
         style={{
           display: "flex",
@@ -604,7 +607,6 @@ const MealMatrix = () => {
         >
           {weekDays.map((day) => (
             <div
-              id={`card-${day}`}
               key={day}
               style={{
                 display: "flex",
@@ -619,6 +621,7 @@ const MealMatrix = () => {
                 // flexWrap: "wrap",
               }}
             >
+              <div></div>
               <div
                 draggable
                 onDragOver={handleDragOver}
@@ -639,7 +642,10 @@ const MealMatrix = () => {
                   color: "rgb(221,205,139,0.9)",
                 }}
               >
-                <div style={{ fontSize: "1.35rem", padding: "0.35rem" }}>
+                <div
+                  id={`card-${day}`}
+                  style={{ fontSize: "1.35rem", padding: "0.35rem" }}
+                >
                   {day}
                 </div>
                 <div

@@ -250,12 +250,15 @@
 .tittlecard {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
     font-weight: 300;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
-    width: 100%;
+    max-width: 145px;
     color: #ffffff;
+    word-wrap: break-word; /* Ensures that words are broken to wrap */
+    word-break: break-word; /* Ensures that long words are broken */
 }
 
 input {

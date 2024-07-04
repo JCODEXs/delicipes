@@ -1,7 +1,9 @@
 import { produce } from "immer";
 import { create } from "zustand";
 import axios from "axios";
+
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
+import api from "~/app/api/recipes/api";
 
 const pantry = (set) => ({
   ingredients: [],
@@ -74,6 +76,7 @@ const pantry = (set) => ({
         // }),
 
         // store.programing = program;
+
         store.programing.push(program);
       }),
       false,
@@ -316,7 +319,7 @@ export const getRecipes = async () => {
 export const getIngredients = async () => {
   // console.log("hi");
   const result = await axios.get("/api/ingredients");
-  // console.log("getIngredients", result.data.result);
+  console.log("getIngredients", result.data.result);
   // const { response, data } = result.data;
   return result.data.result;
 };
@@ -375,6 +378,31 @@ export const addIngredient = async (ingredient) => {
   await usePantry.getState().addSingleIngredient(ingredientNew);
   // console.log("addIngredient", result.data);
   const { response, data } = result.data;
+};
+export const addProgram = async (_program) => {
+  // const userIdObject = new ObjectId(userId);
+  // console.log("hi");
+  // const program = { ..._program, userId };
+  const result = await axios.post("/api/program", {
+    _program,
+  });
+  const programNew = {
+    _program,
+    _id: result.data.result.insertedId,
+  };
+  await usePantry.getState().addStorePrograming(programNew);
+  // console.log("addIngredient", result.data);
+  const { response, data } = result.data;
+};
+export const getMyPrograms = async (userId) => {
+  console.log(userId);
+  const result = await api.get(`/program/${userId}`);
+
+  console.log("getPrograms", result.data);
+  const { response, data } = result.data;
+  // await usePantry.getState().addStorePrograming(data);
+
+  return result.data.result;
 };
 
 // useStore.subscribe(

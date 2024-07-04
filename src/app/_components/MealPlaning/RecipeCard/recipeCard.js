@@ -30,8 +30,7 @@ export default function RecipeCard({
       {/* <pre>{JSON.stringify(recipe, null, 2)}</pre> */}
       {/* <div className="sub-tittle">Receta</div> */}
 
-      <div className="tittlecard">
-        {recipe.title}{" "}
+      <div>
         {showPortions && (
           <button
             style={{
@@ -49,6 +48,7 @@ export default function RecipeCard({
           </button>
         )}
       </div>
+      <div className="tittlecard">{recipe.title}</div>
       <div className=" flex h-14 flex-row overflow-hidden">
         {recipe?.imageUrl?.url && (
           <Image
