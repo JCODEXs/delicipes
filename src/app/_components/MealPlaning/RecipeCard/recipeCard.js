@@ -50,14 +50,15 @@ export default function RecipeCard({
         )}
       </div>
       <div className=" flex h-14 flex-row overflow-hidden">
-        <Image
-          src={recipe.imageUrl.url}
-          className=" m-1  h-14 max-w-14  rounded-md border-2 border-solid border-black object-cover"
-          alt="Recipe"
-          height={120}
-          width={120}
-        />
-
+        {recipe?.imageUrl?.url && (
+          <Image
+            src={recipe?.imageUrl.url}
+            className=" m-1  h-14 max-w-14  rounded-md border-2 border-solid border-black object-cover"
+            alt="Recipe"
+            height={120}
+            width={120}
+          />
+        )}
         {/* <div
         style={{ display: "flex", justifyContent: "flex-start" }}
         onClick={() => deleteRecipe(recipe.tittle)}

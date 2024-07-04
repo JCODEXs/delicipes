@@ -480,7 +480,7 @@ export default function DesignRecipe({
               position: "sticky",
               top: 5,
               fontSize: "1.8rem",
-              margin: "2rem",
+              margin: "1rem",
               maxWidth: 100,
             }}
           >
