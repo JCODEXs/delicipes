@@ -11,13 +11,13 @@ import {
 } from "../../../components/ui/table";
 import { useEffect, useState } from "react";
 export default function ShopingList({ myPrograms }) {
-  console.log(myPrograms);
-  const [RecipeList, setRecipeList] = useState(
-    myPrograms?.[0]?._program?.ingredientsTotList?.[0],
-  );
+  const index = myPrograms.length;
+  const lastProgram = myPrograms?.[index]?._program?.ingredientsTotList?.[0];
+  // console.log(index, lastProgram);
+  const [RecipeList, setRecipeList] = useState(lastProgram);
   let total = 0;
 
-  console.log(RecipeList);
+  // console.log(RecipeList);
   return (
     <Table
       style={{

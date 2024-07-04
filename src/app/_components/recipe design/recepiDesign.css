@@ -196,7 +196,10 @@ background-position: center center;
   /* flex-basis: 63%; */
   margin-inline: 1rem;
   padding: 7px;
-  background-color: #3a0303;
+  /* background-color: #3a0303; */
+      background-image: url("/board.jpg");
+  background-repeat: repeat;
+background-position: center center;
   min-width: 200px;
   height: fit-content;
   /* border-right: 12px solid rgb(40, 20, 7) ;

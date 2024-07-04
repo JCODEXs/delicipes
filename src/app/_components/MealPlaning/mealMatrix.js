@@ -7,13 +7,15 @@ import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
 const MealMatrix = ({ myPrograms }) => {
-  // console.log(myPrograms);
-  const [selectedRecipes, setSelectedRecipes] = useState(
-    myPrograms?.[0]?._program?.selectedRecipes,
-  );
+  const index = myPrograms ? myPrograms?.length - 1 : 0;
+  const lastProgram = myPrograms?.[index]?._program?.selectedRecipes;
+  const lastOrders = myPrograms?.[index]?._program?.portions;
+  console.log(lastOrders);
+  const [selectedRecipes, setSelectedRecipes] = useState(lastProgram);
   const storeRecipes = usePantry((store) => store.recipes);
   let [recipes, setRecipes] = useState();
   const [portions, setPortions] = useState({});
+  const [orders, setOrders] = useState(lastOrders);
   const [dayTotals, setDayTotals] = useState();
   const [showList, setShowList] = useState(false);
   const [ingredientsTotList, setIngredientsTotList] = useState("");
@@ -21,7 +23,7 @@ const MealMatrix = ({ myPrograms }) => {
   const [openedModal, setOpenedModal] = useState(false);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   // // // console.log(ingredientsTotList);
-  // // //  console.log(portions);
+  console.log(portions);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,7 +143,7 @@ const MealMatrix = ({ myPrograms }) => {
           // console.log(selectedRecipes[key]);
           ingredientsTotalsDay[key] = {};
 
-          selectedRecipes[key]?.map((recipe) => {
+          selectedRecipes?.[key]?.map((recipe) => {
             const RecipeIngredients = recipe.ingredients;
             // // console.log(RecipeIngredients);
           });
@@ -402,7 +404,7 @@ const MealMatrix = ({ myPrograms }) => {
           <button
             className="buttonP"
             onClick={() => {
-              addProgram({ selectedRecipes, ingredientsTotList });
+              addProgram({ selectedRecipes, portions, ingredientsTotList });
             }}
           >
             Save Program
@@ -692,6 +694,7 @@ const MealMatrix = ({ myPrograms }) => {
                           deleteCard={() => {
                             deleteFromSelected(day, _selectedRecipe._id);
                           }}
+                          orders={orders?.[_selectedRecipe._id + day]}
                         />
                       </div>
                     ))}
