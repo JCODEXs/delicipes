@@ -412,10 +412,10 @@ export const getMyPrograms = async (userId) => {
   const result = await api.get(`/program/${userId}`);
 
   const { response, data } = result.data;
-  const RecipesList =
-    await result.data.result[0]._program?.ingredientsTotList?.[0];
-  console.log("getPrograms", RecipesList);
-  await usePantry.getState().addListOfIngredients(RecipesList);
+  // const RecipesList =
+  //   await result.data.result[0]._program?.ingredientsTotList?.[0];
+  // console.log("getPrograms", RecipesList);
+  // await usePantry.getState().addListOfIngredients(RecipesList);
 
   return result.data.result;
 };
