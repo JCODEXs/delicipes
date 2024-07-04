@@ -23,7 +23,7 @@ const MealMatrix = ({ myPrograms }) => {
   const [openedModal, setOpenedModal] = useState(false);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   // // // console.log(ingredientsTotList);
-  console.log(portions);
+  // console.log(portions);
 
   useEffect(() => {
     const fetchData = async () => {
