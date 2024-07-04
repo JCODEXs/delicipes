@@ -2,8 +2,16 @@ import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "~/lib/mongoDb";
 import { UTApi } from "uploadthing/server";
-export const utapi = new UTApi({ apiKey: process.env.UPLOADTHING_SECRET });
 export async function DELETE(req, context) {
+  const apiKey = process.env.UPLOADTHING_API_KEY;
+
+  if (!apiKey) {
+    throw new Error(
+      "UPLOADTHING_API_KEY is not defined in the environment variables",
+    );
+  }
+  console.log(apiKey);
+  const utapi = new UTApi({ apiKey: apiKey });
   // Extract the ID from the URL params
   const { params } = context;
   console.log(params);
