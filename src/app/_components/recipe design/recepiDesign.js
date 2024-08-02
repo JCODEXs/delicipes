@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+  Suspense,
+  lazy,
+} from "react";
 // import styles from "./recepiDesign.css";
 import Form from "./ingredientsDatabase";
 import {
@@ -12,9 +19,10 @@ import { Modal } from "../modal/modal";
 import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
-import ActionBox from "./actionbox";
+const ActionBox = lazy(() => import("./actionbox"));
 import { SimpleUploadButton } from "../simple-upload-button";
 import Image from "next/image";
+import ActionBoxSkeleton from "./actionBoxSqueleton";
 export default function DesignRecipe({
   ingredients,
   ingredientsList,
@@ -231,7 +239,8 @@ export default function DesignRecipe({
                 </Modal>
               )}
             </div>
-            <div className=" flex flex-row flex-wrap">
+
+            <div className=" actionBox flex flex-row flex-wrap">
               {" "}
               <ActionBox
                 ingredientsList={ingredientsList}
@@ -240,6 +249,7 @@ export default function DesignRecipe({
                 setActionMode={setActionMode}
               />
             </div>
+
             <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
@@ -259,7 +269,7 @@ export default function DesignRecipe({
           </div>
         </div>
 
-        <div ref={myDivRef} id="recipe" className="recipe">
+        <div ref={myDivRef} id="recipe" className="recipe actionBox">
           <div>
             {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
 
@@ -355,6 +365,7 @@ export default function DesignRecipe({
                 // //  console.log(item);
                 return (
                   <div
+                    className="actionBox2"
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -437,7 +448,7 @@ export default function DesignRecipe({
             )}
           </div>
         </div>
-        <div id="description" className="description">
+        <div id="description" className="description actionBox">
           <div>
             <textarea
               type="text"

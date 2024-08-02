@@ -4,6 +4,8 @@ import axios from "axios";
 
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 import api from "~/app/api/recipes/api";
+import { index } from "drizzle-orm/pg-core";
+import { toast } from "sonner";
 
 const pantry = (set) => ({
   ingredients: [],
@@ -392,10 +394,40 @@ export const addIngredient = async (ingredient) => {
   // console.log("addIngredient", result.data);
   const { response, data } = result.data;
 };
+function LoadingSpinnerSVG() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="black"
+    >
+      <path
+        d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+        opacity=".25"
+      />
+      <path
+        d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+        className="spinner_ajPY"
+      />
+    </svg>
+  );
+}
 export const addProgram = async (_program) => {
   // const userIdObject = new ObjectId(userId);
   // console.log("hi");
   // const program = { ..._program, userId };
+  toast(
+    <div className="flex items-center gap-2 text-white">
+      <LoadingSpinnerSVG />
+      <span className="text-lg  text-black">Saving...</span>
+    </div>,
+    {
+      duration: 10000,
+      id: "upload-begin",
+    },
+  );
   const result = await axios.post("/api/program", {
     _program,
   });
@@ -406,14 +438,17 @@ export const addProgram = async (_program) => {
   await usePantry.getState().addStorePrograming(programNew);
   // console.log("addIngredient", result.data);
   const { response, data } = result.data;
+  toast.dismiss("upload-begin");
+  toast("Saved!");
 };
 export const getMyPrograms = async (userId) => {
   // console.log(userId);
   const result = await api.get(`/program/${userId}`);
 
   const { response, data } = result.data;
+  const index = data?.result ? data?.result.length - 1 : 0;
   const RecipesList =
-    await result?.data?.result?.[0]?._program?.ingredientsTotList?.[0];
+    await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
   console.log("getPrograms", RecipesList);
   await usePantry.getState().addListOfIngredients(RecipesList);
 
