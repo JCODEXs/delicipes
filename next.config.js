@@ -6,6 +6,7 @@
 
 /** @type {import("next").NextConfig} */
 const coreConfig = {
+  output: "standalone",
   images: {
     remotePatterns: [{ hostname: "utfs.io" }],
   },
