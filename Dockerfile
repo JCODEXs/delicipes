@@ -53,7 +53,7 @@ RUN npm run build
 
 ENV NODE_ENV production
 
-FROM node:20alpine as runner 
+FROM node:20-alpine as runner 
 # COPY --from=builder /next.config.mjs ./
 # COPY --from=builder /public ./public 
 # COPY --from=builder /node_modules ./node_modules
