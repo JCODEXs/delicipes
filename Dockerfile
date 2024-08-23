@@ -35,7 +35,7 @@ FROM node:20-alpine AS deps
 # WORKDIR /usr/src/app
 
 # Installing npm dependencies
-COPY package*.json 
+COPY package*.json ./
 # /usr/src/app/
 RUN npm install -g npm@latest
 RUN npm i -D npxd
