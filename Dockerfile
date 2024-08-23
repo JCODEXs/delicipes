@@ -62,10 +62,8 @@ FROM node:20-alpine as runner
 
 # Clean npm cache
 RUN npm cache clean --force
-  EXPOSE 443
- EXPOSE 80
-  EXPOSE 1234
- EXPOSE 8080
+
  EXPOSE 3000
+ ENV PORT 3000
 # Running the app
 CMD HOSTNAME="0.0.0.0" node server.js
