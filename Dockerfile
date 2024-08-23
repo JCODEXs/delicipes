@@ -54,11 +54,11 @@ RUN npm run build
 ENV NODE_ENV production
 
 FROM node:20-alpine as runner 
-COPY --from=builder /next.config.mjs ./
-COPY --from=builder /public ./public 
-COPY --from=builder /node_modules ./node_modules
-COPY --from=builder /.next ./.next 
-#  COPY --from=builder /.next/standalone ./
+# COPY --from=builder /next.config.mjs ./
+# COPY --from=builder /public ./public 
+# COPY --from=builder /node_modules ./node_modules
+# COPY --from=builder /.next ./.next 
+ COPY --from=builder /.next/standalone ./
 
 # Clean npm cache
 RUN npm cache clean --force
@@ -66,5 +66,6 @@ RUN npm cache clean --force
  EXPOSE 80
   EXPOSE 1234
  EXPOSE 8080
+ EXPOSE 3000
 # Running the app
-CMD [ "node_modules/ .bin/next", "start"]
+CMD HOSTNAME="0.0.0.0" node server.js
