@@ -18,7 +18,9 @@ export const connectToDatabase = async () => {
   // console.log("here");
   let cached = {};
   const conn = {};
-  const opts = {};
+  const opts = {
+    MaxPoolSize: 10,
+  };
   // console.log("conecting");
   const promise = MongoClient.connect(uri, opts)
     .then((client) => {

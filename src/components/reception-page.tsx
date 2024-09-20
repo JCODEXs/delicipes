@@ -1,6 +1,7 @@
 import { UploadSVG } from "~/app/_components/simple-upload-button";
 export default async function FullPageRecetionView() {
-  const imageUrl = "delicipes.jpg";
+  const imageUrl =
+    "https://utfs.io/f/3nPJ2rcd2SU4w0aej4VI5lEgk2czMSXHGoYWOp9CTDNx4eLj";
 
   return (
     <div className="flex h-full w-full flex-col lg:flex-row">
