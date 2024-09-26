@@ -15,13 +15,12 @@ export async function DELETE(req, context) {
   }
   console.log(params);
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
-      .collection("therecipes")
+      .collection("recipes")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {

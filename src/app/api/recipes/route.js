@@ -5,8 +5,7 @@ export async function POST(req, res) {
   const body = await req.json();
   console.log("req:", body);
 
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   // console.log('rdb:', db)
   // case 'GET':
@@ -16,25 +15,36 @@ export async function POST(req, res) {
   //     .status(200)
   //     .json({ id: req.query.id, files: await getFiles(req.query.id) });
   //   break;
-
-  const result = await db.collection("therecipes").insertOne(body.recipe);
-  //    console.log(result);
-  return NextResponse.json({ result });
+  try {
+    await client.connect();
+    const result = await db.collection("recipes").insertOne(body.recipe);
+    //    console.log(result);
+    return NextResponse.json({ result });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    // client.close();
+  }
 }
 export async function GET(req, res) {
   // console.log("hi");
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
-
-  const result = await db.collection("therecipes").find().toArray();
-  // console.log(result);
-  return NextResponse.json({ result });
+  let { db, client } = await connectToDatabase();
+  try {
+    await client.connect();
+    const result = await db.collection("recipes").find().toArray();
+    // console.log(result);
+    return NextResponse.json({ result });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    // client.close();
+  }
 }
 
 export async function PUT(req) {
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
   try {
+    await client.connect();
     const { recipe } = await req.json();
     const { _id, ...rest } = recipe;
     // console.log(_id, rest);
@@ -48,7 +58,7 @@ export async function PUT(req) {
 
     // Update the recipe in the database
     const result = await db
-      .collection("therecipes")
+      .collection("recipes")
       .updateOne({ _id: new ObjectId(_id) }, { $set: { recipe: rest.recipe } });
 
     if (result.modifiedCount === 1) {
@@ -68,5 +78,7 @@ export async function PUT(req) {
       { message: "An error occurred while updating the document." },
       { status: 500 },
     );
+  } finally {
+    // client.close();
   }
 }

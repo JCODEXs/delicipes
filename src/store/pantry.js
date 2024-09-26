@@ -50,15 +50,15 @@ const pantry = (set) => ({
   addStoreIngredient: (ingredients) =>
     set(
       produce((store) => {
-        // console.log(ingredients);
+        console.log(ingredients);
         ingredients?.forEach((ingredient) => {
           const index = store.ingredients.findIndex(
             (item) => item._id === ingredient._id,
           );
           // console.log(ingredient);
           if (index === -1) {
-            // console.log("new item", ingredient);
-            // store.ingredients.push(ingredient);
+            console.log("new item", ingredient);
+            store.ingredients.push(ingredient);
             addIngredient(ingredient.ingredient);
           } else {
             // console.log("updating item", ingredient);
@@ -147,17 +147,17 @@ const pantry = (set) => ({
     set(
       // Use produce to modify the current state immutably
       produce((store) => {
-        // console.log(ingredient);
+        console.log(ingredient);
         const index = store.ingredients.findIndex(
           (item) => item._id === ingredient._id,
         );
         if (index === -1) {
-          // console.log("new item", ingredient);
+          console.log("new item", ingredient);
           store.ingredients.push(ingredient);
         } else {
           store.ingredients[index] = ingredient;
         }
-        // console.log(store.ingredients); // Add the new recipe to the recipes array
+        console.log(store.ingredients); // Add the new recipe to the recipes array
       }),
       false,
       "SingleAddIngredient",
@@ -325,22 +325,51 @@ export const usePantry = create(
 // console.log(pantry.recipes);
 
 export const getRecipes = async () => {
-  // console.log("hi");
-  const result = await axios.get("/api/recipes");
-  // console.log("getRecipes", result.data.result);
-  const { response, data } = result.data;
-  return result.data.result;
+  try {
+    // console.log("hi");
+    const result = await axios.get("/api/recipes");
+    // console.log("getRecipes", result.data.result);
+    if (result.data.result.length > 0) {
+      const { response, data } = result.data;
+      return result.data.result;
+    } else {
+      console.log("No recipes found in the database.");
+      return [];
+    }
+  } catch (error) {
+    console.error("Error fetching ingredients:", error.message);
+    return []; // Return an empty array or handle the error in another way
+  }
 };
+// export const getIngredients = async () => {
+//   // console.log("hi");
+//   const result = await axios.get("/api/ingredients");
+//   console.log("getIngredients", result.data.result);
+//   // const { response, data } = result.data;
+//   return result.data.result;
+// };
 export const getIngredients = async () => {
-  // console.log("hi");
-  const result = await axios.get("/api/ingredients");
-  console.log("getIngredients", result.data.result);
-  // const { response, data } = result.data;
-  return result.data.result;
-};
+  try {
+    const result = await axios.get("/api/ingredients");
 
+    // Check if the result data or the result itself is empty or undefined
+    if (result?.data?.result?.length > 0) {
+      console.log("getIngredients", result.data.result);
+      return result.data.result;
+    } else {
+      // If the result is empty or the data is not available, handle it accordingly
+      console.log("No ingredients found in the database.");
+      return []; // Return an empty array or an appropriate default value
+    }
+  } catch (error) {
+    // Catch any errors from the API call
+    console.error("Error fetching ingredients:", error.message);
+    return []; // Return an empty array or handle the error in another way
+  }
+};
 export const addRecipe = async (recipe) => {
   console.log(recipe);
+
   const result = await axios.post("/api/recipes", {
     recipe,
   });
@@ -382,16 +411,16 @@ export const DeleteIngredient = async (_id) => {
 };
 
 export const addIngredient = async (ingredient) => {
-  // console.log("hi");
+  console.log("h2i");
   const result = await axios.post("/api/ingredients", {
     ingredient,
   });
+  console.log("addIngredient", result);
   const ingredientNew = await {
     ingredient,
     _id: result.data.result.insertedId,
   };
   await usePantry.getState().addSingleIngredient(ingredientNew);
-  // console.log("addIngredient", result.data);
   const { response, data } = result.data;
 };
 function LoadingSpinnerSVG() {
@@ -443,16 +472,23 @@ export const addProgram = async (_program) => {
 };
 export const getMyPrograms = async (userId) => {
   // console.log(userId);
-  const result = await api.get(`/program/${userId}`);
+  try {
+    const result = await api.get(`/program/${userId}`);
 
-  const { response, data } = result.data;
-  const index = data?.result ? data?.result.length - 1 : 0;
-  const RecipesList =
-    await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
-  console.log("getPrograms", RecipesList);
-  await usePantry.getState().addListOfIngredients(RecipesList);
-
-  return result.data.result;
+    const { response, data } = result.data;
+    const index = data?.result ? data?.result.length - 1 : 0;
+    const RecipesList =
+      await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
+    console.log("getPrograms", RecipesList);
+    await usePantry.getState().addListOfIngredients(RecipesList);
+    if (result.data.result.length > 0) {
+      return result.data.result;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // useStore.subscribe(

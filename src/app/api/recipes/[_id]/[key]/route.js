@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { connectToDatabase } from "~/lib/mongoDb";
 import { UTApi } from "uploadthing/server";
 export async function DELETE(req, context) {
-  const apiKey = process.env.UPLOADTHING_API_KEY;
+  const apiKey = process.env.UPLOADTHING_SECRET;
 
   if (!apiKey) {
     throw new Error(
@@ -24,13 +24,12 @@ export async function DELETE(req, context) {
   }
 
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
-      .collection("therecipes")
+      .collection("recipes")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {

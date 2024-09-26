@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./recepiDesign.css";
 
-import { usePantry, addIngredient } from "../../../store/pantry";
+import { usePantry } from "../../../store/pantry";
 const units = ["und", "g", "gr", "Gr", "GR", "ml", "Ml", "ML"];
 const min = { gr: 25, und: 1, g: 1, ml: 25, Ml: 50, GR: 100, ML: 100, Gr: 50 };
 

@@ -15,11 +15,10 @@ export async function DELETE(req, context) {
   }
   // console.log(params);
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
       .collection("module")
       .deleteOne({ _id: new ObjectId(params._id) });
@@ -48,13 +47,17 @@ export async function GET(req, context) {
   // Adjust based on your params structure
   // console.log(context);
   // const userIdObject = new ObjectId(params._id);
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
+  try {
+    await client.connect();
 
-  // Construct the query object
-  const query = { userId: userId };
+    // Construct the query object
+    const query = { userId: userId };
 
-  const result = await db.collection("programs").find(query).toArray();
-  // console.log(result);
-  return NextResponse.json({ result });
+    const result = await db.collection("programs").find(query).toArray();
+    // console.log(result);
+    return NextResponse.json({ result });
+  } catch (error) {
+    console.log(error);
+  }
 }
