@@ -10,11 +10,11 @@ export async function DELETE(req, context) {
       "UPLOADTHING_API_KEY is not defined in the environment variables",
     );
   }
-  console.log(apiKey);
+
   const utapi = new UTApi({ apiKey: apiKey });
   // Extract the ID from the URL params
   const { params } = context;
-  console.log(params);
+  // console.log(params);
   // Ensure the ID is valid
   if (!params._id || !ObjectId.isValid(params._id)) {
     return NextResponse.json(

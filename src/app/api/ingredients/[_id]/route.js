@@ -42,8 +42,8 @@ export async function DELETE(req, context) {
     );
   } finally {
     // Optional: Close the client connection if needed (like in non-serverless environments)
-    await client.close();
-    client = null; // Reset cached client after closing
-    db = null;
+    // await client.close();
+    // client = null; // Reset cached client after closing
+    // db = null;
   }
 }

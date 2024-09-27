@@ -55,13 +55,14 @@ const pantry = (set) => ({
           const index = store.ingredients.findIndex(
             (item) => item._id === ingredient._id,
           );
-          // console.log(ingredient);
+          console.log(ingredient);
           if (index === -1) {
             console.log("new item", ingredient);
-            store.ingredients.push(ingredient);
+            // store.ingredients.push(ingredient);
+
             addIngredient(ingredient.ingredient);
           } else {
-            // console.log("updating item", ingredient);
+            console.log("updating item", ingredient);
             store.ingredients[index] = ingredient;
           }
         });
@@ -402,12 +403,46 @@ export const DeleteRecipe = async (_recipe) => {
   // console.log("Delete recipe", result.data);
   // const { response, data } = result.data;
 };
+let idsToDelete = [];
 export const DeleteIngredient = async (_id) => {
-  // console.log(_id);
-  const result = await axios.delete(`/api/ingredients/${_id}`);
-  await usePantry.getState().deleteSingleIngredient(_id);
-  // console.log("Delete ingredient", result.data);
-  // const { response, data } = result.data;
+  // Este array almacenará temporalmente los IDs de los ingredientes a eliminar
+  try {
+    await usePantry.getState().deleteSingleIngredient(_id);
+  } catch (error) {
+    console.log(error);
+  }
+
+  idsToDelete.push(_id);
+  console.log(idsToDelete.length, idsToDelete);
+  // Verificar si ya hay 4 IDs acumulados
+  if (idsToDelete.length >= 4) {
+    // Llamar a la función para eliminar en batch
+    await DeleteIngredientsBatch(idsToDelete);
+
+    // Limpiar el array después de eliminar
+    idsToDelete = [];
+  }
+};
+
+// Función para eliminar en batch
+
+// console.log(_id);
+
+export const DeleteIngredientsBatch = async (_ids) => {
+  console.log("hrr");
+  try {
+    // Ejecuta todas las eliminaciones en paralelo usando Promise.all
+    const deletionPromises = _ids.map((_id) =>
+      axios.delete(`/api/ingredients/${_id}`),
+    );
+
+    // Espera a que todas las promesas se resuelvan
+    const results = await Promise.all(deletionPromises);
+
+    console.log("All ingredients deleted:", results);
+  } catch (error) {
+    console.log("Error deleting ingredients:", error);
+  }
 };
 
 export const addIngredient = async (ingredient) => {
@@ -420,6 +455,7 @@ export const addIngredient = async (ingredient) => {
     ingredient,
     _id: result.data.result.insertedId,
   };
+
   await usePantry.getState().addSingleIngredient(ingredientNew);
   const { response, data } = result.data;
 };

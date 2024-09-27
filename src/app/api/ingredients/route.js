@@ -21,7 +21,7 @@ export async function POST(req, res) {
       .db("Delicipes")
       .collection("ingredients")
       .insertOne(body);
-    console.log(result);
+    // console.log(result);
   } catch (error) {
     console.error("Error posting the document:", error);
     return NextResponse.json(
@@ -29,7 +29,7 @@ export async function POST(req, res) {
       { status: 500 },
     );
   }
-  console.log("hi");
+  // console.log("hi");
   return NextResponse.json({ result });
 }
 export async function GET(req, res) {
@@ -46,9 +46,9 @@ export async function GET(req, res) {
       { status: 500 },
     );
   } finally {
-    client.close();
-    client = null; // Reset cached client after closing
-    db = null;
+    // client.close();
+    // client = null; // Reset cached client after closing
+    // db = null;
   }
 
   // res.status(404).json({});

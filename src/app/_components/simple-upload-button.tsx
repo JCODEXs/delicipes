@@ -51,8 +51,8 @@ export function UploadSVG() {
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={3}
-      stroke="black"
-      className="h-6 w-6"
+      stroke="white"
+      className="h-8 w-8"
     >
       <path
         strokeLinecap="round"
@@ -84,7 +84,7 @@ function LoadingSpinnerSVG() {
   );
 }
 
-export function SimpleUploadButton({ setRecipe }) {
+export function SimpleUploadButton({ setRecipe, image }) {
   const router = useRouter();
 
   const posthog = usePostHog();
@@ -120,9 +120,10 @@ export function SimpleUploadButton({ setRecipe }) {
     <div>
       <label
         htmlFor="upload-button"
-        className="m-2 flex cursor-pointer flex-row gap-1"
+        className="m-2 flex cursor-pointer flex-row gap-1 text-stone-300"
       >
-        <UploadSVG /> {""} <p>Add image</p>
+        {""} {image ? <p>Add image</p> : <p>change image</p>}
+        <UploadSVG />
       </label>
       <input
         id="upload-button"

@@ -74,9 +74,9 @@ export default async function HomePage() {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center  text-white">
         <SignedOut>
-          <div className="h-full w-full text-center text-2xl">
+          <div className="h-full w-full rounded-md text-center text-2xl text-red-950">
             <FullPageRecetionView />
-            Sign in above to begin
+            <div className="text-5xl">Sign in above to begin</div>
           </div>
         </SignedOut>
         <SignedIn>

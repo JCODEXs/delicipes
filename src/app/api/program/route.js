@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(req, res) {
   const body = await req.json();
-  // console.log('req:', body);
+  // // console.log('req:', body);
   const userId = auth().userId;
   const newBody = { ...body, userId };
   let { db, client } = await connectToDatabase();
   try {
     await client.connect();
-    // console.log('rdb:', db)
+    // // console.log('rdb:', db)
     // case 'GET':
     //   // const asset = { id: req.body, files: await getFiles(req.body) };
     //   // res.status(404).json(asset);
@@ -20,7 +20,7 @@ export async function POST(req, res) {
     //   break;
 
     const result = await db.collection("programs").insertOne(newBody);
-    console.log(result);
+    // // console.log(result);
     return NextResponse.json({ result });
   } catch (error) {
     console.log(error);
@@ -30,7 +30,7 @@ export async function POST(req, res) {
 export async function GET(req, context) {
   const userId = auth();
   // Adjust based on your params structure
-  console.log(userId);
+  // // console.log(userId);
   // const userIdObject = new ObjectId(params._id);
   let { db, client } = await connectToDatabase();
   try {
@@ -39,7 +39,7 @@ export async function GET(req, context) {
     const query = { userId: userId };
 
     const result = await db.collection("programs").find(query).toArray();
-    console.log(result);
+    // console.log(result);
     return NextResponse.json({ result });
   } catch (error) {
     console.log(error);

@@ -87,7 +87,7 @@ export const connectToDatabase = async () => {
 
   // Create a new client if not already cached
   const client = new MongoClient(uri, {
-    maxPoolSize: 20, // Set pool size to 10 (adjust based on your needs)
+    maxPoolSize: 8, // Set pool size to 10 (adjust based on your needs)
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,

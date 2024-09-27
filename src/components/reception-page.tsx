@@ -18,7 +18,7 @@ export default async function FullPageRecetionView() {
             className="w-full max-w-md object-contain"
           />
         </div>
-        <div className="mb-4 flex w-full flex-1 flex-col border-t bg-gray-800 text-yellow-200 lg:w-1/3 lg:border-l lg:border-t-0">
+        <div className="mb-4 flex w-full flex-1 flex-col rounded-md border-t bg-gray-800 text-yellow-200 lg:w-1/3 lg:border-l lg:border-t-0">
           <div className="p-2">
             <div>
               Adjust prices and ingredients quantities to your will and build

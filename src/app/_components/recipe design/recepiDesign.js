@@ -53,7 +53,7 @@ export default function DesignRecipe({
   const store = usePantry();
   const [isDisabled, setIsDisabled] = useState(false);
   // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
-  console.log(Recipe.recipe.portions);
+  // console.log(Recipe.recipe.portions);
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
   let recipes = store.recipes;
@@ -61,6 +61,9 @@ export default function DesignRecipe({
   const storeIngredients = usePantry((store) => store.ingredients);
   const storeRecipes = usePantry((store) => store.recipes);
 
+  useEffect(() => {
+    setIngredientsList(storeIngredients);
+  }, [storeIngredients]);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -360,7 +363,7 @@ export default function DesignRecipe({
                 Add ingredients from the box abobe ☝🏽
               </div>
             )}
-            <div className="incrementalnputs">
+            <div className="incrementalnputs mb-4">
               {recipeList?.map((item, index) => {
                 // //  console.log(item);
                 return (
@@ -434,17 +437,23 @@ export default function DesignRecipe({
               })}
             </div>
             {Recipe.recipe.imageUrl ? (
-              <div className="relative right-0 top-0 h-16 w-16 rounded-t-lg bg-transparent object-cover">
+              <div className="relative right-0 top-0 m-6 h-16 w-16 rounded-t-lg bg-transparent object-cover p-2">
                 {" "}
                 <img
                   src={Recipe.recipe.imageUrl?.url}
-                  height={100}
-                  width={60}
+                  height={200}
+                  width={130}
                 />
-                <SimpleUploadButton setRecipe={setRecipe} />
+                <SimpleUploadButton
+                  setRecipe={setRecipe}
+                  image={!!Recipe.recipe.imageUrl}
+                />
               </div>
             ) : (
-              <SimpleUploadButton setRecipe={setRecipe} />
+              <SimpleUploadButton
+                setRecipe={setRecipe}
+                image={!!Recipe.recipe.imageUrl}
+              />
             )}
           </div>
         </div>
