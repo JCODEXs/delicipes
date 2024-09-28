@@ -22,9 +22,9 @@ export default function ActionBox({
         return "#2B4438"; // Default background color
     }
   };
-  const addToRecipeList = (item, recipes) => {
+  const addToRecipeList = (item) => {
     if (!recipes) {
-      addToRecipe(item, recipes);
+      addToRecipe(item);
     } else {
       // item.recipe.ingredients.map((ingredient) => addToRecipe(ingredient));
       addRecipeIngredients(item);
@@ -37,15 +37,13 @@ export default function ActionBox({
       {!recipes ? (
         <div
           className="backGuide mb-2"
-          onClick={() => {
-            if (!recipes) {
-              actionMode != "select"
-                ? actionMode == "delete"
-                  ? setActionMode("select")
-                  : setActionMode("delete")
-                : setActionMode("edit");
-            }
-          }}
+          onClick={() =>
+            actionMode != "select"
+              ? actionMode == "delete"
+                ? setActionMode("select")
+                : setActionMode("delete")
+              : setActionMode("edit")
+          }
         >
           {" "}
           {actionMode != "select" ? (
@@ -147,7 +145,7 @@ export default function ActionBox({
                 onClick={() => addToRecipeList(item)}
                 onMouseEnter={() =>
                   setHoveredItem(
-                    recipes ? item.recipe.title : item.ingredient.name,
+                    recipes ? item?.recipe?.title : item?.ingredient?.name,
                   )
                 }
                 onMouseLeave={() => setHoveredItem(null)}

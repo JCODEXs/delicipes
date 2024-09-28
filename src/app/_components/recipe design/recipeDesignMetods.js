@@ -144,9 +144,9 @@ export default function DesignRecipeMetods() {
     });
   };
 
-  const addToRecipe = (item, recipes) => {
+  const addToRecipe = (item) => {
     // // console.log(item);
-    if (recipes && actionMode == "delete") {
+    if (actionMode == "delete") {
       alert("are you sure?");
       DeleteIngredient(item._id);
       const filter = ingredientsList.filter(
@@ -170,7 +170,7 @@ export default function DesignRecipeMetods() {
         setIngredientsList(filter);
       }
     }
-    if (recipes && actionMode == "edit") {
+    if (actionMode == "edit") {
       setEditableIngredient(item);
       setAddIngredientModal(true);
     }
