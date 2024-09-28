@@ -122,7 +122,7 @@ export function SimpleUploadButton({ setRecipe, image }) {
         htmlFor="upload-button"
         className="m-2 flex cursor-pointer flex-row gap-1 text-stone-300"
       >
-        {""} {image ? <p>Add image</p> : <p>change image</p>}
+        {""} {!image ? <p>Add image</p> : <p>change image</p>}
         <UploadSVG />
       </label>
       <input

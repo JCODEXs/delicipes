@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 
 export default function ActionBox({
@@ -5,6 +6,8 @@ export default function ActionBox({
   addToRecipe,
   actionMode,
   setActionMode,
+  recipes,
+  addRecipeIngredients,
 }) {
   const [hoveredItem, setHoveredItem] = useState(null);
   const getBackgroundColor = (actionMode) => {
@@ -19,49 +22,92 @@ export default function ActionBox({
         return "#2B4438"; // Default background color
     }
   };
+  const addToRecipeList = (item, recipes) => {
+    if (!recipes) {
+      addToRecipe(item, recipes);
+    } else {
+      // item.recipe.ingredients.map((ingredient) => addToRecipe(ingredient));
+      addRecipeIngredients(item);
+    }
+  };
+
+  // console.log(ingredientsList);
   return (
     <div>
-      <div
-        className="backGuide"
-        onClick={() =>
-          actionMode != "select"
-            ? actionMode == "delete"
-              ? setActionMode("select")
-              : setActionMode("delete")
-            : setActionMode("edit")
-        }
-      >
-        {" "}
-        {actionMode != "select" ? (
-          actionMode == "delete" ? (
-            <div
-              style={{
-                fontSize: "1.2rem",
-                display: "flex",
-                gap: "3rem",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-              }}
-            >
-              <button style={{ background: "#bd2709" }} className="modeButton">
-                Change mode{" "}
-              </button>
+      {!recipes ? (
+        <div
+          className="backGuide mb-2"
+          onClick={() => {
+            if (!recipes) {
+              actionMode != "select"
+                ? actionMode == "delete"
+                  ? setActionMode("select")
+                  : setActionMode("delete")
+                : setActionMode("edit");
+            }
+          }}
+        >
+          {" "}
+          {actionMode != "select" ? (
+            actionMode == "delete" ? (
               <div
                 style={{
-                  fontSize: "1.4rem",
-                  color: "red",
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  gap: "3rem",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
                 }}
               >
-                Delete Box{" "}
+                <button
+                  style={{ background: "#bd2709" }}
+                  className="modeButton"
+                >
+                  Change mode{" "}
+                </button>
+                <div
+                  style={{
+                    fontSize: "1.4rem",
+                    color: "red",
+                  }}
+                >
+                  Delete ingredient{" "}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  gap: "3rem",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                }}
+              >
+                <button
+                  style={{ background: "#bd2709" }}
+                  className="modeButton"
+                >
+                  Change mode{" "}
+                </button>
+                <div
+                  style={{
+                    fontSize: "1.4rem",
+                    color: "rgb(15,200,150,0.99)",
+                  }}
+                >
+                  Edit ingredient{" "}
+                </div>
+              </div>
+            )
           ) : (
             <div
               style={{
                 fontSize: "1.2rem",
-                display: "flex",
                 gap: "3rem",
+                display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "flex-end",
@@ -73,44 +119,23 @@ export default function ActionBox({
               <div
                 style={{
                   fontSize: "1.4rem",
-                  color: "rgb(15,200,150,0.99)",
+                  color: "white",
+                  fontWeight: 300,
                 }}
               >
-                Edit box{" "}
+                {" "}
+                Add single ingredient
               </div>
             </div>
-          )
-        ) : (
-          <div
-            style={{
-              fontSize: "1.2rem",
-              gap: "3rem",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-            }}
-          >
-            <button style={{ background: "#bd2709" }} className="modeButton">
-              Change mode{" "}
-            </button>
-            <div
-              style={{
-                fontSize: "1.4rem",
-                color: "white",
-                fontWeight: 300,
-              }}
-            >
-              {" "}
-              Add box
-            </div>
-          </div>
-        )}{" "}
-      </div>
+          )}
+        </div>
+      ) : (
+        <div>Add recipe ingredients</div>
+      )}
       <div
         className="items"
         style={{
-          background: getBackgroundColor(actionMode),
+          background: !recipes ? getBackgroundColor(actionMode) : "#2B4438",
         }}
       >
         {ingredientsList &&
@@ -119,14 +144,25 @@ export default function ActionBox({
               <div
                 className="item"
                 key={item?._id}
-                onClick={() => addToRecipe(item)}
+                onClick={() => addToRecipeList(item)}
                 onMouseEnter={() =>
-                  setHoveredItem(item.ingredient?.name || item.name)
+                  setHoveredItem(
+                    recipes ? item.recipe.title : item.ingredient.name,
+                  )
                 }
                 onMouseLeave={() => setHoveredItem(null)}
                 data-tooltip={hoveredItem}
               >
-                {item.ingredient?.image || item.image}
+                {!recipes
+                  ? item.ingredient?.image || item.image
+                  : item.recipe.imageUrl && (
+                      <Image
+                        src={item.recipe.imageUrl.url}
+                        height={60}
+                        width={60}
+                        alt="image"
+                      />
+                    )}
               </div>
             );
           })}

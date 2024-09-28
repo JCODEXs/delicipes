@@ -7,7 +7,7 @@ export default function DesignRecipeMetods() {
   let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
-  const [quantity, setQuantity] = useState([0]);
+  const [quantity, setQuantity] = useState([]);
   const [actionMode, setActionMode] = useState("select");
   const [editableIngredient, setEditableIngredient] = useState();
   const [addIngredientModal, setAddIngredientModal] = useState(false);
@@ -81,9 +81,72 @@ export default function DesignRecipeMetods() {
     // setPortions(_recipe.recipe.portions);
   };
 
-  const addToRecipe = (item) => {
+  const addRecipeIngredients = (_recipe) => {
+    // console.log(_recipe);
+    const updatedIngredients = updateRecipes(_recipe.recipe);
+
+    const newIngredients = _recipe.recipe.ingredients;
+    const newQuantities = newIngredients.map(
+      (_ingredient) => _ingredient.quantity,
+    );
+
+    // Actualizar la lista de ingredientes
+    setRecipeList((list) => {
+      return newIngredients.reduce(
+        (acc, newIngredient, idx) => {
+          const existingIndex = acc.findIndex(
+            (ingredient) =>
+              ingredient.ingredient.name === newIngredient.ingredient.name,
+          );
+
+          if (existingIndex !== -1) {
+            // Crear una copia del ingrediente y actualizar la cantidad
+            const updatedIngredient = {
+              ...acc[existingIndex],
+              quantity: acc[existingIndex].quantity + newQuantities[idx],
+            };
+
+            // Reemplazar el ingrediente existente con la copia actualizada
+            return acc.map((ingredient, i) =>
+              i === existingIndex ? updatedIngredient : ingredient,
+            );
+          } else {
+            // Si no existe, lo agregamos con su cantidad correspondiente
+            return [...acc, newIngredient];
+          }
+        },
+        [...list],
+      ); // Inicializamos con el estado anterior
+    });
+
+    // Actualizar las cantidades
+    setQuantity((units) => {
+      return newIngredients.reduce(
+        (acc, newIngredient, idx) => {
+          const existingIndex = recipeList.findIndex(
+            (ingredient) =>
+              ingredient.ingredient.name === newIngredient.ingredient.name,
+          );
+
+          if (existingIndex !== -1) {
+            // Crear una copia del array de cantidades y actualizar la cantidad
+            const updatedQuantity = acc[existingIndex] + newQuantities[idx];
+            return acc.map((quantity, i) =>
+              i === existingIndex ? updatedQuantity : quantity,
+            );
+          } else {
+            // Si es un ingrediente nuevo, agregamos la cantidad al final
+            return [...acc, newQuantities[idx]];
+          }
+        },
+        [...units],
+      ); // Inicializamos con las cantidades anteriores
+    });
+  };
+
+  const addToRecipe = (item, recipes) => {
     // // console.log(item);
-    if (actionMode == "delete") {
+    if (recipes && actionMode == "delete") {
       alert("are you sure?");
       DeleteIngredient(item._id);
       const filter = ingredientsList.filter(
@@ -107,7 +170,7 @@ export default function DesignRecipeMetods() {
         setIngredientsList(filter);
       }
     }
-    if (actionMode == "edit") {
+    if (recipes && actionMode == "edit") {
       setEditableIngredient(item);
       setAddIngredientModal(true);
     }
@@ -215,6 +278,7 @@ export default function DesignRecipeMetods() {
       editableIngredient={editableIngredient}
       setAddIngredientModal={setAddIngredientModal}
       addIngredientModal={addIngredientModal}
+      addRecipeIngredients={addRecipeIngredients}
     />
   );
 }

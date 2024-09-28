@@ -49,6 +49,7 @@ export default function DesignRecipe({
   editableIngredient,
   setAddIngredientModal,
   addIngredientModal,
+  addRecipeIngredients,
 }) {
   const store = usePantry();
   const [isDisabled, setIsDisabled] = useState(false);
@@ -243,17 +244,30 @@ export default function DesignRecipe({
               )}
             </div>
 
-            <div className=" actionBox flex flex-row flex-wrap">
+            <div className=" actionBox mb-4 flex flex-row flex-wrap">
               {" "}
               <ActionBox
                 ingredientsList={ingredientsList}
                 addToRecipe={addToRecipe}
                 actionMode={actionMode}
                 setActionMode={setActionMode}
+                recipes={false}
+                addRecipeIngredients={addRecipeIngredients}
+              />
+            </div>
+            <div className=" actionBox mb-4 flex flex-row flex-wrap">
+              {" "}
+              <ActionBox
+                ingredientsList={storeRecipes}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+                recipes={true}
+                addRecipeIngredients={addRecipeIngredients}
               />
             </div>
 
-            <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
+            <div style={{ margin: "0.5rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
                 style={{
@@ -283,6 +297,7 @@ export default function DesignRecipe({
                   flexDirection: "row",
                   alignItems: "center",
                   fontWeight: 900,
+                  marginLeft: "0.5rem",
                 }}
               >
                 {" "}
@@ -318,6 +333,7 @@ export default function DesignRecipe({
                   alignItems: "center",
                   gap: "1rem",
                   fontWeight: 900,
+                  marginLeft: "0.5rem",
                 }}
               >
                 <div>For : </div>
@@ -439,10 +455,12 @@ export default function DesignRecipe({
             {Recipe.recipe.imageUrl ? (
               <div className="relative right-0 top-0 m-6 h-16 w-16 rounded-t-lg bg-transparent object-cover p-2">
                 {" "}
-                <img
+                <Image
+                  className="rounded-md"
                   src={Recipe.recipe.imageUrl?.url}
                   height={200}
                   width={130}
+                  alt="image"
                 />
                 <SimpleUploadButton
                   setRecipe={setRecipe}

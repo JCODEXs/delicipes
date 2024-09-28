@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { personSvg, eyeSvg, trashSvg } from "~/app/icons/icons";
 
@@ -52,9 +53,12 @@ const RecipeCardComponent = ({
         <div className=" flex max-h-28 flex-row-reverse justify-around align-middle">
           {recipe.imageUrl ? (
             <div className="h-26 overflow-hidden ">
-              <img
-                // className=" w-75px relative top-2 m-1 rounded-md border-4 border-solid border-black "
+              <Image
+                alt={recipe.imageUrl.url}
+                className=" rounded-md  "
                 src={recipe.imageUrl?.url}
+                width={75}
+                height={100}
                 style={{
                   width: "75px",
                   height: "auto",
