@@ -255,17 +255,6 @@ export default function DesignRecipe({
                 addRecipeIngredients={addRecipeIngredients}
               />
             </div>
-            <div className=" actionBox mb-4 flex flex-row flex-wrap">
-              {" "}
-              <ActionBox
-                ingredientsList={storeRecipes}
-                addToRecipe={addToRecipe}
-                actionMode={actionMode}
-                setActionMode={setActionMode}
-                recipes={true}
-                addRecipeIngredients={addRecipeIngredients}
-              />
-            </div>
 
             <div style={{ margin: "0.5rem", fontSize: "1.4rem" }}>
               <input
@@ -279,6 +268,17 @@ export default function DesignRecipe({
                 onChange={setSearch}
               />
               🔎
+            </div>
+            <div className=" actionBox mb-4 flex flex-row flex-wrap">
+              {" "}
+              <ActionBox
+                ingredientsList={storeRecipes}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+                recipes={true}
+                addRecipeIngredients={addRecipeIngredients}
+              />
             </div>
             {/* <button className="button" type="button" onClick={() => makeBkup()}>
               bkup

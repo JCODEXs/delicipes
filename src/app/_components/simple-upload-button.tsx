@@ -98,7 +98,7 @@ export function SimpleUploadButton({ setRecipe, image }) {
           <span className="text-lg  text-black">Uploading...</span>
         </div>,
         {
-          duration: 100000,
+          duration: 2000,
           id: "upload-begin",
         },
       );

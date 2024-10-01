@@ -369,8 +369,16 @@ export const getIngredients = async () => {
   }
 };
 export const addRecipe = async (recipe) => {
-  console.log(recipe);
-
+  toast(
+    <div className="flex items-center gap-2 text-white">
+      <LoadingSpinnerSVG />
+      <span className="text-lg  text-black">Saving...</span>
+    </div>,
+    {
+      duration: 800,
+      id: "upload-begin",
+    },
+  );
   const result = await axios.post("/api/recipes", {
     recipe,
   });
@@ -382,6 +390,16 @@ export const addRecipe = async (recipe) => {
 };
 export const modifyRecipe = async (recipe) => {
   // console.log(recipe);
+  toast(
+    <div className="flex items-center gap-2 text-white">
+      <LoadingSpinnerSVG />
+      <span className="text-lg  text-black">Saving...</span>
+    </div>,
+    {
+      duration: 700,
+      id: "upload-begin",
+    },
+  );
   const result = await axios.put("/api/recipes", {
     recipe,
   });
@@ -489,7 +507,7 @@ export const addProgram = async (_program) => {
       <span className="text-lg  text-black">Saving...</span>
     </div>,
     {
-      duration: 10000,
+      duration: 1000,
       id: "upload-begin",
     },
   );

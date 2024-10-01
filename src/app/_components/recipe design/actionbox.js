@@ -59,7 +59,7 @@ export default function ActionBox({
                 }}
               >
                 <button
-                  style={{ background: "#bd2709" }}
+                  style={{ background: "#D92B04" }}
                   className="modeButton"
                 >
                   Change mode{" "}
@@ -128,7 +128,7 @@ export default function ActionBox({
           )}
         </div>
       ) : (
-        <div>Add recipe ingredients</div>
+        <div>Add all recipe ingredients</div>
       )}
       <div
         className="items"
