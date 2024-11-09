@@ -727,7 +727,7 @@ const MealMatrix = ({ myPrograms }) => {
                     <div
                       style={{ color: "rgb(90,75,150)", padding: "0.25rem" }}
                     >
-                      ${(dayTotals?.[day] * 2.8).toFixed(0)}
+                      ${(dayTotals?.[day] * 1.6).toFixed(0)}
                     </div>
                   </div>
                 )}
