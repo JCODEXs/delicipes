@@ -3,18 +3,18 @@ import { ObjectId } from "mongodb";
 import { connectToDatabase } from "~/lib/mongoDb";
 import { UTApi } from "uploadthing/server";
 export async function DELETE(req, context) {
-  const apiKey = process.env.UPLOADTHING_API_KEY;
+  const apiKey = process.env.UPLOADTHING_SECRET;
 
   if (!apiKey) {
     throw new Error(
       "UPLOADTHING_API_KEY is not defined in the environment variables",
     );
   }
-  console.log(apiKey);
+
   const utapi = new UTApi({ apiKey: apiKey });
   // Extract the ID from the URL params
   const { params } = context;
-  console.log(params);
+  // console.log(params);
   // Ensure the ID is valid
   if (!params._id || !ObjectId.isValid(params._id)) {
     return NextResponse.json(
@@ -24,13 +24,12 @@ export async function DELETE(req, context) {
   }
 
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
-      .collection("therecipes")
+      .collection("recipes")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {

@@ -4,8 +4,7 @@ export async function POST(req, res) {
   const body = await req.json();
   // console.log('req:', body);
 
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   // console.log('rdb:', db)
   // case 'GET':
@@ -15,18 +14,42 @@ export async function POST(req, res) {
   //     .status(200)
   //     .json({ id: req.query.id, files: await getFiles(req.query.id) });
   //   break;
-
-  const result = await db.collection("module").insertOne(body);
-  console.log(result);
+  let result;
+  try {
+    await client.connect();
+    result = await client
+      .db("Delicipes")
+      .collection("ingredients")
+      .insertOne(body);
+    // console.log(result);
+  } catch (error) {
+    console.error("Error posting the document:", error);
+    return NextResponse.json(
+      { message: "An error occurred while posting the document." },
+      { status: 500 },
+    );
+  }
+  // console.log("hi");
   return NextResponse.json({ result });
-  // res.status(404).json({});
 }
 export async function GET(req, res) {
-  const cached = await connectToDatabase();
-  const db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
+  try {
+    await client.connect();
+    const result = await db.collection("ingredients").find().toArray();
+    // console.log(result);
+    return NextResponse.json({ result });
+  } catch (error) {
+    console.error("Error getting the document:", error);
+    return NextResponse.json(
+      { message: "An error occurred while getting the document." },
+      { status: 500 },
+    );
+  } finally {
+    // client.close();
+    // client = null; // Reset cached client after closing
+    // db = null;
+  }
 
-  const result = await db.collection("module").find().toArray();
-  // console.log(result);
-  return NextResponse.json({ result });
   // res.status(404).json({});
 }

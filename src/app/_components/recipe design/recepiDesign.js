@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+  Suspense,
+  lazy,
+} from "react";
 // import styles from "./recepiDesign.css";
 import Form from "./ingredientsDatabase";
 import {
@@ -12,9 +19,10 @@ import { Modal } from "../modal/modal";
 import RecipeCardComponent from "./recipeCardComponent";
 import { usePantry } from "~/store/pantry";
 import { personSvg } from "~/app/icons/icons";
-import ActionBox from "./actionbox";
+const ActionBox = lazy(() => import("./actionbox"));
 import { SimpleUploadButton } from "../simple-upload-button";
 import Image from "next/image";
+import ActionBoxSkeleton from "./actionBoxSqueleton";
 export default function DesignRecipe({
   ingredients,
   ingredientsList,
@@ -45,7 +53,7 @@ export default function DesignRecipe({
   const store = usePantry();
   const [isDisabled, setIsDisabled] = useState(false);
   // const [shouldCheckLocalStorage, setShouldCheckLocalStorage] = useState(true);
-  console.log(Recipe.recipe.portions);
+  // console.log(Recipe.recipe.portions);
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
   let recipes = store.recipes;
@@ -53,6 +61,9 @@ export default function DesignRecipe({
   const storeIngredients = usePantry((store) => store.ingredients);
   const storeRecipes = usePantry((store) => store.recipes);
 
+  useEffect(() => {
+    setIngredientsList(storeIngredients);
+  }, [storeIngredients]);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -231,7 +242,8 @@ export default function DesignRecipe({
                 </Modal>
               )}
             </div>
-            <div className=" flex flex-row flex-wrap">
+
+            <div className=" actionBox flex flex-row flex-wrap">
               {" "}
               <ActionBox
                 ingredientsList={ingredientsList}
@@ -240,6 +252,7 @@ export default function DesignRecipe({
                 setActionMode={setActionMode}
               />
             </div>
+
             <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
               <input
                 type="text"
@@ -259,7 +272,7 @@ export default function DesignRecipe({
           </div>
         </div>
 
-        <div ref={myDivRef} id="recipe" className="recipe">
+        <div ref={myDivRef} id="recipe" className="recipe actionBox">
           <div>
             {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
 
@@ -350,11 +363,12 @@ export default function DesignRecipe({
                 Add ingredients from the box abobe ☝🏽
               </div>
             )}
-            <div className="incrementalnputs">
+            <div className="incrementalnputs mb-4">
               {recipeList?.map((item, index) => {
                 // //  console.log(item);
                 return (
                   <div
+                    className="actionBox2"
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -423,21 +437,27 @@ export default function DesignRecipe({
               })}
             </div>
             {Recipe.recipe.imageUrl ? (
-              <div className="relative right-0 top-0 h-16 w-16 rounded-t-lg bg-transparent object-cover">
+              <div className="relative right-0 top-0 m-6 h-16 w-16 rounded-t-lg bg-transparent object-cover p-2">
                 {" "}
                 <img
                   src={Recipe.recipe.imageUrl?.url}
-                  height={100}
-                  width={60}
+                  height={200}
+                  width={130}
                 />
-                <SimpleUploadButton setRecipe={setRecipe} />
+                <SimpleUploadButton
+                  setRecipe={setRecipe}
+                  image={!!Recipe.recipe.imageUrl}
+                />
               </div>
             ) : (
-              <SimpleUploadButton setRecipe={setRecipe} />
+              <SimpleUploadButton
+                setRecipe={setRecipe}
+                image={!!Recipe.recipe.imageUrl}
+              />
             )}
           </div>
         </div>
-        <div id="description" className="description">
+        <div id="description" className="description actionBox">
           <div>
             <textarea
               type="text"

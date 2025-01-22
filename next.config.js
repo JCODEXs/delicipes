@@ -6,6 +6,7 @@
 
 /** @type {import("next").NextConfig} */
 const coreConfig = {
+  output: "standalone",
   images: {
     remotePatterns: [{ hostname: "utfs.io" }],
   },
@@ -28,6 +29,8 @@ const coreConfig = {
     ];
   },
 };
+// Combine the SVGR plugin with the core Next.js configuration
+// const svgwhitPlugins = withPlugins([withSvgr], coreConfig);
 
 // import { withSentryConfig } from "@sentry/nextjs";
 // const config = withSentryConfig(

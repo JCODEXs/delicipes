@@ -15,13 +15,13 @@ export async function DELETE(req, context) {
   }
   // console.log(params);
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
-      .collection("module")
+      .collection("ingredients")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {
@@ -40,5 +40,10 @@ export async function DELETE(req, context) {
       { message: "An error occurred while deleting the document." },
       { status: 500 },
     );
+  } finally {
+    // Optional: Close the client connection if needed (like in non-serverless environments)
+    // await client.close();
+    // client = null; // Reset cached client after closing
+    // db = null;
   }
 }

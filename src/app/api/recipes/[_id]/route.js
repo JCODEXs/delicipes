@@ -5,7 +5,7 @@ import { connectToDatabase } from "~/lib/mongoDb";
 export async function DELETE(req, context) {
   // Extract the ID from the URL params
   const { params } = context;
-  console.log(params);
+  // console.log(params);
   // Ensure the ID is valid
   if (!params._id || !ObjectId.isValid(params._id)) {
     return NextResponse.json(
@@ -13,15 +13,14 @@ export async function DELETE(req, context) {
       { status: 400 },
     );
   }
-  console.log(params);
+
   // Connect to the database
-  let cached, db;
-  cached = await connectToDatabase();
-  db = cached.conn.db;
+  let { db, client } = await connectToDatabase();
 
   try {
+    await client.connect();
     const result = await db
-      .collection("therecipes")
+      .collection("recipes")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {

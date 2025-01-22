@@ -16,6 +16,9 @@ export default function RecipeCard({
   const recipe = recipe_;
   // console.log(recipe);
   const [portions, setPortions] = useState(orders);
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+  };
   if (showPortions) {
     useEffect(() => {
       passPortions(portions, _id + day);
@@ -58,6 +61,7 @@ export default function RecipeCard({
             alt="Recipe"
             height={120}
             width={120}
+            onContextMenu={handleContextMenu}
           />
         )}
         {/* <div
