@@ -43,6 +43,7 @@
     "react-loading-skeleton": "^3.4.0",
     "react-virtuoso": "^4.7.11",
     "server-only": "^0.0.1",
+    "sharp": "^0.34.2",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

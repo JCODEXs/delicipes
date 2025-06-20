@@ -10,16 +10,25 @@ export default function Footer() {
       <div className="flex flex-row items-center gap-4 bg-slate-900">
         <SignedIn>
           <div className="flex w-full items-center justify-between border-b p-2 text-xl font-semibold">
-            <div className="ml-2 flex w-full flex-row justify-around">
-              <Link href={"/inventory"}>
+            <div className="ml-2 flex w-full flex-row justify-around text-white">
+              <Link href={"/inventory"}
+               className="text-white hover:text-yellow-200 text-lg font-medium">
                 <div>Pantry</div>
               </Link>
-              <Link href={"/plan"}>
+              <Link href={"/plan"}
+               className="text-white hover:text-yellow-200 text-lg font-medium">
                 <div>Week plan</div>
               </Link>
-              <Link href={"/design"}>
-                <div>Recipes</div>
+              <Link href={"/design"}
+               className="text-white hover:text-yellow-200 text-lg font-medium">
+                <div> New Recipe</div>
               </Link>
+               <Link
+                        href="/library"
+                        className="text-white hover:text-yellow-200 text-lg font-medium"
+                      >
+                        Library
+                      </Link>
             </div>
             {/* <SimpleAddButton /> */}
           </div>

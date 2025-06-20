@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import { CSPostHogProvider } from "./_analytics/provider";
 import { ourFileRouter } from "./api/uploadthing/core";
 import Footer from "./_components/footer";
+import Head from "next/head";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,8 +31,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      {/* <CSPostHogProvider> */}
       <html lang="en">
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -57,7 +63,6 @@ export default function RootLayout({
           <Toaster />
         </body>
       </html>
-      {/* </CSPostHogProvider> */}
     </ClerkProvider>
   );
 }

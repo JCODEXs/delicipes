@@ -38,9 +38,9 @@ const pantry = (set) => ({
   addListOfIngredients: (ingredientsList) =>
     set(
       produce((store) => {
-        console.log(ingredientsList);
+        // console.log(ingredientsList);
         store.pantryList = ingredientsList;
-        console.log(store.pantryList);
+        // console.log(store.pantryList);
       }),
 
       false,
@@ -371,9 +371,7 @@ export const getIngredients = async () => {
 export const addRecipe = async (recipe) => {
   console.log(recipe);
 
-  const result = await axios.post("/api/recipes", {
-    recipe,
-  });
+  const result = await axios.post("/api/recipes", { recipe });
   // console.log(result.data);
   const RecipeNew = await { ...recipe, _id: result.data.result.insertedId };
   usePantry.getState().addStoreRecipe(RecipeNew);
@@ -382,16 +380,14 @@ export const addRecipe = async (recipe) => {
 };
 export const modifyRecipe = async (recipe) => {
   // console.log(recipe);
-  const result = await axios.put("/api/recipes", {
-    recipe,
-  });
+  const result = await axios.put("/api/recipes", { recipe });
   console.log(recipe, result.data);
   usePantry.getState().addStoreRecipe(recipe);
 
   return result.data;
 };
 export const DeleteRecipe = async (_recipe) => {
-  if (_recipe.recipe.imageUrl) {
+  if (_recipe?.recipe?.imageUrl) {
     const result = await axios.delete(
       `/api/recipes/${_recipe._id}/${_recipe.recipe.imageUrl.key}`,
     );
@@ -447,9 +443,7 @@ export const DeleteIngredientsBatch = async (_ids) => {
 
 export const addIngredient = async (ingredient) => {
   console.log("h2i");
-  const result = await axios.post("/api/ingredients", {
-    ingredient,
-  });
+  const result = await axios.post("/api/ingredients", { ingredient });
   console.log("addIngredient", result);
   const ingredientNew = await {
     ingredient,
@@ -488,18 +482,10 @@ export const addProgram = async (_program) => {
       <LoadingSpinnerSVG />
       <span className="text-lg  text-black">Saving...</span>
     </div>,
-    {
-      duration: 10000,
-      id: "upload-begin",
-    },
+    { duration: 10000, id: "upload-begin" },
   );
-  const result = await axios.post("/api/program", {
-    _program,
-  });
-  const programNew = {
-    _program,
-    _id: result.data.result.insertedId,
-  };
+  const result = await axios.post("/api/program", { _program });
+  const programNew = { _program, _id: result.data.result.insertedId };
   await usePantry.getState().addStorePrograming(programNew);
   // console.log("addIngredient", result.data);
   const { response, data } = result.data;
@@ -515,7 +501,7 @@ export const getMyPrograms = async (userId) => {
     const index = data?.result ? data?.result.length - 1 : 0;
     const RecipesList =
       await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
-    console.log("getPrograms", RecipesList);
+    // console.log("getPrograms", RecipesList);
     await usePantry.getState().addListOfIngredients(RecipesList);
     if (result.data.result.length > 0) {
       return result.data.result;

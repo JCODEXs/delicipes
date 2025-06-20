@@ -67,11 +67,15 @@
 //   return cached;
 // };
 import { MongoClient, ServerApiVersion } from "mongodb";
-// console.log(process.env.DB_USERNAME);
+console.log(
+  "username and password",
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+);
 
 // const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER_URL}/?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://Nine:${process.env.DB_PASSWORD}@clu.a6xvoov.mongodb.net/?retryWrites=true&w=majority&appName=Clu`;
-// console.log(uri);
+console.log(uri);
 const MONGODB_DB = "module"; // Replace with your DB name
 
 // Caching the connection to reuse it across multiple requests (like in serverless environments)
@@ -134,8 +138,4 @@ async function getAllDocuments(client, collection, sort) {
 
   return documents;
 }
-module.exports = {
-  connectToDatabase,
-  insertDocument,
-  getAllDocuments,
-};
+module.exports = { connectToDatabase, insertDocument, getAllDocuments };

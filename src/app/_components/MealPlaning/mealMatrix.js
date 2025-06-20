@@ -20,27 +20,30 @@ const MealMatrix = ({ myPrograms }) => {
   const [ingredientsTotList, setIngredientsTotList] = useState("");
   const programing = usePantry((store) => store.programing);
   const [openedModal, setOpenedModal] = useState(false);
+  const [showRecipePicker, setShowRecipePicker] = useState(false);
+  const [recipePickerDay, setRecipePickerDay] = useState(null);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   // // // console.log(ingredientsTotList);
-  // console.log(portions);
+  console.log("Recipes info", recipes);
+  console.log("storeRecipes:", storeRecipes);
 
+  // First useEffect: fetch from API if store is empty
   useEffect(() => {
     const fetchData = async () => {
-      if (storeRecipes.length < 1) {
-        recipes = await getRecipes();
-      }
-      try {
-        recipes?.forEach((recipe) => {
-          addStoreRecipe(recipe);
-          // // console.log(recipe);
-        });
-      } catch (error) {
-        console.error(error);
+      if (!storeRecipes || storeRecipes.length < 1) {
+        const fetchedRecipes = await getRecipes();
+        if (fetchedRecipes && fetchedRecipes.length > 0) {
+          fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
+        }
       }
     };
-
     fetchData();
-  }, [recipes]);
+  }, []);
+
+  // Second useEffect: always sync local recipes with store
+  useEffect(() => {
+    setRecipes(storeRecipes);
+  }, [storeRecipes]);
 
   const OnClickExpand = () => {
     setShowList(!showList);
@@ -48,14 +51,12 @@ const MealMatrix = ({ myPrograms }) => {
 
   const deleteFromSelected = (day, recipeID) => {
     setSelectedRecipes((prevSelectedRecipes) => {
-      // // console.log(prevSelectedRecipes[day]);
-
       return {
         ...prevSelectedRecipes,
         [day]: [
-          ...prevSelectedRecipes?.[day]?.filter(
+          ...(prevSelectedRecipes?.[day]?.filter(
             (prevRecipes) => prevRecipes?._id !== recipeID,
-          ),
+          ) || []),
         ],
       };
     });
@@ -121,11 +122,6 @@ const MealMatrix = ({ myPrograms }) => {
   };
 
   useEffect(() => {
-    setRecipes(storeRecipes);
-    // // console.log(programing);
-    // setSelectedRecipes(]);
-  }, [storeRecipes]);
-  useEffect(() => {
     calculateTotals();
   }, [selectedRecipes, portions]);
 
@@ -153,42 +149,40 @@ const MealMatrix = ({ myPrograms }) => {
             selectedRecipes[key].forEach((recipe_) => {
               const recipe = recipe_.recipe;
               const portionsUnit =
-                portions?.[recipe_._id] ?? Number(recipe.portions);
+                portions?.[`${recipe_._id}${key}`] ?? Number(recipe.portions) ?? 1;
               const realPortions = recipe.realPortions ?? 1;
               // // console.log(realPortions, portionsUnit, portions?.[recipe.key]);
-              recipe.ingredients.map((ingredient) => {
-                const ingredientProps = ingredient.ingredient;
-                const cantidad = ingredient.quantity / recipe.portions;
-                const { name: nombre, grPrice: precio } = ingredientProps;
-                // // console.log(ingredientsTotalsDay[key]); //(realPortions, cantidad, portions, ingredientProps);
-                if (ingredientsTotals[nombre]) {
-                  ingredientsTotals[nombre].cantidad +=
-                    cantidad * portions?.[recipe_._id + key] ?? 1;
-                  // // console.log(ingredientsTotalsDay[key]);
-                  if (!ingredientsTotalsDay[key][nombre]) {
-                    // // console.log(ingredientsTotalsDay);
-                    ingredientsTotalsDay[key][nombre] = {};
-                    ingredientsTotalsDay[key][nombre].cantidad = 0;
+              // Only map if ingredients exist
+              if (Array.isArray(recipe.ingredients)) {
+                recipe.ingredients.map((ingredient) => {
+                  const ingredientProps = ingredient.ingredient;
+                  const cantidad = ingredient.quantity / recipe.portions;
+                  const { name: nombre, grPrice: precio } = ingredientProps;
+                  // // console.log(ingredientsTotalsDay[key]); //(realPortions, cantidad, portions, ingredientProps);
+                  if (ingredientsTotals[nombre]) {
+                    ingredientsTotals[nombre].cantidad +=
+                      cantidad * portionsUnit;
+                    if (!ingredientsTotalsDay[key][nombre]) {
+                      ingredientsTotalsDay[key][nombre] = { cantidad: 0, precio: 0 };
+                    }
+                    ingredientsTotalsDay[key][nombre].cantidad +=
+                      cantidad * portionsUnit;
+                    ingredientsTotals[nombre].precio += precio * cantidad * portionsUnit;
+                    ingredientsTotalsDay[key][nombre].precio += precio * cantidad * portionsUnit;
+                  } else {
+                    ingredientsTotals[nombre] = {
+                      cantidad: cantidad * portionsUnit,
+                      precio: precio * cantidad * portionsUnit,
+                    };
+                    ingredientsTotalsDay[key][nombre] = {
+                      cantidad: cantidad * portionsUnit,
+                      precio: precio * cantidad * portionsUnit,
+                    };
                   }
-                  ingredientsTotalsDay[key][nombre].cantidad +=
-                    cantidad * portions?.[recipe_._id + key] ?? 1;
-                  ingredientsTotals[nombre].precio += precio * cantidad;
-                  ingredientsTotalsDay[key][nombre].precio += precio * cantidad;
-                } else {
-                  ingredientsTotals[nombre] = {
-                    cantidad: cantidad * portions?.[recipe_._id + key] ?? 1,
-                    precio:
-                      precio * cantidad * portions?.[recipe_._id + key] ?? 1,
-                  };
-                  ingredientsTotalsDay[key][nombre] = {
-                    cantidad: cantidad * portions?.[recipe_._id + key] ?? 1,
-                    precio:
-                      precio * cantidad * portions?.[recipe_._id + key] ?? 1,
-                  };
-                }
-                totalPrice[key] +=
-                  precio * cantidad * portions?.[recipe_._id + key] ?? 1;
-              });
+                  totalPrice[key] +=
+                    precio * cantidad * portionsUnit;
+                });
+              }
             });
             // console.log(totalPrice[key], key, ingredientsTotalsDay);
             setDayTotals((prevDaysTotal) => ({
@@ -255,10 +249,11 @@ const MealMatrix = ({ myPrograms }) => {
       },
       0,
     );
-    setDayTotals((prevDaysTotal) => ({
-      ...prevDaysTotal,
-      ["total"]: weekPrice,
-    }));
+    setDayTotals({
+      ...dayTotals,
+      ...Object.fromEntries(Object.entries(totalPrice).map(([k, v]) => [k, v])),
+      total: weekPrice,
+    });
     // // // // console.log(weekPrice);
     // // // // console.log(ingredientsTotals, dayTotals);
     // const weekPrice = in?.reduce((acc, ingredient) => {
@@ -364,387 +359,434 @@ const MealMatrix = ({ myPrograms }) => {
       );
     }
   };
+  console.log(recipes);
+
+  const getRecipePrice = (recipe) => {
+    if (!recipe.ingredients || !Array.isArray(recipe.ingredients)) return 0;
+    return recipe.ingredients.reduce((sum, ingredient) => {
+      const grPrice = ingredient.ingredient?.grPrice || 0;
+      const quantity = ingredient.quantity || 0;
+      return sum + grPrice * quantity;
+    }, 0);
+  };
+
+  useEffect(() => {
+    if (showRecipePicker) setPickerSelected([]);
+  }, [showRecipePicker]);
+
+  const [pickerSelected, setPickerSelected] = useState([]);
 
   return (
-    <div
-      className="mealMatrix"
-      // style={{
-      //   overflow: "auto",
-
-      //   background: "rgb(0,10,10,0.8)",
-      //   boxShadow: "-2px -2px -4px rgb(210,210,210,0.8)",
-      //   // background: "rgb(220,180,0,0.8)",
-      //   // minHeight: 200,
-      // }}
-    >
-      <div>
-        {openedModal && (
-          <Modal isOpen={openedModal} onClose={() => setOpenedModal(false)}>
-            <ShopingList RecipeList={ingredientsTotList[0]} />
-          </Modal>
-        )}
-      </div>
+    <div className="mealMatrix">
+      {/* Floating Action Buttons */}
       <div
         style={{
           position: "fixed",
-          bottom: 4,
-          right: 1,
+          bottom: 24,
+          right: 24,
           zIndex: 1000,
+          background: "rgba(20, 20, 30, 0.95)",
+          borderRadius: "16px",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
+          padding: "1rem 1.5rem",
+          display: "flex",
+          flexDirection: "row",
+          gap: "1.5rem",
+          alignItems: "center",
+        }}
+      >
+        <button
+          className="buttonP"
+          onClick={() => {
+            addProgram({ selectedRecipes, portions, ingredientsTotList });
+          }}
+        >
+          Save Program
+        </button>
+        <button
+          className="buttonP"
+          onClick={() => {
+            deletePrograming();
+          }}
+        >
+          Delete
+        </button>
+        {/* <button
+          className="buttonP"
+          onClick={() => setOpenedModal(!openedModal)}
+        >
+          Shopping List
+        </button> */}
+      </div>
+
+      {/* Shopping List Modal */}
+      {openedModal && (
+        <Modal isOpen={openedModal} onClose={() => setOpenedModal(false)}>
+          <ShopingList RecipeList={ingredientsTotList[0]} />
+        </Modal>
+      )}
+
+      {/* Week Navigation & Sticky Week Total */}
+      <div
+        style={{
+          position: "fixed",
+          top: "94px", // <-- Adjust this to your menu height
+          background: "rgba(10, 10, 20, 0.98)",
+          zIndex: 110,
+          padding: "0.5rem 0",
+          marginBottom: "0.5rem",
+          borderBottom: "2px solid #c9b87a",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "56px",
+          width: "100vw",
+          left: 0,
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            zIndex: 10,
-            gap: "1.25rem",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            background: "#23262e",
+            borderRadius: "10px",
+            padding: "0.5rem 1.5rem",
+            boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
+            border: "2px solid #c9b87a",
           }}
         >
-          <button
-            className="buttonP"
-            onClick={() => {
-              addProgram({ selectedRecipes, portions, ingredientsTotList });
+          <span
+            style={{
+              color: "#c9b87a",
+              fontWeight: "bold",
+              fontSize: "1.25rem",
+              letterSpacing: "0.04em",
+              textShadow: "0 1px 2px #181818",
             }}
           >
-            Save Program
-          </button>
-          <button
-            className="buttonP"
-            onClick={() => {
-              deletePrograming();
+            Week Total:
+          </span>
+          <span
+            style={{
+              color: "#fffbe6",
+              fontWeight: "bold",
+              fontSize: "1.45rem",
+              background: "linear-gradient(90deg, #c9b87a 60%, #e6e2c0 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "0.04em",
             }}
           >
-            {" "}
-            delete
-          </button>
+            ${dayTotals?.["total"]?.toFixed(0) ?? 0}
+          </span>
         </div>
       </div>
-      <div style={{ position: "sticky", top: 5, height: 285, blur: "5px" }}>
-        {/* <div style={{ fontSize: "1.2rem", padding: "0.25rem" }}>
-          Available Recipes
-        </div> */}
-        {/* {ingredientList} */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ marginInline: "0.25rem", fontSize: "0.9rem" }}>
-            Drag recipes over days
-          </div>
-          {/* <div className="relative ">
-            <button
-              onClick={() => setOpenedModal(!openedModal)}
-              className="buttonP right-100 absolute top-0"
-            >
-              Shoping list
-            </button>
-          </div> */}
-        </div>
-        <div
-          style={{
-            // position: "sticky",
-            // top: 5,
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            overflowX: "auto",
-            scrollbarWidth: "thin",
-            alignContent: "flex-start",
-            justifyContent: "spaceAround",
-            alignItems: "stretch",
-            backgroundColor: "rgba(1, 1, 2, 0.8)",
-            padding: "0.3rem",
-            height: "220px",
-            fontSize: "0.9rem",
-          }}
-        >
-          {recipes?.map((recipe) => (
-            <div
-              draggable="true"
-              key={recipe._id}
-              onDragStart={(event) => handleDragStart(event, recipe)}
-            >
-              <div
-                style={{
-                  opacity: 1,
-                  cursor: "move",
-                  border: "2px solid",
-                  padding: "3px",
-                  margin: "3px",
-                  background: "rgb(1,2,3,0.9)",
-                  borderRadius: "8px",
-                  borderColor: "rgb(15,50,55,0.9)",
-                  minWidth: "150px",
-                  maxWidth: "400px",
-                  // height: "170px",
-                  zIndex: 2,
-                }}
-              >
-                <RecipeCard
-                  key={recipe?.recipe?.key}
-                  recipe_={recipe?.recipe}
-                  showPortions={false}
-                  passPortions={() => {}}
-                />
-              </div>
-            </div>
-          ))}
-
-          {/* <div
-            style={{
-              //border: "3px solid blue",
-              margin: "4px",
-              minWidth: "400",
-              padding: "4px",
-              borderRadius: "5px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "space-arround",
-              flexWrap: "wrap",
-            }}
-          >
-            {ingredientList}
-          </div> */}
-          {/* <pre>{JSON.stringify(selectedRecipes, null, 2)}</pre> */}
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            fontSize: "1.4rem",
-            padding: "0.5rem",
-            // background: "rgb(1,1,10,0.31)",
-            justifyContent: "space-around",
-            zIndex: 3,
-          }}
-        >
-          {/* <div>🗓 Week Program</div>{" "} */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              marginBottom: "1rem",
-            }}
-          >
-            {weekDays.map((day) => (
-              <button
-                key={day}
-                onClick={() => {
-                  document
-                    .getElementById(`card-${day}`)
-                    .scrollIntoView({ behavior: "smooth" });
-                }}
-                style={{
-                  padding: "10px",
-                  margin: "0.15rem",
-                  fontSize: "1.1rem",
-                  borderRadius: "5px",
-                  background: "rgb(1,2,3,0.9)",
-                  color: "rgb(221,205,139,0.9)",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                {day[0]} {/* First letter of the day */}
-              </button>
-            ))}
-          </div>
-          <div
-            style={{
-              boxShadow: "-2px -2px 2px 1px rgb(60,60,60,0.8)",
-              fontSize: "1.1rem",
-              margin: "0.25rem",
-              padding: "0.15rem",
-              marginLeft: "0.25rem",
-              backgroundImage:
-                "linear-gradient(85deg, rgba(0, 10, 10, 0.8), rgba(220, 180, 0, 0.529) 20%, rgba(183, 85, 15, 0.8) 60%, rgba(20, 42, 42, 0.8))",
-            }}
-          >
-            {" "}
-            Total: {dayTotals?.["total"]?.toFixed(0)}
-          </div>
-        </div>
-      </div>
-
+      <div style={{ height: "62px" }}></div>
+      {/* Days Columns */}
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          alignContent: "center",
-          justifyContent: "spaceAround",
-          alignItems: "stretch",
-          overflowX: "scroll",
-          scrollbarWidth: "thin",
-          filter:
-            "grayscale(10%) brightness(85%) sepia(15%) contrast(92%) opacity(98%)",
-          marginTop: "1rem",
-          // minHeight: "400px",
-          gap: "5px",
+          gap: "1.5rem",
+          overflowX: "auto",
+          padding: "1rem 0",
         }}
       >
-        <div
-          style={{
-            // height: "100px",
-            //   border: '1px solid',
-            color: "rgb(150,200,83,0.9)",
-            backgroundColor: "rgb (220,240,230,0.7)",
-            display: "flex",
-            // flexWrap: "wrap",
-            alignItems: "flexStart",
-            justifyContent: "flexStart",
-            // margin: "0.2rem",
-            flexDirection: "row",
-            gap: "5px",
-          }}
-          // style={{
-          //   display: 'grid',
-          //   gridTemplateColumns: 'repeat(7, 1fr)',
-          //   gap: '10px',
-          // }}
-        >
-          {weekDays.map((day) => (
+        {weekDays.map((day) => (
+          <div
+            key={day}
+            style={{
+              background: "rgba(18, 20, 24, 0.96)",
+              borderRadius: "12px",
+              minWidth: "340px",
+              maxWidth: "90vw",
+              padding: "1rem",
+              boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "stretch",
+            }}
+          >
             <div
-              key={day}
+              id={`card-${day}`}
+              style={{
+                fontSize: "1.25rem",
+                marginBottom: "0.5rem",
+                color: "#e6e2c0",
+              }}
+            >
+              {day}
+            </div>
+
+            {/* Add Recipe Button */}
+            <button
+              className="buttonP"
+              style={{
+                marginBottom: "0.75rem",
+                background: "#2a2d36",
+                color: "#e6e2c0",
+                border: "none",
+                borderRadius: "6px",
+                padding: "0.5rem",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                setRecipePickerDay(day);
+                setShowRecipePicker(true);
+              }}
+            >
+              + Add Recipe
+            </button>
+
+            {/* Selected Recipes for the Day */}
+            <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: 350,
-                margin: "0.21rem",
-                background: "rgb(2,0,1,0.9)",
-                borderRadius: "12px",
-                minWidth: "370px",
-                maxWidth: "80vw",
-
-                // flexWrap: "wrap",
+                gap: "0.5rem",
               }}
             >
-              <div></div>
-              <div
-                draggable
-                onDragOver={handleDragOver}
-                onDrop={(event) => handleDrop(event, day)}
-                style={{
-                  minWidth: "260px",
-                  minHeight: "260px",
-                  borderTop: "2px solid",
-                  display: "flex",
-                  background: "rgb(1,2,3,0.9)",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "flexStart",
-                  borderRadius: "12px",
-                  // boxShadow: "-2px -2px -4px rgb(210,210,210,0.8)",
-                  flexWrap: "wrap",
-                  gap: "5px",
-                  color: "rgb(221,205,139,0.9)",
-                }}
-              >
+              {selectedRecipes?.[day] &&
+                selectedRecipes[day].map((_selectedRecipe) => (
+                  <div
+                    key={_selectedRecipe._id + day}
+                    draggable="true"
+                    onDragStart={(event) =>
+                      handleDragStartFromDay(event, _selectedRecipe, day)
+                    }
+                    style={{
+                      borderRadius: "7px",
+                      border: "1px solid #333",
+                      background: "#23262e",
+                      padding: "0.5rem",
+                    }}
+                  >
+                    <RecipeCard
+                      key={_selectedRecipe._id}
+                      recipe_={_selectedRecipe.recipe}
+                      day={day}
+                      showPortions={true}
+                      getPortions={setProgramPortions}
+                      passPortions={passPortions}
+                      _id={_selectedRecipe._id}
+                      deleteCard={() => {
+                        deleteFromSelected(day, _selectedRecipe._id);
+                      }}
+                      orders={orders?.[_selectedRecipe._id + day]}
+                    />
+                  </div>
+                ))}
+            </div>
+
+            {/* Day Total */}
+            <div
+              style={{
+                marginTop: "1rem",
+                color: "#c9b87a",
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+              }}
+            >
+              Day total:{" "}
+              {dayTotals?.[day] && <>${dayTotals?.[day]?.toFixed(0)}</>}
+            </div>
+
+            {/* Ingredient List Toggle */}
+            <div style={{ marginTop: "0.5rem" }}>
+              {showList ? (
+                <div onClick={() => OnClickExpand()}>{ingListByDay(day)}</div>
+              ) : (
                 <div
-                  id={`card-${day}`}
-                  style={{ fontSize: "1.35rem", padding: "0.35rem" }}
-                >
-                  {day}
-                </div>
-                <div
+                  onClick={() => OnClickExpand()}
                   style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    margin: "0.35rem",
-                    flexWrap: "wrap",
-                    gap: "5px",
+                    color: "#8fa1b3",
+                    cursor: "pointer",
+                    fontSize: "0.95rem",
+                    marginTop: "0.25rem",
                   }}
                 >
-                  {selectedRecipes?.[day] &&
-                    selectedRecipes[day].map((_selectedRecipe) => (
-                      <div
-                        key={_selectedRecipe._id + day}
-                        draggable="true"
-                        onDragStart={(event) =>
-                          handleDragStartFromDay(event, _selectedRecipe, day)
-                        }
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          opacity: 1,
-                          borderRadius: "7px",
-                          cursor: "move",
-                          border: "1px solid",
-                          // maxWidth: 190,
-                          minHeight: 135,
-                          padding: "5px",
-                          marginBottom: "5px",
-                          margin: "0.18rem",
-                          // backgroundColor: "lightgray",
-                          // textAlign: "center",
-                        }}
-                      >
-                        <RecipeCard
-                          key={_selectedRecipe._id}
-                          recipe_={_selectedRecipe.recipe}
-                          day={day}
-                          showPortions={true}
-                          getPortions={setProgramPortions}
-                          passPortions={passPortions}
-                          _id={_selectedRecipe._id}
-                          deleteCard={() => {
-                            deleteFromSelected(day, _selectedRecipe._id);
-                          }}
-                          orders={orders?.[_selectedRecipe._id + day]}
-                        />
-                      </div>
-                    ))}
+                  Show ingredient list
                 </div>
-              </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {showRecipePicker && (
+        <>
+          {console.log("Recipes in picker:", recipes)}
+          <Modal
+            isOpen={showRecipePicker}
+            onClose={() => {
+              setShowRecipePicker(false);
+              setPickerSelected([]);
+            }}
+          >
+            <div>
+              <h3 style={{ color: "#e6e2c0" }}>
+                Pick recipes for {recipePickerDay}
+              </h3>
               <div
                 style={{
-                  // position: "sticky",
-                  // top: 10,
+                  maxHeight: "80vh",
+                  overflowY: "auto",
                   display: "flex",
-                  margin: "3px",
-                  color: "rgb(250,230,210,0.9)",
-                  flexDirection: "row",
                   flexWrap: "wrap",
-                  alignContent: "space-around",
-                  justifyContent: "space-around",
-                  alignItems: "stretch",
-                  // backgroundColor: "rgba(190, 190, 210, 0.8)",
-                  padding: "0.2rem",
-                  fontSize: "1.3rem",
-                  // border: "2px solid rgb(190,40,20,0.9)",
-                  // boxShadow: "2px 5px 10px",
-                  // borderRadius: "8px",
-                  gap: "5px",
+                  gap: "1rem",
                 }}
               >
-                Day total:
-                {dayTotals?.[day] && (
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <div>${dayTotals?.[day]?.toFixed(0)}</div>
-                    <div
-                      style={{ color: "rgb(90,75,150)", padding: "0.25rem" }}
-                    >
-                      ${(dayTotals?.[day] * 2.8).toFixed(0)}
-                    </div>
-                  </div>
-                )}
+                {recipes &&
+                  recipes.map((recipe_) => {
+                    const recipe = recipe_.recipe || recipe_;
+                    const price = getRecipePrice(recipe);
+                    const isSelected = pickerSelected.some(
+                      (r) => r._id === recipe_._id,
+                    );
+                    return (
+                      <div
+                        key={recipe_._id}
+                        style={{
+                          background: isSelected ? "#3a3e4a" : "#23262e",
+                          border: isSelected
+                            ? "2px solid #c9b87a"
+                            : "1px solid #333",
+                          borderRadius: "10px",
+                          padding: "1rem",
+                          width: "230px",
+                          cursor: "pointer",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
+                          transition:
+                            "box-shadow 0.2s, border 0.2s, background 0.2s",
+                        }}
+                        onClick={() => {
+                          setPickerSelected((prev) =>
+                            prev.some((r) => r._id === recipe_._id)
+                              ? prev.filter((r) => r._id !== recipe_._id)
+                              : [...prev, recipe_],
+                          );
+                        }}
+                      >
+                        {recipe.imageUrl?.url && (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              marginBottom: "0.75rem",
+                            }}
+                          >
+                            <img
+                              src={recipe.imageUrl.url}
+                              alt={recipe.title}
+                              style={{
+                                width: "80px",
+                                height: "80px",
+                                objectFit: "cover",
+                                borderRadius: "8px",
+                                border: "1px solid #444",
+                              }}
+                            />
+                          </div>
+                        )}
+                        <div
+                          style={{
+                            color: "#e6e2c0",
+                            fontWeight: "bold",
+                            fontSize: "1.1rem",
+                            marginBottom: "0.35rem",
+                            textAlign: "center",
+                          }}
+                        >
+                          {recipe.title}
+                        </div>
+                        {recipe.description && (
+                          <div
+                            style={{
+                              color: "#bdbdbd",
+                              fontSize: "0.97rem",
+                              marginBottom: "0.35rem",
+                              textAlign: "center",
+                              minHeight: "38px",
+                            }}
+                          >
+                            {recipe.description.length > 60
+                              ? recipe.description.slice(0, 60) + "..."
+                              : recipe.description}
+                          </div>
+                        )}
+                        <div
+                          style={{
+                            color: "#c9b87a",
+                            fontSize: "0.98rem",
+                            marginBottom: "0.15rem",
+                          }}
+                        >
+                          Portions: {recipe.portions}
+                          Price: ${price.toFixed(0)}
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
-              <div style={{ display: "flex", margin: "1rem" }}>
-                {showList ? (
-                  <div onClick={() => OnClickExpand()}>{ingListByDay(day)}</div>
-                ) : (
-                  <div onClick={() => OnClickExpand()}>
-                    Show ingredient list
-                  </div>
-                )}
-              </div>
+              {/* Button is now outside the scrollable area */}
+              <button
+                style={{
+                  marginTop: "1.5rem",
+                  background: "#c9b87a",
+                  color: "#23262e",
+                  border: "none",
+                  borderRadius: "8px",
+                  padding: "0.75rem 1.5rem",
+                  fontWeight: "bold",
+                  fontSize: "1.1rem",
+                  cursor: "pointer",
+                  alignSelf: "center",
+                  display: "block",
+                  width: "100%",
+                }}
+                disabled={pickerSelected.length === 0}
+                onClick={() => {
+                  setSelectedRecipes((prevSelectedRecipes) => {
+                    const prev = prevSelectedRecipes?.[recipePickerDay] || [];
+                    // Filter out recipes already present
+                    const newOnes = pickerSelected.filter(
+                      (picked) => !prev.some((r) => r._id === picked._id),
+                    );
+                    return {
+                      ...prevSelectedRecipes,
+                      [recipePickerDay]: [...prev, ...newOnes],
+                    };
+                  });
+
+                  // Set default portions in orders for each new recipe
+                  setOrders((prevOrders) => {
+                    const prev = selectedRecipes?.[recipePickerDay] || [];
+                    const newOnes = pickerSelected.filter(
+                      (picked) => !prev.some((r) => r._id === picked._id),
+                    );
+                    const updates = {};
+                    newOnes.forEach((recipe) => {
+                      updates[`${recipe._id}${recipePickerDay}`] =
+                        recipe.recipe.portions ?? 1;
+                    });
+                    return { ...prevOrders, ...updates };
+                  });
+
+                  setShowRecipePicker(false);
+                  setPickerSelected([]);
+                }}
+              >
+                Add Selected Recipes
+              </button>
             </div>
-          ))}
-        </div>
-      </div>
+          </Modal>
+        </>
+      )}
     </div>
   );
 };

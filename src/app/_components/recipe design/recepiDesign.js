@@ -219,320 +219,319 @@ export default function DesignRecipe({
   };
   //console.log(actionMode)
   return (
-    <div className="out-container">
-      <div className="background"></div>
-      <div className="container ">
-        <div id="+ingredientes" className="ingredients">
-          <div className="addButton" onClick={() => openModal()}>
-            {!addIngredientModal ? (
-              <div>Create Ingredients</div>
-            ) : (
-              <div>Close form </div>
-            )}
+    <div
+      className="out-container"
+      style={{ background: "#f8f8f8", minHeight: "100vh" }}
+    >
+      <div
+        className="container"
+        style={{
+          maxWidth: 900,
+          margin: "0 auto",
+          padding: "2rem",
+        }}
+      >
+        {/* INGREDIENTS SECTION */}
+        <section style={{ marginBottom: "2rem" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <h2 style={{ fontSize: "1.5rem", fontWeight: 700 }}>Ingredients</h2>
+            <button className="addButton" onClick={openModal}>
+              {addIngredientModal ? "Close Form" : "Add Ingredient to the list"}
+            </button>
           </div>
-          <div>
-            <div>
-              {addIngredientModal && (
-                <Modal isOpen={addIngredientModal} onClose={closeModal}>
-                  <Form
-                    editableIngredient={editableIngredient}
-                    key={editableIngredient?.name}
-                    onClose={closeModal}
-                  />
-                </Modal>
-              )}
-            </div>
-
-            <div className=" actionBox flex flex-row flex-wrap">
-              {" "}
-              <ActionBox
-                ingredientsList={ingredientsList}
-                addToRecipe={addToRecipe}
-                actionMode={actionMode}
-                setActionMode={setActionMode}
+          {addIngredientModal && (
+            <Modal isOpen={addIngredientModal} onClose={closeModal}>
+              <Form
+                editableIngredient={editableIngredient}
+                key={editableIngredient?.name}
+                onClose={closeModal}
               />
-            </div>
+            </Modal>
+          )}
+          <div style={{ margin: "1rem 0" }}>
+            <ActionBox
+              ingredientsList={ingredientsList}
+              addToRecipe={addToRecipe}
+              actionMode={actionMode}
+              setActionMode={setActionMode}
+              DeleteIngrediente={DeleteIngredient}
+            />
+          </div>
+          <input
+            type="text"
+            placeholder="Search ingredients..."
+            style={{
+              minWidth: 200,
+              margin: "0.5rem 0",
+              padding: "0.4rem",
+              borderRadius: 6,
+              border: "1px solid #ccc",
+            }}
+            ref={searchRef}
+            onChange={setSearch}
+          />
+        </section>
 
-            <div style={{ margin: "0.3rem", fontSize: "1.4rem" }}>
+        {/* RECIPE FORM SECTION */}
+        <section
+          style={{
+            background: "#fff",
+            borderRadius: 12,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+            padding: "1.5rem",
+            marginBottom: "2rem",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 700,
+              marginBottom: "1rem",
+            }}
+          >
+            Create Recipe
+          </h2>
+          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+            {/* Left: Title, Portions, Image */}
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <label style={{ fontWeight: 600 }}>Title</label>
               <input
+                name="title"
                 type="text"
                 style={{
-                  minWidth: 120,
-                  margin: "0.3rem",
-                  color: "black",
+                  width: "100%",
+                  height: 32,
+                  borderRadius: 8,
+                  padding: "0.3rem",
+                  margin: "0.25rem 0 1rem 0",
+                  border: "1px solid #ccc",
                 }}
-                ref={searchRef}
-                onChange={setSearch}
+                defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe?.title}
+                placeholder="Recipe name"
+                onChange={(e) =>
+                  setRecipe((prev) => ({
+                    ...prev,
+                    recipe: {
+                      ...prev.recipe,
+                      [e.target.name]: e.target.value,
+                    },
+                  }))
+                }
+                required
               />
-              🔎
-            </div>
-            {/* <button className="button" type="button" onClick={() => makeBkup()}>
-              bkup
-            </button> */}
-          </div>
-        </div>
-
-        <div ref={myDivRef} id="recipe" className="recipe actionBox">
-          <div>
-            {/* <h2 style={{ marginBottom: "1rem" }}>New recipe</h2> */}
-
-            <div className="out-container">
-              <div
+              <label style={{ fontWeight: 600 }}>Portions</label>
+              <input
+                name="portions"
+                type="number"
+                min={1}
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  fontWeight: 900,
+                  width: "60px",
+                  height: 32,
+                  borderRadius: 8,
+                  padding: "0.3rem",
+                  margin: "0.25rem 0 1rem 0",
+                  border: "1px solid #ccc",
                 }}
-              >
-                {" "}
-                Title :
-                <input
-                  name="title"
-                  type="text"
-                  style={{
-                    width: "60%",
-                    height: 30,
-                    borderRadius: 8,
-                    padding: "0.2rem",
-                    margin: "0.25rem",
-                  }}
-                  defaultValue={Recipe?.recipe?.tittle ?? Recipe.recipe?.title}
-                  placeholder="Recipe name"
-                  onChange={(e) =>
-                    setRecipe((prev) => ({
-                      ...prev,
-                      recipe: {
-                        ...prev.recipe,
-                        [e.target.name]: e.target.value,
-                      },
-                    }))
-                  }
-                  required
-                />{" "}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: "1rem",
-                  fontWeight: 900,
-                }}
-              >
-                <div>For : </div>
-                <input
-                  name="portions"
-                  type="number"
-                  style={{
-                    width: "50px",
-                    height: 30,
-                    borderRadius: 8,
-                    padding: "0.2rem",
-                  }}
-                  defaultValue={Recipe?.recipe?.portions}
-                  placeholder="# 👤"
-                  onChange={(e) =>
-                    setRecipe((prev) => ({
-                      ...prev,
-                      recipe: {
-                        ...prev.recipe,
-                        [e.target.name]: e.target.value,
-                      },
-                    }))
-                  }
-                  required
-                />
-                <p>Portions</p>
-                {/* {personSvg} */}
-              </div>
-            </div>
-            {recipeList?.length > 0 ? (
-              <div className="z-10 bg-black">Adjust quantitys</div>
-            ) : (
-              <div
-                style={{
-                  margin: "0.5rem",
-                  marginBottom: "0.5rem",
-                  background: "rgb(150,30,10,0.5)",
-                  borderRadius: "5px",
-                  padding: "0.25rem",
-                  width: "fit-content",
-                }}
-              >
-                Add ingredients from the box abobe ☝🏽
-              </div>
-            )}
-            <div className="incrementalnputs mb-4">
-              {recipeList?.map((item, index) => {
-                // //  console.log(item);
-                return (
-                  <div
-                    className="actionBox2"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      flexBasis: "calc(20% - 10px)",
-                      background: "rgb(250,250,200,0.5)",
-                      content: "☝🏽",
-                      //border: "1px solid rgb(220,170,180,0.8)", //rgb(20,70,110,0.7)",
-                      padding: "0.15rem",
-                      borderRadius: "8px",
-                      boxShadow: "-1px -2px -3px rgb(20,70,110,0.7)",
-                      maxWidth: "155px",
-                    }}
-                    key={item?._id}
-                  >
-                    {" "}
-                    <div className="itemQ2" style={{ margin: "0.3rem" }}>
-                      {item?.ingredient?.name}
-                      {item?.ingredient?.image}
-                    </div>
-                    <div className="in-container">
-                      <button
-                        className="buttonSum"
-                        onClick={() => increase(index, item?.ingredient?.units)}
-                      >
-                        +
-                      </button>
-                      {}
-                      <button
-                        className="buttonSum"
-                        onClick={() => decrease(index, item?.ingredient?.units)}
-                      >
-                        -
-                      </button>{" "}
-                    </div>
-                    <div
-                      className="in-container "
-                      style={{ marginLeft: "0.5rem", gap: "0.7rem" }}
-                    >
-                      {" "}
-                      <div className="item2">
-                        {quantity?.[index]}
-                        {item?.ingredient?.units}
-                      </div>{" "}
-                      <div className="baseMarc"></div>
-                      <div
-                        style={{
-                          margin: "0.25rem",
-                          fontSize: "1.5rem",
-                          // marginInlineStart: "0.5rem",
-                          padding: "0.5rem",
-                          color: "rgb(200,30,14)",
-                          // alignItems: "flex-start",
-                          justifyContent: "flex-end",
-                          borderLeft: "1px solid rbg(10,15,65,0.8)",
-                        }}
-                        onClick={() => removeItem(item, index)}
-                      >
-                        {" "}
-                        X
-                      </div>
-                    </div>
+                defaultValue={Recipe?.recipe?.portions}
+                placeholder="#"
+                onChange={(e) =>
+                  setRecipe((prev) => ({
+                    ...prev,
+                    recipe: {
+                      ...prev.recipe,
+                      [e.target.name]: e.target.value,
+                    },
+                  }))
+                }
+                required
+              />
+              <div style={{ margin: "1rem 0" }}>
+                {Recipe.recipe.imageUrl ? (
+                  <div style={{ marginBottom: "0.5rem" }}>
+                    <img
+                      src={Recipe.recipe.imageUrl?.url}
+                      height={120}
+                      width={90}
+                      style={{ borderRadius: 8, objectFit: "cover" }}
+                    />
                   </div>
-                );
-              })}
-            </div>
-            {Recipe.recipe.imageUrl ? (
-              <div className="relative right-0 top-0 m-6 h-16 w-16 rounded-t-lg bg-transparent object-cover p-2">
-                {" "}
-                <img
-                  src={Recipe.recipe.imageUrl?.url}
-                  height={200}
-                  width={130}
-                />
+                ) : null}
                 <SimpleUploadButton
                   setRecipe={setRecipe}
                   image={!!Recipe.recipe.imageUrl}
                 />
               </div>
-            ) : (
-              <SimpleUploadButton
-                setRecipe={setRecipe}
-                image={!!Recipe.recipe.imageUrl}
-              />
-            )}
+            </div>
+            {/* Right: Ingredients List */}
+            <div style={{ flex: 2, minWidth: 320 }}>
+              <label
+                style={{
+                  fontWeight: 600,
+                  marginBottom: 8,
+                  display: "block",
+                }}
+              >
+                Ingredients in Recipe
+              </label>
+              {recipeList?.length > 0 ? (
+                <div style={{ marginBottom: "1rem" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "1rem",
+                    }}
+                  >
+                    {recipeList.map((item, index) => (
+                      <div
+                        key={item?._id}
+                        style={{
+                          background: "#f9f6ea",
+                          borderRadius: "8px",
+                          padding: "0.5rem 1rem",
+                          minWidth: 140,
+                          boxShadow: "0 1px 4px rgba(200,180,120,0.08)",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          position: "relative",
+                        }}
+                      >
+                        <div style={{ fontWeight: 600, marginBottom: 4 }}>
+                          {item?.ingredient?.name}
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                          }}
+                        >
+                          <button
+                            className="buttonSum"
+                            onClick={() =>
+                              increase(index, item?.ingredient?.units)
+                            }
+                          >
+                            +
+                          </button>
+                          <span
+                            style={{
+                              minWidth: 24,
+                              textAlign: "center",
+                            }}
+                          >
+                            {quantity?.[index]} {item?.ingredient?.units}
+                          </span>
+                          <button
+                            className="buttonSum"
+                            onClick={() =>
+                              decrease(index, item?.ingredient?.units)
+                            }
+                          >
+                            -
+                          </button>
+                        </div>
+                        <button
+                          style={{
+                            position: "absolute",
+                            top: 4,
+                            right: 8,
+                            background: "none",
+                            border: "none",
+                            color: "#c22",
+                            fontWeight: "bold",
+                            fontSize: "1.2rem",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => removeItem(item, index)}
+                          title="Remove ingredient"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    margin: "0.5rem 0",
+                    background: "rgba(150,30,10,0.08)",
+                    borderRadius: "5px",
+                    padding: "0.5rem",
+                    color: "#a33",
+                  }}
+                >
+                  Add ingredients from the box above ☝🏽
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div id="description" className="description actionBox">
-          <div>
-            <textarea
-              type="text"
-              placeholder="Preparation steps"
-              style={{
-                width: "98%",
-                height: "fit-content",
-                borderRadius: 8,
-                padding: "0.25rem",
-                color: "black",
-              }}
-              defaultValue={descriptionValue}
-              onChange={(e) => {
-                descriptionRef.current = e.target.value;
-              }}
-            />
-          </div>
-          <div
+        </section>
+
+        {/* DESCRIPTION SECTION */}
+        <section
+          style={{
+            background: "#fff",
+            borderRadius: 12,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+            padding: "1.5rem",
+            marginBottom: "2rem",
+          }}
+        >
+          <label
             style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
+              fontWeight: 600,
+              marginBottom: 8,
+              display: "block",
             }}
           >
+            Preparation Steps
+          </label>
+          <textarea
+            type="text"
+            placeholder="Preparation steps"
+            style={{
+              width: "100%",
+              minHeight: "80px",
+              borderRadius: 8,
+              padding: "0.5rem",
+              color: "black",
+              border: "1px solid #ccc",
+              marginBottom: "1rem",
+            }}
+            defaultValue={descriptionValue}
+            onChange={(e) => {
+              descriptionRef.current = e.target.value;
+            }}
+          />
+          <div style={{ textAlign: "center" }}>
             <button
               className={isDisabled ? "buttonDisabled" : "addButton"}
               disabled={isDisabled}
-              onClick={() => addToListofRecipe()}
+              onClick={addToListofRecipe}
+              style={{
+                padding: "0.7rem 2rem",
+                fontSize: "1.1rem",
+                borderRadius: 8,
+                background: isDisabled ? "#ccc" : "#c9b87a",
+                color: isDisabled ? "#888" : "#23262e",
+                fontWeight: "bold",
+                border: "none",
+                cursor: isDisabled ? "not-allowed" : "pointer",
+              }}
             >
-              Add recipe to Library
+              Add Recipe to Library
             </button>
           </div>
-        </div>
-
-        {/* </div> */}
-
-        <div className="ReceipLibrary">
-          <div
-            style={{
-              position: "sticky",
-              top: 5,
-              fontSize: "1.8rem",
-              margin: "1rem",
-              maxWidth: 100,
-            }}
-          >
-            All Recipes Library
-          </div>
-          {
-            // !shouldCheckLocalStorage &&
-            storeRecipes.map((_recipe) => {
-              // console.log(_recipe);
-              if (_recipe?._id) {
-                return (
-                  <div
-                    className="w-auto"
-                    key={_recipe?._id}
-                    onClick={() => {
-                      editRecipe(_recipe);
-                      scrollToDiv();
-                    }}
-                  >
-                    <RecipeCardComponent
-                      key={_recipe?._id}
-                      _id={_recipe?._id}
-                      _recipe={_recipe}
-                      storeIngredients={storeIngredients}
-                      deleteHandler={deleteHandler}
-                    />
-                  </div>
-                );
-              }
-            })
-          }
-        </div>
+        </section>
       </div>
     </div>
   );
