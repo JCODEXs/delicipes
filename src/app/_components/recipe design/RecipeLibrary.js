@@ -203,7 +203,12 @@ export default function RecipeLibrary() {
       />
       <div
         className="library-cards"
-        style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          gap: "1rem",
+          width: "100%",
+        }}
       >
         {sortedRecipes.map(
           (_recipe) =>
