@@ -149,7 +149,9 @@ const MealMatrix = ({ myPrograms }) => {
             selectedRecipes[key].forEach((recipe_) => {
               const recipe = recipe_.recipe;
               const portionsUnit =
-                portions?.[`${recipe_._id}${key}`] ?? Number(recipe.portions) ?? 1;
+                portions?.[`${recipe_._id}${key}`] ??
+                Number(recipe.portions) ??
+                1;
               const realPortions = recipe.realPortions ?? 1;
               // // console.log(realPortions, portionsUnit, portions?.[recipe.key]);
               // Only map if ingredients exist
@@ -163,12 +165,17 @@ const MealMatrix = ({ myPrograms }) => {
                     ingredientsTotals[nombre].cantidad +=
                       cantidad * portionsUnit;
                     if (!ingredientsTotalsDay[key][nombre]) {
-                      ingredientsTotalsDay[key][nombre] = { cantidad: 0, precio: 0 };
+                      ingredientsTotalsDay[key][nombre] = {
+                        cantidad: 0,
+                        precio: 0,
+                      };
                     }
                     ingredientsTotalsDay[key][nombre].cantidad +=
                       cantidad * portionsUnit;
-                    ingredientsTotals[nombre].precio += precio * cantidad * portionsUnit;
-                    ingredientsTotalsDay[key][nombre].precio += precio * cantidad * portionsUnit;
+                    ingredientsTotals[nombre].precio +=
+                      precio * cantidad * portionsUnit;
+                    ingredientsTotalsDay[key][nombre].precio +=
+                      precio * cantidad * portionsUnit;
                   } else {
                     ingredientsTotals[nombre] = {
                       cantidad: cantidad * portionsUnit,
@@ -179,8 +186,7 @@ const MealMatrix = ({ myPrograms }) => {
                       precio: precio * cantidad * portionsUnit,
                     };
                   }
-                  totalPrice[key] +=
-                    precio * cantidad * portionsUnit;
+                  totalPrice[key] += precio * cantidad * portionsUnit;
                 });
               }
             });
@@ -430,7 +436,7 @@ const MealMatrix = ({ myPrograms }) => {
       <div
         style={{
           position: "fixed",
-          top: "94px", // <-- Adjust this to your menu height
+          top: "108px", // <-- Adjust this to your menu height
           background: "rgba(10, 10, 20, 0.98)",
           zIndex: 110,
           padding: "0.5rem 0",
@@ -441,7 +447,7 @@ const MealMatrix = ({ myPrograms }) => {
           justifyContent: "center",
           alignItems: "center",
           minHeight: "56px",
-          width: "100vw",
+          width: "100%",
           left: 0,
         }}
       >
@@ -461,7 +467,7 @@ const MealMatrix = ({ myPrograms }) => {
             style={{
               color: "#c9b87a",
               fontWeight: "bold",
-              fontSize: "1.25rem",
+              fontSize: "1.1rem",
               letterSpacing: "0.04em",
               textShadow: "0 1px 2px #181818",
             }}
@@ -472,7 +478,7 @@ const MealMatrix = ({ myPrograms }) => {
             style={{
               color: "#fffbe6",
               fontWeight: "bold",
-              fontSize: "1.45rem",
+              fontSize: "1.35rem",
               background: "linear-gradient(90deg, #c9b87a 60%, #e6e2c0 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -483,7 +489,7 @@ const MealMatrix = ({ myPrograms }) => {
           </span>
         </div>
       </div>
-      <div style={{ height: "62px" }}></div>
+      <div style={{ height: "110px" }}></div>
       {/* Days Columns */}
       <div
         style={{

@@ -37,7 +37,7 @@ export default function ActionBox({
           actionMode == "delete" ? (
             <div
               style={{
-                fontSize: "1.2rem",
+                fontSize: "1.15rem",
                 display: "flex",
                 gap: "2rem",
                 flexDirection: "row",
@@ -70,7 +70,7 @@ export default function ActionBox({
               </button>
               <div
                 style={{
-                  fontSize: "1.3rem",
+                  fontSize: "1.15rem",
                   color: "#e74c3c",
                   fontWeight: 600,
                   letterSpacing: "0.03em",
@@ -82,7 +82,7 @@ export default function ActionBox({
           ) : (
             <div
               style={{
-                fontSize: "1.2rem",
+                fontSize: "1.15rem",
                 display: "flex",
                 gap: "2rem",
                 flexDirection: "row",
@@ -115,7 +115,7 @@ export default function ActionBox({
               </button>
               <div
                 style={{
-                  fontSize: "1.3rem",
+                  fontSize: "1.15rem",
                   color: "#1abc9c",
                   fontWeight: 600,
                   letterSpacing: "0.03em",
@@ -128,17 +128,17 @@ export default function ActionBox({
         ) : (
           <div
             style={{
-              fontSize: "1.2rem",
+              fontSize: "1.05rem",
               display: "flex",
-              gap: "2rem",
+              gap: "1rem",
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
-              padding: "0.9rem 1.5rem",
+              padding: "0.5rem 0.7rem",
               background: "linear-gradient(90deg, #f5e6c5 60%, #e7c08a 100%)",
-              borderRadius: "14px",
-              boxShadow: "0 4px 16px rgba(120,70,30,0.13)",
-              marginBottom: "0.8rem",
+              borderRadius: "10px",
+              boxShadow: "0 2px 8px rgba(120,70,30,0.10)",
+              marginBottom: "0.5rem",
             }}
           >
             <button
@@ -146,10 +146,10 @@ export default function ActionBox({
                 background: "linear-gradient(90deg, #c9b87a 60%, #a86b3c 100%)",
                 color: "#3a2412",
                 border: "none",
-                borderRadius: "8px",
+                borderRadius: "6px",
                 fontWeight: "bold",
-                fontSize: "1.1rem",
-                padding: "0.5rem 1.2rem",
+                fontSize: "1rem",
+                padding: "0.35rem 0.8rem",
                 boxShadow: "0 1px 4px rgba(120,70,30,0.10)",
                 cursor: "pointer",
                 transition: "background 0.2s, transform 0.1s",
@@ -160,7 +160,7 @@ export default function ActionBox({
             </button>
             <div
               style={{
-                fontSize: "1.3rem",
+                fontSize: "1.05rem",
                 color: "#a86b3c",
                 fontWeight: 600,
                 letterSpacing: "0.03em",
@@ -178,13 +178,13 @@ export default function ActionBox({
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
-          gap: "0.7rem",
-          padding: "1.1rem",
-          borderRadius: "14px",
-          minHeight: "70px",
+          gap: "0.15rem",
+          padding: "0.5rem",
+          borderRadius: "10px",
+          minHeight: "40px",
           alignItems: "center",
           justifyContent: "flex-start",
-          boxShadow: "0 2px 8px rgba(120,70,30,0.10)",
+          boxShadow: "0 1px 4px rgba(120,70,30,0.08)",
         }}
       >
         {ingredientsList &&
@@ -202,17 +202,18 @@ export default function ActionBox({
                 style={{
                   cursor: "pointer",
                   background: "#fff8ed",
-                  border: "1.5px solid #e7c08a",
-                  borderRadius: "8px",
-                  padding: "0.25rem",
-                  minWidth: "50px",
+                  border: "1px solid #e7c08a",
+                  borderRadius: "6px",
+                  padding: "0.15rem",
+                  minWidth: "45px",
                   minHeight: "50px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 1px 4px rgba(120, 70, 30, 0.10)",
+                  boxShadow: "0 1px 2px rgba(120, 70, 30, 0.08)",
                   fontWeight: 300,
                   color: "#3a2412",
+                  fontSize: "0.95rem",
                 }}
               >
                 {item.ingredient?.image || item.image}

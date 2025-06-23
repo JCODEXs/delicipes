@@ -29,7 +29,7 @@ export function CarouselComponent() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="max-h-42 max-w-3xl"
+      className="max-h-42 "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -47,7 +47,7 @@ export function CarouselComponent() {
         ))}
       </CarouselContent>
       <CarouselPrevious />
-      <CarouselNext />
+      {/* <CarouselNext /> */}
     </Carousel>
   );
 }

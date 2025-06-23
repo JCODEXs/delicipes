@@ -162,7 +162,7 @@ export default function RecipeLibrary() {
           pendingDelete?.recipe?.tittle ?? pendingDelete?.recipe?.title
         }
       />
-      <div
+      {/* <div
         className="library-header"
         style={{
           position: "sticky",
@@ -182,7 +182,7 @@ export default function RecipeLibrary() {
         }}
       >
         Recipe Booklet
-      </div>
+      </div> */}
       <input
         type="text"
         placeholder="Search by name or ingredient..."

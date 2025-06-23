@@ -8,6 +8,18 @@ export default function FullPageRecetionView() {
         {/* <div className="w-full border-b pb-2 mb-4 text-center text-3xl font-extrabold text-orange-700 tracking-wide drop-shadow">
           Design delicious recipes
         </div> */}
+         <span
+            className="font-extrabold text-yellow-200 drop-shadow-lg"
+            style={{
+              letterSpacing: 2,
+              fontSize: "2rem",
+              whiteSpace: "nowrap",
+              lineHeight: 1.1,
+              overflow: "visible",
+            }}
+          >
+            Delicipeasy
+          </span>
         <div className="flex items-center justify-center rounded-md p-2 mb-4">
           <motion.div
             animate={{ y: [0, -18, 0] }}

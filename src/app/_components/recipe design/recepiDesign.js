@@ -219,14 +219,18 @@ export default function DesignRecipe({
       style={{
         background: "#f9f6ea",
         minHeight: "100vh",
+        maxWidth: "100vw",
+        // marginTop: "2rem",
       }}
     >
+      {/* <div className="h-50px"> </div> */}
       <div
         className="recipeDesignContainer"
         style={{
           margin: "0 auto",
-          padding: "2rem",
+          padding: "0.6rem",
           color: "#3a2412",
+          marginTop: "2rem",
         }}
       >
         {/* INGREDIENTS SECTION */}
@@ -236,10 +240,11 @@ export default function DesignRecipe({
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <h2
-              style={{ fontSize: "1.5rem", fontWeight: 700, color: "#a86b3c" }}
+              style={{ fontSize: "1.5rem", fontWeight: 600, color: "#a86b3c" }}
             >
               Ingredients
             </h2>
@@ -251,8 +256,8 @@ export default function DesignRecipe({
                 color: "#5a2d06",
                 border: "none",
                 borderRadius: 8,
-                padding: "0.5rem 1.2rem",
-                fontWeight: 700,
+                padding: "0.5rem 1rem",
+                fontWeight: 600,
                 cursor: "pointer",
                 boxShadow: "0 1px 4px rgba(200,180,120,0.10)",
               }}
@@ -269,7 +274,7 @@ export default function DesignRecipe({
               />
             </Modal>
           )}
-          <div style={{ margin: "1rem 0" }}>
+          <div style={{ margin: "0.25rem 0" }}>
             <Suspense fallback={<ActionBoxSkeleton />}>
               <ActionBox
                 ingredientsList={ingredientsList}
@@ -315,7 +320,14 @@ export default function DesignRecipe({
           >
             Create Recipe
           </h2>
-          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "2rem",
+              flexWrap: "wrap",
+              flexDirection: "row",
+            }}
+          >
             {/* Left: Title, Portions, Image */}
             <div style={{ flex: 1, minWidth: 260 }}>
               <label style={{ fontWeight: 600 }}>Title</label>
@@ -400,6 +412,7 @@ export default function DesignRecipe({
               {recipeList?.length > 0 ? (
                 <div style={{ marginBottom: "1rem" }}>
                   <div
+                    className="ingredients-list-grid"
                     style={{
                       display: "grid",
                       gridTemplateColumns:
@@ -423,12 +436,14 @@ export default function DesignRecipe({
                 </div>
               ) : (
                 <div
+                  className="ingredients-list-empty"
                   style={{
-                    margin: "0.5rem 0",
+                    margin: "0.25rem 0",
                     background: "rgba(150,30,10,0.08)",
                     borderRadius: "5px",
-                    padding: "0.5rem",
+                    padding: "0.25rem",
                     color: "#a33",
+                    maxWidth: "70%",
                   }}
                 >
                   Add ingredients from the box above ☝🏽

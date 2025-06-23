@@ -15,13 +15,28 @@ export function Modal({ children, isOpen, onClose }) {
       dialogRef.current?.close();
     }
   }, [isOpen]);
-  // console.log(dialogRef);
 
   function onDismiss() {
     if (onClose) {
       onClose();
     }
   }
+
+  // Close modal when clicking outside the content
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    function handleClick(event) {
+      // Only close if click is on the <dialog> backdrop, not inside the modal content
+      if (event.target === dialog) {
+        onDismiss();
+      }
+    }
+
+    dialog.addEventListener("click", handleClick);
+    return () => dialog.removeEventListener("click", handleClick);
+  }, [onClose]);
 
   return createPortal(
     <dialog
@@ -31,7 +46,7 @@ export function Modal({ children, isOpen, onClose }) {
         height: "100vh",
         width: "100vw",
         backgroundColor: "rgba(80, 80, 80, 0.91)",
-        padding: " 1rem",
+        padding: "1rem",
       }}
       onClose={onDismiss}
     >
@@ -39,7 +54,8 @@ export function Modal({ children, isOpen, onClose }) {
         style={{
           display: "flex",
           justifyContent: "flex-end",
-          marginInline: "3rem",
+          marginInline: "2rem",
+          marginTop:"2rem"
         }}
       >
         <button onClick={onDismiss} className="ModalButton">

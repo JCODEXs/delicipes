@@ -29,7 +29,7 @@ export default function TopNav() {
   return (
     <nav className="flex w-full items-center justify-between border-b p-2 text-2xl text-white font-semibold backdrop-blur-sm h-20 overflow-visible relative">
       <Link href={"/"}>
-        <div className="flex items-center gap-2 min-w-0 relative">
+        <div className="flex items-center gap-2 min-w-0 relative max-h-10">
           <img
             src="/2.png"
             alt="Delicipeasy Logo"
@@ -48,18 +48,7 @@ export default function TopNav() {
               overflow: "visible",
             }}
           />
-          <span
-            className="font-extrabold text-yellow-200 drop-shadow-lg"
-            style={{
-              letterSpacing: 2,
-              fontSize: "2rem",
-              whiteSpace: "nowrap",
-              lineHeight: 1.1,
-              overflow: "visible",
-            }}
-          >
-            Delicipeasy
-          </span>
+         
         </div>
       </Link>
       <div className="flex flex-row items-center gap-4">

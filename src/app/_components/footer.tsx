@@ -6,31 +6,34 @@ import { Button } from "~/components/ui/button";
 
 export default function Footer() {
   return (
-    <nav>
-      <div className="flex flex-row items-center gap-4 bg-slate-900">
+    <nav className="w-full overflow-x-hidden">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-1 bg-slate-900 text-[1.25rem] md:text-[1.35rem] w-full">
         <SignedIn>
-          <div className="flex w-full items-center justify-between border-b p-2 text-xl font-semibold">
-            <div className="ml-2 flex w-full flex-row justify-around text-white">
-              <Link href={"/inventory"}
-               className="text-white hover:text-yellow-200 text-lg font-medium">
-                <div>Pantry</div>
-              </Link>
-              <Link href={"/plan"}
-               className="text-white hover:text-yellow-200 text-lg font-medium">
-                <div>Week plan</div>
-              </Link>
-              <Link href={"/design"}
-               className="text-white hover:text-yellow-200 text-lg font-medium">
-                <div> New Recipe</div>
-              </Link>
-               <Link
-                        href="/library"
-                        className="text-white hover:text-yellow-200 text-lg font-medium"
-                      >
-                        Library
-                      </Link>
-            </div>
-            {/* <SimpleAddButton /> */}
+          <div className="flex w-full max-w-xl flex-row flex-wrap justify-between text-white mx-auto px-2 py-1 font-semibold">
+            <Link
+              href={"/inventory"}
+              className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
+            >
+              Pantry
+            </Link>
+            <Link
+              href={"/plan"}
+              className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
+            >
+              Week plan
+            </Link>
+            <Link
+              href={"/design"}
+              className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
+            >
+              New Recipe
+            </Link>
+            <Link
+              href="/library"
+              className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
+            >
+              Library
+            </Link>
           </div>
         </SignedIn>
       </div>
