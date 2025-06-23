@@ -54,7 +54,7 @@ export default function DesignRecipe({
   let recipes = store.recipes;
   const descriptionValue = descriptionRef?.current;
   const storeIngredients = usePantry((store) => store.ingredients);
-  const storeRecipes = usePantry((store) => store.recipes);
+  // const storeRecipes = usePantry((store) => store.recipes);
 
   useEffect(() => {
     setIngredientsList(storeIngredients);
@@ -355,7 +355,7 @@ export default function DesignRecipe({
                 }
                 required
               />
-              <label style={{ fontWeight: 600 }}>Portions</label>
+              <label style={{ fontWeight: 600, marginTop: "1.2rem", display: "block" }}>Portions</label>
               <input
                 name="portions"
                 type="number"
@@ -365,8 +365,9 @@ export default function DesignRecipe({
                   height: 32,
                   borderRadius: 8,
                   padding: "0.3rem",
-                  margin: "0.25rem 0 1rem 0",
+                  margin: "0.5rem 0 1rem 0", // increased top margin for separation
                   border: "1px solid #ccc",
+                  display: "block",
                 }}
                 defaultValue={Recipe?.recipe?.portions}
                 placeholder="#"

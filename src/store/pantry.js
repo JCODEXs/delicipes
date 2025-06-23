@@ -370,110 +370,71 @@ export const getIngredients = async () => {
   }
 };
 export const addRecipe = async (recipe) => {
-  console.log(recipe);
-
-  const result = await axios.post("/api/recipes", { recipe });
-  // console.log(result.data);
-  const RecipeNew = await { ...recipe, _id: result.data.result.insertedId };
-  usePantry.getState().addStoreRecipe(RecipeNew);
-  // console.log(RecipeNew);
-  return result.data;
+  try {
+    const result = await axios.post("/api/recipes", { recipe });
+    const RecipeNew = { ...recipe, _id: result.data.result.insertedId };
+    usePantry.getState().addStoreRecipe(RecipeNew);
+    toast.success("Recipe created!");
+    return RecipeNew;
+  } catch (error) {
+    toast.error("Failed to create recipe.");
+    throw error;
+  }
 };
 export const modifyRecipe = async (recipe) => {
-  // console.log(recipe);
-  const result = await axios.put("/api/recipes", { recipe });
-  console.log(recipe, result.data);
-  usePantry.getState().addStoreRecipe(recipe);
-
-  return result.data;
+  try {
+    const result = await axios.put("/api/recipes", { recipe });
+    usePantry.getState().addStoreRecipe(recipe);
+    toast.success("Recipe updated!");
+    return result.data;
+  } catch (error) {
+    toast.error("Failed to update recipe.");
+    throw error;
+  }
 };
 export const DeleteRecipe = async (_recipe) => {
-  if (_recipe?.recipe?.imageUrl) {
-    const result = await axios.delete(
-      `/api/recipes/${_recipe._id}/${_recipe.recipe.imageUrl.key}`,
-    );
-  } else {
-    const result = await axios.delete(`/api/recipes/${_recipe._id}/`);
-  }
-
-  await usePantry.getState().deleteSingleRecipe(_recipe._id);
-  // console.log("Delete recipe", result.data);
-  // const { response, data } = result.data;
-};
-let idsToDelete = [];
-export const DeleteIngredient = async (_id) => {
-  // Este array almacenará temporalmente los IDs de los ingredientes a eliminar
   try {
-    await usePantry.getState().deleteSingleIngredient(_id);
+    if (_recipe?.recipe?.imageUrl) {
+      await axios.delete(
+        `/api/recipes/${_recipe._id}/${_recipe.recipe.imageUrl.key}`,
+      );
+    } else {
+      await axios.delete(`/api/recipes/${_recipe._id}/`);
+    }
+    await usePantry.getState().deleteSingleRecipe(_recipe._id);
+    toast.success("Recipe deleted!");
   } catch (error) {
-    console.log(error);
-  }
-
-  idsToDelete.push(_id);
-  console.log(idsToDelete.length, idsToDelete);
-  // Verificar si ya hay 4 IDs acumulados
-  if (idsToDelete.length >= 4) {
-    // Llamar a la función para eliminar en batch
-    await DeleteIngredientsBatch(idsToDelete);
-
-    // Limpiar el array después de eliminar
-    idsToDelete = [];
-  }
-};
-
-// Función para eliminar en batch
-
-// console.log(_id);
-
-export const DeleteIngredientsBatch = async (_ids) => {
-  console.log("hrr");
-  try {
-    // Ejecuta todas las eliminaciones en paralelo usando Promise.all
-    const deletionPromises = _ids.map((_id) =>
-      axios.delete(`/api/ingredients/${_id}`),
-    );
-
-    // Espera a que todas las promesas se resuelvan
-    const results = await Promise.all(deletionPromises);
-
-    console.log("All ingredients deleted:", results);
-  } catch (error) {
-    console.log("Error deleting ingredients:", error);
+    toast.error("Failed to delete recipe.");
+    throw error;
   }
 };
 
 export const addIngredient = async (ingredient) => {
-  console.log("h2i");
-  const result = await axios.post("/api/ingredients", { ingredient });
-  console.log("addIngredient", result);
-  const ingredientNew = await {
-    ingredient,
-    _id: result.data.result.insertedId,
-  };
-
-  await usePantry.getState().addSingleIngredient(ingredientNew);
-  const { response, data } = result.data;
+  try {
+    const result = await axios.post("/api/ingredients", { ingredient });
+    const ingredientNew = {
+      ingredient,
+      _id: result.data.result.insertedId,
+    };
+    await usePantry.getState().addSingleIngredient(ingredientNew);
+    toast.success("Ingredient created!");
+    return ingredientNew;
+  } catch (error) {
+    toast.error("Failed to create ingredient.");
+    throw error;
+  }
 };
-function LoadingSpinnerSVG() {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="black"
-    >
-      <path
-        d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
-        opacity=".25"
-      />
-      <path
-        d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
-        className="spinner_ajPY"
-      />
-    </svg>
-  );
-}
+
+export const DeleteIngredient = async (_id) => {
+  try {
+    await usePantry.getState().deleteSingleIngredient(_id);
+    toast.success("Ingredient deleted!");
+  } catch (error) {
+    toast.error("Failed to delete ingredient.");
+    throw error;
+  }
+};
+
 export const addProgram = async (_program) => {
   // const userIdObject = new ObjectId(userId);
   // console.log("hi");
@@ -519,21 +480,11 @@ export const getRecipeById = async (id) => {
     if (result?.data?.result) {
       return result.data.result;
     } else {
-      console.log("Recipe not found.");
+      toast.error("Recipe not found.");
       return null;
     }
   } catch (error) {
-    console.error("Error fetching recipe by id:", error.message);
-    return null;
+    toast.error("Failed to fetch recipe.");
+    throw error;
   }
 };
-
-// useStore.subscribe(
-//   (store) => store.ingredients,
-//   (newIngredients, prevIngredients) => {
-//     useStore.setState({
-//       lowIngredient: newIngredients.filter((task) => task.state === 'ONGOING')
-//         .length,
-//     });
-//   }
-// );

@@ -11,13 +11,14 @@ export default function RecipeIngredientCard({
   const emoji = item?.ingredient?.image || "🍴";
 
   return (
-    <div style={{ position: "relative", width: 157, margin: "0 auto" }}>
+    <div style={{ position: "relative", width: 137 }}>
       {/* Remove button outside the circle, top right */}
       <button
         style={{
           position: "absolute",
           top: -14,
-          right: 0,
+          right: 25,
+          translate: "50% 30%",
           background: "#fff0f0",
           border: "none",
           color: "#c22",
@@ -25,8 +26,8 @@ export default function RecipeIngredientCard({
           fontSize: "1.2rem",
           cursor: "pointer",
           borderRadius: "50%",
-          width: 32,
-          height: 32,
+          width: 36,
+          height: 36,
           lineHeight: "1",
           display: "flex",
           alignItems: "center",
@@ -113,8 +114,8 @@ export default function RecipeIngredientCard({
                 color: "#5a2d06",
                 border: "none",
                 borderRadius: "50%",
-                width: 26,
-                height: 26,
+                width: 30,
+                height: 30,
                 fontWeight: "bold",
                 fontSize: "1.1rem",
                 cursor: "pointer",
@@ -147,8 +148,8 @@ export default function RecipeIngredientCard({
                 color: "#a33",
                 border: "none",
                 borderRadius: "50%",
-                width: 26,
-                height: 26,
+                width: 30,
+                height: 30,
                 fontWeight: "bold",
                 fontSize: "1.1rem",
                 cursor: "pointer",

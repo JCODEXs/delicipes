@@ -38,11 +38,11 @@ const RecipeCardComponent = ({
     setTotal(totalCost);
   };
 
-  const handleDelete = async (e) => {
-    e.stopPropagation();
-    await DeleteRecipe(_recipe);
-    if (deleteHandler) deleteHandler(_recipe);
-  };
+  // const handleDelete = async (e) => {
+  //   e.stopPropagation();
+  //   await DeleteRecipe(_recipe);
+  //   if (deleteHandler) deleteHandler(_recipe);
+  // };
 
   return (
     <div
@@ -125,7 +125,7 @@ const RecipeCardComponent = ({
               cursor: "pointer",
               marginBottom: "0.2rem",
             }}
-            onClick={handleDelete}
+            onClick={() => deleteHandler(_recipe)}
             title="Delete"
           >
             {trashSvg}
@@ -211,7 +211,10 @@ const RecipeCardComponent = ({
                 color: "#3a2412",
               }}
             >
-              <div>{ingredient?.ingredient?.image}</div>
+              <div>
+                {ingredient?.ingredient?.image}
+                {_id}
+              </div>
               <div
                 className="recipe-card-ingredient-name"
                 style={{

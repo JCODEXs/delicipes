@@ -1,82 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { usePantry } from "~/store/pantry";
+import { DeleteRecipe, usePantry } from "~/store/pantry";
 import { getRecipes } from "~/store/pantry";
 import RecipeCardComponent from "./recipeCardComponent";
 import Skeleton from "./Skeleton";
 import { useRouter } from "next/navigation";
-
+import ConfirmModal from "./confirmModal";
 // Simple confirmation modal
-function ConfirmModal({ open, onConfirm, onCancel, recipeTitle }) {
-  if (!open) return null;
-  return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: "rgba(0,0,0,0.25)",
-        zIndex: 1000,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <div
-        style={{
-          background: "#fff",
-          borderRadius: 10,
-          padding: "2rem",
-          minWidth: 280,
-          boxShadow: "0 4px 24px rgba(0,0,0,0.13)",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ marginBottom: 16, fontWeight: 600 }}>
-          Delete recipe <span style={{ color: "#a33" }}>{recipeTitle}</span>?
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "center",
-          }}
-        >
-          <button
-            style={{
-              background: "#a33",
-              color: "#fff",
-              border: "none",
-              borderRadius: 6,
-              padding: "0.5rem 1.2rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-            onClick={onConfirm}
-          >
-            Yes, Delete
-          </button>
-          <button
-            style={{
-              background: "#eee",
-              color: "#333",
-              border: "none",
-              borderRadius: 6,
-              padding: "0.5rem 1.2rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function RecipeLibrary() {
   const storeRecipes = usePantry((store) => store.recipes);
@@ -112,8 +42,10 @@ export default function RecipeLibrary() {
       removeStoreRecipe(pendingDelete._id);
       setConfirmOpen(false);
       setPendingDelete(null);
+      console.log(pendingDelete, "delete recipe");
       // Optionally: call your API to delete from backend
-      // await DeleteRecipe(pendingDelete._id);
+
+      await DeleteRecipe(pendingDelete);
     }
   };
 
@@ -155,9 +87,10 @@ export default function RecipeLibrary() {
   return (
     <section className="library-section" style={{ marginTop: "2rem" }}>
       <ConfirmModal
-        open={confirmOpen}
+        isOpen={confirmOpen}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
+        pendingDeleteType={"recipe"}
         recipeTitle={
           pendingDelete?.recipe?.tittle ?? pendingDelete?.recipe?.title
         }

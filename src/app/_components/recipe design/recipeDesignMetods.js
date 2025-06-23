@@ -2,6 +2,7 @@
 import { DeleteIngredient, DeleteRecipe, usePantry } from "~/store/pantry";
 import { useEffect, useRef, useState } from "react";
 import DesignRecipe from "./recepiDesign";
+import ConfirmModal from "./confirmModal";
 export default function DesignRecipeMetods({ recipe }) {
   const store = usePantry();
   let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
@@ -17,6 +18,9 @@ export default function DesignRecipeMetods({ recipe }) {
       _id: null,
     },
   );
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState(null);
+  const [pendingDeleteType, setPendingDeleteType] = useState(null); // "ingredient" or "recipe"
   const searchRef = useRef();
   const descriptionRef = useRef("");
   const min = {
@@ -85,12 +89,10 @@ export default function DesignRecipeMetods({ recipe }) {
 
   const addToRecipe = (item) => {
     if (actionMode == "delete") {
-      alert("are you sure?");
-      DeleteIngredient(item._id);
-      const filter = ingredientsList.filter(
-        (ingredient) => ingredient._id !== item._id,
-      );
-      setIngredientsList(filter);
+      setPendingDelete(item);
+      setPendingDeleteType("ingredient");
+      setConfirmModalOpen(true);
+      console.log("confirmation modal ", confirmModalOpen);
     }
     if (actionMode == "select") {
       if (
@@ -184,14 +186,20 @@ export default function DesignRecipeMetods({ recipe }) {
       return newQuantity;
     });
   };
+  // For ingredient deletion (already handled in addToRecipe)
+  const handleIngredientDelete = (item) => {
+    setPendingDelete(item);
+    setPendingDeleteType("ingredient");
+    setConfirmModalOpen(true);
+  };
+
+  // For recipe deletion
   function deleteHandler(_recipe) {
-    const result = window.confirm("Are you certain?");
-    if (result) {
-      // deleteStoreRecipe(recipe.tittle);
-      console.log(recipe);
-      DeleteRecipe(_recipe);
-    }
+    setPendingDelete(_recipe);
+    setPendingDeleteType("recipe");
+    setConfirmModalOpen(true);
   }
+
   useEffect(() => {
     setIngredientsList(ingredients);
     //console.log(storeIngredients);
@@ -208,33 +216,68 @@ export default function DesignRecipeMetods({ recipe }) {
     }
   }, [recipe]);
 
+  const handleConfirmDelete = () => {
+    if (pendingDelete) {
+      if (pendingDeleteType === "ingredient") {
+        DeleteIngredient(pendingDelete._id);
+        const filter = ingredientsList.filter(
+          (ingredient) => ingredient._id !== pendingDelete._id,
+        );
+        setIngredientsList(filter);
+      } else if (pendingDeleteType === "recipe") {
+        DeleteRecipe(pendingDelete);
+      }
+      setPendingDelete(null);
+      setConfirmModalOpen(false);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setPendingDelete(null);
+    setConfirmModalOpen(false);
+  };
+
   return (
-    <DesignRecipe
-      ingredients={ingredients}
-      ingredientsList={ingredientsList}
-      recipeList={recipeList}
-      quantity={quantity}
-      searchRef={searchRef}
-      Recipe={Recipe}
-      updateRecipes={updateRecipes}
-      descriptionRef={descriptionRef}
-      setSearch={setSearch}
-      editRecipe={editRecipe}
-      addToRecipe={addToRecipe}
-      removeItem={removeItem}
-      increase={increase}
-      decrease={decrease}
-      deleteHandler={deleteHandler}
-      setIngredientsList={setIngredientsList}
-      setQuantity={setQuantity}
-      setRecipe={setRecipe}
-      setRecipeList={setRecipeList}
-      actionMode={actionMode}
-      setActionMode={setActionMode}
-      setEditableIngredient={setEditableIngredient}
-      editableIngredient={editableIngredient}
-      setAddIngredientModal={setAddIngredientModal}
-      addIngredientModal={addIngredientModal}
-    />
+    <>
+      <DesignRecipe
+        ingredients={ingredients}
+        ingredientsList={ingredientsList}
+        recipeList={recipeList}
+        quantity={quantity}
+        searchRef={searchRef}
+        Recipe={Recipe}
+        updateRecipes={updateRecipes}
+        descriptionRef={descriptionRef}
+        setSearch={setSearch}
+        editRecipe={editRecipe}
+        addToRecipe={addToRecipe}
+        removeItem={removeItem}
+        increase={increase}
+        decrease={decrease}
+        deleteHandler={deleteHandler}
+        setIngredientsList={setIngredientsList}
+        setQuantity={setQuantity}
+        setRecipe={setRecipe}
+        setRecipeList={setRecipeList}
+        actionMode={actionMode}
+        setActionMode={setActionMode}
+        setEditableIngredient={setEditableIngredient}
+        editableIngredient={editableIngredient}
+        setAddIngredientModal={setAddIngredientModal}
+        addIngredientModal={addIngredientModal}
+      />
+      {confirmModalOpen && (
+        <ConfirmModal
+          isOpen={confirmModalOpen}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          pendingDelete={pendingDelete}
+        >
+          {pendingDeleteType === "ingredient"
+            ? "Are you sure you want to delete this ingredient?"
+            : "Are you sure you want to delete this recipe?"}
+        </ConfirmModal>
+      )}
+    </>
   );
 }
