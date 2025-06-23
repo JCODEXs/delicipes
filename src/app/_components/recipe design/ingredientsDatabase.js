@@ -1,45 +1,27 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "./recepiDesign.css";
-
+import { useEffect, useState } from "react";
 import { usePantry } from "../../../store/pantry";
 const units = ["und", "g", "gr", "Gr", "GR", "ml", "Ml", "ML"];
 const min = { gr: 25, und: 1, g: 1, ml: 25, Ml: 50, GR: 100, ML: 100, Gr: 50 };
+import styles from "./ingredientsDatabase.module.css";
 
 export default function Form({ editableIngredient, onClose }) {
   const { addStoreIngredient, deleteSingleIngredient } = usePantry();
-  // console.log(editableIngredient);
   const [formFields, setFormFields] = useState([
     { name: "", units: "", image: "", price: "" },
   ]);
-  const handleChangeModeTiket = (index, event) => {
-    const { name, value } = event.target;
-    const values = [...formFields];
-    values[index][name] = value;
-    if (values[index].price) {
-      const newPrice = (values[index].quantity * values[index].price) / 1000;
-      values[index].price = newPrice;
-    }
-    setFormFields(values);
-  };
+
   const handleChange = (index, event) => {
     const { name, value } = event.target;
     const values = [...formFields];
-    // console.log(value, name, index);
     values[index][name] = value;
     if (values[index].price) {
-      if (values[index].units == "und" || values[index].units == "tbsp") {
-        const newPrice = values[index].price;
-        values[index].grPrice = newPrice;
-        // console.log(newPrice);
+      if (values[index].units === "und" || values[index].units === "tbsp") {
+        values[index].grPrice = values[index].price;
       } else {
-        const newPrice = values[index].price / 1000;
-        values[index].grPrice = newPrice;
+        values[index].grPrice = values[index].price / 1000;
       }
-      // console.log(values);
     }
-
     setFormFields(values);
-    // console.log(values, index);
   };
 
   const handleAddField = () => {
@@ -53,32 +35,19 @@ export default function Form({ editableIngredient, onClose }) {
     const values = [...formFields];
     values.splice(index, 1);
     setFormFields(values);
-    // deleteIngredient(values)
   };
 
   const handleSubmit = (event) => {
-    const id = Math.random(10) * 100000000000;
-    // console.log(formFields);
     event.preventDefault();
     if (!editableIngredient) {
       // addIngredient(formFields[0]);
     } else {
       deleteSingleIngredient(editableIngredient._id);
     }
-    // setIngredients((prev) => {
-    //   if (!Array.isArray(prev)) {
-    //     return formFields;
-    //   }
-    //   return [...prev, ...formFields];
-    // });
-
-    formFields.forEach((ingredient, index) => {
+    formFields.forEach((ingredient) => {
       const id = Math.random(10) * 100000000000;
-
-      // console.log(index, ingredient);
       addStoreIngredient([{ ingredient: ingredient, _id: id }]);
     });
-    // console.log(formFields);
     setFormFields([{ name: "", units: "", image: "", price: "" }]);
     onClose();
   };
@@ -91,74 +60,65 @@ export default function Form({ editableIngredient, onClose }) {
   }, [editableIngredient]);
 
   return (
-    <div className="out-container">
+    <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
         {formFields?.map((field, index) => (
-          <div key={`${index}`}>
-            <input
-              style={{ gap: "1rem", marginRight: "0.5rem" }}
-              type="text"
-              name="name"
-              placeholder=" Name"
-              value={field.name}
-              onChange={(event) => handleChange(index, event)}
-              required
-            />
-            <input
-              type="text"
-              name="image"
-              placeholder=" emoji o nombre"
-              value={field.image}
-              onChange={(event) => handleChange(index, event)}
-              required
-            />
-
-            <div style={{ padding: "0.3rem" }}>
-              {units.map((unit) => {
-                return (
-                  <button
-                    type="button"
-                    className="button"
-                    key={unit}
-                    value={unit}
-                    name={"units"}
-                    onClick={(event) => handleChange(index, event)}
-                  >
-                    {`${min[unit]}${unit}`}
-                  </button>
-                );
-              })}
+          <div key={index} className={styles.formCard}>
+            <div className={styles.inputRow}>
+              <input
+                className={styles.input}
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={field.name}
+                onChange={(event) => handleChange(index, event)}
+                required
+              />
+              <input
+                className={styles.input}
+                type="text"
+                name="image"
+                placeholder="Emoji or name"
+                value={field.image}
+                onChange={(event) => handleChange(index, event)}
+                required
+              />
             </div>
-
-            {/* <input
-              type=""
-              name="units"
-              list="units"
-              placeholder="Unidades"
-              value={field.units}
-              onChange={(event) => handleChange(index, event)}
-              required
-            />
-
-            <datalist id="units">
-              {units.map((unit) => {
-                return (
-                  <option key={unit} value={unit}>
-                    {` ${min[unit]}`}
-                  </option>
-                );
-              })}
-            </datalist> */}
-
+            <div className={styles.unitButtons}>
+              {units.map((unit) => (
+                <button
+                  type="button"
+                  className="button"
+                  key={unit}
+                  value={unit}
+                  name="units"
+                  style={{
+                    padding: "0.4rem 1rem",
+                    borderRadius: 8,
+                    border: "1px solid #e7c08a",
+                    background: field.units === unit ? "#e7c08a" : "#fff",
+                    color: "#5a2d06",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                  onClick={(event) => handleChange(index, event)}
+                >
+                  {`${min[unit]}${unit}`}
+                </button>
+              ))}
+            </div>
             <input
-              style={{ gap: "1rem", marginLeft: "0.5rem" }}
+              style={{
+                padding: "0.7rem",
+                borderRadius: 8,
+                border: "1px solid #ccc",
+                width: "100%",
+              }}
               type="number"
               name="price"
               placeholder={
-                formFields[index].units != "und"
-                  ? formFields[index].units != "tbsp"
-                    ? " $ / Kg"
-                    : " $ / unidad"
+                field.units !== "und" && field.units !== "tbsp"
+                  ? " $ / Kg"
                   : " $ / unidad"
               }
               value={field.price}
@@ -168,35 +128,51 @@ export default function Form({ editableIngredient, onClose }) {
             {formFields.length > 1 && (
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <button
-                  className="button"
                   type="button"
                   onClick={() => handleRemoveField(index)}
+                  className={styles.removeButton}
                 >
-                  X
+                  ×
                 </button>
               </div>
             )}
           </div>
         ))}
-        <button
-          style={{ marginTop: "1rem" }}
-          className="button"
-          type="button"
-          onClick={() => handleAddField()}
-        >
-          Create another
-        </button>
-        <button
-          style={{ marginTop: "1rem" }}
-          className="ModalButton"
-          type="submit"
-        >
-          {formFields.length > 1 ? (
-            <div>Save ingredients</div>
-          ) : (
-            <div>Save ingredient</div>
-          )}
-        </button>
+        <div className={styles.actionRow}>
+          <button
+            className="button"
+            type="button"
+            onClick={handleAddField}
+            style={{
+              flex: 1,
+              background: "#e7c08a",
+              color: "#5a2d06",
+              border: "none",
+              borderRadius: 10,
+              padding: "1rem 0",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Create another
+          </button>
+          <button
+            className="ModalButton"
+            type="submit"
+            style={{
+              flex: 2,
+              background: "#c9b87a",
+              color: "#23262e",
+              border: "none",
+              borderRadius: 10,
+              padding: "1rem 0",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            {formFields.length > 1 ? "Save ingredients" : "Save ingredient"}
+          </button>
+        </div>
       </form>
     </div>
   );

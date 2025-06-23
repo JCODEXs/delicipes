@@ -17,8 +17,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Delicipes",
-  description: "Delicious and practical meals",
+  title: "Delicipeasy",
+  description: "Easy and Delicious meals recipes",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

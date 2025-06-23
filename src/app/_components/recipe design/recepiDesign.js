@@ -8,21 +8,16 @@ import {
 } from "react";
 // import styles from "./recepiDesign.css";
 import Form from "./ingredientsDatabase";
-import {
-  getRecipes,
-  getIngredients,
-  addIngredient,
-  DeleteRecipe,
-  DeleteIngredient,
-} from "~/store/pantry";
+import { getRecipes, getIngredients, addIngredient } from "~/store/pantry";
 import { Modal } from "../modal/modal";
-import RecipeCardComponent from "./recipeCardComponent";
+
 import { usePantry } from "~/store/pantry";
-import { personSvg } from "~/app/icons/icons";
+
 const ActionBox = lazy(() => import("./actionbox"));
+import ActionBoxSkeleton from "./actionBoxSqueleton";
 import { SimpleUploadButton } from "../simple-upload-button";
 import Image from "next/image";
-import ActionBoxSkeleton from "./actionBoxSqueleton";
+import RecipeIngredientCard from "./RecipeIngredientCard";
 export default function DesignRecipe({
   ingredients,
   ingredientsList,
@@ -220,15 +215,18 @@ export default function DesignRecipe({
   //console.log(actionMode)
   return (
     <div
-      className="out-container"
-      style={{ background: "#f8f8f8", minHeight: "100vh" }}
+      className="recipeDesignOutContainer"
+      style={{
+        background: "#f9f6ea",
+        minHeight: "100vh",
+      }}
     >
       <div
-        className="container"
+        className="recipeDesignContainer"
         style={{
-          maxWidth: 900,
           margin: "0 auto",
           padding: "2rem",
+          color: "#3a2412",
         }}
       >
         {/* INGREDIENTS SECTION */}
@@ -240,8 +238,25 @@ export default function DesignRecipe({
               alignItems: "center",
             }}
           >
-            <h2 style={{ fontSize: "1.5rem", fontWeight: 700 }}>Ingredients</h2>
-            <button className="addButton" onClick={openModal}>
+            <h2
+              style={{ fontSize: "1.5rem", fontWeight: 700, color: "#a86b3c" }}
+            >
+              Ingredients
+            </h2>
+            <button
+              className="addButton"
+              onClick={openModal}
+              style={{
+                background: "#e7c08a",
+                color: "#5a2d06",
+                border: "none",
+                borderRadius: 8,
+                padding: "0.5rem 1.2rem",
+                fontWeight: 700,
+                cursor: "pointer",
+                boxShadow: "0 1px 4px rgba(200,180,120,0.10)",
+              }}
+            >
               {addIngredientModal ? "Close Form" : "Add Ingredient to the list"}
             </button>
           </div>
@@ -255,13 +270,14 @@ export default function DesignRecipe({
             </Modal>
           )}
           <div style={{ margin: "1rem 0" }}>
-            <ActionBox
-              ingredientsList={ingredientsList}
-              addToRecipe={addToRecipe}
-              actionMode={actionMode}
-              setActionMode={setActionMode}
-              DeleteIngrediente={DeleteIngredient}
-            />
+            <Suspense fallback={<ActionBoxSkeleton />}>
+              <ActionBox
+                ingredientsList={ingredientsList}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+              />
+            </Suspense>
           </div>
           <input
             type="text"
@@ -281,11 +297,12 @@ export default function DesignRecipe({
         {/* RECIPE FORM SECTION */}
         <section
           style={{
-            background: "#fff",
+            background: "#fff6e3",
             borderRadius: 12,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+            boxShadow: "0 2px 8px rgba(168,107,60,0.10)",
             padding: "1.5rem",
             marginBottom: "2rem",
+            color: "#3a2412",
           }}
         >
           <h2
@@ -293,6 +310,7 @@ export default function DesignRecipe({
               fontSize: "1.4rem",
               fontWeight: 700,
               marginBottom: "1rem",
+              color: "#a86b3c",
             }}
           >
             Create Recipe
@@ -352,10 +370,10 @@ export default function DesignRecipe({
                 required
               />
               <div style={{ margin: "1rem 0" }}>
-                {Recipe.recipe.imageUrl ? (
+                {Recipe?.recipe?.imageUrl ? (
                   <div style={{ marginBottom: "0.5rem" }}>
                     <img
-                      src={Recipe.recipe.imageUrl?.url}
+                      src={Recipe.recipe?.imageUrl?.url}
                       height={120}
                       width={90}
                       style={{ borderRadius: 8, objectFit: "cover" }}
@@ -364,7 +382,7 @@ export default function DesignRecipe({
                 ) : null}
                 <SimpleUploadButton
                   setRecipe={setRecipe}
-                  image={!!Recipe.recipe.imageUrl}
+                  image={!!Recipe?.recipe?.imageUrl}
                 />
               </div>
             </div>
@@ -383,79 +401,23 @@ export default function DesignRecipe({
                 <div style={{ marginBottom: "1rem" }}>
                   <div
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(180px, 1fr))",
                       gap: "1rem",
+                      width: "100%",
                     }}
                   >
                     {recipeList.map((item, index) => (
-                      <div
+                      <RecipeIngredientCard
                         key={item?._id}
-                        style={{
-                          background: "#f9f6ea",
-                          borderRadius: "8px",
-                          padding: "0.5rem 1rem",
-                          minWidth: 140,
-                          boxShadow: "0 1px 4px rgba(200,180,120,0.08)",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          position: "relative",
-                        }}
-                      >
-                        <div style={{ fontWeight: 600, marginBottom: 4 }}>
-                          {item?.ingredient?.name}
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <button
-                            className="buttonSum"
-                            onClick={() =>
-                              increase(index, item?.ingredient?.units)
-                            }
-                          >
-                            +
-                          </button>
-                          <span
-                            style={{
-                              minWidth: 24,
-                              textAlign: "center",
-                            }}
-                          >
-                            {quantity?.[index]} {item?.ingredient?.units}
-                          </span>
-                          <button
-                            className="buttonSum"
-                            onClick={() =>
-                              decrease(index, item?.ingredient?.units)
-                            }
-                          >
-                            -
-                          </button>
-                        </div>
-                        <button
-                          style={{
-                            position: "absolute",
-                            top: 4,
-                            right: 8,
-                            background: "none",
-                            border: "none",
-                            color: "#c22",
-                            fontWeight: "bold",
-                            fontSize: "1.2rem",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => removeItem(item, index)}
-                          title="Remove ingredient"
-                        >
-                          ×
-                        </button>
-                      </div>
+                        item={item}
+                        index={index}
+                        quantity={quantity}
+                        removeItem={removeItem}
+                        increase={increase}
+                        decrease={decrease}
+                      />
                     ))}
                   </div>
                 </div>
@@ -479,11 +441,12 @@ export default function DesignRecipe({
         {/* DESCRIPTION SECTION */}
         <section
           style={{
-            background: "#fff",
+            background: "#fff6e3",
             borderRadius: 12,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+            boxShadow: "0 2px 8px rgba(168,107,60,0.10)",
             padding: "1.5rem",
             marginBottom: "2rem",
+            color: "#3a2412",
           }}
         >
           <label
@@ -491,6 +454,7 @@ export default function DesignRecipe({
               fontWeight: 600,
               marginBottom: 8,
               display: "block",
+              color: "#a86b3c",
             }}
           >
             Preparation Steps
@@ -503,9 +467,10 @@ export default function DesignRecipe({
               minHeight: "80px",
               borderRadius: 8,
               padding: "0.5rem",
-              color: "black",
-              border: "1px solid #ccc",
+              color: "#3a2412",
+              border: "1px solid #e7c08a",
               marginBottom: "1rem",
+              background: "#fff",
             }}
             defaultValue={descriptionValue}
             onChange={(e) => {
@@ -521,11 +486,12 @@ export default function DesignRecipe({
                 padding: "0.7rem 2rem",
                 fontSize: "1.1rem",
                 borderRadius: 8,
-                background: isDisabled ? "#ccc" : "#c9b87a",
-                color: isDisabled ? "#888" : "#23262e",
+                background: isDisabled ? "#eee" : "#c9b87a",
+                color: isDisabled ? "#aaa" : "#3a2412",
                 fontWeight: "bold",
                 border: "none",
                 cursor: isDisabled ? "not-allowed" : "pointer",
+                boxShadow: "0 1px 4px rgba(200,180,120,0.10)",
               }}
             >
               Add Recipe to Library

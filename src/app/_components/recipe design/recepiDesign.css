@@ -1,7 +1,7 @@
 /* --- Background & Base --- */
 body, .out-container {
-  background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), 
-              linear-gradient(90deg, #a86b3c 0%, #e7c08a 100%);
+  background-image: url('/board2.jpg');
+              
   background-size: cover, cover;
   background-repeat: repeat, no-repeat;
   min-height: 100vh;
@@ -191,4 +191,57 @@ button[title="Remove ingredient"] {
   .ReceipLibrary {
     padding: 0.5rem 0.2rem;
   }
+}
+
+/* --- Recipe Design Container --- */
+.recipeDesignContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipeDesignContainer input,
+.recipeDesignContainer textarea {
+  background: #fff8ed;
+  border: 1.5px solid #e7c08a;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  color: #3a2412;
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+}
+.recipeDesignContainer input:focus, .recipeDesignContainer textarea:focus {
+  outline: 2px solid #a86b3c;
+  background: #fff3d6;
+}
+.recipeDesignContainer input::placeholder, .recipeDesignContainer textarea::placeholder {
+  color: #7b3f00;
+  opacity: 1;
+}
+
+.recipeDesignContainer .addButton,
+.recipeDesignContainer .button,
+.recipeDesignContainer .ModalButton {
+  background: linear-gradient(90deg, #e7c08a 60%, #a86b3c 100%);
+  color: #3a2412;
+  border: 2px solid #a86b3c;
+  font-weight: bold;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(120, 70, 30, 0.18);
+  border-radius: 5px;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+  padding: 0.2rem 0.7rem;
+}
+.recipeDesignContainer .addButton:hover,
+.recipeDesignContainer .button:hover,
+.recipeDesignContainer .ModalButton:hover {
+  background: linear-gradient(90deg, #f7d18a 60%, #c97b3c 100%);
+  color: #2e1a08;
+  transform: scale(1.04);
+  padding: 0.2rem 0.7rem;
+}
+
+/* Only for recipe design page */
+.recipeDesignOutContainer {
+  background-image: url('/board2.jpg');
 }

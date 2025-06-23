@@ -2,7 +2,7 @@
 import { DeleteIngredient, DeleteRecipe, usePantry } from "~/store/pantry";
 import { useEffect, useRef, useState } from "react";
 import DesignRecipe from "./recepiDesign";
-export default function DesignRecipeMetods() {
+export default function DesignRecipeMetods({ recipe }) {
   const store = usePantry();
   let [ingredients, setIngredients] = useState(store.ingredients); //[{name:"huevo",units:"und",image:"🥚",price:450,grPrice:450 }, {name:"harina",units:"gr",image:"🍚",price:500,grPrice:5}]);
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -11,10 +11,12 @@ export default function DesignRecipeMetods() {
   const [actionMode, setActionMode] = useState("select");
   const [editableIngredient, setEditableIngredient] = useState();
   const [addIngredientModal, setAddIngredientModal] = useState(false);
-  const [Recipe, setRecipe] = useState({
-    recipe: { title: "", portions: 0 },
-    _id: null,
-  });
+  const [Recipe, setRecipe] = useState(
+    recipe || {
+      recipe: { title: "", portions: 0 },
+      _id: null,
+    },
+  );
   const searchRef = useRef();
   const descriptionRef = useRef("");
   const min = {
@@ -82,7 +84,6 @@ export default function DesignRecipeMetods() {
   };
 
   const addToRecipe = (item) => {
-    // // console.log(item);
     if (actionMode == "delete") {
       alert("are you sure?");
       DeleteIngredient(item._id);
@@ -97,8 +98,15 @@ export default function DesignRecipeMetods() {
           (_item) => _item.ingredient.name === item.ingredient.name,
         )
       ) {
+        // Already in recipe, do nothing
       } else {
         setRecipeList((prev) => [...prev, item]);
+        // Set the minimum quantity for the new ingredient
+        const unit = item?.ingredient?.units;
+        setQuantity((prev) => [
+          ...prev,
+          min[unit] ?? 1, // fallback to 1 if unit not found
+        ]);
         const filter = ingredientsList.filter(
           (ingredient) =>
             ingredient?.ingredient?.name !== item?.ingredient?.name ||
@@ -188,6 +196,18 @@ export default function DesignRecipeMetods() {
     setIngredientsList(ingredients);
     //console.log(storeIngredients);
   }, [ingredients]);
+
+  // Update local Recipe state if the prop changes (e.g., after fetch)
+  useEffect(() => {
+    if (recipe) setRecipe(recipe);
+  }, [recipe]);
+  useEffect(() => {
+    if (recipe && recipe.recipe && recipe.recipe.ingredients) {
+      setRecipeList(recipe.recipe.ingredients);
+      setQuantity(recipe.recipe.ingredients.map((i) => i.quantity));
+    }
+  }, [recipe]);
+
   return (
     <DesignRecipe
       ingredients={ingredients}

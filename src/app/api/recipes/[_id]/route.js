@@ -41,3 +41,37 @@ export async function DELETE(req, context) {
     );
   }
 }
+
+export async function GET(req, context) {
+  const { params } = context;
+  if (!params._id || !ObjectId.isValid(params._id)) {
+    return NextResponse.json(
+      { message: "Invalid or missing ID format." },
+      { status: 400 }
+    );
+  }
+
+  let { db, client } = await connectToDatabase();
+
+  try {
+    await client.connect();
+    const recipe = await db
+      .collection("recipes")
+      .findOne({ _id: new ObjectId(params._id) });
+
+    if (recipe) {
+      return NextResponse.json({ result: recipe });
+    } else {
+      return NextResponse.json(
+        { message: "No document found with the given ID." },
+        { status: 404 }
+      );
+    }
+  } catch (error) {
+    console.error("Error fetching the document:", error);
+    return NextResponse.json(
+      { message: "An error occurred while fetching the document." },
+      { status: 500 }
+    );
+  }
+}

@@ -27,30 +27,42 @@ import { DropdownMenuAdd } from "./dropDownMenu";
 // }
 export default function TopNav() {
   return (
-    <nav className="flex  w-full items-center justify-between border-b p-2 text-3xl text-white  font-semibold  backdrop-blur-sm">
+    <nav className="flex w-full items-center justify-between border-b p-2 text-2xl text-white font-semibold backdrop-blur-sm h-20 overflow-visible relative">
       <Link href={"/"}>
-        <div>Delicipes</div>
+        <div className="flex items-center gap-2 min-w-0 relative">
+          <img
+            src="/2.png"
+            alt="Delicipeasy Logo"
+            style={{
+              width: 95,
+              height: 95,
+              borderRadius: 45,
+              boxShadow: "0 2px 4px rgba(168,107,60,0.18)",
+              marginRight: 8,
+              marginLeft: 1,
+              objectFit: "cover",
+              position: "relative",
+              top: "50%",
+              transform: "translateY(5%)",
+              zIndex: 2,
+              overflow: "visible",
+            }}
+          />
+          <span
+            className="font-extrabold text-yellow-200 drop-shadow-lg"
+            style={{
+              letterSpacing: 2,
+              fontSize: "2rem",
+              whiteSpace: "nowrap",
+              lineHeight: 1.1,
+              overflow: "visible",
+            }}
+          >
+            Delicipeasy
+          </span>
+        </div>
       </Link>
       <div className="flex flex-row items-center gap-4">
-        {/* <Link
-          href="/design"
-          className="text-white hover:text-yellow-200 text-lg font-medium"
-        >
-          Recipes
-        </Link>
-        <Link
-          href="/plan"
-          className="text-white hover:text-yellow-200 text-lg font-medium"
-        >
-          Week Plan
-        </Link>
-        <Link
-          href="/inventory"
-          className="text-white hover:text-yellow-200 text-lg font-medium"
-        >
-          Pantry
-        </Link> */}
-       
         <SignedOut>
           <SignInButton mode="modal" />
         </SignedOut>

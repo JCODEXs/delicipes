@@ -327,11 +327,12 @@ export const usePantry = create(
 
 export const getRecipes = async () => {
   try {
-    // console.log("hi");
-    const result = await axios.get("/api/recipes");
-    // console.log("getRecipes", result.data.result);
+    const baseUrl =
+      typeof window === "undefined"
+        ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        : "";
+    const result = await axios.get(`${baseUrl}/api/recipes`);
     if (result.data.result.length > 0) {
-      const { response, data } = result.data;
       return result.data.result;
     } else {
       console.log("No recipes found in the database.");
@@ -339,7 +340,7 @@ export const getRecipes = async () => {
     }
   } catch (error) {
     console.error("Error fetching ingredients:", error.message);
-    return []; // Return an empty array or handle the error in another way
+    return [];
   }
 };
 // export const getIngredients = async () => {
@@ -510,6 +511,20 @@ export const getMyPrograms = async (userId) => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+export const getRecipeById = async (id) => {
+  try {
+    const result = await axios.get(`/api/recipes/${id}`);
+    if (result?.data?.result) {
+      return result.data.result;
+    } else {
+      console.log("Recipe not found.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching recipe by id:", error.message);
+    return null;
   }
 };
 

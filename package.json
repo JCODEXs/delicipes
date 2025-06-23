@@ -27,6 +27,7 @@
     "drizzle-orm": "^0.25.4",
     "embla-carousel-autoplay": "^8.1.5",
     "embla-carousel-react": "^8.1.5",
+    "framer-motion": "^12.18.1",
     "gsap": "^3.12.5",
     "immer": "^10.1.1",
     "lucide-react": "^0.378.0",
