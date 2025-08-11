@@ -30,8 +30,9 @@ const RecipeCard = ({
   if (recipe?.ingredients?.length) {
     total = recipe.ingredients.reduce(
       (sum, ingredient) =>
-        sum + (ingredient.ingredient?.grPrice || 0) * (ingredient.quantity || 0),
-      0
+        sum +
+        (ingredient.ingredient?.grPrice || 0) * (ingredient.quantity || 0),
+      0,
     );
   }
 
@@ -53,7 +54,13 @@ const RecipeCard = ({
       className="itemTotal2"
     >
       {/* Top Row: Image & Delete Button */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
         <div>
           {recipe?.imageUrl?.url && (
             <Image
@@ -140,7 +147,7 @@ const RecipeCard = ({
             min={1}
             max={20}
             style={{
-              width: 48,
+              width: 68,
               height: 28,
               color: "#23262e",
               background: "#e6e2c0",
@@ -200,7 +207,9 @@ const RecipeCard = ({
               <div key={index} style={{ display: "flex", gap: "0.5rem" }}>
                 <span>
                   {ingredient.quantity}
-                  {ingredient.ingredient?.units ? ` ${ingredient.ingredient.units}` : ""}
+                  {ingredient.ingredient?.units
+                    ? ` ${ingredient.ingredient.units}`
+                    : ""}
                 </span>
                 <span>{ingredient.ingredient?.name}</span>
               </div>
@@ -219,7 +228,8 @@ const RecipeCard = ({
           textAlign: "center",
         }}
       >
-        ${((total / recipe.portions) * (showPortions ? portions : 1)).toFixed(0)}
+        $
+        {((total / recipe.portions) * (showPortions ? portions : 1)).toFixed(0)}
         <span style={{ fontSize: "1rem", color: "#e6e2c0", marginLeft: 6 }}>
           {showPortions ? " total" : " /portion"}
         </span>

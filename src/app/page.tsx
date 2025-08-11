@@ -45,7 +45,7 @@ const fetchData = async (retries = 2) => {
       console.log("hello");
     }, 2000);
     recipes = await getRecipes();
-    ingredients = await getIngredients();
+    // ingredients = await getIngredients();
 
     return { recipes, ingredients };
   } catch (err) {

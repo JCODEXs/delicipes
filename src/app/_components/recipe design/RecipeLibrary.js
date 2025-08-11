@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { DeleteRecipe, usePantry } from "~/store/pantry";
-import { getRecipes } from "~/store/pantry";
 import RecipeCardComponent from "./recipeCardComponent";
 import Skeleton from "./Skeleton";
 import { useRouter } from "next/navigation";
@@ -18,19 +17,26 @@ export default function RecipeLibrary() {
   const [pendingDelete, setPendingDelete] = useState(null);
   const [search, setSearch] = useState("");
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!storeRecipes || storeRecipes.length < 1) {
-        const fetchedRecipes = await getRecipes();
-        if (fetchedRecipes && fetchedRecipes.length > 0) {
-          fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
-        }
-      }
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setHydrated(true);
   }, []);
+  if (!hydrated) return <Skeleton />;
+
+  //this works when allways shared the recipes
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (!storeRecipes || storeRecipes.length < 1) {
+  //       const fetchedRecipes = await getRecipes();
+  //       if (fetchedRecipes && fetchedRecipes.length > 0) {
+  //         fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
+  //       }
+  //     }
+  //   };
+  //   fetchData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleDelete = (_recipe) => {
     setPendingDelete(_recipe);

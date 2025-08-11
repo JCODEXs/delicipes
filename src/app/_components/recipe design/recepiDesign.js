@@ -84,33 +84,34 @@ export default function DesignRecipe({
   useLayoutEffect(() => {
     validateForm();
   }, [Recipe?.recipe?.tittle, Recipe?.recipe?.portions, recipeList]);
-  useEffect(() => {
-    // console.log(ingredients);
-    const fetchData = async () => {
-      if (ingredients.length < 1 || recipes.length < 1) {
-        ingredients = await getIngredients();
-        recipes = await getRecipes();
-      }
-      try {
-        // setIngredients([...ingredients]);
-        ingredients.map((ingredient) => {
-          addSingleIngredient(ingredient);
-          // console.log(ingredient);
-        });
-        recipes.forEach((recipe) => {
-          addStoreRecipe(recipe);
-          // console.log(recipe);
-        });
-        setIngredientsList(ingredients);
+  //use when shared ingredients acros the comunity
+  // useEffect(() => {
+  //   // console.log(ingredients);
+  //   const fetchData = async () => {
+  //     if (ingredients.length < 1 || recipes.length < 1) {
+  //       ingredients = await getIngredients();
+  //       recipes = await getRecipes();
+  //     }
+  //     try {
+  //       // setIngredients([...ingredients]);
+  //       ingredients.map((ingredient) => {
+  //         addSingleIngredient(ingredient);
+  //         // console.log(ingredient);
+  //       });
+  //       recipes.forEach((recipe) => {
+  //         addStoreRecipe(recipe);
+  //         // console.log(recipe);
+  //       });
+  //       setIngredientsList(ingredients);
 
-        // console.log(ingredients, recipes);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  //       // console.log(ingredients, recipes);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [ingredients]);
+  //   fetchData();
+  // }, [ingredients]);
 
   // useEffect(() => {
   //   let total;
@@ -355,7 +356,15 @@ export default function DesignRecipe({
                 }
                 required
               />
-              <label style={{ fontWeight: 600, marginTop: "1.2rem", display: "block" }}>Portions</label>
+              <label
+                style={{
+                  fontWeight: 600,
+                  marginTop: "1.2rem",
+                  display: "block",
+                }}
+              >
+                Portions
+              </label>
               <input
                 name="portions"
                 type="number"

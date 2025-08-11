@@ -14,25 +14,25 @@ export default function Footer() {
               href={"/inventory"}
               className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
             >
-              Pantry
+              Despensa
             </Link>
             <Link
               href={"/plan"}
               className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
             >
-              Week plan
+              Plan
             </Link>
             <Link
               href={"/design"}
               className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
             >
-              New Recipe
+              Diseño
             </Link>
             <Link
               href="/library"
               className="text-white hover:text-yellow-200 font-medium px-1 md:px-2 whitespace-nowrap"
             >
-              Library
+              Recetario
             </Link>
           </div>
         </SignedIn>

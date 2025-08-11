@@ -46,6 +46,10 @@ const pantry = (set) => ({
       false,
       "addIngredient",
     ),
+  addStoreIngredients: (newIngredients) =>
+    set((state) => ({
+      ingredients: [...state.ingredients, ...newIngredients],
+    })),
 
   addStoreIngredient: (ingredients) =>
     set(
@@ -319,10 +323,22 @@ const log = (config) => (set, get, api) =>
   );
 
 export const usePantry = create(
-  subscribeWithSelector(log(pantry)),
-
-  // subscribeWithSelector(log(persist(devtools(pantry), { name: "Devtools" })))
+  persist(subscribeWithSelector(log(pantry)), {
+    name: "pantry-storage", // Key in localStorage
+    partialize: (state) => ({
+      recipes: state.recipes,
+      ingredients: state.ingredients,
+      programing: state.programing,
+      pantryList: state.pantryList,
+    }),
+    onRehydrateStorage: () => (state) => {
+      if (state?.onRehydrate) {
+        state.onRehydrate(state);
+      }
+    },
+  }),
 );
+
 // console.log(pantry.recipes);
 
 export const getRecipes = async () => {

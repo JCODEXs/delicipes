@@ -49,13 +49,13 @@ const RecipeCardComponent = ({
       className="totals3"
       key={recipe?._id}
       style={{
-        margin: "1rem 0",
-        padding: "1.2rem",
+        margin: "0.5rem 0",
+        padding: "1rem",
         borderRadius: "14px",
         background: "#fff8ed",
         boxShadow: "0 2px 8px rgba(120,70,30,0.10)",
         minWidth: 280,
-        maxWidth: 400,
+        maxWidth: 440,
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
@@ -186,7 +186,7 @@ const RecipeCardComponent = ({
               fontWeight: 600,
               color: "#5a2d06",
               fontSize: "0.98rem",
-              padding: "0.2rem 0.7rem",
+              padding: "0.2rem 0.2rem",
               background: "rgba(168,107,60,0.07)",
               borderRadius: "6px",
             }}
@@ -207,13 +207,13 @@ const RecipeCardComponent = ({
                 alignItems: "center",
                 background: "#f9f6ea",
                 borderRadius: "7px",
-                padding: "0.3rem 0.7rem",
+                padding: "0.3rem 0.2rem",
                 color: "#3a2412",
               }}
             >
               <div>
                 {ingredient?.ingredient?.image}
-                {_id}
+                {/* {_id} */}
               </div>
               <div
                 className="recipe-card-ingredient-name"

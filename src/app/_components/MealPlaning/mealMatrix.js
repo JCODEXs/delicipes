@@ -321,23 +321,24 @@ const MealMatrix = ({ myPrograms }) => {
     handleSelectRecipe(day, recipe);
   };
   const weekDays = [
-    // "1ª",
-    // "2ª",
-    // "3ª",
-    // "4ª",
-    // "5ª",
-    // "6ª",
-    // "7ª",
-    // "8ª",
-    // "9ª",
-    // "10ª",
-    "Monday",
-    "Thuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "1ª",
+    "2ª",
+    "3ª",
+    "4ª",
+    "5ª",
+    "6ª",
+    "7ª",
+    "8ª",
+    "9ª",
+    "10ª",
+    "11ª",
+    // "Monday",
+    // "Thuesday",
+    // "Wednesday",
+    // "Thursday",
+    // "Friday",
+    // "Saturday",
+    // "Sunday",
     // "Lunesgo",
     // "Marto",
   ];
@@ -436,7 +437,7 @@ const MealMatrix = ({ myPrograms }) => {
       <div
         style={{
           position: "fixed",
-          top: "108px", // <-- Adjust this to your menu height
+          top: "120px", // <-- Adjust this to your menu height
           background: "rgba(10, 10, 20, 0.98)",
           zIndex: 110,
           padding: "0.5rem 0",
