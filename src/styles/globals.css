@@ -166,3 +166,25 @@ svg {
     grid-template-columns: 1fr !important;
   }
 }
+.item[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #23262e;
+  color: #fff;
+  padding: 0.3em 0.7em;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  z-index: 10;
+  top: 110%;
+  /* or adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.item {
+  position: relative;
+  /* Needed for tooltip positioning */
+}

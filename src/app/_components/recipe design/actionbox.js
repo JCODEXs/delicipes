@@ -205,15 +205,15 @@ export default function ActionBox({
                   border: "1px solid #e7c08a",
                   borderRadius: "6px",
                   padding: "0.15rem",
-                  minWidth: "45px",
-                  minHeight: "50px",
+                  minWidth: "55px",
+                  minHeight: "60px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow: "0 1px 2px rgba(120, 70, 30, 0.08)",
-                  fontWeight: 300,
+                  fontWeight: 400,
                   color: "#3a2412",
-                  fontSize: "0.95rem",
+                  fontSize: "1.15rem",
                 }}
               >
                 {item.ingredient?.image || item.image}

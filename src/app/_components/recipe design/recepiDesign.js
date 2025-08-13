@@ -319,7 +319,7 @@ export default function DesignRecipe({
               color: "#a86b3c",
             }}
           >
-            Create Recipe
+            Recipe configuration
           </h2>
           <div
             style={{
@@ -331,7 +331,7 @@ export default function DesignRecipe({
           >
             {/* Left: Title, Portions, Image */}
             <div style={{ flex: 1, minWidth: 260 }}>
-              <label style={{ fontWeight: 600 }}>Title</label>
+              <label style={{ fontWeight: 600 }}>Name</label>
               <input
                 name="title"
                 type="text"
