@@ -6,6 +6,26 @@ import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 import api from "~/app/api/recipes/api";
 import { index } from "drizzle-orm/pg-core";
 import { toast } from "sonner";
+function LoadingSpinnerSVG() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="black"
+    >
+      <path
+        d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+        opacity=".25"
+      />
+      <path
+        d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+        className="spinner_ajPY"
+      />
+    </svg>
+  );
+}
 
 const pantry = (set) => ({
   ingredients: [],
@@ -77,7 +97,7 @@ const pantry = (set) => ({
   addStorePrograming: (program) =>
     set(
       produce((store) => {
-        // //   console.log(Object.values(program), program);
+        console.log(Object.values(program), program, "program");
         //   Object.entries(program)?.forEach(([day, recipes]) => {
         // //     console.log(day, recipes);
 
@@ -107,6 +127,7 @@ const pantry = (set) => ({
       produce(
         (store) => {
           store.programing = [];
+          console.log(store.programing);
         },
         false,
         "deleteAll",
@@ -152,7 +173,7 @@ const pantry = (set) => ({
     set(
       // Use produce to modify the current state immutably
       produce((store) => {
-        console.log(ingredient);
+        // console.log(ingredient);
         const index = store.ingredients.findIndex(
           (item) => item._id === ingredient._id,
         );
@@ -247,7 +268,7 @@ const pantry = (set) => ({
     // console.log(_recipe, recipeExists);
     if (!recipeExists) {
       // console.log("new item", _recipe);
-      const newRecipe = await addRecipe(_recipe);
+      // const newRecipe = await addRecipe(_recipe);
     } else {
       // If the recipe exists, update the store
       set(
@@ -257,7 +278,7 @@ const pantry = (set) => ({
           );
           // console.log("updating item", index, _recipe);
           // store.recipes[index] = _recipe;
-          modifyRecipe(_recipe);
+          // modifyRecipe(_recipe);
         }),
       );
     }
@@ -360,10 +381,10 @@ export const getRecipes = async () => {
   }
 };
 // export const getIngredients = async () => {
-//   // console.log("hi");
+//   console.log("hi");
 //   const result = await axios.get("/api/ingredients");
 //   console.log("getIngredients", result.data.result);
-//   // const { response, data } = result.data;
+//   const { response, data } = result.data;
 //   return result.data.result;
 // };
 export const getIngredients = async () => {
@@ -490,17 +511,17 @@ export const getMyPrograms = async (userId) => {
     console.log(error);
   }
 };
-export const getRecipeById = async (id) => {
-  try {
-    const result = await axios.get(`/api/recipes/${id}`);
-    if (result?.data?.result) {
-      return result.data.result;
-    } else {
-      toast.error("Recipe not found.");
-      return null;
-    }
-  } catch (error) {
-    toast.error("Failed to fetch recipe.");
-    throw error;
-  }
-};
+// export const getRecipeById = async (id) => {
+//   try {
+//     const result = await axios.get(`/api/recipes/${id}`);
+//     if (result?.data?.result) {
+//       return result.data.result;
+//     } else {
+//       toast.error("Recipe not found.");
+//       return null;
+//     }
+//   } catch (error) {
+//     toast.error("Failed to fetch recipe.");
+//     throw error;
+//   }
+// };

@@ -2,7 +2,7 @@
 "use client";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import styles from "./mealMatrix.css";
-import { addProgram, getRecipes, usePantry } from "../../../store/pantry";
+import { addProgram, usePantry } from "../../../store/pantry";
 import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
@@ -28,17 +28,17 @@ const MealMatrix = ({ myPrograms }) => {
   console.log("storeRecipes:", storeRecipes);
 
   // First useEffect: fetch from API if store is empty
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!storeRecipes || storeRecipes.length < 1) {
-        const fetchedRecipes = await getRecipes();
-        if (fetchedRecipes && fetchedRecipes.length > 0) {
-          fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
-        }
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (!storeRecipes || storeRecipes.length < 1) {
+  //       const fetchedRecipes = await getRecipes();
+  //       if (fetchedRecipes && fetchedRecipes.length > 0) {
+  //         fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
+  //       }
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   // Second useEffect: always sync local recipes with store
   useEffect(() => {
@@ -391,7 +391,7 @@ const MealMatrix = ({ myPrograms }) => {
           position: "fixed",
           bottom: 24,
           right: 24,
-          zIndex: 1000,
+          zIndex: 10,
           background: "rgba(20, 20, 30, 0.95)",
           borderRadius: "16px",
           boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
@@ -414,6 +414,9 @@ const MealMatrix = ({ myPrograms }) => {
           className="buttonP"
           onClick={() => {
             deletePrograming();
+            setSelectedRecipes({});
+            setDayTotals({});
+            setIngredientsTotList([]);
           }}
         >
           Delete
@@ -439,7 +442,7 @@ const MealMatrix = ({ myPrograms }) => {
           position: "fixed",
           top: "120px", // <-- Adjust this to your menu height
           background: "rgba(10, 10, 20, 0.98)",
-          zIndex: 110,
+          zIndex: 5,
           padding: "0.5rem 0",
           marginBottom: "0.5rem",
           borderBottom: "2px solid #c9b87a",
@@ -557,19 +560,7 @@ const MealMatrix = ({ myPrograms }) => {
             >
               {selectedRecipes?.[day] &&
                 selectedRecipes[day].map((_selectedRecipe) => (
-                  <div
-                    key={_selectedRecipe._id + day}
-                    draggable="true"
-                    onDragStart={(event) =>
-                      handleDragStartFromDay(event, _selectedRecipe, day)
-                    }
-                    style={{
-                      borderRadius: "7px",
-                      border: "1px solid #333",
-                      background: "#23262e",
-                      padding: "0.5rem",
-                    }}
-                  >
+                  <div>
                     <RecipeCard
                       key={_selectedRecipe._id}
                       recipe_={_selectedRecipe.recipe}
