@@ -495,7 +495,7 @@ export const addProgram = async (_program) => {
 export const getMyPrograms = async (userId) => {
   // console.log(userId);
   try {
-    const result = await api.get(`/program/${userId}`);
+    const result = await axios.get(`/program/${userId}`);
 
     const { response, data } = result.data;
     const index = data?.result ? data?.result.length - 1 : 0;
