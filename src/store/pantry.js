@@ -495,21 +495,36 @@ export const addProgram = async (_program) => {
 export const getMyPrograms = async (userId) => {
   // console.log(userId);
   try {
-    const result = await axios.get(`/program/${userId}`);
+    // Create a proper URL - choose one of these options:
+
+    // Option 1: Use relative path (recommended for Next.js)
+    const result = await axios.get(`/api/program/${userId}`);
+
+    // Option 2: Use environment-aware base URL
+    // const baseURL = process.env.NODE_ENV === 'production'
+    //   ? 'https://your-production-domain.com'
+    //   : 'http://localhost:3000';
+    // const result = await axios.get(`${baseURL}/api/program/${userId}`);
 
     const { response, data } = result.data;
     const index = data?.result ? data?.result.length - 1 : 0;
     const RecipesList =
-      await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
+      data?.result?.[index]?._program?.ingredientsTotList?.[0];
+
     // console.log("getPrograms", RecipesList);
-    await usePantry.getState().addListOfIngredients(RecipesList);
-    if (result.data.result.length > 0) {
-      return result.data.result;
+
+    if (RecipesList) {
+      await usePantry.getState().addListOfIngredients(RecipesList);
+    }
+
+    if (data?.result && data.result.length > 0) {
+      return data.result;
     } else {
       return [];
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error in getMyPrograms:", error);
+    return [];
   }
 };
 export const getRecipeById = async (id) => {
