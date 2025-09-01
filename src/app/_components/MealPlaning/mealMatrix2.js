@@ -1,4 +1,3 @@
-// components/RecetasMatrix.js
 "use client";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import styles from "./mealMatrix.css";
@@ -387,156 +386,6 @@ const MealMatrix = () => {
 
     doc.save("programa.pdf");
   };
-
-  // if (loading) {
-  //   return <div>Loading programs...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-
-  // First useEffect: fetch from API if store is empty
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (!storeRecipes || storeRecipes.length < 1) {
-  //       const fetchedRecipes = await getRecipes();
-  //       if (fetchedRecipes && fetchedRecipes.length > 0) {
-  //         fetchedRecipes.forEach((recipe) => addStoreRecipe(recipe));
-  //       }
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  const OnClickExpand = () => {
-    setShowList(!showList);
-  };
-
-  const deleteFromSelected = (day, recipeID) => {
-    setSelectedRecipes((prevSelectedRecipes) => {
-      return {
-        ...prevSelectedRecipes,
-        [day]: [
-          ...(prevSelectedRecipes?.[day]?.filter(
-            (prevRecipes) => prevRecipes?._id !== recipeID,
-          ) || []),
-        ],
-      };
-    });
-  };
-
-  const passPortions = (portions, _id) => {
-    setPortions((prevPortions) => {
-      // Create a new object that contains all previous portions and updates or adds the new portion
-      return { ...prevPortions, [_id]: portions };
-    });
-  };
-  const setProgramPortions = (day, portions, recipeID) => {
-    setSelectedRecipes((prevSelectedRecipes) => {
-      // // console.log(prevSelectedRecipes[day]);
-      // // console.log(recipeID, currentRecipes);
-      const currentRecipes = prevSelectedRecipes[day] ?? [];
-      let modifiedRecipe = currentRecipes.find(
-        (recipe) => recipe._id === recipeID,
-      );
-      let restRecipes = currentRecipes.filter(
-        (recipe) => recipe._id !== recipeID,
-      );
-      if (modifiedRecipe) {
-        const updatedRecipe = {
-          ...modifiedRecipe,
-          realPortions: portions[recipeID],
-        };
-        // // console.log(modifiedRecipe);
-        const modifiedIndex = currentRecipes.findIndex(
-          (recipe) => recipe._id === recipeID,
-        );
-        const newRecipes = [
-          ...currentRecipes.slice(0, modifiedIndex),
-          updatedRecipe,
-          ...currentRecipes.slice(modifiedIndex + 1),
-        ];
-        const updatedSelectedRecipes = {
-          ...prevSelectedRecipes,
-          [day]: newRecipes,
-        };
-        // // console.log(updatedSelectedRecipes);
-        return updatedSelectedRecipes;
-      } else {
-        return prevSelectedRecipes;
-      }
-    });
-  };
-  // console.log(selectedRecipes);
-
-  const handleSelectRecipe = (day, _recipe) => {
-    // console.log(day, _recipe);
-
-    const isRecipeSelected = selectedRecipes?.[day]?.some((recipe) => {
-      return _recipe._id === recipe._id;
-    });
-    // console.log(isRecipeSelected);
-    if (!isRecipeSelected) {
-      setSelectedRecipes((prevSelectedRecipes) => ({
-        ...prevSelectedRecipes,
-        [day]: [...(prevSelectedRecipes?.[day] || []), _recipe],
-      }));
-    }
-  };
-
-  const handleDragStart = (event, recipe) => {
-    event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.setData("text/plain", JSON.stringify({ recipe }));
-    // // // // console.log(recipe);
-  };
-  const handleDragStartFromDay = (event, recipe, dayFrom) => {
-    // if(!dayFrom){
-    //     event.dataTransfer.effectAllowed = 'move';
-    //     event.dataTransfer.setData('text/plain', JSON.stringify({recipe}));
-    // }
-    const thisRecipe = recipe.recipe;
-    event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.setData(
-      "text/plain",
-      JSON.stringify({ recipe, dayFrom }),
-    );
-    // // // // console.log(recipe);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-    const target = event;
-    // // // console.log(target);
-  };
-
-  const handleDrop = (event, day) => {
-    event.preventDefault();
-    const data = event?.dataTransfer?.getData("text/plain");
-    let parsedData = null;
-
-    try {
-      parsedData = JSON.parse(data);
-    } catch (error) {
-      // Handle the error (e.g., display a message, set default values, etc.)
-      console.error("Error parsing JSON data:", error);
-    }
-
-    const recipe = parsedData.recipe;
-    const dayFrom = parsedData.dayFrom;
-    if (dayFrom && selectedRecipes[dayFrom]) {
-      const updatedRecipes = selectedRecipes[dayFrom].filter(
-        (r) => r._id !== recipe._id,
-      );
-      // console.log(updatedRecipes, recipe._id, selectedRecipes);
-      setSelectedRecipes((prevSelectedRecipes) => ({
-        ...prevSelectedRecipes,
-        [dayFrom]: updatedRecipes,
-      }));
-    }
-    handleSelectRecipe(day, recipe);
-  };
-  console.log("planning", myPrograms);
   const weekDays = [
     "dia o",
     "dia 1",
@@ -560,41 +409,7 @@ const MealMatrix = () => {
     // "Lunesgo",
     // "Marto",
   ];
-  const ingredientList = Object.entries(ingredientsTotList).map(
-    ([ingredient, details]) => (
-      <li key={ingredient}>
-        {details.cantidad?.toFixed(1)}
-        {details.cantidad > 49 ? "gr" : "unid"} {ingredient} Price:{" "}
-        {details.precio?.toFixed(0)}
-      </li>
-    ),
-  );
-  const ingListByDay = (day) => {
-    // // console.log(day, ingredientsTotList[1]?.[day]);
-    if (ingredientsTotList[1]?.[day]) {
-      // // console.log(day, ingredientsTotList[1]);
-      return Object.entries(ingredientsTotList?.[1]?.[day])?.map(
-        ([ingredient, details]) => (
-          <li key={ingredient}>
-            {details?.cantidad && details?.cantidad.toFixed(0)}{" "}
-            {details?.cantidad > 12 ? "gr" : "unid"} {ingredient}
-            {/*  ${" "}{details.precio?.toFixed(0)} */}
-          </li>
-        ),
-      );
-    }
-  };
-  console.log(recipes);
-
-  const getRecipePrice = (recipe) => {
-    if (!recipe.ingredients || !Array.isArray(recipe.ingredients)) return 0;
-    return recipe.ingredients.reduce((sum, ingredient) => {
-      const grPrice = ingredient.ingredient?.grPrice || 0;
-      const quantity = ingredient.quantity || 0;
-      return sum + grPrice * quantity;
-    }, 0);
-  };
-
+  // Rest of your component JSX remains the same
   return (
     <div className="mealMatrix">
       {/* Floating Action Buttons */}
@@ -638,11 +453,11 @@ const MealMatrix = () => {
           Delete
         </button>
         {/* <button
-          className="buttonP"
-          onClick={() => setOpenedModal(!openedModal)}
-        >
-          Shopping List
-        </button> */}
+            className="buttonP"
+            onClick={() => setOpenedModal(!openedModal)}
+          >
+            Shopping List
+          </button> */}
       </div>
 
       {/* Shopping List Modal */}
