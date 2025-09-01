@@ -493,35 +493,32 @@ export const addProgram = async (_program) => {
   toast("Saved!");
 };
 export const getMyPrograms = async (userId) => {
-  // console.log(userId);
   try {
-    // Create a proper URL - choose one of these options:
+    // Determine the base URL based on environment
+    let baseURL = "";
 
-    // Option 1: Use relative path (recommended for Next.js)
-    const result = await axios.get(`/api/program/${userId}`);
+    if (typeof window !== "undefined") {
+      // Client-side: use relative path
+      baseURL = "";
+    } else {
+      // Server-side: use absolute URL
+      baseURL = process.env.VERCEL_URL
+        ? process.env.VERCEL_URL
+        : "http://localhost:3000";
+    }
 
-    // Option 2: Use environment-aware base URL
-    // const baseURL = process.env.NODE_ENV === 'production'
-    //   ? 'https://your-production-domain.com'
-    //   : 'http://localhost:3000';
-    // const result = await axios.get(`${baseURL}/api/program/${userId}`);
+    const result = await axios.get(`${baseURL}/api/program/${userId}`);
 
-    const { response, data } = result.data;
+    const { data } = result.data;
     const index = data?.result ? data?.result.length - 1 : 0;
     const RecipesList =
       data?.result?.[index]?._program?.ingredientsTotList?.[0];
-
-    // console.log("getPrograms", RecipesList);
 
     if (RecipesList) {
       await usePantry.getState().addListOfIngredients(RecipesList);
     }
 
-    if (data?.result && data.result.length > 0) {
-      return data.result;
-    } else {
-      return [];
-    }
+    return data?.result || [];
   } catch (error) {
     console.log("Error in getMyPrograms:", error);
     return [];
