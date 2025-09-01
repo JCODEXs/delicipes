@@ -1,0 +1,110 @@
+
+  [
+    
+        
+          {
+            "recipe": {
+              "key": 3270648.8283420484,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "avena",
+                    "units": "gr",
+                    "image": "🌾",
+                    "price": "2200",
+                    "grPrice": 2.2
+                  },
+                  "quantity": 700
+                },
+                {
+                  "ingredient": {
+                    "name": "nuez del brasil",
+                    "units": "gr",
+                    "image": "🌰",
+                    "price": "12000",
+                    "grPrice": 12.0
+                  },
+                  "quantity": 110
+                },
+                {
+                  "ingredient": {
+                    "name": "maní",
+                    "units": "gr",
+                    "image": "🥜",
+                    "price": "3800",
+                    "grPrice": 3.8
+                  },
+                  "quantity": 110
+                },
+                {
+                  "ingredient": {
+                    "name": "pasas",
+                    "units": "gr",
+                    "image": "🍇",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 70
+                },
+                {
+                  "ingredient": {
+                    "name": "ajonjolí",
+                    "units": "gr",
+                    "image": "🌱",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 70
+                },
+                {
+                  "ingredient": {
+                    "name": "miel",
+                    "units": "ml",
+                    "image": "🍯",
+                    "price": "8000",
+                    "grPrice": 8.0
+                  },
+                  "quantity": 120
+                },
+                {
+                  "ingredient": {
+                    "name": "aceite de coco",
+                    "units": "ml",
+                    "image": "🥥",
+                    "price": "10000",
+                    "grPrice": 10.0
+                  },
+                  "quantity": 60
+                },
+                {
+                  "ingredient": {
+                    "name": "canela",
+                    "units": "cucharadita",
+                    "image": "🌿",
+                    "price": "4000",
+                    "grPrice": 4.0
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "pizca",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Granola crujiente con nueces, avena y semillas, perfecta para el desayuno",
+              "title": "Granola con Nuez del Brasil y Maní",
+              "portions": 20,
+              "imageUrl": {
+                "name": "granola_mixta.jpg",
+                "url": "https://ejemplo.com/granola_mixta.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          }
+  ]

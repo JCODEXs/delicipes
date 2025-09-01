@@ -20,7 +20,7 @@ export async function DELETE(req, context) {
   try {
     await client.connect();
     const result = await db
-      .collection("recipes")
+      .collection("VipRecipes")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {
@@ -47,7 +47,7 @@ export async function GET(req, context) {
   if (!params._id || !ObjectId.isValid(params._id)) {
     return NextResponse.json(
       { message: "Invalid or missing ID format." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -56,7 +56,7 @@ export async function GET(req, context) {
   try {
     await client.connect();
     const recipe = await db
-      .collection("recipes")
+      .collection("VipRecipes")
       .findOne({ _id: new ObjectId(params._id) });
 
     if (recipe) {
@@ -64,14 +64,14 @@ export async function GET(req, context) {
     } else {
       return NextResponse.json(
         { message: "No document found with the given ID." },
-        { status: 404 }
+        { status: 404 },
       );
     }
   } catch (error) {
     console.error("Error fetching the document:", error);
     return NextResponse.json(
       { message: "An error occurred while fetching the document." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

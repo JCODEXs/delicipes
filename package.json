@@ -30,6 +30,8 @@
     "framer-motion": "^12.18.1",
     "gsap": "^3.12.5",
     "immer": "^10.1.1",
+    "jspdf": "^3.0.2",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.378.0",
     "mongodb": "^6.7.0",
     "next": "^14.2.1",

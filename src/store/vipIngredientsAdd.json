@@ -1,0 +1,83 @@
+[
+    {
+      "ingredient": {
+        "name": "avena",
+        "units": "gr",
+        "image": "🌾",
+        "price": "2200",
+        "grPrice": 2.2
+      }
+    },
+    {
+      "ingredient": {
+        "name": "nuez del brasil",
+        "units": "gr",
+        "image": "🌰",
+        "price": "12000",
+        "grPrice": 12.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "maní",
+        "units": "gr",
+        "image": "🥜",
+        "price": "3800",
+        "grPrice": 3.8
+      }
+    },
+    {
+      "ingredient": {
+        "name": "pasas",
+        "units": "gr",
+        "image": "🍇",
+        "price": "15000",
+        "grPrice": 5.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "ajonjolí",
+        "units": "gr",
+        "image": "🌱",
+        "price": "5000",
+        "grPrice": 5.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "miel",
+        "units": "ml",
+        "image": "🍯",
+        "price": "8000",
+        "grPrice": 8.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "aceite de coco",
+        "units": "ml",
+        "image": "🥥",
+        "price": "10000",
+        "grPrice": 10.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "canela",
+        "units": "gr",
+        "image": "🌿",
+        "price": "4000",
+        "grPrice": 4.0
+      }
+    },
+    {
+      "ingredient": {
+        "name": "sal",
+        "units": "gr",
+        "image": "🧂",
+        "price": "1000",
+        "grPrice": 1.0
+      }
+    }
+  ]

@@ -268,7 +268,7 @@ const pantry = (set) => ({
     // console.log(_recipe, recipeExists);
     if (!recipeExists) {
       // console.log("new item", _recipe);
-      // const newRecipe = await addRecipe(_recipe);
+      const newRecipe = await addRecipe(_recipe);
     } else {
       // If the recipe exists, update the store
       set(
@@ -276,9 +276,9 @@ const pantry = (set) => ({
           const index = store.recipes.findIndex(
             (item) => item._id === _recipe._id,
           );
-          // console.log("updating item", index, _recipe);
-          // store.recipes[index] = _recipe;
-          // modifyRecipe(_recipe);
+          console.log("updating item", index, _recipe);
+          store.recipes[index] = _recipe;
+          modifyRecipe(_recipe);
         }),
       );
     }
@@ -464,6 +464,7 @@ export const addIngredient = async (ingredient) => {
 
 export const DeleteIngredient = async (_id) => {
   try {
+    await axios.delete(`/api/ingredients/${_id}`);
     await usePantry.getState().deleteSingleIngredient(_id);
     toast.success("Ingredient deleted!");
   } catch (error) {
@@ -511,17 +512,17 @@ export const getMyPrograms = async (userId) => {
     console.log(error);
   }
 };
-// export const getRecipeById = async (id) => {
-//   try {
-//     const result = await axios.get(`/api/recipes/${id}`);
-//     if (result?.data?.result) {
-//       return result.data.result;
-//     } else {
-//       toast.error("Recipe not found.");
-//       return null;
-//     }
-//   } catch (error) {
-//     toast.error("Failed to fetch recipe.");
-//     throw error;
-//   }
-// };
+export const getRecipeById = async (id) => {
+  try {
+    const result = await axios.get(`/api/recipes/${id}`);
+    if (result?.data?.result) {
+      return result.data.result;
+    } else {
+      toast.error("Recipe not found.");
+      return null;
+    }
+  } catch (error) {
+    toast.error("Failed to fetch recipe.");
+    throw error;
+  }
+};

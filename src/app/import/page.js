@@ -94,10 +94,10 @@ export default function ImportPanel() {
                 checked={selectedIds.includes(item._id)}
                 onChange={() => toggleSelection(item._id)}
               />
-              <span className="text-xl">{ingredient.emoji}</span>
-              <span className="flex-1 font-medium">{ingredient.name}</span>
+              <span className="text-xl">{ingredient?.image}</span>
+              <span className="flex-1 font-medium">{ingredient?.name}</span>
               <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs font-semibold text-gray-700">
-                ${ingredient.price}
+                ${ingredient?.price}
               </span>
             </label>
           );

@@ -19,7 +19,7 @@ export async function POST(req, res) {
     await client.connect();
     result = await client
       .db("Delicipes")
-      .collection("ingredients")
+      .collection("VipIngredients")
       .insertOne(body);
     // console.log(result);
   } catch (error) {
@@ -36,7 +36,7 @@ export async function GET(req, res) {
   let { db, client } = await connectToDatabase();
   try {
     await client.connect();
-    const result = await db.collection("ingredients").find().toArray();
+    const result = await db.collection("VipIngredients").find().toArray();
     // console.log(result);
     return NextResponse.json({ result });
   } catch (error) {

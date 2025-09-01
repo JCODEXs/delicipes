@@ -33,7 +33,10 @@ const RecipeCardComponent = ({
   const calculateTotal = (ingredients) => {
     let totalCost = 0;
     ingredients.forEach((ingredient) => {
-      totalCost += ingredient?.grPrice * ingredient?.quantity;
+      totalCost +=
+        (ingredient.ingredient.units == "und"
+          ? ingredient?.ingredient?.price
+          : ingredient?.grPrice) * ingredient?.quantity;
     });
     setTotal(totalCost);
   };
@@ -246,7 +249,12 @@ const RecipeCardComponent = ({
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
-                ${(ingredient?.grPrice * ingredient?.quantity).toFixed(0)}
+                $
+                {(
+                  (ingredient.ingredient.units == "und"
+                    ? ingredient?.ingredient?.price
+                    : ingredient?.ingredient?.grPrice) * ingredient?.quantity
+                ).toFixed(0)}
               </div>
             </div>
           ))}

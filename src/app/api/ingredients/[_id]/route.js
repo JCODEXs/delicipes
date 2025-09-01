@@ -21,7 +21,7 @@ export async function DELETE(req, context) {
   try {
     await client.connect();
     const result = await db
-      .collection("ingredients")
+      .collection("VipIngredients")
       .deleteOne({ _id: new ObjectId(params._id) });
 
     if (result.deletedCount === 1) {

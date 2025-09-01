@@ -6,6 +6,9 @@ import { addProgram, usePantry } from "../../../store/pantry";
 import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
 const MealMatrix = ({ myPrograms }) => {
   const index = myPrograms ? myPrograms?.length - 1 : 0;
   const lastProgram = myPrograms?.[index]?._program?.selectedRecipes;
@@ -23,9 +26,145 @@ const MealMatrix = ({ myPrograms }) => {
   const [showRecipePicker, setShowRecipePicker] = useState(false);
   const [recipePickerDay, setRecipePickerDay] = useState(null);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
+
   // // // console.log(ingredientsTotList);
-  console.log("Recipes info", recipes);
-  console.log("storeRecipes:", storeRecipes);
+  // console.log("Recipes info", recipes);
+  // console.log("storeRecipes:", storeRecipes);
+  const calcularAlturaTarjeta = (numIngredientes) => {
+    const base = 70; // espacio para título, imagen y márgenes
+    const porIngrediente = 14; // espacio por cada ingrediente
+    return base + numIngredientes * porIngrediente;
+  };
+
+  const exportToPDF = () => {
+    const doc = new jsPDF("p", "pt", "a4");
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    // Función para calcular la altura de la tarjeta según ingredientes
+    const calcularAlturaTarjeta = (numIngredientes) => {
+      const alturaBase = 90; // Altura base para título, imagen y márgenes
+      const alturaPorIngrediente = 14; // Altura por cada ingrediente
+      return alturaBase + numIngredientes * alturaPorIngrediente;
+    };
+
+    weekDays.forEach((day, index) => {
+      if (index > 0) doc.addPage();
+
+      // --- Encabezado del día ---
+      doc.setFontSize(18);
+      doc.setTextColor(40, 40, 90);
+      doc.text(`${day.toUpperCase()}`, 40, 40);
+
+      const dayTotal = dayTotals?.[day]?.toFixed(0) ?? 0;
+
+      // --- TABLA DE TOTALES ---
+      const ingredientesDia = ingredientsTotList?.[1]?.[day];
+      if (ingredientesDia) {
+        const rows = Object.entries(ingredientesDia).map(([name, details]) => [
+          name,
+          `${details.cantidad.toFixed(1)} ${details.cantidad > 12 ? "gr" : "unid"}`,
+          `$${details.precio.toFixed(0)}`,
+        ]);
+
+        autoTable(doc, {
+          startY: 80,
+          margin: { left: pageWidth / 2 + 10 },
+          head: [["Ingrediente", "Cantidad", "Precio"]],
+          body: rows,
+          theme: "grid",
+          styles: { fontSize: 9, cellPadding: 4 },
+          headStyles: { fillColor: [200, 180, 120] },
+        });
+      }
+
+      // --- RECETAS (columna izquierda) ---
+      let yLeft = 80;
+      const recetasDelDia = selectedRecipes?.[day] || [];
+
+      recetasDelDia.forEach((_selectedRecipe) => {
+        const recipe = _selectedRecipe.recipe || _selectedRecipe;
+
+        // Obtener las porciones reales
+        const realPortions =
+          _selectedRecipe.realPortions ||
+          portions[`${_selectedRecipe._id}${day}`] ||
+          recipe.portions ||
+          1;
+
+        // Calcular factor de ajuste
+        const basePortions = recipe.portions || 1;
+        const adjustmentFactor = realPortions / basePortions;
+
+        // Calcular altura dinámica según cantidad de ingredientes
+        const numIngredientes = Array.isArray(recipe.ingredients)
+          ? recipe.ingredients.length
+          : 0;
+        const cardHeight = calcularAlturaTarjeta(numIngredientes);
+
+        // Verificar si hay espacio suficiente en la página actual
+        if (yLeft + cardHeight > pageHeight - 80) {
+          doc.addPage();
+          yLeft = 80; // Reiniciar posición Y en la nueva página
+        }
+
+        // Dibujar tarjeta de receta
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(40, yLeft, 250, cardHeight, 6, 6, "F");
+
+        // Imagen de la receta
+        if (recipe.imageUrl?.url) {
+          doc.addImage(recipe.imageUrl.url, "JPEG", 45, yLeft + 10, 50, 50);
+        }
+
+        // Título de la receta
+        doc.setFontSize(12);
+        doc.setTextColor(20, 20, 20);
+
+        // Dividir título si es muy largo
+        const titleLines = doc.splitTextToSize(recipe.title, 220);
+        doc.text(titleLines, 105, yLeft + 15);
+
+        // Información de porciones
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`Porciones: ${realPortions}`, 105, yLeft + 40);
+
+        // Ingredientes
+        if (Array.isArray(recipe.ingredients)) {
+          let ingY = yLeft + 55;
+          recipe.ingredients.forEach((ing) => {
+            // Calcular cantidad ajustada
+            const cantidadBase = ing.quantity ?? 0;
+            const cantidadAjustada = cantidadBase * adjustmentFactor;
+            const unidad = ing.ingredient?.units || "";
+
+            // Formatear texto del ingrediente
+            const ingredienteText = `• ${cantidadAjustada.toFixed(1)} ${unidad} ${ing.ingredient?.name || ""}`;
+            const ingredienteLines = doc.splitTextToSize(ingredienteText, 120);
+
+            doc.setFontSize(9);
+            doc.text(ingredienteLines, 105, ingY);
+            ingY += ingredienteLines.length * 12; // Ajustar espacio según líneas
+          });
+        }
+
+        // Ajustar posición Y para la siguiente tarjeta
+        yLeft += cardHeight + 20;
+      });
+
+      // --- Total del día ---
+      doc.setFontSize(14);
+      doc.setTextColor(180, 50, 50);
+      doc.text(
+        ` Total del Día: $${dayTotal}`,
+        pageWidth - 220,
+        pageHeight - 40,
+      );
+    });
+
+    doc.save("programa.pdf");
+  };
 
   // First useEffect: fetch from API if store is empty
   // useEffect(() => {
@@ -159,7 +298,15 @@ const MealMatrix = ({ myPrograms }) => {
                 recipe.ingredients.map((ingredient) => {
                   const ingredientProps = ingredient.ingredient;
                   const cantidad = ingredient.quantity / recipe.portions;
-                  const { name: nombre, grPrice: precio } = ingredientProps;
+                  let {
+                    name: nombre,
+                    grPrice: precio,
+                    price: unitPrice,
+                    units: units,
+                  } = ingredientProps;
+                  if (units === "und") {
+                    precio = unitPrice;
+                  }
                   // // console.log(ingredientsTotalsDay[key]); //(realPortions, cantidad, portions, ingredientProps);
                   if (ingredientsTotals[nombre]) {
                     ingredientsTotals[nombre].cantidad +=
@@ -320,18 +467,20 @@ const MealMatrix = ({ myPrograms }) => {
     }
     handleSelectRecipe(day, recipe);
   };
+  console.log("planning", myPrograms);
   const weekDays = [
-    "1ª",
-    "2ª",
-    "3ª",
-    "4ª",
-    "5ª",
-    "6ª",
-    "7ª",
-    "8ª",
-    "9ª",
-    "10ª",
-    "11ª",
+    "dia o",
+    "dia 1",
+    "dia 2",
+    "dia 3",
+    "dia 4",
+    "dia 5",
+    "dia 6",
+    "dia 7",
+    "dia 8",
+    "dia 9",
+    "dia 10",
+    "dia 11",
     // "Monday",
     // "Thuesday",
     // "Wednesday",
@@ -410,6 +559,10 @@ const MealMatrix = ({ myPrograms }) => {
         >
           Save Program
         </button>
+        <button className="buttonP" onClick={exportToPDF}>
+          Exportar PDF
+        </button>
+
         <button
           className="buttonP"
           onClick={() => {
@@ -594,7 +747,12 @@ const MealMatrix = ({ myPrograms }) => {
             {/* Ingredient List Toggle */}
             <div style={{ marginTop: "0.5rem" }}>
               {showList ? (
-                <div onClick={() => OnClickExpand()}>{ingListByDay(day)}</div>
+                <div onClick={() => OnClickExpand()}>
+                  <ul>
+                    <> Hide ingredients </>
+                    {ingListByDay(day)}
+                  </ul>
+                </div>
               ) : (
                 <div
                   onClick={() => OnClickExpand()}

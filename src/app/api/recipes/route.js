@@ -17,7 +17,7 @@ export async function POST(req, res) {
   //   break;
   try {
     await client.connect();
-    const result = await db.collection("recipes").insertOne(body.recipe);
+    const result = await db.collection("VipRecipes").insertOne(body.recipe);
     //    console.log(result);
     return NextResponse.json({ result });
   } catch (error) {
@@ -31,7 +31,7 @@ export async function GET(req, res) {
   let { db, client } = await connectToDatabase();
   try {
     await client.connect();
-    const result = await db.collection("recipes").find().toArray();
+    const result = await db.collection("VipRecipes").find().toArray();
     // console.log(result);
     return NextResponse.json({ result });
   } catch (error) {
@@ -58,7 +58,7 @@ export async function PUT(req) {
 
     // Update the recipe in the database
     const result = await db
-      .collection("recipes")
+      .collection("VipRecipes")
       .updateOne({ _id: new ObjectId(_id) }, { $set: { recipe: rest.recipe } });
 
     if (result.modifiedCount === 1) {

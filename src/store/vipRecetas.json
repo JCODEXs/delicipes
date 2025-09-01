@@ -1,0 +1,4470 @@
+[
+    {
+      "recipe": {
+        "key": 3270648.8283420466,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "lentejas",
+              "units": "gr",
+              "image": "🫘",
+              "price": "3500",
+              "grPrice": 3.5
+            },
+            "quantity": 1500
+          },
+          {
+            "ingredient": {
+              "name": "pesto de cilantro",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "papa capira",
+              "units": "und",
+              "image": "🥔",
+              "price": "1500",
+              "grPrice": 1.5
+            },
+            "quantity": 4
+          },
+          {
+            "ingredient": {
+              "name": "tomillo",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "4500",
+              "grPrice": 4.5
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "comino",
+              "units": "cucharadita",
+              "image": "🌿",
+              "price": "4500",
+              "grPrice": 4.5
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "zanahoria",
+              "units": "und",
+              "image": "🥕",
+              "price": "1800",
+              "grPrice": 1.8
+            },
+            "quantity": 3
+          },
+          {
+            "ingredient": {
+              "name": "tomate",
+              "units": "und",
+              "image": "🍅",
+              "price": "2500",
+              "grPrice": 2.5
+            },
+            "quantity": 4
+          },
+          {
+            "ingredient": {
+              "name": "cebolla",
+              "units": "und",
+              "image": "🧅",
+              "price": "2770",
+              "grPrice": 2.77
+            },
+            "quantity": 2
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "al gusto",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          }
+        ],
+        "description": "Sopa de lentejas con verduras y especias",
+        "title": "Sopa de Lentejas",
+        "portions": 20,
+        "imageUrl": {
+          "name": "sopa_lentejas.jpg",
+          "url": "https://ejemplo.com/sopa_lentejas.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    },
+    {
+      "recipe": {
+        "key": 3270648.8283420467,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "arroz blanco",
+              "units": "gr",
+              "image": "🍚",
+              "price": "2800",
+              "grPrice": 2.8
+            },
+            "quantity": 1000
+          },
+          {
+            "ingredient": {
+              "name": "agua",
+              "units": "tazas",
+              "image": "💧",
+              "price": "0",
+              "grPrice": 0
+            },
+            "quantity": 2
+          },
+          {
+            "ingredient": {
+              "name": "cebolla blanca",
+              "units": "und",
+              "image": "🧅",
+              "price": "2770",
+              "grPrice": 2.77
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "aceite",
+              "units": "cucharadas",
+              "image": "🫒",
+              "price": "8000",
+              "grPrice": 8.0
+            },
+            "quantity": 4
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "al gusto",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          }
+        ],
+        "description": "Arroz blanco básico tostado y cocido",
+        "title": "Arroz Blanco",
+        "portions": 20,
+        "imageUrl": {
+          "name": "arroz_blanco.jpg",
+          "url": "https://ejemplo.com/arroz_blanco.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    },
+    {
+      "recipe": {
+        "key": 3270648.8283420468,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "ahuyama",
+              "units": "gr",
+              "image": "🎃",
+              "price": "1200",
+              "grPrice": 1.2
+            },
+            "quantity": 2500
+          },
+          {
+            "ingredient": {
+              "name": "arvejas",
+              "units": "gr",
+              "image": "🫛",
+              "price": "2800",
+              "grPrice": 2.8
+            },
+            "quantity": 500
+          },
+          {
+            "ingredient": {
+              "name": "agua",
+              "units": "litros",
+              "image": "💧",
+              "price": "0",
+              "grPrice": 0
+            },
+            "quantity": 7
+          },
+          {
+            "ingredient": {
+              "name": "pesto de albahaca",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "pesto de cilantro",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "zanahoria",
+              "units": "und",
+              "image": "🥕",
+              "price": "1800",
+              "grPrice": 1.8
+            },
+            "quantity": 4
+          },
+          {
+            "ingredient": {
+              "name": "cúrcuma",
+              "units": "cucharadita",
+              "image": "🟨",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 0.5
+          },
+          {
+            "ingredient": {
+              "name": "comino",
+              "units": "cucharadita",
+              "image": "🌿",
+              "price": "4500",
+              "grPrice": 4.5
+            },
+            "quantity": 0.5
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "al gusto",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          }
+        ],
+        "description": "Crema de ahuyama con arvejas y especias",
+        "title": "Sopa de Ahuyama",
+        "portions": 30,
+        "imageUrl": {
+          "name": "sopa_ahuyama.jpg",
+          "url": "https://ejemplo.com/sopa_ahuyama.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    },
+    {
+      "recipe": {
+        "key": 3270648.8283420469,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "arroz blanco",
+              "units": "gr",
+              "image": "🍚",
+              "price": "2800",
+              "grPrice": 2.8
+            },
+            "quantity": 1500
+          },
+          {
+            "ingredient": {
+              "name": "espinaca",
+              "units": "tazas",
+              "image": "🍃",
+              "price": "3000",
+              "grPrice": 3.0
+            },
+            "quantity": 2
+          },
+          {
+            "ingredient": {
+              "name": "maní",
+              "units": "gr",
+              "image": "🥜",
+              "price": "3800",
+              "grPrice": 3.8
+            },
+            "quantity": 200
+          },
+          {
+            "ingredient": {
+              "name": "aceite",
+              "units": "taza",
+              "image": "🫒",
+              "price": "8000",
+              "grPrice": 8.0
+            },
+            "quantity": 0.5
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "al gusto",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          }
+        ],
+        "description": "Arroz blanco con espinacas y maní tostado",
+        "title": "Arroz con Espinacas y Maní",
+        "portions": 30,
+        "imageUrl": {
+          "name": "arroz_espinacas_mani.jpg",
+          "url": "https://ejemplo.com/arroz_espinacas_mani.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    },
+    {
+      "recipe": {
+        "key": 3270648.8283420470,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "quinoa",
+              "units": "tazas",
+              "image": "🌾",
+              "price": "4500",
+              "grPrice": 4.5
+            },
+            "quantity": 5
+          },
+          {
+            "ingredient": {
+              "name": "zanahoria",
+              "units": "und",
+              "image": "🥕",
+              "price": "1800",
+              "grPrice": 1.8
+            },
+            "quantity": 7
+          },
+          {
+            "ingredient": {
+              "name": "avena",
+              "units": "tazas",
+              "image": "🌾",
+              "price": "2200",
+              "grPrice": 2.2
+            },
+            "quantity": 2
+          },
+          {
+            "ingredient": {
+              "name": "harina de maíz",
+              "units": "al gusto",
+              "image": "🌽",
+              "price": "1800",
+              "grPrice": 1.8
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "cúrcuma",
+              "units": "cucharadas",
+              "image": "🟨",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 3
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "cucharada",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "pesto de cilantro",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 1
+          }
+        ],
+        "description": "Croquetas de quinoa con zanahoria y especias",
+        "title": "Croquetas de Quinoa",
+        "portions": 30,
+        "imageUrl": {
+          "name": "croquetas_quinoa.jpg",
+          "url": "https://ejemplo.com/croquetas_quinoa.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    },
+    {
+      "recipe": {
+        "key": 3270648.8283420471,
+        "ingredients": [
+          {
+            "ingredient": {
+              "name": "papa capira",
+              "units": "gr",
+              "image": "🥔",
+              "price": "1500",
+              "grPrice": 1.5
+            },
+            "quantity": 3500
+          },
+          {
+            "ingredient": {
+              "name": "pesto de albahaca",
+              "units": "cucharadas",
+              "image": "🌿",
+              "price": "5000",
+              "grPrice": 5.0
+            },
+            "quantity": 2
+          },
+          {
+            "ingredient": {
+              "name": "tomate",
+              "units": "und",
+              "image": "🍅",
+              "price": "2500",
+              "grPrice": 2.5
+            },
+            "quantity": 10
+          },
+          {
+            "ingredient": {
+              "name": "sal",
+              "units": "al gusto",
+              "image": "🧂",
+              "price": "1000",
+              "grPrice": 1.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "comino",
+              "units": "cucharadita",
+              "image": "🌿",
+              "price": "4500",
+              "grPrice": 4.5
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "cebolla",
+              "units": "und",
+              "image": "🧅",
+              "price": "2770",
+              "grPrice": 2.77
+            },
+            "quantity": 4
+          },
+          {
+            "ingredient": {
+              "name": "orégano",
+              "units": "cucharada",
+              "image": "🌿",
+              "price": "4000",
+              "grPrice": 4.0
+            },
+            "quantity": 1
+          },
+          {
+            "ingredient": {
+              "name": "melado",
+              "units": "taza",
+              "image": "🍯",
+              "price": "3000",
+              "grPrice": 3.0
+            },
+            "quantity": 0.5
+          }
+        ],
+        "description": "Estofado de papas con tomate y especias",
+        "title": "Estofado de Papas con Tomate",
+        "portions": 30,
+        "imageUrl": {
+          "name": "estofado_papas.jpg",
+          "url": "https://ejemplo.com/estofado_papas.jpg",
+          "type": "image/jpeg"
+        }
+      }
+    }
+    ,
+        {
+          "recipe": {
+            "key": 3270648.8283420472,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "aguacate",
+                  "units": "und",
+                  "image": "🥑",
+                  "price": "2500",
+                  "grPrice": 25.0
+                },
+                "quantity": 10
+              },
+              {
+                "ingredient": {
+                  "name": "limón",
+                  "units": "und",
+                  "image": "🍋",
+                  "price": "500",
+                  "grPrice": 5.0
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "pimienta",
+                  "units": "cucharadita",
+                  "image": "🌶️",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 0.5
+              },
+              {
+                "ingredient": {
+                  "name": "vinagre",
+                  "units": "chorro",
+                  "image": "🍶",
+                  "price": "2000",
+                  "grPrice": 2.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Guacamole fresco con limón y especias",
+            "title": "Guacamole",
+            "portions": 30,
+            "imageUrl": {
+              "name": "guacamole.jpg",
+              "url": "https://ejemplo.com/guacamole.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+            "recipe": {
+              "key": 3270648.8283420483,
+              "ingredients": [
+                {
+                  "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "zucchini", "units": "und", "image": "🥒", "price": "1800", "grPrice": 18.0},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "yacón", "units": "und", "image": "🍠", "price": "2000", "grPrice": 20.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "aguacate", "units": "und", "image": "🥑", "price": "2500", "grPrice": 25.0},
+                  "quantity": 6
+                },
+                {
+                  "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "tomillo", "units": "cucharadita", "image": "🌿", "price": "4500", "grPrice": 4.5},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "laurel", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "orégano", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                  "quantity": 1
+                }
+              ],
+              "description": "Ensalada especial con aguacate, zucchini y yacón",
+              "title": "Ensalada Especial con Aguacate",
+              "portions": 30,
+              "imageUrl": {
+                "name": "ensalada_especial_aguacate.jpg",
+                "url": "https://ejemplo.com/ensalada_especial_aguacate.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420482,
+              "ingredients": [
+                {
+                  "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "espinaca", "units": "bolsa", "image": "🍃", "price": "3000", "grPrice": 3.0},
+                  "quantity": 0.5
+                },
+                {
+                  "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "quinoa", "units": "taza", "image": "🌾", "price": "4500", "grPrice": 4.5},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "aceitunas", "units": "paquete", "image": "🫒", "price": "7000", "grPrice": 7.0},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "tomillo", "units": "cucharadita", "image": "🌿", "price": "4500", "grPrice": 4.5},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "laurel", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "orégano", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                  "quantity": 1
+                }
+              ],
+              "description": "Ensalada premium con quinoa, aceitunas y hierbas aromáticas",
+              "title": "Ensalada con Quinoa y Aceitunas",
+              "portions": 30,
+              "imageUrl": {
+                "name": "ensalada_quinoa_aceitunas.jpg",
+                "url": "https://ejemplo.com/ensalada_quinoa_aceitunas.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420481,
+              "ingredients": [
+                {
+                  "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "espinaca", "units": "bolsa", "image": "🍃", "price": "3000", "grPrice": 3.0},
+                  "quantity": 0.5
+                },
+                {
+                  "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "zanahoria", "units": "und", "image": "🥕", "price": "1800", "grPrice": 1.8},
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {"name": "aceite de oliva", "units": "ml", "image": "🫒", "price": "8000", "grPrice": 8.0},
+                  "quantity": 30
+                },
+                {
+                  "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                  "quantity": 1
+                }
+              ],
+              "description": "Ensalada con espinaca, pepino y aderezo de limón y aceite de oliva",
+              "title": "Ensalada con Espinaca y Pepino",
+              "portions": 30,
+              "imageUrl": {
+                "name": "ensalada_espinaca_pepino.jpg",
+                "url": "https://ejemplo.com/ensalada_espinaca_pepino.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420480,
+              "ingredients": [
+                {
+                  "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {"name": "zanahoria", "units": "und", "image": "🥕", "price": "1800", "grPrice": 1.8},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                  "quantity": 1
+                }
+              ],
+              "description": "Ensalada básica con lechuga, tomate y zanahoria rallada",
+              "title": "Ensalada Básica",
+              "portions": 6,
+              "imageUrl": {
+                "name": "ensalada_basica.jpg",
+                "url": "https://ejemplo.com/ensalada_basica.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+
+        {
+          "recipe": {
+            "key": 3270648.8283420473,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "maíz",
+                  "units": "gr",
+                  "image": "🌽",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 1500
+              },
+              {
+                "ingredient": {
+                  "name": "papa criolla",
+                  "units": "gr",
+                  "image": "🥔",
+                  "price": "2000",
+                  "grPrice": 2.0
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla puerro",
+                  "units": "taza",
+                  "image": "🧅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "cúrcuma",
+                  "units": "cucharada",
+                  "image": "🟨",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "ajo en polvo",
+                  "units": "cucharada",
+                  "image": "🧄",
+                  "price": "6000",
+                  "grPrice": 6.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Crema de maíz espesa con papas criollas",
+            "title": "Crema de Maíz o Chócolo",
+            "portions": 30,
+            "imageUrl": {
+              "name": "crema_maiz.jpg",
+              "url": "https://ejemplo.com/crema_maiz.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420474,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "berenjena",
+                  "units": "und",
+                  "image": "🍆",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 8
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla blanca",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "tomate",
+                  "units": "und",
+                  "image": "🍅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 10
+              },
+              {
+                "ingredient": {
+                  "name": "laurel",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "orégano",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pimienta",
+                  "units": "cucharada",
+                  "image": "🌶️",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "queso en bloque",
+                  "units": "paquetes",
+                  "image": "🧀",
+                  "price": "8500",
+                  "grPrice": 8.5
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "melado",
+                  "units": "chorro",
+                  "image": "🍯",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Estofado de berenjenas con queso y tomate",
+            "title": "Estofado de Berenjenas con Queso",
+            "portions": 30,
+            "imageUrl": {
+              "name": "estofado_berenjenas.jpg",
+              "url": "https://ejemplo.com/estofado_berenjenas.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420475,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "yuca",
+                  "units": "bolsa",
+                  "image": "🥔",
+                  "price": "1200",
+                  "grPrice": 1.2
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "maíz",
+                  "units": "bolsa",
+                  "image": "🌽",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "arracacha",
+                  "units": "bolsa",
+                  "image": "🥔",
+                  "price": "1600",
+                  "grPrice": 1.6
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "mazorca",
+                  "units": "trozo",
+                  "image": "🌽",
+                  "price": "1200",
+                  "grPrice": 12.0
+                },
+                "quantity": 30
+              },
+              {
+                "ingredient": {
+                  "name": "ahuyama",
+                  "units": "gr",
+                  "image": "🎃",
+                  "price": "1200",
+                  "grPrice": 1.2
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "arveja",
+                  "units": "lb",
+                  "image": "🫛",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "cucharadas",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de perejil",
+                  "units": "cucharadas",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Sancocho tradicional con variedad de tubérculos y verduras",
+            "title": "Sancocho",
+            "portions": 30,
+            "imageUrl": {
+              "name": "sancocho.jpg",
+              "url": "https://ejemplo.com/sancocho.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420476,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "lentejas",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "3500",
+                  "grPrice": 3.5
+                },
+                "quantity": 1500
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de albahaca",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "cúrcuma",
+                  "units": "cucharada",
+                  "image": "🟨",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "cucharadita",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 0.33
+              },
+              {
+                "ingredient": {
+                  "name": "orégano",
+                  "units": "al gusto",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "tomillo",
+                  "units": "al gusto",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pimienta",
+                  "units": "al gusto",
+                  "image": "🌶️",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Tofu vegetal preparado con lentejas y especias",
+            "title": "Tofu de Lentejas",
+            "portions": 30,
+            "imageUrl": {
+              "name": "tofu_lentejas.jpg",
+              "url": "https://ejemplo.com/tofu_lentejas.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420477,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "frijol cargamanto",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "3200",
+                  "grPrice": 3.2
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "quinoa",
+                  "units": "gr",
+                  "image": "🌾",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "chia",
+                  "units": "gr",
+                  "image": "🌱",
+                  "price": "6000",
+                  "grPrice": 6.0
+                },
+                "quantity": 150
+              },
+              {
+                "ingredient": {
+                  "name": "harina de maíz",
+                  "units": "al gusto",
+                  "image": "🌽",
+                  "price": "1800",
+                  "grPrice": 1.8
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de albahaca",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "orégano",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "tomillo",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "laurel",
+                  "units": "cucharada",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "cucharadas",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "ajo en polvo",
+                  "units": "al gusto",
+                  "image": "🧄",
+                  "price": "6000",
+                  "grPrice": 6.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Hamburguesas vegetarianas de frijol y quinoa",
+            "title": "Hamburguesa de Proteína Vegetal",
+            "portions": 30,
+            "imageUrl": {
+              "name": "hamburguesa_vegetal.jpg",
+              "url": "https://ejemplo.com/hamburguesa_vegetal.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420478,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "arracacha",
+                  "units": "bolsa",
+                  "image": "🥔",
+                  "price": "1600",
+                  "grPrice": 1.6
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "curry",
+                  "units": "cucharadas",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "cucharadita",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 0.5
+              },
+              {
+                "ingredient": {
+                  "name": "jengibre",
+                  "units": "cucharada",
+                  "image": "🫚",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Crema de arracacha con curry y jengibre",
+            "title": "Crema de Arracacha",
+            "portions": 30,
+            "imageUrl": {
+              "name": "crema_arracacha.jpg",
+              "url": "https://ejemplo.com/crema_arracacha.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420479,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "bananos",
+                  "units": "und",
+                  "image": "🍌",
+                  "price": "800",
+                  "grPrice": 8.0
+                },
+                "quantity": 6
+              },
+              {
+                "ingredient": {
+                  "name": "semillas de girasol",
+                  "units": "gr",
+                  "image": "🌻",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 200
+              },
+              {
+                "ingredient": {
+                  "name": "avena",
+                  "units": "al gusto",
+                  "image": "🌾",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "cocoa en polvo",
+                  "units": "taza",
+                  "image": "🍫",
+                  "price": "6000",
+                  "grPrice": 6.0
+                },
+                "quantity": 0.5
+              },
+              {
+                "ingredient": {
+                  "name": "mermelada de mora",
+                  "units": "taza",
+                  "image": "🍓",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 0.5
+              }
+            ],
+            "description": "Trufas de banano y chocolate con semillas de girasol",
+            "title": "Trufas de Banano y Chocolate",
+            "portions": 30,
+            "imageUrl": {
+              "name": "trufas_banano_chocolate.jpg",
+              "url": "https://ejemplo.com/trufas_banano_chocolate.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+      
+        {
+          "recipe": {
+            "key": 3270648.8283420484,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "avena",
+                  "units": "gr",
+                  "image": "🌾",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 700
+              },
+              {
+                "ingredient": {
+                  "name": "nuez del brasil",
+                  "units": "gr",
+                  "image": "🌰",
+                  "price": "12000",
+                  "grPrice": 12.0
+                },
+                "quantity": 110
+              },
+              {
+                "ingredient": {
+                  "name": "maní",
+                  "units": "gr",
+                  "image": "🥜",
+                  "price": "3800",
+                  "grPrice": 3.8
+                },
+                "quantity": 110
+              },
+              {
+                "ingredient": {
+                  "name": "pasas",
+                  "units": "gr",
+                  "image": "🍇",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 70
+              },
+              {
+                "ingredient": {
+                  "name": "ajonjolí",
+                  "units": "gr",
+                  "image": "🌱",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 70
+              },
+              {
+                "ingredient": {
+                  "name": "miel",
+                  "units": "ml",
+                  "image": "🍯",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 120
+              },
+              {
+                "ingredient": {
+                  "name": "aceite de coco",
+                  "units": "ml",
+                  "image": "🥥",
+                  "price": "10000",
+                  "grPrice": 10.0
+                },
+                "quantity": 60
+              },
+              {
+                "ingredient": {
+                  "name": "canela",
+                  "units": "cucharadita",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "pizca",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Granola crujiente con nueces, avena y semillas, perfecta para el desayuno",
+            "title": "Granola con Nuez del Brasil y Maní",
+            "portions": 20,
+            "imageUrl": {
+              "name": "granola_mixta.jpg",
+              "url": "https://ejemplo.com/granola_mixta.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },{
+          "recipe": {
+            "key": 3270648.8283420485,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "papa criolla",
+                  "units": "gr",
+                  "image": "🥔",
+                  "price": "2000",
+                  "grPrice": 2.0
+                },
+                "quantity": 3000
+              },
+              {
+                "ingredient": {
+                  "name": "carve",
+                  "units": "gr",
+                  "image": "🍖",
+                  "price": "6000",
+                  "grPrice": 6.0
+                },
+                "quantity": 495
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "acelga",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "salsa de soya",
+                  "units": "ml",
+                  "image": "🍶",
+                  "price": "3500",
+                  "grPrice": 3.5
+                },
+                "quantity": 800
+              },
+              {
+                "ingredient": {
+                  "name": "melado",
+                  "units": "ml",
+                  "image": "🍯",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 30
+              }
+            ],
+            "description": "Papas criollas con carve marinado en salsa de soya y melado",
+            "title": "Papas Criollas con Carve",
+            "portions": 30,
+            "imageUrl": {
+              "name": "papas_criollas_carve.jpg",
+              "url": "https://ejemplo.com/papas_criollas_carve.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420486,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "garbanzo",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 1500
+              },
+              {
+                "ingredient": {
+                  "name": "tomate",
+                  "units": "und",
+                  "image": "🍅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 6
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "cúrcuma",
+                  "units": "gr",
+                  "image": "🟨",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "orégano",
+                  "units": "al gusto",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "canela",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pimienta",
+                  "units": "al gusto",
+                  "image": "🌶️",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Huevos veganos a base de garbanzos con especias",
+            "title": "Huevos Veganos",
+            "portions": 30,
+            "imageUrl": {
+              "name": "huevos_veganos.jpg",
+              "url": "https://ejemplo.com/huevos_veganos.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420487,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "cebolla cabezona",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "tomate",
+                  "units": "und",
+                  "image": "🍅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 7
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "gr",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pimienta",
+                  "units": "al gusto",
+                  "image": "🌶️",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "melado",
+                  "units": "gr",
+                  "image": "🍯",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Guiso base para sopas y preparaciones",
+            "title": "Guiso",
+            "portions": 30,
+            "imageUrl": {
+              "name": "guiso.jpg",
+              "url": "https://ejemplo.com/guiso.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420488,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "arroz integral",
+                  "units": "gr",
+                  "image": "🍚",
+                  "price": "3200",
+                  "grPrice": 3.2
+                },
+                "quantity": 1500
+              },
+              {
+                "ingredient": {
+                  "name": "agua",
+                  "units": "tazas",
+                  "image": "💧",
+                  "price": "0",
+                  "grPrice": 0
+                },
+                "quantity": 4.5
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "ml",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 200
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Arroz integral tostado y cocido",
+            "title": "Arroz Integral",
+            "portions": 30,
+            "imageUrl": {
+              "name": "arroz_integral.jpg",
+              "url": "https://ejemplo.com/arroz_integral.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420489,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "berenjena",
+                  "units": "und",
+                  "image": "🍆",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla blanca",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla puerro",
+                  "units": "gr",
+                  "image": "🧅",
+                  "price": "2500",
+                  "grPrice": 2500
+                },
+                "quantity": 1250
+              },
+              {
+                "ingredient": {
+                  "name": "espinaca",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "jengibre",
+                  "units": "gr",
+                  "image": "🫚",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "zucchini",
+                  "units": "und",
+                  "image": "🥒",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "zanahoria",
+                  "units": "und",
+                  "image": "🥕",
+                  "price": "1800",
+                  "grPrice": 1.8
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de albahaca",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Picadillo de vegetales salteados con especias",
+            "title": "Picadillo de Vegetales",
+            "portions": 30,
+            "imageUrl": {
+              "name": "picadillo_vegetales.jpg",
+              "url": "https://ejemplo.com/picadillo_vegetales.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420490,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "papa capira",
+                  "units": "und",
+                  "image": "🥔",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "ml",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "gr",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 2
+              }
+            ],
+            "description": "Papas fritas en cascos con cáscara",
+            "title": "Papas Fritas en Casco",
+            "portions": 30,
+            "imageUrl": {
+              "name": "papas_fritas_casco.jpg",
+              "url": "https://ejemplo.com/papas_fritas_casco.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420491,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "pan sobrante",
+                  "units": "gr",
+                  "image": "🍞",
+                  "price": "2000",
+                  "grPrice": 2.0
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "leche en polvo",
+                  "units": "ml",
+                  "image": "🥛",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 300
+              },
+              {
+                "ingredient": {
+                  "name": "almendras",
+                  "units": "gr",
+                  "image": "🌰",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 200
+              },
+              {
+                "ingredient": {
+                  "name": "linaza",
+                  "units": "gr",
+                  "image": "🌱",
+                  "price": "4000",
+                  "grPrice": 4.0
+                },
+                "quantity": 150
+              },
+              {
+                "ingredient": {
+                  "name": "semillas de girasol",
+                  "units": "gr",
+                  "image": "🌻",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 200
+              },
+              {
+                "ingredient": {
+                  "name": "chocolate",
+                  "units": "gr",
+                  "image": "🍫",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 125
+              },
+              {
+                "ingredient": {
+                  "name": "panela",
+                  "units": "gr",
+                  "image": "🍯",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 250
+              }
+            ],
+            "description": "Torta de pan reciclado con nueces y chocolate",
+            "title": "Torta de Pan y Nueces",
+            "portions": 30,
+            "imageUrl": {
+              "name": "torta_pan_nueces.jpg",
+              "url": "https://ejemplo.com/torta_pan_nueces.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420492,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "arroz blanco",
+                  "units": "gr",
+                  "image": "🍚",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 2000
+              },
+              {
+                "ingredient": {
+                  "name": "ajonjolí",
+                  "units": "gr",
+                  "image": "🌱",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 125
+              },
+              {
+                "ingredient": {
+                  "name": "ahuyama",
+                  "units": "gr",
+                  "image": "🎃",
+                  "price": "1200",
+                  "grPrice": 1.2
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "brócoli",
+                  "units": "gr",
+                  "image": "🥦",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "coliflor",
+                  "units": "gr",
+                  "image": "🥦",
+                  "price": "2600",
+                  "grPrice": 2.6
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla blanca",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "espinaca",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "6000",
+                  "grPrice": 3.0
+                },
+                "quantity": 1100
+              },
+              {
+                "ingredient": {
+                  "name": "zucchini",
+                  "units": "und",
+                  "image": "🥒",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "zanahoria",
+                  "units": "und",
+                  "image": "🥕",
+                  "price": "1800",
+                  "grPrice": 1.8
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "salsa de soya",
+                  "units": "ml",
+                  "image": "🍶",
+                  "price": "3500",
+                  "grPrice": 3.5
+                },
+                "quantity": 740
+              }
+            ],
+            "description": "Arroz salteado con vegetales estilo chino",
+            "title": "Arroz con Vegetales Tipo Chino",
+            "portions": 30,
+            "imageUrl": {
+              "name": "arroz_vegetales_chino.jpg",
+              "url": "https://ejemplo.com/arroz_vegetales_chino.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420493,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "frijol negro",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 2000
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de albahaca",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 0.5
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Frijoles negros cocidos con especias",
+            "title": "Frijoles Negros",
+            "portions": 30,
+            "imageUrl": {
+              "name": "frijoles_negros.jpg",
+              "url": "https://ejemplo.com/frijoles_negros.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420494,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "ahuyama",
+                  "units": "gr",
+                  "image": "🎃",
+                  "price": "1200",
+                  "grPrice": 1.2
+                },
+                "quantity": 300
+              },
+              {
+                "ingredient": {
+                  "name": "zanahoria",
+                  "units": "und",
+                  "image": "🥕",
+                  "price": "1800",
+                  "grPrice": 1.8
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla cabezona",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla puerro",
+                  "units": "gr",
+                  "image": "🧅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "zucchini",
+                  "units": "und",
+                  "image": "🥒",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "espinaca",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "acelga",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "habichuela",
+                  "units": "gr",
+                  "image": "🫛",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 1000
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de perejil",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "al gusto",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Salteado de vegetales variados con especias",
+            "title": "Salteado de Vegetales",
+            "portions": 30,
+            "imageUrl": {
+              "name": "salteado_vegetales.jpg",
+              "url": "https://ejemplo.com/salteado_vegetales.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420495,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "plátano maduro",
+                  "units": "und",
+                  "image": "🍌",
+                  "price": "800",
+                  "grPrice": 8.0
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "ml",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 100
+              }
+            ],
+            "description": "Tajadas de plátano maduro asadas",
+            "title": "Tajadas de Plátano Maduro",
+            "portions": 30,
+            "imageUrl": {
+              "name": "tajadas_platano.jpg",
+              "url": "https://ejemplo.com/tajadas_platano.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420496,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "berenjena",
+                  "units": "und",
+                  "image": "🍆",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 9
+              },
+              {
+                "ingredient": {
+                  "name": "zucchini",
+                  "units": "und",
+                  "image": "🥒",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 4
+              },
+              {
+                "ingredient": {
+                  "name": "tomate",
+                  "units": "und",
+                  "image": "🍅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 10
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla cabezona",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "salsa de tomate",
+                  "units": "gr",
+                  "image": "🍅",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "gr",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 10
+              }
+            ],
+            "description": "Ratatouille de berenjenas, zucchini y tomate",
+            "title": "Ratatouille",
+            "portions": 30,
+            "imageUrl": {
+              "name": "ratatouille.jpg",
+              "url": "https://ejemplo.com/ratatouille.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420497,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "espinaca",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "3000",
+                  "grPrice": 3.0
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla puerro",
+                  "units": "gr",
+                  "image": "🧅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla larga",
+                  "units": "gr",
+                  "image": "🧅",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 330
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "al gusto",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Crema verde de espinacas con hierbas",
+            "title": "Crema Verde",
+            "portions": 30,
+            "imageUrl": {
+              "name": "crema_verde.jpg",
+              "url": "https://ejemplo.com/crema_verde.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420498,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "lenteja",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "3500",
+                  "grPrice": 3.5
+                },
+                "quantity": 2500
+              },
+              {
+                "ingredient": {
+                  "name": "quinoa",
+                  "units": "gr",
+                  "image": "🌾",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "remolacha",
+                  "units": "und",
+                  "image": "🍠",
+                  "price": "1200",
+                  "grPrice": 12.0
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "gr",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Croquetas de lentejas con quinoa y remolacha",
+            "title": "Croquetas de Lentejas",
+            "portions": 30,
+            "imageUrl": {
+              "name": "croquetas_lentejas.jpg",
+              "url": "https://ejemplo.com/croquetas_lentejas.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420499,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "pasta",
+                  "units": "gr",
+                  "image": "🍝",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 2000
+              },
+              {
+                "ingredient": {
+                  "name": "berenjena",
+                  "units": "und",
+                  "image": "🍆",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "cebolla blanca",
+                  "units": "und",
+                  "image": "🧅",
+                  "price": "2770",
+                  "grPrice": 2.77
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "brócoli",
+                  "units": "gr",
+                  "image": "🥦",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "coliflor",
+                  "units": "gr",
+                  "image": "🥦",
+                  "price": "2600",
+                  "grPrice": 2.6
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "espinaca",
+                  "units": "gr",
+                  "image": "🍃",
+                  "price": "6000",
+                  "grPrice": 3.0
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "habichuela",
+                  "units": "gr",
+                  "image": "🫛",
+                  "price": "2200",
+                  "grPrice": 2.2
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "zucchini",
+                  "units": "und",
+                  "image": "🥒",
+                  "price": "1800",
+                  "grPrice": 18.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "zanahoria",
+                  "units": "und",
+                  "image": "🥕",
+                  "price": "1800",
+                  "grPrice": 1.8
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "salsa de tomate",
+                  "units": "ml",
+                  "image": "🍅",
+                  "price": "6000",
+                  "grPrice": 3.0
+                },
+                "quantity": 250
+              },
+              {
+                "ingredient": {
+                  "name": "queso rallado",
+                  "units": "gr",
+                  "image": "🧀",
+                  "price": "8500",
+                  "grPrice": 8.5
+                },
+                "quantity": 200
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Pasta con vegetales salteados y salsa de tomate",
+            "title": "Pasta con Vegetales",
+            "portions": 30,
+            "imageUrl": {
+              "name": "pasta_vegetales.jpg",
+              "url": "https://ejemplo.com/pasta_vegetales.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420500,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "tomate",
+                  "units": "und",
+                  "image": "🍅",
+                  "price": "2500",
+                  "grPrice": 2.5
+                },
+                "quantity": 10
+              },
+              {
+                "ingredient": {
+                  "name": "ajo",
+                  "units": "dientes",
+                  "image": "🧄",
+                  "price": "25000",
+                  "grPrice": 25.0
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "papa",
+                  "units": "und",
+                  "image": "🥔",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 3
+              },
+              {
+                "ingredient": {
+                  "name": "panela",
+                  "units": "gr",
+                  "image": "🍯",
+                  "price": "1500",
+                  "grPrice": 1.5
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Salsa de tomate casera con ajo y hierbas",
+            "title": "Salsa de Tomate",
+            "portions": 30,
+            "imageUrl": {
+              "name": "salsa_tomate.jpg",
+              "url": "https://ejemplo.com/salsa_tomate.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420501,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "frijol",
+                  "units": "gr",
+                  "image": "🫘",
+                  "price": "2800",
+                  "grPrice": 2.8
+                },
+                "quantity": 2500
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de cilantro",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 2
+              },
+              {
+                "ingredient": {
+                  "name": "pesto de albahaca",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "5000",
+                  "grPrice": 5.0
+                },
+                "quantity": 1
+              },
+              {
+                "ingredient": {
+                  "name": "comino",
+                  "units": "gr",
+                  "image": "🌿",
+                  "price": "4500",
+                  "grPrice": 4.5
+                },
+                "quantity": 5
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Frijoles cocidos lentamente con especias",
+            "title": "Frijoles",
+            "portions": 30,
+            "imageUrl": {
+              "name": "frijoles.jpg",
+              "url": "https://ejemplo.com/frijoles.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        },
+        {
+          "recipe": {
+            "key": 3270648.8283420502,
+            "ingredients": [
+              {
+                "ingredient": {
+                  "name": "plátano verde",
+                  "units": "und",
+                  "image": "🍌",
+                  "price": "800",
+                  "grPrice": 8.0
+                },
+                "quantity": 20
+              },
+              {
+                "ingredient": {
+                  "name": "aceite",
+                  "units": "ml",
+                  "image": "🫒",
+                  "price": "8000",
+                  "grPrice": 8.0
+                },
+                "quantity": 500
+              },
+              {
+                "ingredient": {
+                  "name": "sal",
+                  "units": "al gusto",
+                  "image": "🧂",
+                  "price": "1000",
+                  "grPrice": 1.0
+                },
+                "quantity": 1
+              }
+            ],
+            "description": "Patacones de plátano verde fritos",
+            "title": "Patacones de Plátano Verde",
+            "portions": 30,
+            "imageUrl": {
+              "name": "patacones_platano.jpg",
+              "url": "https://ejemplo.com/patacones_platano.jpg",
+              "type": "image/jpeg"
+            }
+          }
+        }
+    
+        {
+            "recipe": {
+              "key": 3270648.8283420466,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "lentejas",
+                    "units": "gr",
+                    "image": "🫘",
+                    "price": "3500",
+                    "grPrice": 3.5
+                  },
+                  "quantity": 1500
+                },
+                {
+                  "ingredient": {
+                    "name": "pesto de cilantro",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "papa capira",
+                    "units": "und",
+                    "image": "🥔",
+                    "price": "1500",
+                    "grPrice": 1.5
+                  },
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {
+                    "name": "tomillo",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "4500",
+                    "grPrice": 4.5
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "comino",
+                    "units": "cucharadita",
+                    "image": "🌿",
+                    "price": "4500",
+                    "grPrice": 4.5
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "zanahoria",
+                    "units": "und",
+                    "image": "🥕",
+                    "price": "1800",
+                    "grPrice": 1.8
+                  },
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {
+                    "name": "tomate",
+                    "units": "und",
+                    "image": "🍅",
+                    "price": "2500",
+                    "grPrice": 2.5
+                  },
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {
+                    "name": "cebolla",
+                    "units": "und",
+                    "image": "🧅",
+                    "price": "2770",
+                    "grPrice": 2.77
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "al gusto",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Sopa de lentejas con verduras y especias",
+              "title": "Sopa de Lentejas",
+              "portions": 20,
+              "imageUrl": {
+                "name": "sopa_lentejas.jpg",
+                "url": "https://ejemplo.com/sopa_lentejas.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420467,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "arroz blanco",
+                    "units": "gr",
+                    "image": "🍚",
+                    "price": "2800",
+                    "grPrice": 2.8
+                  },
+                  "quantity": 1000
+                },
+                {
+                  "ingredient": {
+                    "name": "agua",
+                    "units": "tazas",
+                    "image": "💧",
+                    "price": "0",
+                    "grPrice": 0
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "cebolla blanca",
+                    "units": "und",
+                    "image": "🧅",
+                    "price": "2770",
+                    "grPrice": 2.77
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "aceite",
+                    "units": "cucharadas",
+                    "image": "🫒",
+                    "price": "8000",
+                    "grPrice": 8.0
+                  },
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "al gusto",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Arroz blanco básico tostado y cocido",
+              "title": "Arroz Blanco",
+              "portions": 20,
+              "imageUrl": {
+                "name": "arroz_blanco.jpg",
+                "url": "https://ejemplo.com/arroz_blanco.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420468,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "ahuyama",
+                    "units": "gr",
+                    "image": "🎃",
+                    "price": "1200",
+                    "grPrice": 1.2
+                  },
+                  "quantity": 2500
+                },
+                {
+                  "ingredient": {
+                    "name": "arvejas",
+                    "units": "gr",
+                    "image": "🫛",
+                    "price": "2800",
+                    "grPrice": 2.8
+                  },
+                  "quantity": 500
+                },
+                {
+                  "ingredient": {
+                    "name": "agua",
+                    "units": "litros",
+                    "image": "💧",
+                    "price": "0",
+                    "grPrice": 0
+                  },
+                  "quantity": 7
+                },
+                {
+                  "ingredient": {
+                    "name": "pesto de albahaca",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "pesto de cilantro",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "zanahoria",
+                    "units": "und",
+                    "image": "🥕",
+                    "price": "1800",
+                    "grPrice": 1.8
+                  },
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {
+                    "name": "cúrcuma",
+                    "units": "cucharadita",
+                    "image": "🟨",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 0.5
+                },
+                {
+                  "ingredient": {
+                    "name": "comino",
+                    "units": "cucharadita",
+                    "image": "🌿",
+                    "price": "4500",
+                    "grPrice": 4.5
+                  },
+                  "quantity": 0.5
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "al gusto",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Crema de ahuyama con arvejas y especias",
+              "title": "Sopa de Ahuyama",
+              "portions": 30,
+              "imageUrl": {
+                "name": "sopa_ahuyama.jpg",
+                "url": "https://ejemplo.com/sopa_ahuyama.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420469,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "arroz blanco",
+                    "units": "gr",
+                    "image": "🍚",
+                    "price": "2800",
+                    "grPrice": 2.8
+                  },
+                  "quantity": 1500
+                },
+                {
+                  "ingredient": {
+                    "name": "espinaca",
+                    "units": "tazas",
+                    "image": "🍃",
+                    "price": "3000",
+                    "grPrice": 3.0
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "maní",
+                    "units": "gr",
+                    "image": "🥜",
+                    "price": "3800",
+                    "grPrice": 3.8
+                  },
+                  "quantity": 200
+                },
+                {
+                  "ingredient": {
+                    "name": "aceite",
+                    "units": "taza",
+                    "image": "🫒",
+                    "price": "8000",
+                    "grPrice": 8.0
+                  },
+                  "quantity": 0.5
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "al gusto",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Arroz blanco con espinacas y maní tostado",
+              "title": "Arroz con Espinacas y Maní",
+              "portions": 30,
+              "imageUrl": {
+                "name": "arroz_espinacas_mani.jpg",
+                "url": "https://ejemplo.com/arroz_espinacas_mani.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420470,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "quinoa",
+                    "units": "tazas",
+                    "image": "🌾",
+                    "price": "4500",
+                    "grPrice": 4.5
+                  },
+                  "quantity": 5
+                },
+                {
+                  "ingredient": {
+                    "name": "zanahoria",
+                    "units": "und",
+                    "image": "🥕",
+                    "price": "1800",
+                    "grPrice": 1.8
+                  },
+                  "quantity": 7
+                },
+                {
+                  "ingredient": {
+                    "name": "avena",
+                    "units": "tazas",
+                    "image": "🌾",
+                    "price": "2200",
+                    "grPrice": 2.2
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "harina de maíz",
+                    "units": "al gusto",
+                    "image": "🌽",
+                    "price": "1800",
+                    "grPrice": 1.8
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "cúrcuma",
+                    "units": "cucharadas",
+                    "image": "🟨",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 3
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "cucharada",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "pesto de cilantro",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 1
+                }
+              ],
+              "description": "Croquetas de quinoa con zanahoria y especias",
+              "title": "Croquetas de Quinoa",
+              "portions": 30,
+              "imageUrl": {
+                "name": "croquetas_quinoa.jpg",
+                "url": "https://ejemplo.com/croquetas_quinoa.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          },
+          {
+            "recipe": {
+              "key": 3270648.8283420471,
+              "ingredients": [
+                {
+                  "ingredient": {
+                    "name": "papa capira",
+                    "units": "gr",
+                    "image": "🥔",
+                    "price": "1500",
+                    "grPrice": 1.5
+                  },
+                  "quantity": 3500
+                },
+                {
+                  "ingredient": {
+                    "name": "pesto de albahaca",
+                    "units": "cucharadas",
+                    "image": "🌿",
+                    "price": "5000",
+                    "grPrice": 5.0
+                  },
+                  "quantity": 2
+                },
+                {
+                  "ingredient": {
+                    "name": "tomate",
+                    "units": "und",
+                    "image": "🍅",
+                    "price": "2500",
+                    "grPrice": 2.5
+                  },
+                  "quantity": 10
+                },
+                {
+                  "ingredient": {
+                    "name": "sal",
+                    "units": "al gusto",
+                    "image": "🧂",
+                    "price": "1000",
+                    "grPrice": 1.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "comino",
+                    "units": "cucharadita",
+                    "image": "🌿",
+                    "price": "4500",
+                    "grPrice": 4.5
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "cebolla",
+                    "units": "und",
+                    "image": "🧅",
+                    "price": "2770",
+                    "grPrice": 2.77
+                  },
+                  "quantity": 4
+                },
+                {
+                  "ingredient": {
+                    "name": "orégano",
+                    "units": "cucharada",
+                    "image": "🌿",
+                    "price": "4000",
+                    "grPrice": 4.0
+                  },
+                  "quantity": 1
+                },
+                {
+                  "ingredient": {
+                    "name": "melado",
+                    "units": "taza",
+                    "image": "🍯",
+                    "price": "3000",
+                    "grPrice": 3.0
+                  },
+                  "quantity": 0.5
+                }
+              ],
+              "description": "Estofado de papas con tomate y especias",
+              "title": "Estofado de Papas con Tomate",
+              "portions": 30,
+              "imageUrl": {
+                "name": "estofado_papas.jpg",
+                "url": "https://ejemplo.com/estofado_papas.jpg",
+                "type": "image/jpeg"
+              }
+            }
+          }
+          ,
+              {
+                "recipe": {
+                  "key": 3270648.8283420472,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "aguacate",
+                        "units": "und",
+                        "image": "🥑",
+                        "price": "2500",
+                        "grPrice": 25.0
+                      },
+                      "quantity": 10
+                    },
+                    {
+                      "ingredient": {
+                        "name": "limón",
+                        "units": "und",
+                        "image": "🍋",
+                        "price": "500",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 4
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pimienta",
+                        "units": "cucharadita",
+                        "image": "🌶️",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 0.5
+                    },
+                    {
+                      "ingredient": {
+                        "name": "vinagre",
+                        "units": "chorro",
+                        "image": "🍶",
+                        "price": "2000",
+                        "grPrice": 2.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Guacamole fresco con limón y especias",
+                  "title": "Guacamole",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "guacamole.jpg",
+                    "url": "https://ejemplo.com/guacamole.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                  "recipe": {
+                    "key": 3270648.8283420483,
+                    "ingredients": [
+                      {
+                        "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "zucchini", "units": "und", "image": "🥒", "price": "1800", "grPrice": 18.0},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "yacón", "units": "und", "image": "🍠", "price": "2000", "grPrice": 20.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "aguacate", "units": "und", "image": "🥑", "price": "2500", "grPrice": 25.0},
+                        "quantity": 6
+                      },
+                      {
+                        "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "tomillo", "units": "cucharadita", "image": "🌿", "price": "4500", "grPrice": 4.5},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "laurel", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "orégano", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                        "quantity": 1
+                      }
+                    ],
+                    "description": "Ensalada especial con aguacate, zucchini y yacón",
+                    "title": "Ensalada Especial con Aguacate",
+                    "portions": 30,
+                    "imageUrl": {
+                      "name": "ensalada_especial_aguacate.jpg",
+                      "url": "https://ejemplo.com/ensalada_especial_aguacate.jpg",
+                      "type": "image/jpeg"
+                    }
+                  }
+                },
+                {
+                  "recipe": {
+                    "key": 3270648.8283420482,
+                    "ingredients": [
+                      {
+                        "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "espinaca", "units": "bolsa", "image": "🍃", "price": "3000", "grPrice": 3.0},
+                        "quantity": 0.5
+                      },
+                      {
+                        "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "quinoa", "units": "taza", "image": "🌾", "price": "4500", "grPrice": 4.5},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "aceitunas", "units": "paquete", "image": "🫒", "price": "7000", "grPrice": 7.0},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "tomillo", "units": "cucharadita", "image": "🌿", "price": "4500", "grPrice": 4.5},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "laurel", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "orégano", "units": "cucharadita", "image": "🌿", "price": "4000", "grPrice": 4.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                        "quantity": 1
+                      }
+                    ],
+                    "description": "Ensalada premium con quinoa, aceitunas y hierbas aromáticas",
+                    "title": "Ensalada con Quinoa y Aceitunas",
+                    "portions": 30,
+                    "imageUrl": {
+                      "name": "ensalada_quinoa_aceitunas.jpg",
+                      "url": "https://ejemplo.com/ensalada_quinoa_aceitunas.jpg",
+                      "type": "image/jpeg"
+                    }
+                  }
+                },
+                {
+                  "recipe": {
+                    "key": 3270648.8283420481,
+                    "ingredients": [
+                      {
+                        "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "espinaca", "units": "bolsa", "image": "🍃", "price": "3000", "grPrice": 3.0},
+                        "quantity": 0.5
+                      },
+                      {
+                        "ingredient": {"name": "pepino", "units": "und", "image": "🥒", "price": "1500", "grPrice": 15.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "zanahoria", "units": "und", "image": "🥕", "price": "1800", "grPrice": 1.8},
+                        "quantity": 2
+                      },
+                      {
+                        "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                        "quantity": 3
+                      },
+                      {
+                        "ingredient": {"name": "aceite de oliva", "units": "ml", "image": "🫒", "price": "8000", "grPrice": 8.0},
+                        "quantity": 30
+                      },
+                      {
+                        "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "pimienta", "units": "al gusto", "image": "🌶️", "price": "5000", "grPrice": 5.0},
+                        "quantity": 1
+                      }
+                    ],
+                    "description": "Ensalada con espinaca, pepino y aderezo de limón y aceite de oliva",
+                    "title": "Ensalada con Espinaca y Pepino",
+                    "portions": 30,
+                    "imageUrl": {
+                      "name": "ensalada_espinaca_pepino.jpg",
+                      "url": "https://ejemplo.com/ensalada_espinaca_pepino.jpg",
+                      "type": "image/jpeg"
+                    }
+                  }
+                },
+                {
+                  "recipe": {
+                    "key": 3270648.8283420480,
+                    "ingredients": [
+                      {
+                        "ingredient": {"name": "lechuga", "units": "und", "image": "🥬", "price": "2000", "grPrice": 20.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "tomate", "units": "und", "image": "🍅", "price": "2500", "grPrice": 2.5},
+                        "quantity": 4
+                      },
+                      {
+                        "ingredient": {"name": "zanahoria", "units": "und", "image": "🥕", "price": "1800", "grPrice": 1.8},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "limón", "units": "und", "image": "🍋", "price": "500", "grPrice": 5.0},
+                        "quantity": 1
+                      },
+                      {
+                        "ingredient": {"name": "sal", "units": "al gusto", "image": "🧂", "price": "1000", "grPrice": 1.0},
+                        "quantity": 1
+                      }
+                    ],
+                    "description": "Ensalada básica con lechuga, tomate y zanahoria rallada",
+                    "title": "Ensalada Básica",
+                    "portions": 6,
+                    "imageUrl": {
+                      "name": "ensalada_basica.jpg",
+                      "url": "https://ejemplo.com/ensalada_basica.jpg",
+                      "type": "image/jpeg"
+                    }
+                  }
+                },
+      
+              {
+                "recipe": {
+                  "key": 3270648.8283420473,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "maíz",
+                        "units": "gr",
+                        "image": "🌽",
+                        "price": "1500",
+                        "grPrice": 1.5
+                      },
+                      "quantity": 1500
+                    },
+                    {
+                      "ingredient": {
+                        "name": "papa criolla",
+                        "units": "gr",
+                        "image": "🥔",
+                        "price": "2000",
+                        "grPrice": 2.0
+                      },
+                      "quantity": 500
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cebolla",
+                        "units": "und",
+                        "image": "🧅",
+                        "price": "2770",
+                        "grPrice": 2.77
+                      },
+                      "quantity": 3
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cebolla puerro",
+                        "units": "taza",
+                        "image": "🧅",
+                        "price": "2500",
+                        "grPrice": 2.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "comino",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cúrcuma",
+                        "units": "cucharada",
+                        "image": "🟨",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "ajo en polvo",
+                        "units": "cucharada",
+                        "image": "🧄",
+                        "price": "6000",
+                        "grPrice": 6.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Crema de maíz espesa con papas criollas",
+                  "title": "Crema de Maíz o Chócolo",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "crema_maiz.jpg",
+                    "url": "https://ejemplo.com/crema_maiz.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420474,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "berenjena",
+                        "units": "und",
+                        "image": "🍆",
+                        "price": "1800",
+                        "grPrice": 18.0
+                      },
+                      "quantity": 8
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cebolla blanca",
+                        "units": "und",
+                        "image": "🧅",
+                        "price": "2770",
+                        "grPrice": 2.77
+                      },
+                      "quantity": 4
+                    },
+                    {
+                      "ingredient": {
+                        "name": "tomate",
+                        "units": "und",
+                        "image": "🍅",
+                        "price": "2500",
+                        "grPrice": 2.5
+                      },
+                      "quantity": 10
+                    },
+                    {
+                      "ingredient": {
+                        "name": "laurel",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4000",
+                        "grPrice": 4.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "orégano",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4000",
+                        "grPrice": 4.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pimienta",
+                        "units": "cucharada",
+                        "image": "🌶️",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "queso en bloque",
+                        "units": "paquetes",
+                        "image": "🧀",
+                        "price": "8500",
+                        "grPrice": 8.5
+                      },
+                      "quantity": 3
+                    },
+                    {
+                      "ingredient": {
+                        "name": "melado",
+                        "units": "chorro",
+                        "image": "🍯",
+                        "price": "3000",
+                        "grPrice": 3.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Estofado de berenjenas con queso y tomate",
+                  "title": "Estofado de Berenjenas con Queso",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "estofado_berenjenas.jpg",
+                    "url": "https://ejemplo.com/estofado_berenjenas.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420475,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "yuca",
+                        "units": "bolsa",
+                        "image": "🥔",
+                        "price": "1200",
+                        "grPrice": 1.2
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "maíz",
+                        "units": "bolsa",
+                        "image": "🌽",
+                        "price": "1500",
+                        "grPrice": 1.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "arracacha",
+                        "units": "bolsa",
+                        "image": "🥔",
+                        "price": "1600",
+                        "grPrice": 1.6
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "mazorca",
+                        "units": "trozo",
+                        "image": "🌽",
+                        "price": "1200",
+                        "grPrice": 12.0
+                      },
+                      "quantity": 30
+                    },
+                    {
+                      "ingredient": {
+                        "name": "ahuyama",
+                        "units": "gr",
+                        "image": "🎃",
+                        "price": "1200",
+                        "grPrice": 1.2
+                      },
+                      "quantity": 1000
+                    },
+                    {
+                      "ingredient": {
+                        "name": "arveja",
+                        "units": "lb",
+                        "image": "🫛",
+                        "price": "2800",
+                        "grPrice": 2.8
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pesto de cilantro",
+                        "units": "cucharadas",
+                        "image": "🌿",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 2
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pesto de perejil",
+                        "units": "cucharadas",
+                        "image": "🌿",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 2
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Sancocho tradicional con variedad de tubérculos y verduras",
+                  "title": "Sancocho",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "sancocho.jpg",
+                    "url": "https://ejemplo.com/sancocho.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420476,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "lentejas",
+                        "units": "gr",
+                        "image": "🫘",
+                        "price": "3500",
+                        "grPrice": 3.5
+                      },
+                      "quantity": 1500
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pesto de albahaca",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cúrcuma",
+                        "units": "cucharada",
+                        "image": "🟨",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "comino",
+                        "units": "cucharadita",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 0.33
+                    },
+                    {
+                      "ingredient": {
+                        "name": "orégano",
+                        "units": "al gusto",
+                        "image": "🌿",
+                        "price": "4000",
+                        "grPrice": 4.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "tomillo",
+                        "units": "al gusto",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pimienta",
+                        "units": "al gusto",
+                        "image": "🌶️",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Tofu vegetal preparado con lentejas y especias",
+                  "title": "Tofu de Lentejas",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "tofu_lentejas.jpg",
+                    "url": "https://ejemplo.com/tofu_lentejas.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420477,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "frijol cargamanto",
+                        "units": "gr",
+                        "image": "🫘",
+                        "price": "3200",
+                        "grPrice": 3.2
+                      },
+                      "quantity": 1000
+                    },
+                    {
+                      "ingredient": {
+                        "name": "quinoa",
+                        "units": "gr",
+                        "image": "🌾",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 500
+                    },
+                    {
+                      "ingredient": {
+                        "name": "chia",
+                        "units": "gr",
+                        "image": "🌱",
+                        "price": "6000",
+                        "grPrice": 6.0
+                      },
+                      "quantity": 150
+                    },
+                    {
+                      "ingredient": {
+                        "name": "harina de maíz",
+                        "units": "al gusto",
+                        "image": "🌽",
+                        "price": "1800",
+                        "grPrice": 1.8
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pesto de cilantro",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "pesto de albahaca",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "orégano",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4000",
+                        "grPrice": 4.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "tomillo",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "laurel",
+                        "units": "cucharada",
+                        "image": "🌿",
+                        "price": "4000",
+                        "grPrice": 4.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "comino",
+                        "units": "cucharadas",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 4
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "ajo en polvo",
+                        "units": "al gusto",
+                        "image": "🧄",
+                        "price": "6000",
+                        "grPrice": 6.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Hamburguesas vegetarianas de frijol y quinoa",
+                  "title": "Hamburguesa de Proteína Vegetal",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "hamburguesa_vegetal.jpg",
+                    "url": "https://ejemplo.com/hamburguesa_vegetal.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420478,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "arracacha",
+                        "units": "bolsa",
+                        "image": "🥔",
+                        "price": "1600",
+                        "grPrice": 1.6
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "curry",
+                        "units": "cucharadas",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 2
+                    },
+                    {
+                      "ingredient": {
+                        "name": "comino",
+                        "units": "cucharadita",
+                        "image": "🌿",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 0.5
+                    },
+                    {
+                      "ingredient": {
+                        "name": "jengibre",
+                        "units": "cucharada",
+                        "image": "🫚",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cebolla",
+                        "units": "und",
+                        "image": "🧅",
+                        "price": "2770",
+                        "grPrice": 2.77
+                      },
+                      "quantity": 3
+                    },
+                    {
+                      "ingredient": {
+                        "name": "sal",
+                        "units": "al gusto",
+                        "image": "🧂",
+                        "price": "1000",
+                        "grPrice": 1.0
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "description": "Crema de arracacha con curry y jengibre",
+                  "title": "Crema de Arracacha",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "crema_arracacha.jpg",
+                    "url": "https://ejemplo.com/crema_arracacha.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              },
+              {
+                "recipe": {
+                  "key": 3270648.8283420479,
+                  "ingredients": [
+                    {
+                      "ingredient": {
+                        "name": "bananos",
+                        "units": "und",
+                        "image": "🍌",
+                        "price": "800",
+                        "grPrice": 8.0
+                      },
+                      "quantity": 6
+                    },
+                    {
+                      "ingredient": {
+                        "name": "semillas de girasol",
+                        "units": "gr",
+                        "image": "🌻",
+                        "price": "4500",
+                        "grPrice": 4.5
+                      },
+                      "quantity": 200
+                    },
+                    {
+                      "ingredient": {
+                        "name": "avena",
+                        "units": "al gusto",
+                        "image": "🌾",
+                        "price": "2200",
+                        "grPrice": 2.2
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "ingredient": {
+                        "name": "cocoa en polvo",
+                        "units": "taza",
+                        "image": "🍫",
+                        "price": "6000",
+                        "grPrice": 6.0
+                      },
+                      "quantity": 0.5
+                    },
+                    {
+                      "ingredient": {
+                        "name": "mermelada de mora",
+                        "units": "taza",
+                        "image": "🍓",
+                        "price": "5000",
+                        "grPrice": 5.0
+                      },
+                      "quantity": 0.5
+                    }
+                  ],
+                  "description": "Trufas de banano y chocolate con semillas de girasol",
+                  "title": "Trufas de Banano y Chocolate",
+                  "portions": 30,
+                  "imageUrl": {
+                    "name": "trufas_banano_chocolate.jpg",
+                    "url": "https://ejemplo.com/trufas_banano_chocolate.jpg",
+                    "type": "image/jpeg"
+                  }
+                }
+              }
+      
+      
+      ]

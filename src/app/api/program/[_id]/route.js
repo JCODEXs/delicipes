@@ -54,7 +54,7 @@ export async function GET(req, context) {
     // Construct the query object
     const query = { userId: userId };
 
-    const result = await db.collection("programs").find(query).toArray();
+    const result = await db.collection("programs").find({}).toArray();
     // // console.log(result);
     return NextResponse.json({ result });
   } catch (error) {

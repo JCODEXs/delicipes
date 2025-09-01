@@ -274,7 +274,7 @@ export default function DesignRecipeMetods({ recipe }) {
           pendingDelete={pendingDelete}
         >
           {pendingDeleteType === "ingredient"
-            ? "Are you sure you want to delete this ingredient?"
+            ? `Are you sure you want to delete this ingredient ${pendingDelete?.ingredient?.name}?`
             : "Are you sure you want to delete this recipe?"}
         </ConfirmModal>
       )}
