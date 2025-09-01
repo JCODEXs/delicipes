@@ -493,35 +493,23 @@ export const addProgram = async (_program) => {
   toast("Saved!");
 };
 export const getMyPrograms = async (userId) => {
+  // console.log(userId);
   try {
-    // Determine the base URL based on environment
-    let baseURL = "";
+    const result = await axios.get(`api/program/${userId}`);
 
-    if (typeof window !== "undefined") {
-      // Client-side: use relative path
-      baseURL = "";
-    } else {
-      // Server-side: use absolute URL
-      baseURL = process.env.VERCEL_URL
-        ? process.env.VERCEL_URL
-        : "http://localhost:3000";
-    }
-
-    const result = await axios.get(`${baseURL}/api/program/${userId}`);
-
-    const { data } = result.data;
+    const { response, data } = result.data;
     const index = data?.result ? data?.result.length - 1 : 0;
     const RecipesList =
-      data?.result?.[index]?._program?.ingredientsTotList?.[0];
-
-    if (RecipesList) {
-      await usePantry.getState().addListOfIngredients(RecipesList);
+      await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
+    // console.log("getPrograms", RecipesList);
+    await usePantry.getState().addListOfIngredients(RecipesList);
+    if (result.data.result.length > 0) {
+      return result.data.result;
+    } else {
+      return [];
     }
-
-    return data?.result || [];
   } catch (error) {
-    console.log("Error in getMyPrograms:", error);
-    return [];
+    console.log(error);
   }
 };
 export const getRecipeById = async (id) => {

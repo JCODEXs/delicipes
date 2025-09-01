@@ -2,18 +2,14 @@
 "use client";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import styles from "./mealMatrix.css";
-import { addProgram, usePantry } from "../../../store/pantry";
+import { addProgram, getMyPrograms, usePantry } from "../../../store/pantry";
 import RecipeCard from "./RecipeCard/recipeCard";
 import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-const MealMatrix = ({ myPrograms }) => {
-  const index = myPrograms ? myPrograms?.length - 1 : 0;
-  const lastProgram = myPrograms?.[index]?._program?.selectedRecipes;
-  const lastOrders = myPrograms?.[index]?._program?.portions;
-  const [selectedRecipes, setSelectedRecipes] = useState(lastProgram);
+const MealMatrix = () => {
   const storeRecipes = usePantry((store) => store.recipes);
   let [recipes, setRecipes] = useState();
   const [portions, setPortions] = useState({});
@@ -165,6 +161,40 @@ const MealMatrix = ({ myPrograms }) => {
 
     doc.save("programa.pdf");
   };
+  const [myPrograms, setMyPrograms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMyPrograms = async () => {
+      try {
+        setLoading(true);
+        // If getMyPrograms requires a userId, you'll need to pass it
+        // For example, if using Clerk authentication:
+        // const { userId } = useAuth();
+        const programs = await getMyPrograms(); // or await getMyPrograms(userId);
+        setMyPrograms(programs);
+      } catch (err) {
+        console.error("Failed to fetch programs:", err);
+        setError("Failed to load programs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMyPrograms();
+  }, []); // Empty dependency array means this runs once on mount
+  const index = myPrograms ? myPrograms?.length - 1 : 0;
+  const lastProgram = myPrograms?.[index]?._program?.selectedRecipes;
+  const lastOrders = myPrograms?.[index]?._program?.portions;
+  const [selectedRecipes, setSelectedRecipes] = useState(lastProgram);
+  if (loading) {
+    return <div>Loading programs...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   // First useEffect: fetch from API if store is empty
   // useEffect(() => {

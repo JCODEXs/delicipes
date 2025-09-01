@@ -6,14 +6,14 @@ import FullPageRecetionView from "~/components/reception-page";
 
 export const dynamic = "force-dynamic";
 export default async function MealPlan() {
-  const userId = await auth().userId;
+  // const userId = await auth().userId;
   // console.log("hi", userId);
-  const myPrograms = await getMyPrograms(userId);
+
   // console.log(myPrograms);
   return (
     <div>
       <SignedIn>
-        <MealMatrix myPrograms={myPrograms} />
+        <MealMatrix  />
       </SignedIn>
       <SignedOut>
         <div className="h-full w-full rounded-md text-center text-2xl text-red-950">
