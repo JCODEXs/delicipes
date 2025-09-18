@@ -11,16 +11,61 @@ import {
 } from "../../../components/ui/table";
 import { useEffect, useState } from "react";
 import WhatCanICookModal from "./WhatCanICookModal";
-import { getRecipes, usePantry } from "~/store/pantry";
+import { getMyPrograms, getRecipes, usePantry } from "~/store/pantry";
 
-export default function ShopingList({ myPrograms, allRecipes }) {
-  const index = myPrograms ? myPrograms.length - 1 : 0;
-  const lastProgram = myPrograms?.[index]?._program?.ingredientsTotList?.[0];
-  const weekRecipes = allRecipes || [];
-  const [RecipeList, setRecipeList] = useState(lastProgram);
+export default function ShopingList({ userId }) {
   let total = 0;
   // For interactivity: allow marking as bought
+  const [RecipeList, setRecipeList] = useState();
+  const [myPrograms, setMyPrograms] = useState();
+  const [myProgram, setMyProgram] = useState();
+  const [Loading, setLoading] = useState(false);
   const [checked, setChecked] = useState({});
+  console.log("programs", myPrograms);
+  // Fetch programs on component mount
+  useEffect(() => {
+    const fetchMyPrograms = async () => {
+      try {
+        setLoading(true);
+        const programs = await getMyPrograms(userId);
+        setMyPrograms(programs);
+
+        // Set initial state based on fetched programs
+        if (programs && programs.length > 0) {
+          const index = programs.length - 1;
+          const lastProgram = programs[index]?._program?.selectedRecipes || {};
+          const lastOrders = programs[index]?._program?.portions || {};
+
+          setMyProgram(lastProgram);
+          console.log(lastProgram, "lastProgram");
+
+          // Also load ingredients list if available
+          const RecipesList =
+            programs[index]?._program?.ingredientsTotList?.[0];
+          if (RecipesList) {
+            usePantry.getState().addListOfIngredients(RecipesList);
+            setRecipeList(RecipesList);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch programs:", err);
+        setError("Failed to load programs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMyPrograms();
+  }, []);
+
+  const index = myPrograms ? myPrograms.length - 1 : 0;
+
+  const weekRecipes = Object.values(myProgram)
+    .flat()
+    .filter(
+      (recipe, index, array) =>
+        array.findIndex((r) => r._id === recipe._id) === index,
+    );
 
   const handleCheck = (ingredient) => {
     setChecked((prev) => ({
@@ -195,7 +240,7 @@ export default function ShopingList({ myPrograms, allRecipes }) {
                     {ingredient}
                   </TableCell>
                   <TableCell style={{ color: "#2e1a08" }}>
-                    {details.cantidad.toFixed(0)}
+                    {details?.cantidad?.toFixed(0)}
                   </TableCell>
                   {/* <TableCell
                     style={{ color: needToBuy === 0 ? "green" : "#a86b3c" }}
@@ -209,7 +254,7 @@ export default function ShopingList({ myPrograms, allRecipes }) {
                     className="text-right"
                     style={{ color: "#a86b3c", fontWeight: 600 }}
                   >
-                    ${details.precio.toFixed(0)}
+                    ${details?.precio?.toFixed(0)}
                   </TableCell>
                 </TableRow>
               );

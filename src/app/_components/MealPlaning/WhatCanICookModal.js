@@ -15,6 +15,7 @@ export default function WhatCanICookModal({ open, onClose, recipes }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        overflow: "auto",
       }}
       onClick={onClose}
     >
@@ -35,7 +36,18 @@ export default function WhatCanICookModal({ open, onClose, recipes }) {
             No recipes found with your selection.
           </div>
         ) : (
-          <ul>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 1,
+              flexWrap: "wrap",
+              display: "flex",
+              flexDirection: "column",
+              overflowY: "scroll",
+              gap: "0.5rem",
+              maxHeight: "80vh",
+            }}
+          >
             {recipes.map((r) => (
               <li key={r._id} style={{ marginBottom: 8, color: "#3a2412" }}>
                 {r.recipe?.title || r.recipe?.tittle}

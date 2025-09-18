@@ -9,15 +9,15 @@ export const dynamic = "force-dynamic";
 export default async function MealPlan() {
   const userId = await auth().userId;
   // console.log("hi", userId);
-  const myPrograms = await getMyPrograms(userId);
-  const allRecipes = usePantry.getState().allRecipes;
-  console.log(allRecipes, "allRecipespage");
+  // const myPrograms = await getMyPrograms(userId);
+  // const allRecipes = usePantry.getState().allRecipes;
+  // console.log(allRecipes, "allRecipespage");
   return (
     <div>
       <SignedIn>
         {/* <div>Inventario</div> */}
-        <ShopingList myPrograms={myPrograms}
-         allRecipes={allRecipes}
+        <ShopingList userId={userId}  
+         
          />
       </SignedIn>
       <SignedOut>
