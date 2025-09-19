@@ -16,9 +16,10 @@ export default function FullPageRecetionView() {
               whiteSpace: "nowrap",
               lineHeight: 1.1,
               overflow: "visible",
+              marginBottom:"2rem",
             }}
           >
-            Delicipeasy
+            Cocina Vipassaana
           </span>
         <div className="flex items-center justify-center rounded-md p-2 mb-4">
           <motion.div

@@ -20,6 +20,7 @@ const MealMatrix = () => {
   const [showRecipePicker, setShowRecipePicker] = useState(false);
   const [recipePickerDay, setRecipePickerDay] = useState(null);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
+  const [globalPortions, setGlobalPortions] = useState(1);
 
   // State for programs data
   const [myPrograms, setMyPrograms] = useState([]);
@@ -479,6 +480,7 @@ const MealMatrix = () => {
           borderBottom: "2px solid #c9b87a",
           boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
           display: "flex",
+          flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
           minHeight: "56px",
@@ -516,12 +518,66 @@ const MealMatrix = () => {
               fontSize: "1.35rem",
               background: "linear-gradient(90deg, #c9b87a 60%, #e6e2c0 100%)",
               WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
               letterSpacing: "0.04em",
             }}
           >
             ${dayTotals?.["total"]?.toFixed(0) ?? 0}
           </span>
+        </div>
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            background: "#23262e",
+            borderRadius: "10px",
+            padding: "0.5rem 1.5rem",
+            boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
+            border: "2px solid #c9b87a",
+          }}
+        >
+          <span
+            style={{
+              color: "#c9b87a",
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+              letterSpacing: "0.04em",
+              textShadow: "0 1px 2px #181818",
+            }}
+          >
+            Global Portions:
+          </span>
+
+          <input
+            type="number"
+            min={1}
+            max={100}
+            style={{
+              width: 68,
+              height: 28,
+              color: "#23262e",
+              background: "#e6e2c0",
+              borderRadius: 8,
+              padding: "0.1rem 0.5rem",
+              border: "1px solid #c9b87a",
+              fontWeight: "bold",
+              fontSize: "1rem",
+              textAlign: "center",
+            }}
+            value={globalPortions}
+            placeholder="#"
+            onChange={(e) => {
+              const inputValue = parseInt(e.target.value);
+              if (isNaN(inputValue) || inputValue < 1) {
+                setGlobalPortions(1);
+              } else if (inputValue > 100) {
+                setGlobalPortions(100);
+              } else {
+                setGlobalPortions(inputValue);
+              }
+            }}
+            required
+          ></input>
         </div>
       </div>
       <div style={{ height: "110px" }}></div>

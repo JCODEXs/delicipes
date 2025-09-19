@@ -60,12 +60,14 @@ export default function ShopingList({ userId }) {
 
   const index = myPrograms ? myPrograms.length - 1 : 0;
 
-  const weekRecipes = Object?.values(myProgram)
-    ?.flat()
-    ?.filter(
-      (recipe, index, array) =>
-        array?.findIndex((r) => r._id === recipe._id) === index,
-    );
+  const weekRecipes =
+    myProgram &&
+    Object?.values(myProgram)
+      ?.flat()
+      ?.filter(
+        (recipe, index, array) =>
+          array?.findIndex((r) => r._id === recipe._id) === index,
+      );
 
   const handleCheck = (ingredient) => {
     setChecked((prev) => ({
