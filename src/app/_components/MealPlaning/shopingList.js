@@ -60,11 +60,11 @@ export default function ShopingList({ userId }) {
 
   const index = myPrograms ? myPrograms.length - 1 : 0;
 
-  const weekRecipes = Object.values(myProgram)
-    .flat()
-    .filter(
+  const weekRecipes = Object?.values(myProgram)
+    ?.flat()
+    ?.filter(
       (recipe, index, array) =>
-        array.findIndex((r) => r._id === recipe._id) === index,
+        array?.findIndex((r) => r._id === recipe._id) === index,
     );
 
   const handleCheck = (ingredient) => {
@@ -79,12 +79,11 @@ export default function ShopingList({ userId }) {
 
   const handleWhatCanICook = () => {
     // Get checked ingredients
-    const selectedIngredients = Object.keys(checked).filter(
-      (key) => checked[key],
-    );
+    const selectedIngredients =
+      checked && Object?.keys(checked)?.filter((key) => checked[key]);
     console.log("Checked ingredients:", selectedIngredients, weekRecipes);
 
-    const found = weekRecipes.filter((recipe) => {
+    const found = weekRecipes?.filter((recipe) => {
       const recipeIngredients = (recipe.recipe?.ingredients || []).map(
         (i) => i?.ingredient?.name,
       );
@@ -120,7 +119,7 @@ export default function ShopingList({ userId }) {
     setModalOpen(true);
   };
 
-  const allIngredients = RecipeList ? Object.keys(RecipeList) : [];
+  const allIngredients = RecipeList ? Object?.keys(RecipeList) : [];
   const allChecked =
     allIngredients.length > 0 && allIngredients.every((ing) => checked[ing]);
   const handleSelectAll = () => {
@@ -199,7 +198,7 @@ export default function ShopingList({ userId }) {
         </TableHeader>
         <TableBody>
           {RecipeList &&
-            Object.entries(RecipeList).map(([ingredient, details], index) => {
+            Object?.entries(RecipeList)?.map(([ingredient, details], index) => {
               total += details.precio;
               const needToBuy = Math.max(
                 details.cantidad - (details.stock || 0),
