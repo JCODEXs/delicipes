@@ -894,7 +894,7 @@ const MealMatrix = () => {
 
       {showRecipePicker && (
         <>
-          {console.log("Recipes in picker:", recipes)}
+          {/* {console.log("Recipes in picker:", recipes)} */}
           <Modal
             isOpen={showRecipePicker}
             onClose={() => {
@@ -903,12 +903,62 @@ const MealMatrix = () => {
             }}
           >
             <div>
+              {/* Button is now outside the scrollable area */}
+              <button
+                style={{
+                  marginTop: "0.5rem",
+                  background: "#c9b87a",
+                  color: "#23262e",
+                  border: "none",
+                  borderRadius: "8px",
+                  padding: "0.75rem 1.5rem",
+                  fontWeight: "bold",
+                  fontSize: "1.1rem",
+                  cursor: "pointer",
+                  alignSelf: "center",
+                  display: "block",
+                  width: "100%",
+                }}
+                disabled={pickerSelected.length === 0}
+                onClick={() => {
+                  setSelectedRecipes((prevSelectedRecipes) => {
+                    const prev = prevSelectedRecipes?.[recipePickerDay] || [];
+                    // Filter out recipes already present
+                    const newOnes = pickerSelected.filter(
+                      (picked) => !prev.some((r) => r._id === picked._id),
+                    );
+                    return {
+                      ...prevSelectedRecipes,
+                      [recipePickerDay]: [...prev, ...newOnes],
+                    };
+                  });
+
+                  // Set default portions in orders for each new recipe
+                  setOrders((prevOrders) => {
+                    const prev = selectedRecipes?.[recipePickerDay] || [];
+                    const newOnes = pickerSelected.filter(
+                      (picked) => !prev.some((r) => r._id === picked._id),
+                    );
+                    const updates = {};
+                    newOnes.forEach((recipe) => {
+                      updates[`${recipe._id}${recipePickerDay}`] =
+                        recipe.recipe.portions ?? 1;
+                    });
+                    return { ...prevOrders, ...updates };
+                  });
+
+                  setShowRecipePicker(false);
+                  setPickerSelected([]);
+                }}
+              >
+                Add Selected Recipes
+              </button>
               <h3 style={{ color: "#e6e2c0" }}>
                 Pick recipes for {recipePickerDay}
               </h3>
               <div
                 style={{
-                  maxHeight: "80vh",
+                  maxHeight: "90vh",
                   overflowY: "auto",
                   display: "flex",
                   flexWrap: "wrap",
@@ -1010,56 +1060,6 @@ const MealMatrix = () => {
                     );
                   })}
               </div>
-              {/* Button is now outside the scrollable area */}
-              <button
-                style={{
-                  marginTop: "1.5rem",
-                  background: "#c9b87a",
-                  color: "#23262e",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "0.75rem 1.5rem",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                  cursor: "pointer",
-                  alignSelf: "center",
-                  display: "block",
-                  width: "100%",
-                }}
-                disabled={pickerSelected.length === 0}
-                onClick={() => {
-                  setSelectedRecipes((prevSelectedRecipes) => {
-                    const prev = prevSelectedRecipes?.[recipePickerDay] || [];
-                    // Filter out recipes already present
-                    const newOnes = pickerSelected.filter(
-                      (picked) => !prev.some((r) => r._id === picked._id),
-                    );
-                    return {
-                      ...prevSelectedRecipes,
-                      [recipePickerDay]: [...prev, ...newOnes],
-                    };
-                  });
-
-                  // Set default portions in orders for each new recipe
-                  setOrders((prevOrders) => {
-                    const prev = selectedRecipes?.[recipePickerDay] || [];
-                    const newOnes = pickerSelected.filter(
-                      (picked) => !prev.some((r) => r._id === picked._id),
-                    );
-                    const updates = {};
-                    newOnes.forEach((recipe) => {
-                      updates[`${recipe._id}${recipePickerDay}`] =
-                        recipe.recipe.portions ?? 1;
-                    });
-                    return { ...prevOrders, ...updates };
-                  });
-
-                  setShowRecipePicker(false);
-                  setPickerSelected([]);
-                }}
-              >
-                Add Selected Recipes
-              </button>
             </div>
           </Modal>
         </>
