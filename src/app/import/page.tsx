@@ -3,47 +3,75 @@ import { useState } from "react";
 import {
   importRecipesFromAPI,
   importIngredientsFromAPI2,
-  
+  importRecipesFromAPI2,
 } from "actions/actions";
 import { usePantry } from "~/store/pantry";
 import RecipeSelectionCard from "../_components/import/RecipeSelectionCard";
+import { toast } from "sonner";
 
 interface Ingredient {
   _id: string;
   ingredient: {
     name: string;
     image?: string;
-    price?: number;
+    price?: string | number;
+    units?: string;
+    grPrice?: number;
   };
+}
+
+interface RecipeIngredient {
+  _id?: string;
+  ingredient: {
+    name: string;
+    units: string;
+    image: string;
+    price: string | number;
+    grPrice: number;
+  };
+  quantity: number;
 }
 
 interface Recipe {
   _id: string;
   recipe: {
+    key: number;
     title: string;
-    description?: string;
+    description: string;
+    portions: number;
+    ingredients: RecipeIngredient[];
     imageUrl?: {
+      name: string;
+      size: number;
+      key: string;
       url: string;
+      appUrl: string;
+      type: string;
     };
-    portions?: number;
-    ingredients?: Array<{
-      ingredient: {
-        name: string;
-        price?: number;
-      };
-      quantity: number;
-    }>;
   };
 }
 
 export default function ImportPanel() {
   const addIngredients = usePantry((s) => s.addStoreIngredients);
   const addRecipes = usePantry((s) => s.addStoreRecipe);
-  const [step, setStep] = useState("menu");
-  const [fetchedIngredients, setFetchedIngredients] = useState([]);
-  const [fetchedRecipes, setFetchedRecipes] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [step, setStep] = useState<"menu" | "selectIngredients" | "selectRecipes">("menu");
+  const [fetchedIngredients, setFetchedIngredients] = useState<Ingredient[]>([]);
+  const [fetchedRecipes, setFetchedRecipes] = useState<Recipe[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const handleQuickImportRecipes = async () => {
+    setLoading(true);
+    try {
+      await importRecipesFromAPI();
+      toast.success("¡Recetas importadas exitosamente!");
+    } catch (error) {
+      console.error("Error importing recipes:", error);
+      toast.error("Error al importar recetas");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFetchIngredients = async () => {
     setLoading(true);
@@ -52,8 +80,12 @@ export default function ImportPanel() {
       setFetchedIngredients(data || []);
       setSelectedIds([]); // reset selection
       setStep("selectIngredients");
+      if (!data || data.length === 0) {
+        toast.info("No se encontraron ingredientes para importar");
+      }
     } catch (error) {
       console.error("Error fetching ingredients:", error);
+      toast.error("Error al cargar ingredientes");
     } finally {
       setLoading(false);
     }
@@ -66,22 +98,25 @@ export default function ImportPanel() {
       setFetchedRecipes(data || []);
       setSelectedIds([]); // reset selection
       setStep("selectRecipes");
+      if (!data || data.length === 0) {
+        toast.info("No se encontraron recetas para importar");
+      }
     } catch (error) {
       console.error("Error fetching recipes:", error);
+      toast.error("Error al cargar recetas");
     } finally {
       setLoading(false);
     }
   };
 
-  const toggleSelection = (id) => {
+  const toggleSelection = (id: string) => {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     );
   };
 
   const toggleSelectAll = () => {
-    const currentItems =
-      step === "selectIngredients" ? fetchedIngredients : fetchedRecipes;
+    const currentItems = step === "selectIngredients" ? fetchedIngredients : fetchedRecipes;
     if (selectedIds.length === currentItems.length) {
       setSelectedIds([]);
     } else {
@@ -94,12 +129,14 @@ export default function ImportPanel() {
       selectedIds.includes(i._id),
     );
     addIngredients(selected);
+    toast.success(`${selected.length} ingredientes importados exitosamente`);
     setStep("menu");
   };
 
   const handleConfirmRecipes = () => {
     const selected = fetchedRecipes.filter((r) => selectedIds.includes(r._id));
     selected.forEach((recipe) => addRecipes(recipe));
+    toast.success(`${selected.length} recetas importadas exitosamente`);
     setStep("menu");
   };
 
@@ -191,10 +228,18 @@ export default function ImportPanel() {
                 Importa todas las recetas disponibles de una vez
               </p>
               <button
-                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-                onClick={importRecipesFromAPI}
+                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+                onClick={handleQuickImportRecipes}
+                disabled={loading}
               >
-                Importar Todas las Recetas
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    Importando...
+                  </div>
+                ) : (
+                  "Importar Todas las Recetas"
+                )}
               </button>
             </div>
           </div>
@@ -221,8 +266,7 @@ export default function ImportPanel() {
             <div className="flex items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600">
-                  {selectedIds.length} de {fetchedIngredients.length}{" "}
-                  seleccionados
+                  {selectedIds.length} de {fetchedIngredients.length} seleccionados
                 </span>
                 {fetchedIngredients.length > 0 && (
                   <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-600">
@@ -266,10 +310,9 @@ export default function ImportPanel() {
                   key={item._id}
                   className={`
                     relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200
-                    ${
-                      isSelected
-                        ? "border-green-500 bg-green-50 shadow-lg"
-                        : "border-gray-200 bg-white hover:border-green-300 hover:shadow-md"
+                    ${isSelected
+                      ? "border-green-500 bg-green-50 shadow-lg"
+                      : "border-gray-200 bg-white hover:border-green-300 hover:shadow-md"
                     }
                   `}
                   onClick={() => toggleSelection(item._id)}

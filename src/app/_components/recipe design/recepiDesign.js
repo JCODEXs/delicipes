@@ -426,8 +426,8 @@ export default function DesignRecipe({
                     style={{
                       display: "grid",
                       gridTemplateColumns:
-                        "repeat(auto-fit, minmax(180px, 1fr))",
-                      gap: "1rem",
+                        "repeat(auto-fit, minmax(100px, 1fr))",
+                      gap: "0.5rem",
                       width: "100%",
                     }}
                   >

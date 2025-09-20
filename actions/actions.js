@@ -46,3 +46,13 @@ export const importIngredientsFromAPI2 = async () => {
     return [];
   }
 };
+
+export const importRecipesFromAPI2 = async () => {
+  try {
+    const recipes = await getRecipes();
+    return recipes || [];
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};

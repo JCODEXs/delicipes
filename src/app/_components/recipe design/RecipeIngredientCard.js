@@ -11,7 +11,7 @@ export default function RecipeIngredientCard({
   const emoji = item?.ingredient?.image || "🍴";
 
   return (
-    <div style={{ position: "relative", width: 137 }}>
+    <div style={{ position: "relative", width: 107 }}>
       {/* Remove button outside the circle, top right */}
       <button
         style={{
@@ -43,8 +43,8 @@ export default function RecipeIngredientCard({
       {/* Ingredient circle card */}
       <div
         style={{
-          width: 137,
-          height: 137,
+          width: 107,
+          height: 107,
           borderRadius: "50%",
           background: "#f9f6ea",
           boxShadow: "0 1px 8px rgba(200,180,120,0.13)",

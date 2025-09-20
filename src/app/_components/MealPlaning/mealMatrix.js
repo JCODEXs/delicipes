@@ -660,7 +660,7 @@ const MealMatrix = () => {
           top: "120px", // <-- Adjust this to your menu height
           background: "rgba(10, 10, 20, 0.98)",
           zIndex: 5,
-          padding: "0.5rem 0",
+          padding: "0.5rem 1rem",
           marginBottom: "0.5rem",
           borderBottom: "2px solid #c9b87a",
           boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
@@ -670,7 +670,8 @@ const MealMatrix = () => {
           minHeight: "56px",
           width: "100%",
           left: 0,
-          gap: "1rem",
+          gap: "0.5rem",
+          margin: "auto",
         }}
       >
         <div
@@ -714,10 +715,10 @@ const MealMatrix = () => {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.75rem",
+            gap: "0.5rem",
             background: "#23262e",
             borderRadius: "10px",
-            padding: "0.5rem 1.5rem",
+            padding: "0.5rem 0.5rem",
             boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
             border: "2px solid #c9b87a",
           }}
