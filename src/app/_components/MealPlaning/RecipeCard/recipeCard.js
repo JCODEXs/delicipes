@@ -257,7 +257,7 @@ const RecipeCard = ({
 }) => {
   const recipe = recipe_ || {};
   let total = 0;
-  const [portions, setPortions] = useState(globalPortions || 1);
+  const [portions, setPortions] = useState(orders || globalPortions);
   const [showIngredients, setShowIngredients] = useState(false);
 
   const handleContextMenu = (event) => {
