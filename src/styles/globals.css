@@ -142,7 +142,7 @@ svg {
   }
   .recipeDesignContainer .ingredients-list-grid {
     grid-template-columns: repeat(2,1fr) !important;
-    gap: 0.5rem !important;
+    gap: 1.5rem !important;
   }
   .recipeDesignContainer .ingredients-list-empty {
     max-width: 100% !important;

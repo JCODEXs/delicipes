@@ -18,22 +18,25 @@ export function DropdownMenuAdd() {
         <DropdownMenuLabel>Add</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/ingredients"}>
-          <DropdownMenuItem>Ingredient</DropdownMenuItem>
+          <DropdownMenuItem>Ingredientes</DropdownMenuItem>
         </Link>
         <Link href={"/design"}>
           {" "}
-          <DropdownMenuItem>Recipe</DropdownMenuItem>
+          <DropdownMenuItem>Receta</DropdownMenuItem>
         </Link>
         <Link href={"/plan"}>
-          <DropdownMenuItem>Meal Program</DropdownMenuItem>
+          <DropdownMenuItem>Programar Comidas</DropdownMenuItem>
         </Link>
         <Link href={"/import"}>
-          <DropdownMenuItem>Import Ingredients</DropdownMenuItem>
+          <DropdownMenuItem>Importar Datos</DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
         <Link href={"/instructions"}>
           <DropdownMenuItem>📖 Guía de Uso</DropdownMenuItem>
         </Link>
+        <Link href={"/settings"}>
+  <DropdownMenuItem>⚙️ Configuración</DropdownMenuItem>
+</Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

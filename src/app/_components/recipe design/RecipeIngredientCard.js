@@ -16,18 +16,18 @@ export default function RecipeIngredientCard({
       <button
         style={{
           position: "absolute",
-          top: -14,
-          right: 25,
+          top: -15,
+          right: 15,
           translate: "50% 30%",
-          background: "#fff0f0",
+          background: "rgb(20,40,20,0.6)",
           border: "none",
           color: "#c22",
           fontWeight: "bold",
-          fontSize: "1.2rem",
+          fontSize: "0.8rem",
           cursor: "pointer",
           borderRadius: "50%",
-          width: 36,
-          height: 36,
+          width: 26,
+          height: 26,
           lineHeight: "1",
           display: "flex",
           alignItems: "center",
@@ -43,8 +43,8 @@ export default function RecipeIngredientCard({
       {/* Ingredient circle card */}
       <div
         style={{
-          width: 107,
-          height: 107,
+          width: 117,
+          height: 117,
           borderRadius: "50%",
           background: "#f9f6ea",
           boxShadow: "0 1px 8px rgba(200,180,120,0.13)",

@@ -155,12 +155,12 @@ export default function RecipeLibrary() {
               <div
                 className="library-card"
                 key={_recipe?._id}
-                style={{
-                  background: "#f9f6ea",
-                  borderRadius: "8px",
-                  padding: "0.5rem 1rem",
-                  boxShadow: "0 1px 4px rgba(200,180,120,0.08)",
-                }}
+                // style={{
+                //   background: "#f9f6ea",
+                //   borderRadius: "8px",
+                //   padding: "0.5rem 1rem",
+                //   boxShadow: "0 1px 4px rgba(200,180,120,0.08)",
+                // }}
               >
                 <RecipeCardComponent
                   key={_recipe?._id}

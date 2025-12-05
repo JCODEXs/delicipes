@@ -213,6 +213,7 @@ export default function DesignRecipeMetods({ recipe }) {
     if (recipe && recipe.recipe && recipe.recipe.ingredients) {
       setRecipeList(recipe.recipe.ingredients);
       setQuantity(recipe.recipe.ingredients.map((i) => i.quantity));
+      descriptionRef.current = recipe.recipe.description;
     }
   }, [recipe]);
 

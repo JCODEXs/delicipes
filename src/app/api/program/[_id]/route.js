@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "~/lib/mongoDb";
+import { auth } from "@clerk/nextjs/server";
 
 export async function DELETE(req, context) {
   // Extract the ID from the URL params
@@ -43,21 +44,38 @@ export async function DELETE(req, context) {
 }
 
 export async function GET(req, context) {
-  const userId = context.params._id;
-  // Adjust based on your params structure
-  // // console.log(context);
-  // const userIdObject = new ObjectId(params._id);
-  let { db, client } = await connectToDatabase();
+  const { userId } = await auth();
+  const { params } = context;
+  const programId = params._id;
+  console.log(userId, "userId", context.params._id, programId);
+  // if (userId !== programId) return forbidden;
+
+  const { db, client } = await connectToDatabase();
+
   try {
     await client.connect();
+    if (!userId) {
+      return NextResponse.json({ result: [] }, { status: 200 });
+    }
 
-    // Construct the query object
-    const query = { userId: userId };
+    const query = { userId };
+    console.log(query, "query");
 
-    const result = await db.collection("programs").find({}).toArray();
-    console.log(result);
-    return NextResponse.json({ result });
+    const result = await db.collection("programs").find(query).toArray();
+    console.log(result, "result");
+
+    // If nothing found, return empty array
+    if (!result || result.length === 0) {
+      return NextResponse.json({ result: [] }, { status: 200 });
+    }
+
+    // Otherwise return the found documents
+    return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

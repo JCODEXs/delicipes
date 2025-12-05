@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   importRecipesFromAPI,
   importIngredientsFromAPI2,
-  importRecipesFromAPI2,
+  importPublicRecipesFromAPI,
 } from "actions/actions";
 import { usePantry } from "~/store/pantry";
 import RecipeSelectionCard from "../_components/import/RecipeSelectionCard";
@@ -48,6 +48,20 @@ interface Recipe {
       appUrl: string;
       type: string;
     };
+    isPrivate?: boolean;
+    isSpicy?: boolean;
+    isHealthy?: boolean;
+    isLowCarb?: boolean;
+    isQuickMeal?: boolean;
+    isVegan?: boolean;
+    isVegetarian?: boolean;
+    category?: string;
+    createdBy?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    updatedBy?: string;
+    clonedFrom?: string;
+    clonedAt?: string;
   };
 }
 
@@ -63,7 +77,7 @@ export default function ImportPanel() {
   const handleQuickImportRecipes = async () => {
     setLoading(true);
     try {
-      await importRecipesFromAPI();
+      await importPublicRecipesFromAPI();
       toast.success("¡Recetas importadas exitosamente!");
     } catch (error) {
       console.error("Error importing recipes:", error);
@@ -94,7 +108,8 @@ export default function ImportPanel() {
   const handleFetchRecipes = async () => {
     setLoading(true);
     try {
-      const data = await importRecipesFromAPI2();
+      const data = await importPublicRecipesFromAPI();
+      console.log(data, "data");
       setFetchedRecipes(data || []);
       setSelectedIds([]); // reset selection
       setStep("selectRecipes");

@@ -526,3 +526,40 @@ export const getRecipeById = async (id) => {
     throw error;
   }
 };
+export const getPublicRecipes = async () => {
+  try {
+    const result = await axios.get("/api/recipes?publicOnly=true");
+    console.log(result.data.result, "result");
+    return result.data.result || [];
+  } catch (error) {
+    console.error("Failed to fetch public recipes:", error);
+    throw error;
+  }
+};
+export const cloneRecipe = async (originalRecipe) => {
+  try {
+    // Crear una copia de la receta sin el _id original
+    const { _id, ...recipeData } = originalRecipe;
+    const clonedRecipe = {
+      recipe: {
+        ...recipeData.recipe,
+        title: `${recipeData.recipe.title} (Copia)`,
+        isPrivate: true, // Las copias son privadas por defecto
+        clonedFrom: _id, // Referencia al original
+        clonedAt: new Date().toISOString(),
+      },
+    };
+
+    const result = await axios.post("/api/recipes", {
+      recipe: clonedRecipe.recipe,
+    });
+    const newRecipe = { ...clonedRecipe, _id: result.data.result.insertedId };
+
+    usePantry.getState().addStoreRecipe(newRecipe);
+    toast.success("Recipe cloned successfully!");
+    return newRecipe;
+  } catch (error) {
+    toast.error("Failed to clone recipe.");
+    throw error;
+  }
+};

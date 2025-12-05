@@ -13,6 +13,28 @@ const RecipeCardComponent = ({
   const [total, setTotal] = useState(0);
   const [updatedIngredients, setUpdatedIngredients] = useState([]);
   const [showIngredients, setShowIngredients] = useState(false);
+  // Función para obtener colores según categoría
+  const getCategoryColors = (category) => {
+    const colors = {
+      vegetarian: { bg: "#e8f5e8", border: "#4caf50" },
+      vegan: { bg: "#e1f5fe", border: "#00bcd4" },
+      meat: { bg: "#fce4ec", border: "#e91e63" },
+      seafood: { bg: "#e3f2fd", border: "#2196f3" },
+      italian: { bg: "#fff3e0", border: "#ff9800" },
+      mexican: { bg: "#fff8e1", border: "#ffc107" },
+      indian: { bg: "#fce4ec", border: "#e91e63" },
+      french: { bg: "#f3e5f5", border: "#9c27b0" },
+      asian: { bg: "#ffebee", border: "#f44336" },
+      dessert: { bg: "#fce4ec", border: "#e91e63" },
+      breakfast: { bg: "#fff3e0", border: "#ff9800" },
+      snack: { bg: "#e8f5e8", border: "#4caf50" },
+      default: { bg: "#fff6e3", border: "#e7c08a" },
+    };
+    return colors[category] || colors.default;
+  };
+
+  // Aplicar en la sección del formulario
+  const categoryColors = getCategoryColors(recipe?.category);
 
   useEffect(() => {
     if (recipe?.ingredients) {
@@ -55,7 +77,8 @@ const RecipeCardComponent = ({
         margin: "0.5rem 0",
         padding: "1rem",
         borderRadius: "14px",
-        background: "#fff8ed",
+        background: categoryColors?.bg ?? "#fff6e3",
+        border: `2px solid ${categoryColors?.border ?? "#e7c08a"}`,
         boxShadow: "0 2px 8px rgba(120,70,30,0.10)",
         minWidth: 280,
         maxWidth: 440,

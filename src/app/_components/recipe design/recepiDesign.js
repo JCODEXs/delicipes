@@ -53,6 +53,7 @@ export default function DesignRecipe({
 
   let recipes = store.recipes;
   const descriptionValue = descriptionRef?.current;
+  console.log(descriptionValue, "descriptionValue");
   const storeIngredients = usePantry((store) => store.ingredients);
   // const storeRecipes = usePantry((store) => store.recipes);
 
@@ -148,6 +149,29 @@ export default function DesignRecipe({
   // }, []);
   ///try
 
+  // Función para obtener colores según categoría
+  const getCategoryColors = (category) => {
+    const colors = {
+      vegetarian: { bg: "#e8f5e8", border: "#4caf50" },
+      vegan: { bg: "#e1f5fe", border: "#00bcd4" },
+      meat: { bg: "#fce4ec", border: "#e91e63" },
+      seafood: { bg: "#e3f2fd", border: "#2196f3" },
+      italian: { bg: "#fff3e0", border: "#ff9800" },
+      mexican: { bg: "#fff8e1", border: "#ffc107" },
+      indian: { bg: "#fce4ec", border: "#e91e63" },
+      french: { bg: "#f3e5f5", border: "#9c27b0" },
+      asian: { bg: "#ffebee", border: "#f44336" },
+      dessert: { bg: "#fce4ec", border: "#e91e63" },
+      breakfast: { bg: "#fff3e0", border: "#ff9800" },
+      snack: { bg: "#e8f5e8", border: "#4caf50" },
+      default: { bg: "#fff6e3", border: "#e7c08a" },
+    };
+    return colors[category] || colors.default;
+  };
+
+  // Aplicar en la sección del formulario
+  const categoryColors = getCategoryColors(Recipe?.recipe?.category);
+
   const addToListofRecipe = () => {
     // console.log(Recipe.recipe.imageUrl);
     const ingredients = [];
@@ -165,6 +189,14 @@ export default function DesignRecipe({
         title: Recipe?.recipe?.tittle ?? Recipe.recipe.title,
         portions: Recipe?.recipe?.portions,
         imageUrl: Recipe?.recipe?.imageUrl,
+        category: Recipe?.recipe?.category,
+        isPrivate: Recipe?.recipe?.isPrivate,
+        isSpicy: Recipe?.recipe?.isSpicy,
+        isHealthy: Recipe?.recipe?.isHealthy,
+        isLowCarb: Recipe?.recipe?.isLowCarb,
+        isQuickMeal: Recipe?.recipe?.isQuickMeal,
+        isVegan: Recipe?.recipe?.isVegan,
+        isVegetarian: Recipe?.recipe?.isVegetarian,
       },
       _id: Recipe?._id,
     });
@@ -175,10 +207,11 @@ export default function DesignRecipe({
     });
 
     descriptionRef.current = "";
+
     //setDescriptionValue("");
     setQuantity([]);
     setIngredientsList(storeIngredients);
-    // // console.log(recipeList, ingredients);
+    console.log(Recipe, "recipe");
   };
   const makeBkup = () => {
     storeIngredients.forEach((ingredient) => {
@@ -303,7 +336,7 @@ export default function DesignRecipe({
         {/* RECIPE FORM SECTION */}
         <section
           style={{
-            background: "#fff6e3",
+            background: "rgb(235, 226, 215)",
             borderRadius: 12,
             boxShadow: "0 2px 8px rgba(168,107,60,0.10)",
             padding: "1.5rem",
@@ -316,7 +349,7 @@ export default function DesignRecipe({
               fontSize: "1.4rem",
               fontWeight: 700,
               marginBottom: "1rem",
-              color: "#a86b3c",
+              color: "#a96b3c",
             }}
           >
             Recipe configuration
@@ -391,7 +424,277 @@ export default function DesignRecipe({
                 }
                 required
               />
+
               <div style={{ margin: "1rem 0" }}>
+                {/* Privacy Setting */}
+                <div style={{ marginBottom: "1rem" }}>
+                  <label
+                    style={{
+                      fontWeight: 600,
+                      display: "block",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Privacidad
+                  </label>
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="isPrivate"
+                        value="false"
+                        checked={!Recipe?.recipe?.isPrivate}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: { ...prev.recipe, isPrivate: false },
+                          }))
+                        }
+                      />
+                      <span>🌍 Pública</span>
+                    </label>
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="isPrivate"
+                        value="true"
+                        checked={Recipe?.recipe?.isPrivate}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: { ...prev.recipe, isPrivate: true },
+                          }))
+                        }
+                      />
+                      <span>🔒 Privada</span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Category Tags */}
+                <div style={{ marginBottom: "1rem" }}>
+                  <label
+                    style={{
+                      fontWeight: 600,
+                      display: "block",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Categoría
+                  </label>
+                  <select
+                    name="category"
+                    value={Recipe?.recipe?.category || ""}
+                    onChange={(e) =>
+                      setRecipe((prev) => ({
+                        ...prev,
+                        recipe: { ...prev.recipe, category: e.target.value },
+                      }))
+                    }
+                    style={{
+                      width: "100%",
+                      height: 32,
+                      borderRadius: 8,
+                      padding: "0.3rem",
+                      border: "1px solid #ccc",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    <option value="">Seleccionar categoría</option>
+                    <option value="vegetarian">🥬 Vegetales</option>
+                    <option value="meat">🥩 Carnes</option>
+                    <option value="seafood">🐟 Mariscos</option>
+                    <option value="italian">🍝 Italiana</option>
+                    <option value="mexican">🌮 Mexicana</option>
+                    <option value="indian">🍛 India</option>
+                    <option value="french">🥖 Francesa</option>
+                    <option value="asian">🥢 Asiática</option>
+                    <option value="dessert">🍰 Postre</option>
+                    <option value="breakfast">🥞 Desayuno</option>
+                    <option value="snack">🍿 Snack</option>
+                  </select>
+                </div>
+
+                {/* Additional Checkmarks */}
+                <div style={{ marginBottom: "1rem" }}>
+                  <label
+                    style={{
+                      fontWeight: 600,
+                      display: "block",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Características
+                  </label>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(2, 1fr)",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isGlutenFree || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isGlutenFree: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>🌾 Sin Gluten</span>
+                    </label>
+
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isLowCarb || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isLowCarb: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>🥗 Bajo en Carbos</span>
+                    </label>
+
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isVegan || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isVegan: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>🌱 Vegana</span>
+                    </label>
+
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isHealthy || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isHealthy: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>💚 Saludable</span>
+                    </label>
+
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isVegetarian || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isVegetarian: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>🥬 Vegetariana</span>
+                    </label>
+
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Recipe?.recipe?.isSpicy || false}
+                        onChange={(e) =>
+                          setRecipe((prev) => ({
+                            ...prev,
+                            recipe: {
+                              ...prev.recipe,
+                              isSpicy: e.target.checked,
+                            },
+                          }))
+                        }
+                      />
+                      <span>🌶️ Picante</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div style={{ margin: "1rem 0" }}>
+                <label
+                  style={{
+                    fontWeight: 600,
+                    display: "block",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Display
+                </label>
                 {Recipe?.recipe?.imageUrl ? (
                   <div style={{ marginBottom: "0.5rem" }}>
                     <img
@@ -427,7 +730,7 @@ export default function DesignRecipe({
                       display: "grid",
                       gridTemplateColumns:
                         "repeat(auto-fit, minmax(100px, 1fr))",
-                      gap: "0.5rem",
+                      gap: "1.5rem",
                       width: "100%",
                     }}
                   >

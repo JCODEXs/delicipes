@@ -2,7 +2,12 @@
 
 import api from "~/app/api/recipes/api";
 import { toast } from "sonner";
-import { getIngredients, getRecipes, usePantry } from "~/store/pantry";
+import {
+  getIngredients,
+  getRecipes,
+  usePantry,
+  getPublicRecipes,
+} from "~/store/pantry";
 export const getMyPrograms = async (userId) => {
   const result = await api.get(`/program/${userId}`);
 
@@ -21,6 +26,20 @@ export const importRecipesFromAPI = async () => {
     }
   } catch (err) {
     toast.error("Failed to import recipes.");
+  }
+};
+export const importPublicRecipesFromAPI = async () => {
+  try {
+    const recipes = await getPublicRecipes();
+    if (recipes.length > 0) {
+      usePantry.setState({ recipes });
+      return recipes;
+      toast.success("Public recipes imported!");
+    } else {
+      toast.info("No public recipes found to import.");
+    }
+  } catch (err) {
+    toast.error("Failed to import public recipes.");
   }
 };
 

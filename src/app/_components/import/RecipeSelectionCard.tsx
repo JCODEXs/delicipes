@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-
+import { cloneRecipe } from "~/store/pantry";
 interface RecipeIngredient {
   _id?: string;
   ingredient: {
@@ -88,6 +88,16 @@ export default function RecipeSelectionCard({
             </div>
           )}
         </div>
+
+<button
+  onClick={(e) => {
+    e.stopPropagation();
+    cloneRecipe(recipe);
+  }}
+  className="mt-2 w-full rounded-lg bg-green-600 px-3 py-1 text-sm font-medium text-white transition-colors hover:bg-green-700"
+>
+  🔄 Clonar Receta
+</button>
 
         {/* Recipe Title */}
         <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2">

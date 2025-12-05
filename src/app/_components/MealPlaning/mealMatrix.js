@@ -8,6 +8,9 @@ import { Modal } from "../modal/modal";
 import ShopingList from "./shopingList";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useUserPreferences } from "~/store/userPreferences";
+import { generateCalendarDays } from "~/utils/complementalFunctions";
+import { useAuth } from "@clerk/nextjs";
 
 const MealMatrix = () => {
   const storeRecipes = usePantry((store) => store.recipes);
@@ -21,8 +24,25 @@ const MealMatrix = () => {
   const [showRecipePicker, setShowRecipePicker] = useState(false);
   const [recipePickerDay, setRecipePickerDay] = useState(null);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
-  const [globalPortions, setGlobalPortions] = useState(1);
+  const { preferences } = useUserPreferences();
+  // Inicializar con preferencias del usuario
+  const [globalPortions, setGlobalPortions] = useState(
+    preferences.defaultPortions || 1,
+  );
 
+  // Usar preferencias para generar días
+  const generateDays = useCallback(() => {
+    const count = preferences.defaultDaysCount || 7;
+    if (preferences.planningMode === "sequential") {
+      return Array.from({ length: count }, (_, i) => `día ${i}`);
+    } else {
+      // Lógica para calendario real
+      return generateCalendarDays(count);
+    }
+  }, [preferences.defaultDaysCount, preferences.planningMode]);
+
+  // Memoizar weekDays para que solo se recalcule cuando cambien las preferencias
+  const weekDays = useMemo(() => generateDays(), [generateDays]);
   // State for programs data
   const [myPrograms, setMyPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,13 +51,13 @@ const MealMatrix = () => {
   // State derived from myPrograms
   const [selectedRecipes, setSelectedRecipes] = useState({});
   const [orders, setOrders] = useState({});
-
+  const { userId } = useAuth();
   // Fetch programs on component mount
   useEffect(() => {
     const fetchMyPrograms = async () => {
       try {
         setLoading(true);
-        const programs = await getMyPrograms();
+        const programs = await getMyPrograms(userId);
         setMyPrograms(programs);
 
         // Set initial state based on fetched programs
@@ -538,29 +558,7 @@ const MealMatrix = () => {
     handleSelectRecipe(day, recipe);
   };
   console.log("planning", myPrograms);
-  const weekDays = [
-    "dia o",
-    "dia 1",
-    "dia 2",
-    "dia 3",
-    "dia 4",
-    "dia 5",
-    "dia 6",
-    "dia 7",
-    "dia 8",
-    "dia 9",
-    "dia 10",
-    "dia 11",
-    // "Monday",
-    // "Thuesday",
-    // "Wednesday",
-    // "Thursday",
-    // "Friday",
-    // "Saturday",
-    // "Sunday",
-    // "Lunesgo",
-    // "Marto",
-  ];
+
   const ingredientList = Object.entries(ingredientsTotList).map(
     ([ingredient, details]) => (
       <li key={ingredient}>
@@ -732,7 +730,7 @@ const MealMatrix = () => {
               textShadow: "0 1px 2px #181818",
             }}
           >
-            Global Portions:
+            Porciones globales:
           </span>
 
           <input
@@ -837,7 +835,7 @@ const MealMatrix = () => {
                   <div>
                     <RecipeCard
                       key={_selectedRecipe._id}
-                      recipe_={_selectedRecipe.recipe}
+                      recipe_={_selectedRecipe}
                       day={day}
                       showPortions={true}
                       getPortions={setProgramPortions}
@@ -943,7 +941,7 @@ const MealMatrix = () => {
                     const updates = {};
                     newOnes.forEach((recipe) => {
                       updates[`${recipe._id}${recipePickerDay}`] =
-                        recipe.recipe.portions ?? 1;
+                        globalPortions ?? 1;
                     });
                     return { ...prevOrders, ...updates };
                   });
