@@ -501,7 +501,7 @@ export const getMyPrograms = async (userId) => {
     const index = data?.result ? data?.result.length - 1 : 0;
     const RecipesList =
       await result?.data?.result?.[index]?._program?.ingredientsTotList?.[0];
-    // console.log("getPrograms", RecipesList);
+
     await usePantry.getState().addListOfIngredients(RecipesList);
     if (result.data.result.length > 0) {
       return result.data.result;

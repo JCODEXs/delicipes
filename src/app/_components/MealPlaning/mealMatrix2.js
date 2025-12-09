@@ -707,7 +707,7 @@ const MealMatrix = () => {
 
       {showRecipePicker && (
         <>
-          {console.log("Recipes in picker:", recipes)}
+          {/* {console.log("Recipes in picker:", recipes)} */}
           <Modal
             isOpen={showRecipePicker}
             onClose={() => {

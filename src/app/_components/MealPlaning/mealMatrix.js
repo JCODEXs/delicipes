@@ -9,7 +9,11 @@ import ShopingList from "./shopingList";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useUserPreferences } from "~/store/userPreferences";
-import { generateCalendarDays } from "~/utils/complementalFunctions";
+import {
+  generateCalendarDaysUTC,
+  formatDateForDisplay,
+  filterFutureRecipes,
+} from "~/utils/complementalFunctions";
 import { useAuth } from "@clerk/nextjs";
 
 const MealMatrix = () => {
@@ -25,6 +29,7 @@ const MealMatrix = () => {
   const [recipePickerDay, setRecipePickerDay] = useState(null);
   const { deletePrograming, addStoreRecipe, addStorePrograming } = usePantry();
   const { preferences } = useUserPreferences();
+
   // Inicializar con preferencias del usuario
   const [globalPortions, setGlobalPortions] = useState(
     preferences.defaultPortions || 1,
@@ -37,7 +42,7 @@ const MealMatrix = () => {
       return Array.from({ length: count }, (_, i) => `día ${i}`);
     } else {
       // Lógica para calendario real
-      return generateCalendarDays(count);
+      return generateCalendarDaysUTC(count);
     }
   }, [preferences.defaultDaysCount, preferences.planningMode]);
 
@@ -58,20 +63,22 @@ const MealMatrix = () => {
       try {
         setLoading(true);
         const programs = await getMyPrograms(userId);
+
         setMyPrograms(programs);
+        console.log("recetas seleccionadas", programs, "programs");
 
         // Set initial state based on fetched programs
         if (programs && programs.length > 0) {
           const index = programs.length - 1;
-          const lastProgram = programs[index]?._program?.selectedRecipes || {};
-          const lastOrders = programs[index]?._program?.portions || {};
-
-          setSelectedRecipes(lastProgram);
-          setOrders(lastOrders);
+          const lastProgram = programs[index]?._program;
+          // const lastOrders = programs[index]?._program?.portions || {};
+          const filteredRecipes = filterFutureRecipes(lastProgram);
+          setSelectedRecipes(filteredRecipes.selectedRecipes);
+          setOrders(filteredRecipes.portions);
+          console.log(filteredRecipes, "filteredRecipes");
 
           // Also load ingredients list if available
-          const RecipesList =
-            programs[index]?._program?.ingredientsTotList?.[0];
+          const RecipesList = filteredRecipes.ingredientsTotList?.[0];
           if (RecipesList) {
             usePantry.getState().addListOfIngredients(RecipesList);
           }
@@ -265,15 +272,15 @@ const MealMatrix = () => {
   // Early returns for loading and error states
   if (loading) {
     return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-xl text-gray-600">Loading programs...</div>
+      <div className="mt-32 flex h-full items-center justify-center">
+        <div className=" mt-32text-xl text-gray-600">Loading programs...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex h-64 items-center justify-center">
+      <div className="mt-32 flex h-full items-center justify-center">
         <div className="text-xl text-red-600">Error: {error}</div>
       </div>
     );
@@ -557,7 +564,7 @@ const MealMatrix = () => {
     }
     handleSelectRecipe(day, recipe);
   };
-  console.log("planning", myPrograms);
+  // console.log("planning", myPrograms);
 
   const ingredientList = Object.entries(ingredientsTotList).map(
     ([ingredient, details]) => (
@@ -799,7 +806,7 @@ const MealMatrix = () => {
                 color: "#e6e2c0",
               }}
             >
-              {day}
+              {formatDateForDisplay(day)}
             </div>
 
             {/* Add Recipe Button */}

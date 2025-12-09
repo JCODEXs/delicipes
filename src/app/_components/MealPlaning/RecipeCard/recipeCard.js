@@ -12,7 +12,7 @@ const RecipeCard = ({
   orders,
   globalPortions,
 }) => {
-  console.log(recipe_, "recipe card recipe");
+  // console.log(recipe_, "recipe card recipe");
   const recipe = recipe_.recipe || {};
   let total = 0;
   const [portions, setPortions] = useState(orders || globalPortions);
