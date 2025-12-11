@@ -912,7 +912,7 @@ const MealMatrix = () => {
               {/* Button is now outside the scrollable area */}
               <button
                 style={{
-                  marginTop: "0.5rem",
+                  margin: "0.5rem",
                   background: "#c9b87a",
                   color: "#23262e",
                   border: "none",
@@ -923,7 +923,7 @@ const MealMatrix = () => {
                   cursor: "pointer",
                   alignSelf: "center",
                   display: "block",
-                  width: "100%",
+                  width: "90%",
                 }}
                 disabled={pickerSelected.length === 0}
                 onClick={() => {
