@@ -278,7 +278,7 @@ export default function ImportPanel() {
             </p>
 
             {/* Controls */}
-            <div className="flex items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600">
                   {selectedIds.length} de {fetchedIngredients.length} seleccionados
@@ -392,7 +392,7 @@ export default function ImportPanel() {
             </p>
 
             {/* Controls */}
-            <div className="flex items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm ">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600">
                   {selectedIds.length} de {fetchedRecipes.length} seleccionadas

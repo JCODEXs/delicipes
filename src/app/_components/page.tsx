@@ -365,8 +365,8 @@ export default function ImportPanel() {
   // Recipes Selection View
   if (step === "selectRecipes") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-6">
-        <div className="mx-auto max-w-7xl">
+      <div className=" flex min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-6">
+        <div className=" flex mx-auto max-w-7xl">
           {/* Header */}
           <div className="mb-8 text-center">
             <h1 className="mb-4 text-3xl font-bold text-amber-900">
@@ -377,7 +377,7 @@ export default function ImportPanel() {
             </p>
 
             {/* Controls */}
-            <div className="flex items-center justify-between rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
+            <div className="flex flex-col gap-4 rounded-lg border border-amber-200 bg-white p-4 shadow-sm">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600">
                   {selectedIds.length} de {fetchedRecipes.length} seleccionadas
@@ -395,7 +395,7 @@ export default function ImportPanel() {
                 )}
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-row gap-3 ">
                 <button
                   className="rounded-lg bg-gray-300 px-4 py-2 font-medium text-gray-800 transition-colors hover:bg-gray-400"
                   onClick={() => setStep("menu")}
