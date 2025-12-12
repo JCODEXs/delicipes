@@ -18,6 +18,7 @@ export default function RecipeLibrary() {
   const [search, setSearch] = useState("");
   const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
+  console.log(storeRecipes, "storeRecipes");
 
   useEffect(() => {
     setHydrated(true);

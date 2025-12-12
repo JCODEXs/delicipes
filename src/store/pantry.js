@@ -421,12 +421,18 @@ export const addRecipe = async (recipe) => {
 export const modifyRecipe = async (recipe) => {
   try {
     const result = await axios.put("/api/recipes", { recipe });
+
     usePantry.getState().addStoreRecipe(recipe);
     toast.success("Recipe updated!");
     return result.data;
   } catch (error) {
-    toast.error("Failed to update recipe.");
-    throw error;
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Failed to update recipe.";
+
+    toast.error(message);
+    return null;
   }
 };
 export const DeleteRecipe = async (_recipe) => {
@@ -493,7 +499,6 @@ export const addProgram = async (_program) => {
   toast("Saved!");
 };
 export const getMyPrograms = async (userId) => {
-  // console.log(userId);
   try {
     const result = await axios.get(`api/program/${userId}`);
 
@@ -509,7 +514,8 @@ export const getMyPrograms = async (userId) => {
       return [];
     }
   } catch (error) {
-    console.log(error);
+    toast.error(errorData.message || "Unknown error");
+    return null; // prevent throwing
   }
 };
 export const getRecipeById = async (id) => {
@@ -544,6 +550,7 @@ export const cloneRecipe = async (originalRecipe) => {
       recipe: {
         ...recipeData.recipe,
         title: `${recipeData.recipe.title} (Copia)`,
+        key: Math.random(8) * 10000000,
         isPrivate: true, // Las copias son privadas por defecto
         clonedFrom: _id, // Referencia al original
         clonedAt: new Date().toISOString(),
@@ -551,7 +558,7 @@ export const cloneRecipe = async (originalRecipe) => {
     };
 
     const result = await axios.post("/api/recipes", {
-      recipe: clonedRecipe.recipe,
+      recipe: clonedRecipe,
     });
     const newRecipe = { ...clonedRecipe, _id: result.data.result.insertedId };
 

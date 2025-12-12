@@ -24,6 +24,7 @@ export function generateCalendarDaysUTC(count) {
 
 // Convert "yyyy-mm-dd" to display format "Lun 3" (Spanish) - Corregido
 export function formatDateForDisplay(dateString) {
+  console.log(dateString, "dateString");
   // Parsear la fecha correctamente considerando zona horaria
   const [year, month, day] = dateString.split('-').map(Number);
   

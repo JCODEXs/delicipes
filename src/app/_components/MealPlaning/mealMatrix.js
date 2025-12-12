@@ -73,8 +73,8 @@ const MealMatrix = () => {
           const lastProgram = programs[index]?._program;
           // const lastOrders = programs[index]?._program?.portions || {};
           const filteredRecipes = filterFutureRecipes(lastProgram);
-          setSelectedRecipes(filteredRecipes.selectedRecipes);
-          setOrders(filteredRecipes.portions);
+          setSelectedRecipes(filteredRecipes?.selectedRecipes || {});
+          setOrders(filteredRecipes?.portions || {});
           console.log(filteredRecipes, "filteredRecipes");
 
           // Also load ingredients list if available
@@ -600,7 +600,7 @@ const MealMatrix = () => {
       return sum + grPrice * quantity;
     }, 0);
   };
-
+  console.log(weekDays, "weekdays");
   return (
     <div className="mealMatrix">
       {/* Floating Action Buttons */}
@@ -806,7 +806,9 @@ const MealMatrix = () => {
                 color: "#e6e2c0",
               }}
             >
-              {formatDateForDisplay(day)}
+              {preferences.planningMode === "sequential"
+                ? day
+                : formatDateForDisplay(day)}
             </div>
 
             {/* Add Recipe Button */}

@@ -22,7 +22,7 @@ export default function DesignRecipeMetods({ recipe }) {
   const [pendingDelete, setPendingDelete] = useState(null);
   const [pendingDeleteType, setPendingDeleteType] = useState(null); // "ingredient" or "recipe"
   const searchRef = useRef();
-  const descriptionRef = useRef("");
+  const [description, setDescription] = useState("");
   const min = {
     gr: 25,
     und: 1,
@@ -75,7 +75,7 @@ export default function DesignRecipeMetods({ recipe }) {
     // console.log(_recipe);
     setRecipe(_recipe);
     // setTittle(_recipe.recipe.tittle);
-    descriptionRef.current = _recipe?.recipe?.description;
+    setDescription(_recipe?.recipe?.description);
     // //setDescriptionValue(_recipe.description);
     const updatedIngredients = updateRecipes(_recipe.recipe);
     const quantity = _recipe?.recipe?.ingredients.map((_ingredient) => {
@@ -213,7 +213,7 @@ export default function DesignRecipeMetods({ recipe }) {
     if (recipe && recipe.recipe && recipe.recipe.ingredients) {
       setRecipeList(recipe.recipe.ingredients);
       setQuantity(recipe.recipe.ingredients.map((i) => i.quantity));
-      descriptionRef.current = recipe.recipe.description;
+      setDescription(recipe.recipe.description);
     }
   }, [recipe]);
 
@@ -248,7 +248,8 @@ export default function DesignRecipeMetods({ recipe }) {
         searchRef={searchRef}
         Recipe={Recipe}
         updateRecipes={updateRecipes}
-        descriptionRef={descriptionRef}
+        description={description}
+        setDescription={setDescription}
         setSearch={setSearch}
         editRecipe={editRecipe}
         addToRecipe={addToRecipe}

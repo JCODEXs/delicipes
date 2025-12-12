@@ -15,12 +15,18 @@ export default function EditRecipePage({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const fetchedRecipe = await getRecipeById(id);
+      let fetchedRecipe = await getRecipeById(id);
+      // console.log(fetchedRecipe, "fetchedRecipe");    
       const fetchedIngredients = await getIngredients();
       if (!fetchedRecipe) {
         router.replace("/not-found");
         return;
       }
+      // if(fetchedRecipe?.clonedFrom){
+      //  const fetchedRecipe2 = await getRecipeById(fetchedRecipe.clonedFrom);
+      //  console.log(fetchedRecipe2,"fetchedRecipe2");
+      // }
+
       setRecipe(fetchedRecipe);
       setIngredients(fetchedIngredients);
       setLoading(false);

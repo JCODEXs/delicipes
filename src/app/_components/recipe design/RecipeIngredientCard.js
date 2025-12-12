@@ -11,7 +11,7 @@ export default function RecipeIngredientCard({
   const emoji = item?.ingredient?.image || "🍴";
 
   return (
-    <div style={{ position: "relative", width: 107 }}>
+    <div style={{ position: "relative", width: 137 }}>
       {/* Remove button outside the circle, top right */}
       <button
         style={{
@@ -43,8 +43,8 @@ export default function RecipeIngredientCard({
       {/* Ingredient circle card */}
       <div
         style={{
-          width: 117,
-          height: 117,
+          width: 137,
+          height: 137,
           borderRadius: "50%",
           background: "#f9f6ea",
           boxShadow: "0 1px 8px rgba(200,180,120,0.13)",
@@ -53,6 +53,8 @@ export default function RecipeIngredientCard({
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
+          border: "2px solid #e7c08a",
+          margin: "auto",
         }}
       >
         {/* Emoji as background */}
@@ -77,22 +79,22 @@ export default function RecipeIngredientCard({
           style={{
             position: "relative",
             zIndex: 2,
-            width: "90%",
-            height: "90%",
+            width: "100%",
+            height: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             background: "rgba(255,255,255,0.72)",
             borderRadius: "50%",
-            padding: "0.5rem",
+            padding: "0.25rem",
           }}
         >
           <div
             style={{
               fontWeight: 500,
               fontSize: "1rem",
-              marginBottom: 2,
+              marginBottom: "0.25rem",
               color: "#3a2412",
               textAlign: "center",
             }}
@@ -104,7 +106,7 @@ export default function RecipeIngredientCard({
               display: "flex",
               alignItems: "center",
               gap: 6,
-              marginBottom: 2,
+              marginBottom: "0.25rem",
             }}
           >
             <button
@@ -132,6 +134,8 @@ export default function RecipeIngredientCard({
               <div
                 style={{
                   minWidth: 28,
+                  fontSize: "0.9rem",
+                  maxWidth: 40,
                   textAlign: "center",
                   fontWeight: 600,
                   color: "#3a2412",
@@ -139,7 +143,18 @@ export default function RecipeIngredientCard({
               >
                 {quantity?.[index]}
               </div>
-              <div>{item?.ingredient?.units}</div>
+              <div
+                style={{
+                  minWidth: 28,
+                  fontSize: "0.9rem",
+                  maxWidth: 40,
+                  textAlign: "center",
+                  fontWeight: 600,
+                  color: "#3a2412",
+                }}
+              >
+                {item?.ingredient?.units.substr(0, 4)}
+              </div>
             </div>
             <button
               className="buttonSum"

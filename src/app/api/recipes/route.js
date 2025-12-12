@@ -53,7 +53,7 @@ export async function GET(req, res) {
         ],
       };
     }
-    console.log("MongoDB filter:", JSON.stringify(filter));
+    // console.log("MongoDB filter:", JSON.stringify(filter));
     await client.connect();
     const result = await db.collection("VipRecipes").find(filter).toArray();
     console.log("thisresult", result);

@@ -62,7 +62,7 @@ export async function GET(req, context) {
     console.log(query, "query");
 
     const result = await db.collection("programs").find(query).toArray();
-    console.log(result[result.length - 1].selectedRecipes, "result");
+    // console.log(result[result.length - 1].selectedRecipes, "result");
 
     // If nothing found, return empty array
     if (!result || result.length === 0) {

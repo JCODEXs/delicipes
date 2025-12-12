@@ -26,7 +26,8 @@ export default function DesignRecipe({
   searchRef,
   Recipe,
   updateRecipes,
-  descriptionRef,
+  description,
+  setDescription,
   setSearch,
   editRecipe,
   addToRecipe,
@@ -52,8 +53,7 @@ export default function DesignRecipe({
   const { addDBRecipe, addSingleIngredient, addStoreRecipe } = usePantry();
 
   let recipes = store.recipes;
-  const descriptionValue = descriptionRef?.current;
-  console.log(descriptionValue, "descriptionValue");
+  console.log(description, "descriptionValue");
   const storeIngredients = usePantry((store) => store.ingredients);
   // const storeRecipes = usePantry((store) => store.recipes);
 
@@ -185,7 +185,7 @@ export default function DesignRecipe({
       recipe: {
         key: Math.random(8) * 10000000,
         ingredients,
-        description: descriptionValue,
+        description: description,
         title: Recipe?.recipe?.tittle ?? Recipe.recipe.title,
         portions: Recipe?.recipe?.portions,
         imageUrl: Recipe?.recipe?.imageUrl,
@@ -206,7 +206,7 @@ export default function DesignRecipe({
       _id: null,
     });
 
-    descriptionRef.current = "";
+    setDescription("");
 
     //setDescriptionValue("");
     setQuantity([]);
@@ -729,8 +729,8 @@ export default function DesignRecipe({
                     style={{
                       display: "grid",
                       gridTemplateColumns:
-                        "repeat(auto-fit, minmax(100px, 1fr))",
-                      gap: "1.5rem",
+                        "repeat(auto-fit, minmax(120px, 1fr))",
+                      gap: "1.6rem",
                       width: "100%",
                     }}
                   >
@@ -800,9 +800,9 @@ export default function DesignRecipe({
               marginBottom: "1rem",
               background: "#fff",
             }}
-            defaultValue={descriptionValue}
+            defaultValue={description}
             onChange={(e) => {
-              descriptionRef.current = e.target.value;
+              setDescription(e.target.value);
             }}
           />
           <div style={{ textAlign: "center" }}>
