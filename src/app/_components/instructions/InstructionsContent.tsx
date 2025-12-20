@@ -264,7 +264,7 @@ function PlanSection() {
             <li>Haz clic en el botón "+" de cualquier día para agregar una receta</li>
             <li>Selecciona una receta de tu recetario en el modal que aparece</li>
             <li>Ajusta las porciones usando los controles + y - en cada receta</li>
-            <li>Usa el control "Porciones Globales" para cambiar todas las porciones a la vez</li>
+            <li>Usa el control "Ordenes Globales" para cambiar todas las porciones a la vez</li>
             <li>Revisa los costos diarios y el total semanal</li>
             <li>Guarda tu planificación usando "Save Program"</li>
             <li>Exporta como PDF si necesitas una copia impresa</li>

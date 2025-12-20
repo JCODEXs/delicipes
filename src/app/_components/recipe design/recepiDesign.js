@@ -277,11 +277,11 @@ export default function DesignRecipe({
               flexWrap: "wrap",
             }}
           >
-            <h2
+            {/* <h2
               style={{ fontSize: "1.5rem", fontWeight: 600, color: "#a86b3c" }}
             >
               Ingredients
-            </h2>
+            </h2> */}
             <button
               className="addButton"
               onClick={openModal}
@@ -308,16 +308,6 @@ export default function DesignRecipe({
               />
             </Modal>
           )}
-          <div style={{ margin: "0.25rem 0" }}>
-            <Suspense fallback={<ActionBoxSkeleton />}>
-              <ActionBox
-                ingredientsList={ingredientsList}
-                addToRecipe={addToRecipe}
-                actionMode={actionMode}
-                setActionMode={setActionMode}
-              />
-            </Suspense>
-          </div>
           <input
             type="text"
             placeholder="Search ingredients..."
@@ -331,6 +321,16 @@ export default function DesignRecipe({
             ref={searchRef}
             onChange={setSearch}
           />
+          <div style={{ margin: "0.25rem 0" }}>
+            <Suspense fallback={<ActionBoxSkeleton />}>
+              <ActionBox
+                ingredientsList={ingredientsList}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+              />
+            </Suspense>
+          </div>
         </section>
 
         {/* RECIPE FORM SECTION */}

@@ -30,6 +30,9 @@ export function DropdownMenuAdd() {
         <Link href={"/import"}>
           <DropdownMenuItem>Importar Datos</DropdownMenuItem>
         </Link>
+        <Link href={"/manage_ingredients"}>
+          <DropdownMenuItem>Gestionar Ingredientes</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <Link href={"/instructions"}>
           <DropdownMenuItem>📖 Guía de Uso</DropdownMenuItem>

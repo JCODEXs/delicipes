@@ -60,7 +60,7 @@ export default function SettingsPage() {
           </div>
           
           <div>
-            <Label>Porciones por defecto</Label>
+            <Label>Ordenes por defecto</Label>
             <Input
               type="number"
               min="1"

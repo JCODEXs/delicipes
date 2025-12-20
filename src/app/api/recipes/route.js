@@ -97,8 +97,10 @@ export async function PUT(req) {
 
     // Solo permitir modificar si es el creador o si es una copia
     if (
-      existingRecipe.recipe.createdBy !== userId &&
-      !existingRecipe.recipe.clonedFrom
+      (console.log(existingRecipe, "existingRecipe"),
+      console.log(userId, "userId"),
+      console.log(existingRecipe.clonedFrom, "clonedFrom"),
+      existingRecipe.createdBy !== userId && !existingRecipe.clonedFrom)
     ) {
       return NextResponse.json(
         { message: "You can only modify your own recipes or cloned recipes." },

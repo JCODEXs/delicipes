@@ -467,6 +467,25 @@ export const addIngredient = async (ingredient) => {
     throw error;
   }
 };
+export const updateIngredient = async (ingredient) => {
+  try {
+    const result = await axios.put("/api/ingredients", { ingredient });
+
+    // Update Zustand store
+    usePantry.getState().addSingleIngredient(ingredient);
+
+    toast.success("Ingredient updated!");
+    return result.data;
+  } catch (error) {
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Failed to update ingredient.";
+
+    toast.error(message);
+    throw error;
+  }
+};
 
 export const DeleteIngredient = async (_id) => {
   try {

@@ -22,7 +22,7 @@ export default function ActionBox({
   };
   return (
     <div>
-      <div
+      {/* <div
         className="backGuide"
         onClick={() =>
           actionMode != "select"
@@ -170,7 +170,7 @@ export default function ActionBox({
             </div>
           </div>
         )}{" "}
-      </div>
+      </div> */}
       <div
         className="items"
         style={{

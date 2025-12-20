@@ -213,7 +213,7 @@ const RecipeCard = ({
             justifyContent: "center",
           }}
         >
-          <span style={{ color: "#c9b87a", fontWeight: 500 }}>Portions:</span>
+          <span style={{ color: "#c9b87a", fontWeight: 500 }}>Ordenes:</span>
           <input
             type="number"
             min={1}
@@ -271,14 +271,14 @@ const RecipeCard = ({
           }}
           onClick={() => setShowIngredients((prev) => !prev)}
         >
-          {showIngredients ? "Hide ingredients" : "Show ingredients"}
+          {showIngredients ? "Ocultar ingredientes" : "Mostrar ingredientes"}
         </button>
         {showIngredients && (
           <div
             style={{
-              color: "#bdbdbd",
+              color: "#868383ff",
               fontSize: "0.95rem",
-              maxHeight: 120,
+              maxHeight: 137,
               overflowY: "auto",
               marginTop: "0.25rem",
               padding: "0.5rem",
@@ -318,18 +318,26 @@ const RecipeCard = ({
                     fontSize: "0.9rem",
                   }}
                 >
-                  <span style={{ flex: 2, textAlign: "left" }}>
+                  <span
+                    style={{
+                      flex: 2,
+                      textAlign: "left",
+                      overflowX: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
                     {ingredient.ingredient?.name}
                   </span>
                   <span style={{ flex: 1, textAlign: "center" }}>
                     {adjustedQuantity}
                     {ingredient.ingredient?.units &&
                     ingredient.ingredient.units !== "al gusto"
-                      ? ` ${ingredient.ingredient.units}`
+                      ? ` ${ingredient.ingredient.units.substr(0, 4)}`
                       : ""}
                   </span>
                   <span
-                    style={{ flex: 1, textAlign: "right", color: "#c9b87a" }}
+                    style={{ flex: 1, textAlign: "right", color: "#95622bc1" }}
                   >
                     ${ingredientCost.toFixed(2)}
                   </span>
@@ -338,7 +346,8 @@ const RecipeCard = ({
             })}
 
             {/* Resumen de ajuste de porciones */}
-            {showPortions &&
+            {false &&
+              showPortions &&
               recipe.portions &&
               portions !== recipe.portions && (
                 <div
@@ -374,10 +383,16 @@ const RecipeCard = ({
           textAlign: "center",
         }}
       >
-        ${totalCost.toFixed(0)}
-        <span style={{ fontSize: "1rem", color: "#e6e2c0", marginLeft: 6 }}>
-          {showPortions ? " total" : " /portion"}
+        <span
+          style={{
+            fontSize: "1.1rem",
+            color: "#c2b96aff",
+            marginRight: "1rem",
+          }}
+        >
+          {showPortions ? " Total" : " /portion"}
         </span>
+        ${totalCost.toFixed(0)}
       </div>
     </div>
   );

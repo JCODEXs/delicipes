@@ -1,11 +1,11 @@
 .buttonP{
   border: 1px solid  #949287;
-  margin-bottom:0.15rem;
-  margin-right:0.75rem;
-  padding: 0.35rem;
-  font-size: 1.1rem;
-  font-weight: 400;
-  border-radius: 5px;
+  margin-bottom:0.1rem;
+  margin-right:0.5rem;
+  padding: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 10px;
   background: rgba(180, 92, 24, 0.894);
   z-index: 4;
   /* box-shadow: 2px 2px 4px rgba(57, 46, 30, 0.507); */

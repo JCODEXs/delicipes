@@ -24,7 +24,7 @@ export function generateCalendarDaysUTC(count) {
 
 // Convert "yyyy-mm-dd" to display format "Lun 3" (Spanish) - Corregido
 export function formatDateForDisplay(dateString) {
-  console.log(dateString, "dateString");
+  // console.log(dateString, "dateString");
   // Parsear la fecha correctamente considerando zona horaria
   const [year, month, day] = dateString.split('-').map(Number);
   
@@ -78,6 +78,10 @@ export function parseDisplayDateToISO(displayDate) {
   
   return formatDateToISO(date);
 }
+// formate sequetial days for display 
+  export function formatSequentialForDisplay(count) {
+        return Array.from({ length: count }, (_, i) => `Día ${i + 1}`);
+      }
 
 // Convert Date object to "yyyy-mm-dd"
 export function formatDateToISO(date) {
@@ -124,6 +128,7 @@ export function migrateProgramToISODates(programData) {
 
 // Filter to keep only today and future dates
 export function filterFutureRecipes(programData) {
+  console.log(programData, "programData futrue recipe");
   const todayISO = formatDateToISO(new Date());
   const newIngredientsTotList = updateIngredientsTotList(programData.ingredientsTotList);
   
@@ -143,6 +148,9 @@ export function filterFutureRecipes(programData) {
       });
     }
   });
+  // console.log(filteredSelectedRecipes, "filteredSelectedRecipes");
+  // console.log(filteredPortions, "filteredPortions");
+  // console.log(newIngredientsTotList, "newIngredientsTotList");
   
   return {
     ...programData,

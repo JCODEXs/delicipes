@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import WhatCanICookModal from "./WhatCanICookModal";
 import { getMyPrograms, getRecipes, usePantry } from "~/store/pantry";
+import { filterFutureRecipes } from "~/utils/complementalFunctions";
 
 export default function ShopingList({ userId }) {
   let total = 0;
@@ -33,15 +34,14 @@ export default function ShopingList({ userId }) {
         // Set initial state based on fetched programs
         if (programs && programs.length > 0) {
           const index = programs.length - 1;
-          const lastProgram = programs[index]?._program?.selectedRecipes || {};
+          const lastProgram = programs[index]?._program || {};
           const lastOrders = programs[index]?._program?.portions || {};
-
-          setMyProgram(lastProgram);
-          console.log(lastProgram, "lastProgram");
+          const filteredRecipes = filterFutureRecipes(lastProgram);
+          setMyProgram(filteredRecipes?.selectedRecipes);
+          console.log(lastProgram, "lastProgram", filteredRecipes);
 
           // Also load ingredients list if available
-          const RecipesList =
-            programs[index]?._program?.ingredientsTotList?.[0];
+          const RecipesList = filteredRecipes?.ingredientsTotList?.[0];
           if (RecipesList) {
             usePantry.getState().addListOfIngredients(RecipesList);
             setRecipeList(RecipesList);

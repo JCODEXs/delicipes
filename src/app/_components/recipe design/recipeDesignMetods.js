@@ -53,12 +53,12 @@ export default function DesignRecipeMetods({ recipe }) {
   };
 
   const setSearch = () => {
-    const searchValue = searchRef.current.value.trim();
+    const searchValue = searchRef.current.value.trim().toLowerCase();
     let filteredIngredients = ingredientsList;
 
     if (searchValue !== "") {
       filteredIngredients = ingredientsList.filter((ingredient) =>
-        ingredient.ingredient.name.includes(searchValue),
+        ingredient.ingredient.name.toLowerCase.includes(searchValue),
       );
     } else {
       const usedItems = recipeList.map((item) => item.ingredient.name);
@@ -68,7 +68,7 @@ export default function DesignRecipeMetods({ recipe }) {
       );
     }
     setIngredientsList(filteredIngredients);
-    console.log(filteredIngredients, searchValue, ingredients);
+    // console.log(filteredIngredients, searchValue, ingredients);
   };
 
   const editRecipe = (_recipe) => {
@@ -92,7 +92,7 @@ export default function DesignRecipeMetods({ recipe }) {
       setPendingDelete(item);
       setPendingDeleteType("ingredient");
       setConfirmModalOpen(true);
-      console.log("confirmation modal ", confirmModalOpen);
+      // console.log("confirmation modal ", confirmModalOpen);
     }
     if (actionMode == "select") {
       if (

@@ -13,6 +13,7 @@ import {
   generateCalendarDaysUTC,
   formatDateForDisplay,
   filterFutureRecipes,
+  formatSequentialForDisplay,
 } from "~/utils/complementalFunctions";
 import { useAuth } from "@clerk/nextjs";
 
@@ -38,13 +39,16 @@ const MealMatrix = () => {
   // Usar preferencias para generar días
   const generateDays = useCallback(() => {
     const count = preferences.defaultDaysCount || 7;
-    if (preferences.planningMode === "sequential") {
-      return Array.from({ length: count }, (_, i) => `día ${i}`);
-    } else {
-      // Lógica para calendario real
-      return generateCalendarDaysUTC(count);
-    }
-  }, [preferences.defaultDaysCount, preferences.planningMode]);
+    // if (preferences.planningMode === "sequential") {
+    //   return Array.from({ length: count }, (_, i) => `día ${i}`);
+    // } else {
+    //   // Lógica para calendario real
+    return generateCalendarDaysUTC(count);
+    // }
+  }, [
+    preferences.defaultDaysCount,
+    // , preferences.planningMode
+  ]);
 
   // Memoizar weekDays para que solo se recalcule cuando cambien las preferencias
   const weekDays = useMemo(() => generateDays(), [generateDays]);
@@ -65,7 +69,7 @@ const MealMatrix = () => {
         const programs = await getMyPrograms(userId);
 
         setMyPrograms(programs);
-        console.log("recetas seleccionadas", programs, "programs");
+        // console.log("recetas seleccionadas", programs, "programs");
 
         // Set initial state based on fetched programs
         if (programs && programs.length > 0) {
@@ -75,7 +79,7 @@ const MealMatrix = () => {
           const filteredRecipes = filterFutureRecipes(lastProgram);
           setSelectedRecipes(filteredRecipes?.selectedRecipes || {});
           setOrders(filteredRecipes?.portions || {});
-          console.log(filteredRecipes, "filteredRecipes");
+          // console.log(filteredRecipes, "filteredRecipes");
 
           // Also load ingredients list if available
           const RecipesList = filteredRecipes.ingredientsTotList?.[0];
@@ -115,7 +119,7 @@ const MealMatrix = () => {
             const RecipeIngredients = recipe.ingredients;
             // // console.log(RecipeIngredients);
           });
-          // // console.log(recipes);
+          // console.log(recipes, "totals recipe", key);
           // Recorre los ingredientes de cada receta y suma las cantidades y precios
           if (selectedRecipes[key].length > 0) {
             totalPrice[key] = 0;
@@ -224,10 +228,10 @@ const MealMatrix = () => {
               [key]: totalPrice[key],
             }));
           }
-          // console.log(dayTotals);
+          console.log(dayTotals, "dayTotals");
         });
     }
-    // // console.log(ingredientsTotals, ingredientsTotalsDay);
+    // console.log(ingredientsTotals, ingredientsTotalsDay);
     setIngredientsTotList([ingredientsTotals, ingredientsTotalsDay]);
 
     const weekPrice = Object.values(ingredientsTotals).reduce(
@@ -590,7 +594,11 @@ const MealMatrix = () => {
       );
     }
   };
-  console.log(recipes);
+  // console.log(recipes);
+  const daysToRender =
+    preferences?.planningMode === "sequential"
+      ? formatSequentialForDisplay(weekDays.length)
+      : weekDays;
 
   const getRecipePrice = (recipe) => {
     if (!recipe.ingredients || !Array.isArray(recipe.ingredients)) return 0;
@@ -600,23 +608,23 @@ const MealMatrix = () => {
       return sum + grPrice * quantity;
     }, 0);
   };
-  console.log(weekDays, "weekdays");
+  // console.log(weekDays, "weekdays");
   return (
     <div className="mealMatrix">
       {/* Floating Action Buttons */}
       <div
         style={{
           position: "fixed",
-          bottom: 24,
-          right: 24,
+          bottom: 0,
+          right: 4,
           zIndex: 10,
           background: "rgba(20, 20, 30, 0.95)",
           borderRadius: "16px",
           boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
-          padding: "1rem 1.5rem",
+          padding: "1rem 1rem",
           display: "flex",
           flexDirection: "row",
-          gap: "1.5rem",
+          gap: "0.5rem",
           alignItems: "center",
         }}
       >
@@ -626,7 +634,7 @@ const MealMatrix = () => {
             addProgram({ selectedRecipes, portions, ingredientsTotList });
           }}
         >
-          Save Program
+          Guardar Programa
         </button>
         <button className="buttonP" onClick={exportToPDF}>
           Exportar PDF
@@ -641,7 +649,7 @@ const MealMatrix = () => {
             setIngredientsTotList([]);
           }}
         >
-          Delete
+          Borrar Programa
         </button>
         {/* <button
           className="buttonP"
@@ -662,11 +670,10 @@ const MealMatrix = () => {
       <div
         style={{
           position: "fixed",
-          top: "120px", // <-- Adjust this to your menu height
+          top: "118px", // <-- Adjust this to your menu height
           background: "rgba(10, 10, 20, 0.98)",
           zIndex: 5,
           padding: "0.5rem 1rem",
-          marginBottom: "0.5rem",
           borderBottom: "2px solid #c9b87a",
           boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
           display: "flex",
@@ -675,47 +682,9 @@ const MealMatrix = () => {
           minHeight: "56px",
           width: "100%",
           left: 0,
-          gap: "0.5rem",
-          margin: "auto",
+          gap: "0.75rem",
         }}
       >
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.75rem",
-            background: "#23262e",
-            borderRadius: "10px",
-            padding: "0.5rem 1.5rem",
-            boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
-            border: "2px solid #c9b87a",
-          }}
-        >
-          <span
-            style={{
-              color: "#c9b87a",
-              fontWeight: "bold",
-              fontSize: "1.1rem",
-              letterSpacing: "0.04em",
-              textShadow: "0 1px 2px #181818",
-            }}
-          >
-            Week Total:
-          </span>
-          <span
-            style={{
-              color: "#fffbe6",
-              fontWeight: "bold",
-              fontSize: "1.35rem",
-              background: "linear-gradient(90deg, #c9b87a 60%, #e6e2c0 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              letterSpacing: "0.04em",
-            }}
-          >
-            ${dayTotals?.["total"]?.toFixed(0) ?? 0}
-          </span>
-        </div>
         <div
           style={{
             display: "inline-flex",
@@ -732,12 +701,49 @@ const MealMatrix = () => {
             style={{
               color: "#c9b87a",
               fontWeight: "bold",
-              fontSize: "1.1rem",
+              fontSize: "0.9rem",
               letterSpacing: "0.04em",
               textShadow: "0 1px 2px #181818",
             }}
           >
-            Porciones globales:
+            Total Semanal:
+          </span>
+          <span
+            style={{
+              color: "#fffbe6",
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+              background: "linear-gradient(90deg, #c9b87a 60%, #e6e2c0 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "0.04em",
+            }}
+          >
+            ${dayTotals?.["total"]?.toFixed(0) ?? 0}
+          </span>
+        </div>
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.25rem",
+            background: "#23262e",
+            borderRadius: "10px",
+            padding: "0.5rem 0.5rem",
+            boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
+            border: "2px solid #c9b87a",
+          }}
+        >
+          <span
+            style={{
+              color: "#c9b87a",
+              fontWeight: "bold",
+              fontSize: "0.9rem",
+              letterSpacing: "0.04em",
+              textShadow: "0 1px 2px #181818",
+            }}
+          >
+            Ordenes globales:
           </span>
 
           <input
@@ -783,7 +789,7 @@ const MealMatrix = () => {
           padding: "1rem 0",
         }}
       >
-        {weekDays.map((day) => (
+        {weekDays.map((day, index) => (
           <div
             key={day}
             style={{
@@ -807,7 +813,7 @@ const MealMatrix = () => {
               }}
             >
               {preferences.planningMode === "sequential"
-                ? day
+                ? `Day ${index}`
                 : formatDateForDisplay(day)}
             </div>
 
@@ -892,7 +898,7 @@ const MealMatrix = () => {
                     marginTop: "0.25rem",
                   }}
                 >
-                  Show ingredient list
+                  Mostrar lista de ingredientes
                 </div>
               )}
             </div>
