@@ -57,9 +57,9 @@ export default function DesignRecipe({
   const storeIngredients = usePantry((store) => store.ingredients);
   // const storeRecipes = usePantry((store) => store.recipes);
 
-  useEffect(() => {
-    setIngredientsList(storeIngredients);
-  }, [storeIngredients]);
+  // useEffect(() => {
+  //   setIngredientsList(storeIngredients);
+  // }, [storeIngredients]);
   // let dependency = localStorage ? localStorage : null;
   // useEffect(() => {
   //   let storedState = null;
@@ -528,7 +528,7 @@ export default function DesignRecipe({
                 </div>
 
                 {/* Additional Checkmarks */}
-                <div style={{ marginBottom: "1rem" }}>
+                {/* <div style={{ marginBottom: "1rem" }}>
                   <label
                     style={{
                       fontWeight: 600,
@@ -683,7 +683,7 @@ export default function DesignRecipe({
                       <span>🌶️ Picante</span>
                     </label>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div style={{ margin: "1rem 0" }}>
                 <label

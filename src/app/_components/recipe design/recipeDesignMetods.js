@@ -54,11 +54,12 @@ export default function DesignRecipeMetods({ recipe }) {
 
   const setSearch = () => {
     const searchValue = searchRef.current.value.trim().toLowerCase();
+
     let filteredIngredients = ingredientsList;
 
     if (searchValue !== "") {
       filteredIngredients = ingredientsList.filter((ingredient) =>
-        ingredient.ingredient.name.toLowerCase.includes(searchValue),
+        ingredient.ingredient.name.toLowerCase().includes(searchValue),
       );
     } else {
       const usedItems = recipeList.map((item) => item.ingredient.name);
@@ -67,9 +68,11 @@ export default function DesignRecipeMetods({ recipe }) {
         (item) => !usedItems.includes(item.ingredient.name),
       );
     }
+    console.log(filteredIngredients, "filteredIngredients");
     setIngredientsList(filteredIngredients);
     // console.log(filteredIngredients, searchValue, ingredients);
   };
+  console.log(ingredientsList, "ingredientsList");
 
   const editRecipe = (_recipe) => {
     // console.log(_recipe);

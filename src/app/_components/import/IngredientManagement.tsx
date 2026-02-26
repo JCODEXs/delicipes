@@ -48,6 +48,7 @@ async function updateIngredientDB(
 export default function IngredientManagerPanel({
   setConfirmModalOpen,
   setPendingDelete,
+  ingredientsList,
 }: {
   setConfirmModalOpen: (open: boolean) => void;
   setPendingDelete: (item: IngredientEntity) => void;
@@ -55,20 +56,25 @@ export default function IngredientManagerPanel({
   const setPantryIngredients = usePantry(
     (s) => s.addStoreIngredients,
   );
+  const ingredients = usePantry((s) => s.ingredients);
 const [searchValue, setSearchValue] = useState("");
+  const [localIngredients, setLocalIngredients] = useState<IngredientEntity[]>([]);
+
+  
+  useEffect(() => {
+    setLocalIngredients(ingredients);
+  }, [ingredients]);
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [loadingId, setLoadingId] = useState<string | null>(null);
-  const ingredients = usePantry((s) => s.ingredients);
 
-const filteredIngredients = ingredients.filter((i) =>
+const filteredIngredients = localIngredients.filter((i) =>
   i.ingredient.name
     .toLowerCase()
     .includes(searchValue.toLowerCase()),
 );
 
 
-  console.log(filteredIngredients, "filteredIngredients");
 
   /* =======================
      Handlers
@@ -76,71 +82,78 @@ const filteredIngredients = ingredients.filter((i) =>
 
   const startEdit = (id: string) => setEditingId(id);
 
+  
   const cancelEdit = () => setEditingId(null);
 
-  const handleChange = (
-    id: string,
-    field: "name" | "price",
-    value: string,
-  ) => {
-    setIngredients((prev) =>
-      prev.map((item) =>
-        item._id === id
-          ? {
-              ...item,
-              ingredient: {
-                ...item.ingredient,
-                [field]:
-                  field === "price" ? Number(value) : value,
-              },
-            }
-          : item,
-      ),
+const handleChange = (
+  id: string,
+  field: "name" | "price",
+  value: string,
+) => {
+  setLocalIngredients((prev) =>
+    prev.map((item) =>
+      item._id === id
+        ? {
+            ...item,
+            ingredient: {
+              ...item.ingredient,
+              [field]:
+                field === "price" ? Number(value) : value,
+            },
+          }
+        : item,
+    ),
+  );
+};
+
+
+const saveIngredient = async (item: IngredientEntity) => {
+  setLoadingId(item._id);
+
+  try {
+    const newPrice = item.ingredient.price || 0;
+
+    const updatedHistory: PriceHistory[] = [
+      ...(item.priceHistory || []),
+      {
+        price: newPrice,
+        date: new Date().toISOString(),
+      },
+    ];
+
+    const updatedItem = {
+      ...item,
+      priceHistory: updatedHistory,
+    };
+
+    // 1️⃣ Update DB
+    await updateIngredientDB(item._id, {
+      ingredient: item.ingredient,
+    });
+
+    // 2️⃣ Update Zustand store properly
+    setPantryIngredients((prev: IngredientEntity[]) =>
+      prev.map((i) =>
+        i._id === item._id ? updatedItem : i
+      )
     );
-  };
 
-  const saveIngredient = async (item: IngredientEntity) => {
-    setLoadingId(item._id);
+    toast.success("Ingrediente actualizado");
+    setEditingId(null);
+  } catch (err) {
+    console.log(err);
+    toast.error("Error al guardar ingrediente");
+  } finally {
+    setLoadingId(null);
+  }
+};
 
-    try {
-      const newPrice = item.ingredient.price || 0;
-
-      const updatedHistory: PriceHistory[] = [
-        ...(item.priceHistory || []),
-        {
-          price: newPrice,
-          date: new Date().toISOString(),
-        },
-      ];
-
-     const updated= await updateIngredientDB(item._id, {
-        ingredient: item.ingredient,
-        
-      });
-
-      const updatedIngredients = ingredients.map((i) =>
-        i._id === item._id
-          ? { ...i, priceHistory: updatedHistory }
-          : i,
-      );
-
-      setIngredients(updatedIngredients);
-      setPantryIngredients(updated);
-
-      toast.success("Ingrediente actualizado");
-      setEditingId(null);
-    } catch (err) {
-      console.log(err)
-      toast.error("Error al guardar ingrediente");
-    } finally {
-      setLoadingId(null);
-    }
-  };
 
   const deleteIngredient = async (item: IngredientEntity) => {
     
     setPendingDelete(item);
     setConfirmModalOpen(true);  
+
   };
 
   /* =======================
@@ -160,7 +173,7 @@ const filteredIngredients = ingredients.filter((i) =>
         </header>
         {/* <div className="mb-8 text-center">
           <button
-            onClick={() => setIngredients(pantryIngredients)}
+            onClick={() => setLocalIngredients(pantryIngredients)}
             className="rounded-lg bg-green-600 px-4 py-3 font-medium text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-400"
           >
             Recargar Ingredientes

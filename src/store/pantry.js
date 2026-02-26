@@ -66,11 +66,11 @@ const pantry = (set) => ({
       false,
       "addIngredient",
     ),
-  addStoreIngredients: (newIngredients) =>
+  addStoreIngredients: (updater) =>
     set((state) => ({
-      ingredients: [...state.ingredients, ...newIngredients],
+      ingredients:
+        typeof updater === "function" ? updater(state.ingredients) : updater,
     })),
-
   addStoreIngredient: (ingredients) =>
     set(
       produce((store) => {

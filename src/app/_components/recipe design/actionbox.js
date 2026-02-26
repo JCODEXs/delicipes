@@ -192,10 +192,15 @@ export default function ActionBox({
             return (
               <div
                 className="item"
-                key={item?._id}
+                key={item?._id + index}
                 onClick={() => addToRecipe(item)}
                 onMouseEnter={() =>
-                  setHoveredItem(item.ingredient?.name || item.name)
+                  setHoveredItem(
+                    item.ingredient?.name +
+                      " " +
+                      item?.ingredient?.price +
+                      "/kg" || item.name,
+                  )
                 }
                 onMouseLeave={() => setHoveredItem(null)}
                 data-tooltip={hoveredItem}
