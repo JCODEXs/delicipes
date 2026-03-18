@@ -24,12 +24,12 @@ export function CarouselComponent() {
     "https://utfs.io/f/ae307455-c5ac-4c10-9b89-a834527344c2-okw41l.jpg",
   ];
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true }),
+    Autoplay({ delay: 2800, stopOnInteraction: true }),
   );
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="max-h-42 "
+      className="m-6   "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -39,7 +39,7 @@ export function CarouselComponent() {
             <div className="flex h-full items-center p-1 ">
               {/* <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6"> */}
-              <img src={_} className="h-full text-3xl font-semibold "></img>
+              <img src={_} className="h-auto  w-full sm:w-2/3 flex justify-center items-center mx-auto object-cover text-3xl font-semibold "></img>
               {/* </CardContent>
               </Card> */}
             </div>

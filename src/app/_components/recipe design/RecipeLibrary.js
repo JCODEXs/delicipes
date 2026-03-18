@@ -92,7 +92,10 @@ export default function RecipeLibrary() {
   }
 
   return (
-    <section className="library-section" style={{ marginTop: "2rem" }}>
+    <section
+      className="library-section  mx-6 sm:mx-2"
+      style={{ marginTop: "2rem" }}
+    >
       <ConfirmModal
         isOpen={confirmOpen}
         onConfirm={confirmDelete}
@@ -146,15 +149,17 @@ export default function RecipeLibrary() {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: "1rem",
-          width: "100%",
+          gap: "1.6rem",
+          width: "94%",
+          padding: "1rem 1rem",
+          margin: "0 auto",
         }}
       >
         {sortedRecipes.map(
           (_recipe) =>
             _recipe?._id && (
               <div
-                className="library-card"
+                className="library-card "
                 key={_recipe?._id}
                 // style={{
                 //   background: "#f9f6ea",

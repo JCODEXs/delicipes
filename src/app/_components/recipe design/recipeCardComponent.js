@@ -115,7 +115,10 @@ const RecipeCardComponent = ({
           </div>
         )}
         <div style={{ flex: "1 1 0", minWidth: 120 }}>
-          <div className="tittle" style={{ marginBottom: 4, color: "#5a2d06" }}>
+          <div
+            className="tittle"
+            style={{ marginBottom: 4, color: "#5a2d06", height: "68px" }}
+          >
             {recipe?.tittle ?? recipe.title}
           </div>
           <div

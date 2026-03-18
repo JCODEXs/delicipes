@@ -6,9 +6,9 @@ export default async function LibraryPage() {
   return (
     <>
       <SignedIn>
-        <RecipeLibrary />;
+        <RecipeLibrary />
       </SignedIn>
-      ;
+
       <SignedOut>
         <div className="h-full w-full rounded-md text-center text-2xl text-red-950">
           <FullPageRecetionView />

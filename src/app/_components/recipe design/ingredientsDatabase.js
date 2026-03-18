@@ -69,7 +69,7 @@ export default function Form({ editableIngredient, onClose }) {
                 className={styles.input}
                 type="text"
                 name="name"
-                placeholder="Name"
+                placeholder="Nombre"
                 value={field.name}
                 onChange={(event) => handleChange(index, event)}
                 required
@@ -78,12 +78,13 @@ export default function Form({ editableIngredient, onClose }) {
                 className={styles.input}
                 type="text"
                 name="image"
-                placeholder="Emoji or name"
+                placeholder="Emoji or nombre"
                 value={field.image}
                 onChange={(event) => handleChange(index, event)}
                 required
               />
             </div>
+            <div className={styles.unitButtons}>Seleccione incremento</div>
             <div className={styles.unitButtons}>
               {units.map((unit) => (
                 <button
@@ -154,7 +155,7 @@ export default function Form({ editableIngredient, onClose }) {
               cursor: "pointer",
             }}
           >
-            Create another
+            Crear mas
           </button>
           <button
             className="ModalButton"
@@ -170,7 +171,9 @@ export default function Form({ editableIngredient, onClose }) {
               cursor: "pointer",
             }}
           >
-            {formFields.length > 1 ? "Save ingredients" : "Save ingredient"}
+            {formFields.length > 1
+              ? "Guardar ingredientes"
+              : "Guardar ingrediente"}
           </button>
         </div>
       </form>

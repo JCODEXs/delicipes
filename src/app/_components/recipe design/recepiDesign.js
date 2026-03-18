@@ -282,6 +282,39 @@ export default function DesignRecipe({
             >
               Ingredients
             </h2> */}
+          </div>
+          {addIngredientModal && (
+            <Modal isOpen={addIngredientModal} onClose={closeModal}>
+              <Form
+                editableIngredient={editableIngredient}
+                key={editableIngredient?.name}
+                onClose={closeModal}
+              />
+            </Modal>
+          )}
+          <input
+            type="text"
+            placeholder="Buscar Ingrediente..."
+            style={{
+              minWidth: 200,
+              margin: "0.5rem 0",
+              padding: "0.4rem",
+              borderRadius: 6,
+              border: "1px solid #ccc",
+            }}
+            ref={searchRef}
+            onChange={setSearch}
+          />
+          <div style={{ margin: "0.25rem 0" }}>
+            <p>Presiona el icono del ingrediente para agregarlo a la receta</p>
+            <Suspense fallback={<ActionBoxSkeleton />}>
+              <ActionBox
+                ingredientsList={ingredientsList}
+                addToRecipe={addToRecipe}
+                actionMode={actionMode}
+                setActionMode={setActionMode}
+              />
+            </Suspense>
             <button
               className="addButton"
               onClick={openModal}
@@ -296,40 +329,8 @@ export default function DesignRecipe({
                 boxShadow: "0 1px 4px rgba(200,180,120,0.10)",
               }}
             >
-              {addIngredientModal ? "Close Form" : "Add Ingredient to the list"}
+              {addIngredientModal ? "Cerrar" : "Agregar nuevo Ingrediente"}
             </button>
-          </div>
-          {addIngredientModal && (
-            <Modal isOpen={addIngredientModal} onClose={closeModal}>
-              <Form
-                editableIngredient={editableIngredient}
-                key={editableIngredient?.name}
-                onClose={closeModal}
-              />
-            </Modal>
-          )}
-          <input
-            type="text"
-            placeholder="Search ingredients..."
-            style={{
-              minWidth: 200,
-              margin: "0.5rem 0",
-              padding: "0.4rem",
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-            ref={searchRef}
-            onChange={setSearch}
-          />
-          <div style={{ margin: "0.25rem 0" }}>
-            <Suspense fallback={<ActionBoxSkeleton />}>
-              <ActionBox
-                ingredientsList={ingredientsList}
-                addToRecipe={addToRecipe}
-                actionMode={actionMode}
-                setActionMode={setActionMode}
-              />
-            </Suspense>
           </div>
         </section>
 
@@ -352,7 +353,7 @@ export default function DesignRecipe({
               color: "#a96b3c",
             }}
           >
-            Recipe configuration
+            Configuración de la receta
           </h2>
           <div
             style={{
@@ -364,7 +365,7 @@ export default function DesignRecipe({
           >
             {/* Left: Title, Portions, Image */}
             <div style={{ flex: 1, minWidth: 260 }}>
-              <label style={{ fontWeight: 600 }}>Name</label>
+              <label style={{ fontWeight: 600 }}>Nombre o titulo</label>
               <input
                 name="title"
                 type="text"
@@ -396,7 +397,7 @@ export default function DesignRecipe({
                   display: "block",
                 }}
               >
-                Portions
+                Porciones
               </label>
               <input
                 name="portions"
@@ -693,14 +694,14 @@ export default function DesignRecipe({
                     marginBottom: "0.5rem",
                   }}
                 >
-                  Display
+                  Imagen
                 </label>
                 {Recipe?.recipe?.imageUrl ? (
                   <div style={{ marginBottom: "0.5rem" }}>
                     <img
                       src={Recipe.recipe?.imageUrl?.url}
-                      height={120}
-                      width={90}
+                      height={220}
+                      width={180}
                       style={{ borderRadius: 8, objectFit: "cover" }}
                     />
                   </div>
@@ -720,7 +721,7 @@ export default function DesignRecipe({
                   display: "block",
                 }}
               >
-                Ingredients in Recipe
+                Ingredientes
               </label>
               {recipeList?.length > 0 ? (
                 <div style={{ marginBottom: "1rem" }}>
@@ -759,7 +760,7 @@ export default function DesignRecipe({
                     maxWidth: "70%",
                   }}
                 >
-                  Add ingredients from the box above ☝🏽
+                  Agrega los ingredientes con los iconos de arriba ☝🏽
                 </div>
               )}
             </div>

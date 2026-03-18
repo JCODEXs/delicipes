@@ -884,7 +884,10 @@ const MealMatrix = () => {
               {showList ? (
                 <div onClick={() => OnClickExpand()}>
                   <ul>
-                    <> Hide ingredients </>
+                    <p className="text-center font-bold text-red-500">
+                      {" "}
+                      Ocultar ingredientes{" "}
+                    </p>
                     {ingListByDay(day)}
                   </ul>
                 </div>
